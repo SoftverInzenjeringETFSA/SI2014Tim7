@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 10, 2015 4:50:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="ba.unsa.etf.si.app.entity.Ocitanja" table="ocitanja" catalog="vodovod" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="potrosacBySifraVodomjera" class="ba.unsa.etf.si.app.entity.Potrosac" fetch="select">
+            <column name="sifra_vodomjera" />
+        </many-to-one>
+        <many-to-one name="potrosacByIdPotrosaca" class="ba.unsa.etf.si.app.entity.Potrosac" fetch="select">
+            <column name="id_potrosaca" />
+        </many-to-one>
+        <property name="potrosnja" type="java.lang.Double">
+            <column name="potrosnja" precision="22" scale="0" />
+        </property>
+        <property name="godina" type="java.lang.Integer">
+            <column name="godina" />
+        </property>
+        <property name="mjesec" type="java.lang.Integer">
+            <column name="mjesec" />
+        </property>
+        <property name="access" type="java.lang.Boolean">
+            <column name="access" />
+        </property>
+        <set name="racunis" table="racuni" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_ocitanja" />
+            </key>
+            <one-to-many class="ba.unsa.etf.si.app.entity.Racuni" />
+        </set>
+    </class>
+</hibernate-mapping>

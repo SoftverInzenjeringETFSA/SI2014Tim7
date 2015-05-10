@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 10, 2015 4:50:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="ba.unsa.etf.si.app.entity.Racuni" table="racuni" catalog="vodovod" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="ocitanja" class="ba.unsa.etf.si.app.entity.Ocitanja" fetch="select">
+            <column name="id_ocitanja" />
+        </many-to-one>
+        <many-to-one name="potrosac" class="ba.unsa.etf.si.app.entity.Potrosac" fetch="select">
+            <column name="id_potrosaca" />
+        </many-to-one>
+        <property name="datumUplate" type="date">
+            <column name="datum_uplate" length="10" />
+        </property>
+        <property name="datumKreacije" type="date">
+            <column name="datum_kreacije" length="10" />
+        </property>
+        <property name="fisknaCijenaZaKoristenjeUsluga" type="java.lang.Double">
+            <column name="fiskna_cijena_za_koristenje_usluga" precision="22" scale="0" />
+        </property>
+        <property name="potrosnjaZaKoristenjeVoda" type="java.lang.Double">
+            <column name="potrosnja_za_koristenje_voda" precision="22" scale="0" />
+        </property>
+        <property name="potrosnjaZaKoristenjeKanalizacije" type="java.lang.Double">
+            <column name="potrosnja_za_koristenje_kanalizacije" precision="22" scale="0" />
+        </property>
+        <property name="cijenaVoda" type="java.lang.Double">
+            <column name="cijena_voda" precision="22" scale="0" />
+        </property>
+        <property name="cijenaKanalizacije" type="java.lang.Double">
+            <column name="cijena_kanalizacije" precision="22" scale="0" />
+        </property>
+        <property name="ukupnaCijena" type="java.lang.Double">
+            <column name="ukupna_cijena" precision="22" scale="0" />
+        </property>
+        <property name="cijenaVodaSaPdv" type="java.lang.Double">
+            <column name="cijena_voda_sa_pdv" precision="22" scale="0" />
+        </property>
+        <property name="cijenaKanalizacijeSaPdv" type="java.lang.Double">
+            <column name="cijena_kanalizacije_sa_pdv" precision="22" scale="0" />
+        </property>
+        <property name="ukupnaCijenaSaPdv" type="java.lang.Double">
+            <column name="ukupna_cijena_sa_pdv" precision="22" scale="0" />
+        </property>
+        <property name="pvnZaKoristenjeVoda" type="java.lang.Double">
+            <column name="pvn_za_koristenje_voda" precision="22" scale="0" />
+        </property>
+        <property name="pvnZaZastituVoda" type="java.lang.Double">
+            <column name="pvn_za_zastitu_voda" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

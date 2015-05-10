@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 10, 2015 4:50:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="ba.unsa.etf.si.app.entity.Potrosac" table="potrosac" catalog="vodovod" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="ime" type="string">
+            <column name="ime" length="45" />
+        </property>
+        <property name="prezime" type="string">
+            <column name="prezime" length="45" />
+        </property>
+        <property name="jmbg" type="string">
+            <column name="jmbg" length="45" unique="true" />
+        </property>
+        <property name="adresa" type="string">
+            <column name="adresa" length="45" />
+        </property>
+        <property name="telefon" type="string">
+            <column name="telefon" length="45" />
+        </property>
+        <property name="brojClanova" type="string">
+            <column name="broj_clanova" length="45" />
+        </property>
+        <property name="kategorija" type="string">
+            <column name="kategorija" length="45" />
+        </property>
+        <property name="sifraVodomjera" type="java.lang.Integer">
+            <column name="sifra_vodomjera" unique="true" />
+        </property>
+        <property name="usluga" type="java.lang.Boolean">
+            <column name="usluga" />
+        </property>
+        <property name="aktivnost" type="java.lang.Boolean">
+            <column name="aktivnost" />
+        </property>
+        <property name="hidden" type="java.lang.Boolean">
+            <column name="hidden" />
+        </property>
+        <set name="ocitanjasForSifraVodomjera" table="ocitanja" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="sifra_vodomjera" />
+            </key>
+            <one-to-many class="ba.unsa.etf.si.app.entity.Ocitanja" />
+        </set>
+        <set name="racunis" table="racuni" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_potrosaca" />
+            </key>
+            <one-to-many class="ba.unsa.etf.si.app.entity.Racuni" />
+        </set>
+        <set name="ocitanjasForIdPotrosaca" table="ocitanja" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_potrosaca" />
+            </key>
+            <one-to-many class="ba.unsa.etf.si.app.entity.Ocitanja" />
+        </set>
+    </class>
+</hibernate-mapping>
