@@ -8,6 +8,7 @@ package ba.unsa.etf.si.app.entity;
  */
 public class Izvjestaji  implements java.io.Serializable {
 
+	 private static final long serialVersionUID = 1L;
 
      private Integer id;
      private Integer brojPausalaca;

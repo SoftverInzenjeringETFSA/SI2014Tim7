@@ -10,7 +10,8 @@ import java.util.Set;
  */
 public class Potrosac  implements java.io.Serializable {
 
-
+	 private static final long serialVersionUID = 1L;
+	 
      private Integer id;
      private String ime;
      private String prezime;
@@ -23,6 +24,7 @@ public class Potrosac  implements java.io.Serializable {
      private Boolean usluga;
      private Boolean aktivnost;
      private Boolean hidden;
+     //popraviti ovo
      private Set ocitanjasForSifraVodomjera = new HashSet(0);
      private Set racunis = new HashSet(0);
      private Set ocitanjasForIdPotrosaca = new HashSet(0);

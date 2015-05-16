@@ -9,7 +9,8 @@ import java.util.Date;
  */
 public class Racuni  implements java.io.Serializable {
 
-
+	 private static final long serialVersionUID = 1L;
+	
      private Integer id;
      private Ocitanja ocitanja;
      private Potrosac potrosac;

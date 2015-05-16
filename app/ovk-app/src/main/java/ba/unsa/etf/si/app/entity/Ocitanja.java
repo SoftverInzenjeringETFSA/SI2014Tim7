@@ -10,14 +10,16 @@ import java.util.Set;
  */
 public class Ocitanja  implements java.io.Serializable {
 
-
-     private Integer id;
+	 private static final long serialVersionUID = 1L;
+   
+	 private Integer id;
      private Potrosac potrosacBySifraVodomjera;
      private Potrosac potrosacByIdPotrosaca;
      private Double potrosnja;
      private Integer godina;
      private Integer mjesec;
      private Boolean access;
+     //neka greska u mapiranju?
      private Set racunis = new HashSet(0);
 
     public Ocitanja() {
