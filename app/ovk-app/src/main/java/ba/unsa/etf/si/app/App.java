@@ -40,6 +40,6 @@ public class App
         //zatvaranje sesije
         session.close();
         HibernateUtil.getSessionFactory().close();
-    	*/
+    	*/ 
     }
 }
