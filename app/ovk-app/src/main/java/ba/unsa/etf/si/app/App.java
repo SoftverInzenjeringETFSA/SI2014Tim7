@@ -1,5 +1,6 @@
 package ba.unsa.etf.si.app;
 
+import ba.unsa.etf.si.services.KorisnikService;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.hibernate.Session;
 import ba.unsa.etf.si.app.dao.KorisnikDAO;
 import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.util.HibernateUtil;
+import java.util.Date;
 
 /**
  * Hello world!
@@ -18,7 +20,6 @@ public class App
     public static void main( String[] args )
     {
         /*
-        
         //primjer koristenja dao klase
         
         //otvaranje sesije i pocetak transakcije, potrebno za svaku komunikaciju sa bazom
