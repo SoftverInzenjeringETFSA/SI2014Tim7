@@ -31,31 +31,27 @@ public class KorisnikService {
     }
     public String createNewKorisnik(Korisnik k){
         int id = -1;
-        String jmbg = "";
-        String username = "";
         for (Korisnik svi1 : svi) {
             if (k.getJmbg().equals(svi1.getJmbg())) {
-                jmbg = k.getJmbg();
                 id = svi1.getId();
             } else if (k.getUsername().equals(svi1.getUsername())) {
-                username = k.getUsername();
                 id = svi1.getId();
             }
         }
         // Pocetak sesije obavezni kod za korisnika
         if(id==-1){
             if(validate(k)){
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        KorisnikDAO dao = new KorisnikDAO();
-        dao.setSession(session);
-        // Dodavanje novog korisnika
-        k = setPassword(k);
-        dao.save(k);
-        // Zatvaranje sesije, isto obavezni dio
-        session.getTransaction().commit();
-        session.close();
-        return k.getPassword();
+                Session session = HibernateUtil.getSessionFactory().openSession();
+                session.beginTransaction();
+                KorisnikDAO dao = new KorisnikDAO();
+                dao.setSession(session);
+                // Dodavanje novog korisnika
+                k.setPassword(createPassword());
+                dao.save(k);
+                // Zatvaranje sesije, isto obavezni dio
+                session.getTransaction().commit();
+                session.close();
+                return k.getPassword();
             }
             return "Korisnik nije prosao validaciju, provjerite podatke";
         }
@@ -67,11 +63,10 @@ public class KorisnikService {
         }
         return validateBrLicne(k);
     }
-    private Korisnik setPassword(Korisnik k){
+    private String createPassword(){
         String newPass;
         newPass = Long.toHexString(Double.doubleToLongBits(Math.random()));
-        k.setPassword(newPass);
-        return k;
+        return newPass;
     }
     private Boolean validateJMBG(Korisnik k){
         String[] jmbg = k.getJmbg().split("");
