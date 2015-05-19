@@ -1,6 +1,6 @@
 package ba.unsa.etf.si.app;
 
-import ba.unsa.etf.si.services.KorisnikService;
+import ba.unsa.etf.si.app.services.KorisnikService;
 import java.util.ArrayList;
 import java.util.List;
 

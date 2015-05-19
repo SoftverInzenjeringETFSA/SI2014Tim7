@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ba.unsa.etf.si.services;
+package ba.unsa.etf.si.app.services;
 
 import ba.unsa.etf.si.app.dao.KorisnikDAO;
 import ba.unsa.etf.si.app.entity.Korisnik;
