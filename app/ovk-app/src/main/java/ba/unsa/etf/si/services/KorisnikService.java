@@ -62,10 +62,14 @@ public class KorisnikService {
     // zatim mjenjamo te podatke i saljemo u modifyKorisnik
     // getKorisnikByJMBG takodjer sluzi za pretragu po JMBG
     public Korisnik getKorisnikByJMBG(String JMBG){
-        for (Korisnik svi1 : svi) {
-            if (JMBG.equals(svi1.getJmbg())) {
-                return svi1;
-            } 
+        Korisnik k = new Korisnik();
+        k.setJmbg(JMBG);
+        if(validateJMBG(k)){
+            for (Korisnik svi1 : svi) {
+                if (JMBG.equals(svi1.getJmbg())) {
+                    return svi1;
+                } 
+            }
         }
         return new Korisnik();
     }
@@ -131,20 +135,14 @@ public class KorisnikService {
     
     public List<Korisnik> searchByCriteria(String ime,String prezime,String jmbg){
         List <Korisnik> listaPretrage = new ArrayList<Korisnik>();
-        
-        if (!"".equals(jmbg)){
-            listaPretrage.add(getKorisnikByJMBG(jmbg));
-        }
-        else{
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();   
         KorisnikDAO dao = new KorisnikDAO();
         dao.setSession(session);
-    	listaPretrage = dao.findByImePrezime(ime,prezime);
+    	listaPretrage = dao.findByImePrezimeJMBG(ime,prezime,jmbg);
         session.getTransaction().commit();
         //zatvaranje sesije
         session.close();
-        }
     return listaPretrage;
     }
     
