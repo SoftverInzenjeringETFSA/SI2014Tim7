@@ -79,10 +79,10 @@ public class KorisnikService {
         j[i] = Integer.parseInt(jmbg[i+1]);
         }
         int v = 11-((7*(j[0]+j[6])+6*(j[1]+j[7])+5*(j[2]+j[8])+4*(j[3]+j[9])+3*(j[4]+j[10])+ 2*(j[5]+j[11]))%11);
-        return ((v<10&&j[12]==v)||(v>9&&j[12]==0));
+        return (v<10&&j[12]==v)||(v>9&&j[12]==0);
     }
     private Boolean validateBrLicne(Korisnik k){
-        return (k.getBrojLicne().length()==9);
+        return k.getBrojLicne().length()==9;
     }
     public void closeSession(){
         HibernateUtil.getSessionFactory().close();
