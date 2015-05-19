@@ -61,7 +61,12 @@ for (String exclude : excludeProperty) {
 }  
 crit.add(example);  
 return crit.list();  
-}  
+}
+
+// skracenica za findByExample
+public List<T> findByExample(T exampleInstance) {
+	return findByExample(exampleInstance, new String[] {});
+}
 
 public T save(T entity) {  
 getSession().saveOrUpdate(entity);  
