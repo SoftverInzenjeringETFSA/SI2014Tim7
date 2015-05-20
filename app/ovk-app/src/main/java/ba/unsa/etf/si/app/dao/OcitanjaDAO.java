@@ -1,10 +1,8 @@
 package ba.unsa.etf.si.app.dao;
-
-<<<<<<< HEAD
-
-
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
@@ -19,12 +17,12 @@ public class OcitanjaDAO extends AbstractDAO<Ocitanja, Integer> {
     }
     
     
-    public List<Ocitanja> PreuzmiSveRacune(){
+    public List<Ocitanja> preuzmiSveRacune(){
     	
             return null;
     }
 
-    public boolean DodajParametre(Ocitanja o) {
+    public boolean dodajParametre(Ocitanja o) {
             try {
                     
             Transaction t = session.beginTransaction();
@@ -43,13 +41,10 @@ public class OcitanjaDAO extends AbstractDAO<Ocitanja, Integer> {
             session.close();
     }
 	
-	
-	
-	
-=======
-import ba.unsa.etf.si.app.entity.Ocitanja;
-
-public class OcitanjaDAO extends AbstractDAO<Ocitanja,Integer>{
->>>>>>> origin/master
-	
+    public List<Ocitanja> dajOcitanja() {  
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.add(Restrictions.like("access",0).ignoreCase());     
+        return criteria.list();  
+    }  
+    
 }

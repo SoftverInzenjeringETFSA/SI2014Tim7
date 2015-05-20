@@ -2,8 +2,8 @@ package ba.unsa.etf.si.app;
 
 import org.junit.Test;
 
-import ba.unsa.etf.app.services.ObracunService;
 import ba.unsa.etf.si.app.entity.Parametri;
+import ba.unsa.etf.si.app.services.ObracunService;
 import junit.framework.TestCase;
 
 public class ObracunServiceTest extends TestCase {

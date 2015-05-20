@@ -4,6 +4,7 @@ package ba.unsa.etf.app.services;
 import org.junit.Test;
 
 import ba.unsa.etf.si.app.entity.Potrosac;
+import ba.unsa.etf.si.app.services.OcitanjaService;
 import junit.framework.TestCase;
 
 public class OcitanjaServiceTest extends TestCase {
