@@ -19,12 +19,12 @@ public class App
 {
     public static void main( String[] args )
     {
-        /*
+       
         //primjer koristenja dao klase
         
         //otvaranje sesije i pocetak transakcije, potrebno za svaku komunikaciju sa bazom
     	Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+        /*
         
         //instanca dao klase i proslijedjivanje sesije
     	KorisnikDAO dao = new KorisnikDAO();

@@ -7,6 +7,7 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/Tim7</property>
     <property name="hibernate.connection.username">EtfSI2014</property>
     <property name="hibernate.connection.password">2014SIEtf</property>
+   	<property name="hibernate.hbm2ddl.auto">update</property>
     <mapping resource="ba/unsa/etf/si/app/entity/Potrosac.hbm.xml"/>
     <mapping resource="ba/unsa/etf/si/app/entity/Racuni.hbm.xml"/>
     <mapping resource="ba/unsa/etf/si/app/entity/Ocitanja.hbm.xml"/>

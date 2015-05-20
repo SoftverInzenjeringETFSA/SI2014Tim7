@@ -20,6 +20,7 @@ public class PotrosacService {
 		dao = new PotrosacDAO();
 		dao.setSession(session);
 		this.session = session;
+		
 	}
 		
 	public void kreirajPotrosaca(Potrosac p){

@@ -23,7 +23,7 @@ public class PotrosacServiceTest {
 		potrosac.setIme("Emina");
 		potrosac.setPrezime("Muharemovic");
 		potrosac.setJmbg("2709992176219");
-		potrosac.setSifraVodomjera(3);
+		potrosac.setSifraVodomjera(1);
 		potrosac.setKategorija("pausalni");
 		potrosaci.kreirajPotrosaca(potrosac);
 		session.close();
