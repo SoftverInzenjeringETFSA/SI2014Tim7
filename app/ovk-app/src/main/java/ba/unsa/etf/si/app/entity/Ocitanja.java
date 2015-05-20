@@ -11,8 +11,7 @@ import java.util.Set;
 public class Ocitanja  implements java.io.Serializable {
 
 	 private static final long serialVersionUID = 1L;
-   
-	 private Integer id;
+     private Integer id;
      private Potrosac potrosacBySifraVodomjera;
      private Potrosac potrosacByIdPotrosaca;
      private Double potrosnja;

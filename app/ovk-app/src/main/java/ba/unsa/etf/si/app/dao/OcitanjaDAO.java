@@ -6,23 +6,15 @@ import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
+import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.entity.Ocitanja;
 
 public class OcitanjaDAO extends AbstractDAO<Ocitanja, Integer> {
 	
     private Session session;
     
-    public void setSession(Session s){
-            this.session = s;
-    }
-    
-    
-    public List<Ocitanja> preuzmiSveRacune(){
-    	
-            return null;
-    }
 
-    public boolean dodajParametre(Ocitanja o) {
+    public boolean dodajOcitanja(Ocitanja o) {
             try {
                     
             Transaction t = session.beginTransaction();
@@ -36,15 +28,19 @@ public class OcitanjaDAO extends AbstractDAO<Ocitanja, Integer> {
             }            
     }
     
-    
-    public void closeSession(){
-            session.close();
-    }
 	
     public List<Ocitanja> dajOcitanja() {  
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.add(Restrictions.like("access",0).ignoreCase());     
+        return criteria.list();
+    }
+    
+	/*public List<Ocitanja> findByMjesecGodinaSifraVodomjera(Int month, Int year,Int sifraVodomjera) {  
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.add(Restrictions.like("ime","%" + ime + "%").ignoreCase());
+        criteria.add(Restrictions.like("prezime","%" + prezime + "%").ignoreCase());
+        criteria.add(Restrictions.like("jmbg","%" + jmbg + "%").ignoreCase());
         return criteria.list();  
-    }  
+    }  */
     
 }

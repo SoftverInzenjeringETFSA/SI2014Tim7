@@ -11,6 +11,12 @@ import org.hibernate.Session;
 public class OcitanjaService {
 	public boolean kreirajOcitanja(Potrosac TMPpotrosacBySifraVodomjera, Potrosac TMPpotrosacByIdPotrosaca, Double TMPpotrosnja, Integer TMPgodina, Integer TMPmjesec, Boolean TMPaccess)
 	{	
+		
+		/*Kreira se obracun sa primljenim parametrima i stavlja se na bazu*/
+		
+		
+		
+		
 		try{
 		Session session = HibernateUtil.getSessionFactory().openSession(); 
 		
@@ -18,7 +24,10 @@ public class OcitanjaService {
         
         dao.setSession(session);
 		
+        
+        //Kreira se novo ocitanje i postavljaju se parametri preko setera
 		Ocitanja o = new Ocitanja();
+		
 		o.setPotrosacBySifraVodomjera(TMPpotrosacBySifraVodomjera);
 		o.setPotrosacByIdPotrosaca(TMPpotrosacByIdPotrosaca);
 		o.setGodina(TMPgodina);
@@ -26,7 +35,7 @@ public class OcitanjaService {
 		o.setPotrosnja(TMPpotrosnja);
 		o.setAccess(TMPaccess);
 		
-        dao.DodajParametre(o);
+        dao.dodajOcitanja(o);
         
 		session.close();
 		
@@ -39,37 +48,12 @@ public class OcitanjaService {
 	}
 	
 	public boolean modificirajOcitanja(Ocitanja o)
-	{
-		try{
-			Session session = HibernateUtil.getSessionFactory().openSession(); 
-			
-			OcitanjaDAO dao = new OcitanjaDAO();
-	        
-	        dao.setSession(session);
-			
-			o.setPotrosacBySifraVodomjera(TMPpotrosacBySifraVodomjera);
-			o.setPotrosacByIdPotrosaca(TMPpotrosacByIdPotrosaca);
-			o.setGodina(TMPgodina);
-			o.setMjesec(TMPmjesec);
-			o.setPotrosnja(TMPpotrosnja);
-			o.setAccess(TMPaccess);
-			
-	        dao.DodajParametre(o);
-	        
-			session.close();
-			
-			return true;
-			}
-			catch(Exception ex)
-			{
-				return false;
-			}
+	{	
+		return true;
 	} 
 	
 	public boolean obrisiOcitanja(Ocitanja o)
-	{
-		
-		
+	{	
 		return true;
 	}
 	
@@ -77,12 +61,6 @@ public class OcitanjaService {
 	{
 		
 	}
-	
-	public void pretragaPoSifri(int n)
-	{
-		
-	}
-	
 	
 	
 }
