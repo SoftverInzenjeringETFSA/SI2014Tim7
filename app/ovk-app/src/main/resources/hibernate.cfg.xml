@@ -4,9 +4,10 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/vodovod?zeroDateTimeBehavior=convertToNull</property>
-    <property name="hibernate.connection.username">SITim7</property>
-    <property name="hibernate.connection.password">S373nS0FT</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/Tim7</property>
+    <property name="hibernate.connection.username">EtfSI2014</property>
+    <property name="hibernate.connection.password">2014SIEtf</property>
+   	<property name="hibernate.hbm2ddl.auto">update</property>
     <mapping resource="ba/unsa/etf/si/app/entity/Potrosac.hbm.xml"/>
     <mapping resource="ba/unsa/etf/si/app/entity/Racuni.hbm.xml"/>
     <mapping resource="ba/unsa/etf/si/app/entity/Ocitanja.hbm.xml"/>

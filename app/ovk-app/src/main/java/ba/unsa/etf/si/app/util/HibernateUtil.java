@@ -25,7 +25,7 @@ public class HibernateUtil {
             	StandardServiceRegistry standardServiceRegistry = sb.build();           	
             	sessionFactory = cfg.buildSessionFactory(standardServiceRegistry);  
             	
-            } catch (Throwable th) {
+            } catch (Exception th) {
             	
                     System.err.println("Enitial SessionFactory creation failed" + th);
                     throw new ExceptionInInitializerError(th);

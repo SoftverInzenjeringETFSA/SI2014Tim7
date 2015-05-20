@@ -154,10 +154,6 @@ public class Potrosac  implements java.io.Serializable {
     public void setOcitanjasForIdPotrosaca(Set ocitanjasForIdPotrosaca) {
         this.ocitanjasForIdPotrosaca = ocitanjasForIdPotrosaca;
     }
-
-
-
-
 }
 
 

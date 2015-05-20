@@ -1,5 +1,6 @@
 package ba.unsa.etf.si.app.dao;
 
+<<<<<<< HEAD
 
 
 import org.hibernate.Session;
@@ -45,5 +46,10 @@ public class OcitanjaDAO extends AbstractDAO<Ocitanja, Integer> {
 	
 	
 	
+=======
+import ba.unsa.etf.si.app.entity.Ocitanja;
+
+public class OcitanjaDAO extends AbstractDAO<Ocitanja,Integer>{
+>>>>>>> origin/master
 	
 }
