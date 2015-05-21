@@ -20,7 +20,7 @@ import ba.unsa.etf.si.app.services.PotrosacService;
 import ba.unsa.etf.si.app.util.HibernateUtil;
 
 public class OcitanjaServiceTest {
-	/*
+	
 	@Test
 	public void testKreirajOcitanja() {
 		
@@ -37,9 +37,9 @@ public class OcitanjaServiceTest {
 		
 		Ocitanja tmp = new Ocitanja();
 		tmp.setAccess(false);
-		tmp.setGodina(12);
-		tmp.setMjesec(12);
-		tmp.setPotrosnja(12.0);
+		tmp.setGodina(4);
+		tmp.setMjesec(4);
+		tmp.setPotrosnja(4.0);
 		tmp.setPotrosacByIdPotrosaca(tmpPotrosac);
 		
 		o.kreirajOcitanja(tmp);
@@ -47,13 +47,13 @@ public class OcitanjaServiceTest {
 		session = HibernateUtil.getSessionFactory().openSession();
 		o.setSession(session);
 		tmp.setPotrosacBySifraVodomjera(tmpPotrosac);
-		tmp.setGodina(13);
-		tmp.setMjesec(14);
+		tmp.setGodina(20);
+		tmp.setMjesec(20);
 		
 		assertTrue(o.kreirajOcitanja(tmp));
 		
-	}*/
-	/*
+	}
+	
 	@Test
 	public void testObrisiOcitanja() 
 	{
@@ -62,15 +62,13 @@ public class OcitanjaServiceTest {
 	
 		OcitanjaService o = new OcitanjaService(session);
 		
-		Ocitanja ocitanja = o.pretragaPoId(18);
+		Ocitanja ocitanja = o.pretragaPoId(27);
 		assertTrue(o.obrisiOcitanja(ocitanja));
 		
 		
-		
-		
 	}
-	*/
-	/*@Test
+	
+	@Test
 	public void testVracaLiIspravno()
 	{
 		
@@ -78,13 +76,13 @@ public class OcitanjaServiceTest {
 		
 		OcitanjaService o = new OcitanjaService(session);
 		
-		Ocitanja ocitanja = o.pretragaPoId(18);
+		Ocitanja ocitanja = o.pretragaPoId(24);
 		int a = ocitanja.getId();
-		assertEquals(18,a);
+		assertEquals(24,a);
 		
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	public void testModificirajOcitanja() 
 	{
 		
@@ -92,14 +90,14 @@ public class OcitanjaServiceTest {
 	
 		OcitanjaService o = new OcitanjaService(session);
 		
-		Ocitanja ocitanja = o.pretragaPoId(2);
+		Ocitanja ocitanja = o.pretragaPoId(25);
 
 		ocitanja.setMjesec(15);
 		
 		
 		assertTrue(o.modificirajOcitanja(ocitanja));
 			
-	}*/
+	}
 	
 	
 	
@@ -120,7 +118,7 @@ public class OcitanjaServiceTest {
 	
 		int i = o.getId();
 		
-		assertEquals(19,i);
+		assertEquals(26,i);
 			
 	}
 	
