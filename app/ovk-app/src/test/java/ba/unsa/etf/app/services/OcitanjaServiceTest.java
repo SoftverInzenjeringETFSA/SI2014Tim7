@@ -1,5 +1,7 @@
 package ba.unsa.etf.app.services;
 
+import static org.junit.Assert.*;
+
 import java.util.List;
 
 
@@ -9,19 +11,18 @@ import org.junit.Test;
 import ba.unsa.etf.si.app.entity.Ocitanja;
 import ba.unsa.etf.si.app.entity.Potrosac;
 import ba.unsa.etf.si.app.services.OcitanjaService;
-import ba.unsa.etf.si.app.servisi.PotrosacService;
+import ba.unsa.etf.si.app.services.PotrosacService;
 import ba.unsa.etf.si.app.util.HibernateUtil;
-import junit.framework.TestCase;
 
-public class OcitanjaServiceTest extends TestCase {
+public class OcitanjaServiceTest {
 	
 	@Test
 	public void testKreirajOcitanja() {
 		
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		
-		
 		PotrosacService p = new PotrosacService(session);
+	
 		
 		List<Potrosac> potrosac = p.pretragaPoIme("Anes");
 		
