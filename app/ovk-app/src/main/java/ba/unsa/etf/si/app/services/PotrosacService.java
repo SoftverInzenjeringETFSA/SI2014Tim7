@@ -1,12 +1,15 @@
-package ba.unsa.etf.si.app.servisi;
+package ba.unsa.etf.si.app.services;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import ba.unsa.etf.si.app.dao.KorisnikDAO;
 import ba.unsa.etf.si.app.dao.PotrosacDAO;
+import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.entity.Potrosac;
 import ba.unsa.etf.si.app.util.HibernateUtil;
 
@@ -25,7 +28,7 @@ public class PotrosacService {
 		
 	public void kreirajPotrosaca(Potrosac p){
 		session.beginTransaction();
-		if(validateJMBG(p)){
+		if(validateJMBG(p.getJmbg())){
 			dao.save(p);
 			session.getTransaction().commit();
 		} else {
@@ -73,17 +76,28 @@ public class PotrosacService {
 		p.setKategorija(kategorija);
 		return dao.findByExample(p);
 	}
+	public List<Potrosac> searchByCriteria(String ime,String prezime,String jmbg){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();   
+        PotrosacDAO dao = new PotrosacDAO();
+        dao.setSession(session);
+    	List <Potrosac> listaPretrage = dao.findByImePrezimeJMBG(ime,prezime,jmbg);
+        session.getTransaction().commit();
+        session.close();
+        return listaPretrage;
+	}
 	
-	private Boolean validateJMBG(Potrosac p){
+	public boolean validateJMBG(String jmbgString){
 		return true;
-        /*String[] jmbg = p.getJmbg().split("");
+		
+        /*String[] jmbg = jmbgString.split("");
         if(jmbg.length!=14) {
-        return false;
+        	return false;
         }
         int[] j;
         j = new int[jmbg.length-1];
         for(int i = 0; i < jmbg.length-1; i++) {
-        j[i] = Integer.parseInt(jmbg[i+1]);
+        	j[i] = Integer.parseInt(jmbg[i+1]);
         }
         int v = 11-((7*(j[0]+j[6])+6*(j[1]+j[7])+5*(j[2]+j[8])+4*(j[3]+j[9])+3*(j[4]+j[10])+ 2*(j[5]+j[11]))%11);
         return (v<10&&j[12]==v)||(v>9&&j[12]==0);*/
