@@ -19,10 +19,8 @@ import ba.unsa.etf.si.app.services.OcitanjaService;
 import ba.unsa.etf.si.app.services.PotrosacService;
 import ba.unsa.etf.si.app.util.HibernateUtil;
 
-public class OcitanjaServiceTest extends TestCase {
-	/*
 public class OcitanjaServiceTest {
-	
+	/*
 	@Test
 	public void testKreirajOcitanja() {
 		
