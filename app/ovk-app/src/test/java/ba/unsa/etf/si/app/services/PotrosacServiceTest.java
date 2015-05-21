@@ -1,4 +1,4 @@
-package ba.unsa.etf.si.app.servisi;
+package ba.unsa.etf.si.app.services;
 
 import static org.junit.Assert.*;
 
@@ -10,6 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ba.unsa.etf.si.app.entity.Potrosac;
+import ba.unsa.etf.si.app.services.PotrosacService;
 import ba.unsa.etf.si.app.util.HibernateUtil;
 
 public class PotrosacServiceTest {
@@ -22,7 +23,7 @@ public class PotrosacServiceTest {
 		potrosac = new Potrosac();
 		potrosac.setIme("Emina");
 		potrosac.setPrezime("Muharemovic");
-		potrosac.setJmbg("2709992176219");
+		potrosac.setJmbg("2709992176217");
 		potrosac.setSifraVodomjera(1);
 		potrosac.setKategorija("pausalni");
 		potrosaci.kreirajPotrosaca(potrosac);
