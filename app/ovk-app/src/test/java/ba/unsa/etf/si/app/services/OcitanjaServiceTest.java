@@ -1,4 +1,4 @@
-package ba.unsa.etf.app.services;
+package ba.unsa.etf.si.app.services;
 
 import static org.junit.Assert.*;
 
