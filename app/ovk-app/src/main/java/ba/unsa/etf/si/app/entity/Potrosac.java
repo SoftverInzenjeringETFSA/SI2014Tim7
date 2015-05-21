@@ -25,9 +25,9 @@ public class Potrosac  implements java.io.Serializable {
      private Boolean aktivnost;
      private Boolean hidden;
      //popraviti ovo
-     private Set ocitanjasForSifraVodomjera = new HashSet(0);
-     private Set racunis = new HashSet(0);
-     private Set ocitanjasForIdPotrosaca = new HashSet(0);
+     private transient Set ocitanjasForSifraVodomjera = new HashSet(0);
+     private transient Set racunis = new HashSet(0);
+     private transient Set ocitanjasForIdPotrosaca = new HashSet(0);
 
     public Potrosac() {
     }
