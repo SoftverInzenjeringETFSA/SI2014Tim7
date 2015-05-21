@@ -30,7 +30,8 @@ public class ObracunService {
 	
 	public ObracunService(){
 		 dao = new RacuniDAO();
-		 Parametri parametri = parametriService.DajParametre();
+                 ParametriService params = new ParametriService();
+		 Parametri parametri = params.dajParametre();
 		 ObracunService.setCijenaKanalizacijePoKubiku(parametri.getCijenaKanalizacijePoKubiku());
 		 ObracunService.setCijenaVodePoKubiku(parametri.getCijenaVodePoKubiku());
 		 ObracunService.setFiksnaCijena(parametri.getFiksnaCijena());
