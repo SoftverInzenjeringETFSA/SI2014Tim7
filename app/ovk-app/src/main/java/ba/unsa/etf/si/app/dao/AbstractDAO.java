@@ -2,6 +2,8 @@ package ba.unsa.etf.si.app.dao;
 
 import org.hibernate.Criteria;
 
+
+
 import org.hibernate.Session;
 
 import org.hibernate.criterion.Criterion;
@@ -16,7 +18,7 @@ import java.lang.reflect.ParameterizedType;
 
 public abstract class AbstractDAO<T, ID extends Serializable>{  
 
-private Class<T> persistentClass;  
+private Class<T> persistentClass;
 private Session session;  
 
 @SuppressWarnings("unchecked")

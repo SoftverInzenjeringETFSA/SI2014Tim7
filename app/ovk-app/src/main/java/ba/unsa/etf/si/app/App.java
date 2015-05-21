@@ -1,21 +1,18 @@
 package ba.unsa.etf.si.app;
 
-import ba.unsa.etf.si.app.services.KorisnikService;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
 
-import ba.unsa.etf.si.app.dao.KorisnikDAO;
 import ba.unsa.etf.si.app.dao.OcitanjaDAO;
 import ba.unsa.etf.si.app.dao.PotrosacDAO;
-import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.entity.Ocitanja;
 import ba.unsa.etf.si.app.entity.Potrosac;
 import ba.unsa.etf.si.app.util.HibernateUtil;
 
-import java.util.Date;
 
 /**
  * Hello world!
