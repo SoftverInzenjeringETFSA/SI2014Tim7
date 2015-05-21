@@ -11,6 +11,7 @@ import ba.unsa.etf.si.app.dao.OcitanjaDAO;
 import ba.unsa.etf.si.app.dao.PotrosacDAO;
 import ba.unsa.etf.si.app.entity.Ocitanja;
 import ba.unsa.etf.si.app.entity.Potrosac;
+import ba.unsa.etf.si.app.services.KorisnikService;
 import ba.unsa.etf.si.app.util.HibernateUtil;
 
 
@@ -23,7 +24,7 @@ public class App
 
     public static void main( String[] args )
     {
-       
+       /*
         //primjer koristenja dao klase
         
         //otvaranje sesije i pocetak transakcije, potrebno za svaku komunikaciju sa bazom
@@ -50,7 +51,7 @@ public class App
         
         //zatvaranje sesije
         session.close();
-        HibernateUtil.getSessionFactory().close();
-    	
+        HibernateUtil.getSessionFactory().close();*/
+       
     }
 }

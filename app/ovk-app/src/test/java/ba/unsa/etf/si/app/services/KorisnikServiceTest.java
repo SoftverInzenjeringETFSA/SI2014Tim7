@@ -5,8 +5,14 @@
  */
 package ba.unsa.etf.si.app.services;
 
+import ba.unsa.etf.si.app.dao.KorisnikDAO;
 import ba.unsa.etf.si.app.entity.Korisnik;
+import ba.unsa.etf.si.app.util.HibernateUtil;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import static org.hamcrest.CoreMatchers.is;
+import org.hibernate.Session;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -20,23 +26,44 @@ import static org.junit.Assert.*;
  */
 public class KorisnikServiceTest {
     
+    private static Korisnik testCaseKorisnik;
+    private static Korisnik testCaseKorisnik2;
+    private Session session;
+    private static KorisnikDAO dao;
     public KorisnikServiceTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
+   
     }
     
     @AfterClass
     public static void tearDownClass() {
+
     }
     
     @Before
     public void setUp() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(2000, 10, 10);
+        Date x = cal.getTime();
+        testCaseKorisnik2 = new Korisnik("Armin","Klaèar","0101006500006","00AAA0001","TestAdress 2","062123452","example1@example.com",x,false,"testUsername2","testPassword2");
+        KorisnikService instance = new KorisnikService();
+        testCaseKorisnik2.setPassword(instance.createNewKorisnik(testCaseKorisnik2));
+        testCaseKorisnik = new Korisnik("Armin","Klaèar","2709992176217","00AAA0000","TestAdress 1","062123456","example@example.com",x,true,"testUsername1","testPassword1");
+        session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        dao = new KorisnikDAO();
+        dao.setSession(session);
     }
     
     @After
     public void tearDown() {
+        KorisnikService instance = new KorisnikService();
+        instance.deleteKorisnik(testCaseKorisnik2);
+        session.getTransaction().commit();
+        session.close();
     }
 
     /**
@@ -45,13 +72,11 @@ public class KorisnikServiceTest {
     @org.junit.Test
     public void testCreateNewKorisnik() {
         System.out.println("createNewKorisnik");
-        Korisnik k = null;
         KorisnikService instance = new KorisnikService();
-        String expResult = "";
-        String result = instance.createNewKorisnik(k);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.createNewKorisnik(testCaseKorisnik);
+        List<Korisnik> s = dao.findByFullJMBG(testCaseKorisnik.getJmbg());
+        instance.deleteKorisnik(testCaseKorisnik);
+        assertEquals(s.get(0).getJmbg(), testCaseKorisnik.getJmbg());
     }
 
     /**
@@ -60,13 +85,10 @@ public class KorisnikServiceTest {
     @org.junit.Test
     public void testGetKorisnikByJMBG() {
         System.out.println("getKorisnikByJMBG");
-        String JMBG = "";
+        String JMBG = "0101006500006";
         KorisnikService instance = new KorisnikService();
-        Korisnik expResult = null;
         Korisnik result = instance.getKorisnikByJMBG(JMBG);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(JMBG, result.getJmbg());
     }
 
     /**
@@ -75,36 +97,37 @@ public class KorisnikServiceTest {
     @org.junit.Test
     public void testModifyKorisnik() {
         System.out.println("modifyKorisnik");
-        Korisnik k = null;
+        String JMBG = "0101006500006";
+      
         KorisnikService instance = new KorisnikService();
-        instance.modifyKorisnik(k);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Korisnik result = instance.getKorisnikByJMBG(JMBG);
+       
+        result.setAdmin(Boolean.TRUE);
+        instance.modifyKorisnik(result);
+        
+        result = instance.getKorisnikByJMBG(JMBG);
+        Boolean test = result.getAdmin();
+        
+        result.setAdmin(Boolean.FALSE);
+        instance.modifyKorisnik(result);
+        
+        assertEquals(test,true);
     }
 
     /**
      * Test of deleteKorisnik method, of class KorisnikService.
      */
-    @org.junit.Test
+    @org.junit.Test(expected=IllegalArgumentException.class)
     public void testDeleteKorisnik() {
         System.out.println("deleteKorisnik");
-        Korisnik k = null;
+        Calendar cal = Calendar.getInstance();
+        cal.set(2000, 10, 10);
+        Date x = cal.getTime();
         KorisnikService instance = new KorisnikService();
-        instance.deleteKorisnik(k);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of closeSession method, of class KorisnikService.
-     */
-    @org.junit.Test
-    public void testCloseSession() {
-        System.out.println("closeSession");
-        KorisnikService instance = new KorisnikService();
-        instance.closeSession();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        testCaseKorisnik = new Korisnik("Armin","Klaèar","2309992170008","00AAA0000","TestAdress 1","062123456","example@example.com",x,true,"testUsername1","testPassword1");
+        instance.createNewKorisnik(testCaseKorisnik);
+        instance.deleteKorisnik(testCaseKorisnik);
+        Korisnik s = instance.getKorisnikByJMBG(testCaseKorisnik.getJmbg());
     }
 
     /**
@@ -118,11 +141,8 @@ public class KorisnikServiceTest {
         String jmbg = "";
         String username = "";
         KorisnikService instance = new KorisnikService();
-        List<Korisnik> expResult = null;
         List<Korisnik> result = instance.searchByCriteria(ime, prezime, jmbg, username);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertThat(result.isEmpty(), is(false));
     }
 
     /**
@@ -131,14 +151,12 @@ public class KorisnikServiceTest {
     @org.junit.Test
     public void testCheckLogin() {
         System.out.println("checkLogin");
-        String Username = "";
-        String Password = "";
+        String Username = "testUsername2";
+        String Password = testCaseKorisnik2.getPassword();
         KorisnikService instance = new KorisnikService();
-        Boolean expResult = null;
+        Boolean expResult = false;
         Boolean result = instance.checkLogin(Username, Password);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

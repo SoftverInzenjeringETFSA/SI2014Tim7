@@ -94,6 +94,5 @@ public class OcitanjaServiceTest {
 		
 		assertTrue(o.modificirajOcitanja(ocitanja));
 			
-	}*/
-	
+	}*/	
 }

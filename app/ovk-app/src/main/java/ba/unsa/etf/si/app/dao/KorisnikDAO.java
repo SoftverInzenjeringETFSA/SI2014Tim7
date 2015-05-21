@@ -16,7 +16,7 @@ public class KorisnikDAO extends AbstractDAO<Korisnik,Integer>{
         } 
         
         
-        public List<Korisnik> findByFullUsernamaJMBG(String username,String jmbg){
+        public List<Korisnik> findByFullUsernameJMBG(String username,String jmbg){
             Criteria criteria = getSession().createCriteria(getPersistentClass());
             criteria.add(Restrictions.like("jmbg",jmbg).ignoreCase());
             criteria.add(Restrictions.like("username",username).ignoreCase());

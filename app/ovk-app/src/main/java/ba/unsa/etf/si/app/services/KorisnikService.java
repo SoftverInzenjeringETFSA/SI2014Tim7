@@ -8,7 +8,6 @@ package ba.unsa.etf.si.app.services;
 import ba.unsa.etf.si.app.dao.KorisnikDAO;
 import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.util.HibernateUtil;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 
@@ -24,9 +23,9 @@ public class KorisnikService {
         session.beginTransaction();
         KorisnikDAO dao = new KorisnikDAO();
         dao.setSession(session);
-        List<Korisnik> svi  = dao.findByFullUsernamaJMBG(k.getUsername(),k.getJmbg());
-        if(!svi.isEmpty()){
-            test= true;
+        List<Korisnik> svi  = dao.findByFullUsernameJMBG(k.getUsername(),k.getJmbg());
+        if(svi.isEmpty()){
+            test = true;
         }
         // Pocetak sesije obavezni kod za korisnika
         if(test){
@@ -61,7 +60,7 @@ public class KorisnikService {
             session.beginTransaction();
             KorisnikDAO dao = new KorisnikDAO();
             dao.setSession(session);
-            List<Korisnik> k= dao.findByFullJMBG(JMBG);
+            List<Korisnik> k = dao.findByFullJMBG(JMBG);
             session.getTransaction().commit();
             session.close();
             
@@ -95,13 +94,13 @@ public class KorisnikService {
     }
     // Kako i ova klasa radi zajedno sa metodom za pretragu, ovdje je nepotrebno vracati odgovor
     public void deleteKorisnik(Korisnik k){
+                Korisnik zaBrisanje = getKorisnikByJMBG(k.getJmbg());
                 Session session = HibernateUtil.getSessionFactory().openSession();
                 session.beginTransaction();
                 KorisnikDAO dao = new KorisnikDAO();
                 dao.setSession(session);
                 // Dodavanje novog korisnika
-                k.setPassword(createPassword());
-                dao.delete(k.getId());
+                dao.delete(zaBrisanje.getId());
                 // Zatvaranje sesije, isto obavezni dio
                 session.getTransaction().commit();
                 session.close();
@@ -157,7 +156,6 @@ public class KorisnikService {
             List<Korisnik> k = dao.findByFullUsername(Username);
             session.getTransaction().commit();
             session.close();
-            
             if(!k.isEmpty() && k.get(0).getUsername().equals(Username)){
                 if(k.get(0).getPassword().equals(Password)){
                     return k.get(0).getAdmin();
@@ -170,6 +168,4 @@ public class KorisnikService {
                 throw new IllegalArgumentException("Korisnik ne postoji u sistemu");
             }   
     }
-    
-     
 }
