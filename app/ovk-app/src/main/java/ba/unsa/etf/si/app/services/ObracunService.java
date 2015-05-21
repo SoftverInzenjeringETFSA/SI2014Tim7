@@ -30,13 +30,13 @@ public class ObracunService {
 	
 	public ObracunService(){
 		 dao = new RacuniDAO();
-		 Parametri parametri = parametriService.DajParametre();
+		/* Parametri parametri = parametriService.DajParametre();
 		 ObracunService.setCijenaKanalizacijePoKubiku(parametri.getCijenaKanalizacijePoKubiku());
 		 ObracunService.setCijenaVodePoKubiku(parametri.getCijenaVodePoKubiku());
 		 ObracunService.setFiksnaCijena(parametri.getFiksnaCijena());
 		 ObracunService.setPVNKoristenja(parametri.getPvnZaKoristenjeVoda());
 		 ObracunService.setPVNZastite(parametri.getPvnZaZastituVoda());
-		 ObracunService.setStopaPDV(parametri.getStopaPdv());
+		 ObracunService.setStopaPDV(parametri.getStopaPdv());*/
 		 
 	}
 
@@ -124,12 +124,12 @@ public class ObracunService {
 		
 		public List<Racuni> formirajRacune(Calendar pocetni, Calendar krajnji){
 			 List<Racuni> racuni = new ArrayList<Racuni>();
-			 OcitanjaService servis = new OcitanjaService();
-			 List<Ocitanja> ocitanja = servis.pretragaOcitanja(pocetni.MONTH, pocetni.YEAR);
+			 OcitanjaService servis = new OcitanjaService(s);
+			 List<Ocitanja> ocitanja = servis.findByMjesecGodinaId(pocetni.MONTH, pocetni.YEAR);
 			  
 			 
 			 for(int i=0;i<ocitanja.size();i++){
-				 Ocitanja o = servis.pretragaOcitanja(ocitanja.get(i).getPotrosacByIdPotrosaca().getId().intValue(),krajnji.MONTH, pocetni.YEAR);
+				 Ocitanja o = servis.findByMjesecGodinaId(ocitanja.get(i).getPotrosacByIdPotrosaca().getId().intValue(),krajnji.MONTH, pocetni.YEAR);
 				 double vrijednost = o.getPotrosnja() - ocitanja.get(i).getPotrosnja();
 				 Racuni racun = obracunajRacun(vrijednost);
 				 racun.setPotrosac(ocitanja.get(i).getPotrosacByIdPotrosaca());

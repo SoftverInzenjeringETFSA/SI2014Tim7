@@ -1,10 +1,13 @@
 package ba.unsa.etf.si.app.services;
 
 
-import ba.unsa.etf.si.app.dao.OcitanjaDAO;
+import java.util.List;
 
+import ba.unsa.etf.si.app.dao.OcitanjaDAO;
 import ba.unsa.etf.si.app.entity.Ocitanja;
 
+
+import ba.unsa.etf.si.app.entity.Potrosac;
 
 import org.hibernate.Session;
 
@@ -92,10 +95,46 @@ public class OcitanjaService {
 		return dao.findById(id);
 	}
 	
-	public void pretragaOcitanja()
-	{
+	
+	public Ocitanja findByMjesecGodinaId(int month, int year,int id) {  
 		
-	}
-
+		Ocitanja o = new Ocitanja();
+		Potrosac p = new Potrosac();
+		
+		dao = new OcitanjaDAO();
+		dao.setSession(session);
+		
+		p.setId(id);
+		o.setGodina(year);
+		o.setMjesec(month);
+		o.setPotrosacByIdPotrosaca(p);
+		
+		return dao.findByExample(o).get(0);
+        /*Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.add(Restrictions.like("mjesec","%" + month + "%").ignoreCase());
+        criteria.add(Restrictions.like("godina","%" + year + "%").ignoreCase());
+        //criteria.add(Restrictions.like("sifra_vodomjera","%" + sifraVodomjera + "%").ignoreCase());
+        return criteria.list();  */
+    } 
+	
+	
+	
+	public List<Ocitanja> findByMjesecGodinaId(int month, int year) {  
+		
+		dao = new OcitanjaDAO();
+		dao.setSession(session);
+		Ocitanja o = new Ocitanja();
+		
+		o.setGodina(year);
+		o.setMjesec(month);
+		
+		return dao.findByExample(o);
+        /*Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.add(Restrictions.like("mjesec","%" + month + "%").ignoreCase());
+        criteria.add(Restrictions.like("godina","%" + year + "%").ignoreCase());
+        //criteria.add(Restrictions.like("sifra_vodomjera","%" + sifraVodomjera + "%").ignoreCase());
+        return criteria.list();  */
+    }
+	
 	
 }

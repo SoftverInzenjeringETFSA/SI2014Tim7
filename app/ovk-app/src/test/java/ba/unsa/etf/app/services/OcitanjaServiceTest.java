@@ -3,9 +3,11 @@ package ba.unsa.etf.app.services;
 import java.util.List;
 
 
+
 import org.hibernate.Session;
 import org.junit.Test;
 
+import ba.unsa.etf.si.app.dao.OcitanjaDAO;
 import ba.unsa.etf.si.app.entity.Ocitanja;
 import ba.unsa.etf.si.app.entity.Potrosac;
 import ba.unsa.etf.si.app.services.OcitanjaService;
@@ -14,7 +16,7 @@ import ba.unsa.etf.si.app.util.HibernateUtil;
 import junit.framework.TestCase;
 
 public class OcitanjaServiceTest extends TestCase {
-	
+	/*
 	@Test
 	public void testKreirajOcitanja() {
 		
@@ -40,13 +42,13 @@ public class OcitanjaServiceTest extends TestCase {
 		
 		session = HibernateUtil.getSessionFactory().openSession();
 		o.setSession(session);
-		//tmp.setPotrosacBySifraVodomjera(tmpPotrosac);
+		tmp.setPotrosacBySifraVodomjera(tmpPotrosac);
 		tmp.setGodina(13);
-		tmp.setMjesec(13);
+		tmp.setMjesec(14);
 		
 		assertTrue(o.kreirajOcitanja(tmp));
 		
-	}
+	}*/
 	/*
 	@Test
 	public void testObrisiOcitanja() 
@@ -94,5 +96,29 @@ public class OcitanjaServiceTest extends TestCase {
 		assertTrue(o.modificirajOcitanja(ocitanja));
 			
 	}*/
+	
+	
+	
+	@Test
+	public void testirajPretraguPoTriParametra() 
+	{
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+	
+		
+		OcitanjaService s = new OcitanjaService(session);
+		
+		//Potrosac p = new Potrosac();
+		
+		//p.setSifraVodomjera(1);
+		
+		Ocitanja o	= s.findByMjesecGodinaId(13, 13,1);
+	
+		int i = o.getId();
+		
+		assertEquals(19,i);
+			
+	}
+	
 	
 }
