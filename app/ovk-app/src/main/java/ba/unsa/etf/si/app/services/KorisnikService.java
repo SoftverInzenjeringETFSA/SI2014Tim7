@@ -8,7 +8,6 @@ package ba.unsa.etf.si.app.services;
 import ba.unsa.etf.si.app.dao.KorisnikDAO;
 import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.util.HibernateUtil;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 
@@ -17,34 +16,20 @@ import org.hibernate.Session;
  * @author armin
  */
 public class KorisnikService {
-    List<Korisnik> svi;
-    public KorisnikService(){
-        svi = new ArrayList<Korisnik>();
+    
+    public String createNewKorisnik(Korisnik k){
+        Boolean test = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();   
+        session.beginTransaction();
         KorisnikDAO dao = new KorisnikDAO();
         dao.setSession(session);
-    	svi = dao.findAll();
-        session.getTransaction().commit();
-        //zatvaranje sesije
-        session.close();
-    }
-    public String createNewKorisnik(Korisnik k){
-        int id = -1;
-        for (Korisnik svi1 : svi) {
-            if (k.getJmbg().equals(svi1.getJmbg())) {
-                id = svi1.getId();
-            } else if (k.getUsername().equals(svi1.getUsername())) {
-                id = svi1.getId();
-            }
+        List<Korisnik> svi  = dao.findByFullUsernameJMBG(k.getUsername(),k.getJmbg());
+        if(svi.isEmpty()){
+            test = true;
         }
         // Pocetak sesije obavezni kod za korisnika
-        if(id==-1){
+        if(test){
             if(validate(k)){
-                Session session = HibernateUtil.getSessionFactory().openSession();
-                session.beginTransaction();
-                KorisnikDAO dao = new KorisnikDAO();
-                dao.setSession(session);
                 // Dodavanje novog korisnika
                 k.setPassword(createPassword());
                 dao.save(k);
@@ -53,27 +38,44 @@ public class KorisnikService {
                 session.close();
                 return k.getPassword();
             }
-            return "Korisnik nije prosao validaciju, provjerite podatke";
+            else{
+                session.getTransaction().commit();
+                session.close();
+                throw new IllegalArgumentException("JMBG nije validan!");
+            }
         }
-        return "Korisnik postoji vec u sistemu";
+        else{
+            session.getTransaction().commit();
+            session.close();
+            throw new IllegalArgumentException("Korisnik vec postoji u sistemu !");
+        }
     }
     
     // Sljedece dvije metode trebaju da rade zajedno, prvo nadjemo korisnika i uzmemo njegove podatke
     // zatim mjenjamo te podatke i saljemo u modifyKorisnik
     // getKorisnikByJMBG takodjer sluzi za pretragu po JMBG
     public Korisnik getKorisnikByJMBG(String JMBG){
-        Korisnik k = new Korisnik();
-        k.setJmbg(JMBG);
-        if(validateJMBG(k)){
-            for (Korisnik svi1 : svi) {
-                if (JMBG.equals(svi1.getJmbg())) {
-                    return svi1;
-                } 
+        if(validateJMBG(JMBG)){
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            KorisnikDAO dao = new KorisnikDAO();
+            dao.setSession(session);
+            List<Korisnik> k = dao.findByFullJMBG(JMBG);
+            session.getTransaction().commit();
+            session.close();
+            
+            if(!k.isEmpty() && k.get(0).getJmbg().equals(JMBG)){
+                return k.get(0);
             }
+            else{
+                throw new IllegalArgumentException("Korisnik ne postoji u sistemu");
+            }   
         }
-        return new Korisnik();
+        else{
+            throw new IllegalArgumentException("JMBG nije validan!");
+        }
     }
-    public String modifyKorisnik(Korisnik k){
+    public void modifyKorisnik(Korisnik k){
             if(validate(k)){
                 Session session = HibernateUtil.getSessionFactory().openSession();
                 session.beginTransaction();
@@ -85,25 +87,26 @@ public class KorisnikService {
                 // Zatvaranje sesije, isto obavezni dio
                 session.getTransaction().commit();
                 session.close();
-                return "Uspjesna izmjena korisnika";
             }
-            return "Korisnik nije prosao validaciju, provjerite podatke";
+            else{
+                throw new IllegalArgumentException("Korisnik nije prosao validaciju, provjerite podatke");
+            }
     }
     // Kako i ova klasa radi zajedno sa metodom za pretragu, ovdje je nepotrebno vracati odgovor
     public void deleteKorisnik(Korisnik k){
+                Korisnik zaBrisanje = getKorisnikByJMBG(k.getJmbg());
                 Session session = HibernateUtil.getSessionFactory().openSession();
                 session.beginTransaction();
                 KorisnikDAO dao = new KorisnikDAO();
                 dao.setSession(session);
                 // Dodavanje novog korisnika
-                k.setPassword(createPassword());
-                dao.delete(k.getId());
+                dao.delete(zaBrisanje.getId());
                 // Zatvaranje sesije, isto obavezni dio
                 session.getTransaction().commit();
                 session.close();
     }
     private Boolean validate(Korisnik k){
-        if(!validateJMBG(k)){
+        if(!validateJMBG(k.getJmbg())){
         return false;
         }
         return validateBrLicne(k);
@@ -113,8 +116,8 @@ public class KorisnikService {
         newPass = Long.toHexString(Double.doubleToLongBits(Math.random()));
         return newPass;
     }
-    private Boolean validateJMBG(Korisnik k){
-        String[] jmbg = k.getJmbg().split("");
+    private Boolean validateJMBG(String JMBGX){
+        String[] jmbg = JMBGX.split("");
         if(jmbg.length!=14) {
         return false;
         }
@@ -133,28 +136,36 @@ public class KorisnikService {
         HibernateUtil.getSessionFactory().close();
     }
     
-    public List<Korisnik> searchByCriteria(String ime,String prezime,String jmbg){
-        List <Korisnik> listaPretrage = new ArrayList<Korisnik>();
+    public List<Korisnik> searchByCriteria(String ime,String prezime,String jmbg,String username){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();   
         KorisnikDAO dao = new KorisnikDAO();
         dao.setSession(session);
-    	listaPretrage = dao.findByImePrezimeJMBG(ime,prezime,jmbg);
+    	List <Korisnik> listaPretrage = dao.findByImePrezimeJMBG(ime,prezime,jmbg,username);
         session.getTransaction().commit();
         //zatvaranje sesije
         session.close();
     return listaPretrage;
     }
-    
     // Metoda za upotrebu prilikom logiranja na sistem
-    public Korisnik getKorisnikByUsername(String Username){
-        for (Korisnik svi1 : svi) {
-            if (Username.equals(svi1.getJmbg())) {
-                return svi1;
-                } 
+    public Boolean checkLogin(String Username,String Password){
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            KorisnikDAO dao = new KorisnikDAO();
+            dao.setSession(session);
+            List<Korisnik> k = dao.findByFullUsername(Username);
+            session.getTransaction().commit();
+            session.close();
+            if(!k.isEmpty() && k.get(0).getUsername().equals(Username)){
+                if(k.get(0).getPassword().equals(Password)){
+                    return k.get(0).getAdmin();
+                }
+                else{
+                    throw new IllegalArgumentException("Pogresan Password");
+                }   
             }
-        return new Korisnik();
+            else{
+                throw new IllegalArgumentException("Korisnik ne postoji u sistemu");
+            }   
     }
-    
-     
 }

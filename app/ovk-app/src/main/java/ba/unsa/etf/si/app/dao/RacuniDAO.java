@@ -9,11 +9,13 @@ import org.hibernate.criterion.Restrictions;
 
 import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.entity.Parametri;
+import ba.unsa.etf.si.app.entity.Potrosac;
 import ba.unsa.etf.si.app.entity.Racuni;
+import java.util.Date;
 
 public class RacuniDAO extends AbstractDAO<Racuni,Integer> {
 
-	
+/*
 	private Session session;
 	
 	public void setSession(Session s){
@@ -34,5 +36,18 @@ public class RacuniDAO extends AbstractDAO<Racuni,Integer> {
 	public void closeSession(){
 		session.close();
 	}
+*/
+    public List<Racuni> finByDateId(Date datumKreacije, int id) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.add(Restrictions.like("datumKreacije",datumKreacije));
+        criteria.add(Restrictions.like("id",id));
+        return criteria.list();  
+    }
+
+    public List<Racuni> findByPotrosac(Potrosac p) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.add(Restrictions.like("potrosac",p));
+        return criteria.list();
+    }
 	
 }

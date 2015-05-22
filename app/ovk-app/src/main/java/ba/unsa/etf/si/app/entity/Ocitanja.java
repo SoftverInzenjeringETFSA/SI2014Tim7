@@ -13,20 +13,20 @@ public class Ocitanja  implements java.io.Serializable {
 
 	 private static final long serialVersionUID = 1L;
      private Integer id;
-     private Potrosac potrosacBySifraVodomjera;
+     private Integer sifraVodomjera;
      private Potrosac potrosacByIdPotrosaca;
      private Double potrosnja;
      private Integer godina;
      private Integer mjesec;
      private Boolean access;
      //neka greska u mapiranju?
-     private Set racunis = new HashSet(0);
+     private transient Set racunis = new HashSet(0);
 
     public Ocitanja() {
     }
 
-    public Ocitanja(Potrosac potrosacBySifraVodomjera, Potrosac potrosacByIdPotrosaca, Double potrosnja, Integer godina, Integer mjesec, Boolean access, Set racunis) {
-       this.potrosacBySifraVodomjera = potrosacBySifraVodomjera;
+    public Ocitanja(Integer sifraVodomjera, Potrosac potrosacByIdPotrosaca, Double potrosnja, Integer godina, Integer mjesec, Boolean access, Set racunis) {
+       this.sifraVodomjera = sifraVodomjera;
        this.potrosacByIdPotrosaca = potrosacByIdPotrosaca;
        this.potrosnja = potrosnja;
        this.godina = godina;
@@ -42,12 +42,12 @@ public class Ocitanja  implements java.io.Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    public Potrosac getPotrosacBySifraVodomjera() {
-        return this.potrosacBySifraVodomjera;
+    public Integer getSifraVodomjera() {
+        return this.sifraVodomjera;
     }
     
-    public void setPotrosacBySifraVodomjera(Potrosac potrosacBySifraVodomjera) {
-        this.potrosacBySifraVodomjera = potrosacBySifraVodomjera;
+    public void setSifraVodomjera(Integer sifraVodomjera) {
+        this.sifraVodomjera = sifraVodomjera;
     }
     public Potrosac getPotrosacByIdPotrosaca() {
         return this.potrosacByIdPotrosaca;

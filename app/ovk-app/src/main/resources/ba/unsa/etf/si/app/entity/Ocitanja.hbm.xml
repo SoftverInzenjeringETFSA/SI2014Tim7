@@ -8,9 +8,9 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="potrosacBySifraVodomjera" class="ba.unsa.etf.si.app.entity.Potrosac" fetch="select">
+        <property name="sifraVodomjera" type="java.lang.Integer">
             <column name="sifra_vodomjera" />
-        </many-to-one>
+        </property>
         <many-to-one name="potrosacByIdPotrosaca" class="ba.unsa.etf.si.app.entity.Potrosac" fetch="select">
             <column name="id_potrosaca" />
         </many-to-one>

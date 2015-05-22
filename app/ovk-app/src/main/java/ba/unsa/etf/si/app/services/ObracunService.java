@@ -13,190 +13,148 @@ import ba.unsa.etf.si.app.dao.OcitanjaDAO;
 import ba.unsa.etf.si.app.dao.RacuniDAO;
 import ba.unsa.etf.si.app.entity.Ocitanja;
 import ba.unsa.etf.si.app.entity.Parametri;
+import ba.unsa.etf.si.app.entity.Potrosac;
 import ba.unsa.etf.si.app.entity.Racuni;
 import ba.unsa.etf.si.app.util.HibernateUtil;
 
 public class ObracunService {
+	public List<Racuni> formirajRacune(Date odDatuma,Date doDatuma){
+           OcitanjaService ocitanja = new OcitanjaService();
+           ParametriService paramS = new ParametriService();
+           List<Ocitanja> ocitanjaZaRacune = ocitanja.getOcitanjaForRacuni(odDatuma, doDatuma);
+           Parametri param = paramS.dajParametre();
+           List<Racuni> racuniList = new ArrayList<Racuni>();
+            for (Ocitanja ocitanjaZaRacuneX : ocitanjaZaRacune) {
+                Racuni racun = formirajRacun(ocitanjaZaRacuneX,param);
+                racuniList.add(racun);
+            }
+            
+            if(racuniList.isEmpty()){
+                throw new IllegalArgumentException("Nema ocitanja");
+            }
+            else{
+                return racuniList;
+            }
+        }
 	
-	private Session s;
-	private RacuniDAO dao;
-	
-	
-	public ObracunService(){
-		 dao = new RacuniDAO();
-		/* Parametri parametri = parametriService.DajParametre();
-		 ObracunService.setCijenaKanalizacijePoKubiku(parametri.getCijenaKanalizacijePoKubiku());
-		 ObracunService.setCijenaVodePoKubiku(parametri.getCijenaVodePoKubiku());
-		 ObracunService.setFiksnaCijena(parametri.getFiksnaCijena());
-		 ObracunService.setPVNKoristenja(parametri.getPvnZaKoristenjeVoda());
-		 ObracunService.setPVNZastite(parametri.getPvnZaZastituVoda());
-		 ObracunService.setStopaPDV(parametri.getStopaPdv());*/
-		 
-	}
-
-
-
-		public static double getCijenaVodePoKubiku() {
-		return cijenaVodePoKubiku;
-	}
-
-	public static void setCijenaVodePoKubiku(double cijenaVodePoKubiku) {
-		ObracunService.cijenaVodePoKubiku = cijenaVodePoKubiku;
-	}
-
-	public static double getCijenaKanalizacijePoKubiku() {
-		return cijenaKanalizacijePoKubiku;
-	}
-
-	public static void setCijenaKanalizacijePoKubiku(
-			double cijenaKanalizacijePoKubiku) {
-		ObracunService.cijenaKanalizacijePoKubiku = cijenaKanalizacijePoKubiku;
-	}
-
-	public static double getPVNKoristenja() {
-		return PVNKoristenja;
-	}
-
-	public static void setPVNKoristenja(double pVNKoristenja) {
-		PVNKoristenja = pVNKoristenja;
-	}
-
-	public static double getPVNZastite() {
-		return PVNZastite;
-	}
-
-	public static void setPVNZastite(double pVNZastite) {
-		PVNZastite = pVNZastite;
-	}
-
-	public static double getFiksniBrojKubikaVodaZaPausalce() {
-		return fiksniBrojKubikaVodaZaPausalce;
-	}
-
-	public static void setFiksniBrojKubikaVodaZaPausalce(
-			double fiksniBrojKubikaVodaZaPausalce) {
-		ObracunService.fiksniBrojKubikaVodaZaPausalce = fiksniBrojKubikaVodaZaPausalce;
-	}
-
-	public static double getFiksniBrojKubikaKanalizacijaZaPausalce() {
-		return fiksniBrojKubikaKanalizacijaZaPausalce;
-	}
-
-	public static void setFiksniBrojKubikaKanalizacijaZaPausalce(
-			double fiksniBrojKubikaKanalizacijaZaPausalce) {
-		ObracunService.fiksniBrojKubikaKanalizacijaZaPausalce = fiksniBrojKubikaKanalizacijaZaPausalce;
-	}
-
-	public static double getStopaPDV() {
-		return stopaPDV;
-	}
-
-	public static void setStopaPDV(double stopaPDV) {
-		ObracunService.stopaPDV = stopaPDV;
-	}
-
-	public static double getFiksnaCijena() {
-		return fiksnaCijena;
-	}
-
-	public static void setFiksnaCijena(double fiksnaCijena) {
-		ObracunService.fiksnaCijena = fiksnaCijena;
-	}
-
-
-
-		public static double cijenaVodePoKubiku;
-		public static double cijenaKanalizacijePoKubiku;
-		public static double PVNKoristenja;
-		public static double PVNZastite;
-		public static double fiksniBrojKubikaVodaZaPausalce;
-		public static double fiksniBrojKubikaKanalizacijaZaPausalce;
-		public static double stopaPDV;
-		public static double fiksnaCijena;
+        private Racuni formirajRacun(Ocitanja o,Parametri param){
+            Potrosac p = o.getPotrosacByIdPotrosaca();
+            Double potrosnja = 0.0;
+            if("Pausalni".equals(p.getKategorija())){
+                potrosnja = param.getFiksniVodaZaPausalce();
+            }
+            else{
+                potrosnja = o.getPotrosnja();
+            }
+            Double fixnaCijenaZaKoristenjeUsluga = param.getFiksnaCijena();
+            Double cijenaVoda = potrosnja*(param.getPvnZaKoristenjeVoda()+param.getCijenaVodePoKubiku()+param.getPvnZaZastituVoda());
+            Double cijenaKanalizacije = 0.0;
+            if(p.getUsluga()){
+                cijenaKanalizacije = potrosnja*param.getCijenaKanalizacijePoKubiku();
+            }
+            Double ukupno = cijenaKanalizacije + cijenaVoda;
+            Double cijenaKsaPDV = cijenaKanalizacije + cijenaKanalizacije*param.getStopaPdv();
+            Double cijenaVsaPDV = cijenaVoda + cijenaVoda*param.getStopaPdv();
+            Double ukupnoSaPDV = cijenaVsaPDV + cijenaKsaPDV;
+            Racuni r = new Racuni();
+            r.setCijenaKanalizacije(cijenaKanalizacije);
+            r.setCijenaKanalizacijeSaPdv(cijenaKsaPDV);
+            r.setCijenaVoda(cijenaVoda);
+            r.setCijenaVodaSaPdv(cijenaVsaPDV);
+            r.setDatumKreacije(Calendar.getInstance().getTime());
+            r.setFisknaCijenaZaKoristenjeUsluga(fixnaCijenaZaKoristenjeUsluga);
+            r.setOcitanja(o);
+            r.setPotrosac(p);
+            if(p.getUsluga()){
+                r.setPotrosnjaZaKoristenjeKanalizacije(potrosnja);
+            }
+            else{
+                r.setPotrosnjaZaKoristenjeKanalizacije(0.0);
+            }
+            r.setPvnZaKoristenjeVoda(param.getPvnZaKoristenjeVoda());
+            r.setPvnZaZastituVoda(param.getPvnZaZastituVoda());
+            r.setUkupnaCijena(ukupno);
+            r.setUkupnaCijenaSaPdv(ukupnoSaPDV);
+            return r;
+        }
+        
+        public void snimiRacune(List<Racuni> racuni,List<Ocitanja> ocitanja){
+        OcitanjaService o = new OcitanjaService();
+            for (Ocitanja ocitanja1 : ocitanja) {
+                ocitanja1.setAccess(Boolean.FALSE);
+                o.modifyOcitanja(ocitanja1);
+            }
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            RacuniDAO dao = new RacuniDAO();
+            dao.setSession(session);
+            
+            for(Racuni r : racuni){
+                dao.save(r);
+            }
+            
+            session.getTransaction().commit();
+            session.close();
+        
+        }
 		
-		
-		
-		public List<Racuni> formirajRacune(Calendar pocetni, Calendar krajnji){
-			 List<Racuni> racuni = new ArrayList<Racuni>();
-			 OcitanjaService servis = new OcitanjaService(s);
-			 List<Ocitanja> ocitanja = servis.findByMjesecGodinaId(pocetni.MONTH, pocetni.YEAR);
-			  
-			 
-			 for(int i=0;i<ocitanja.size();i++){
-				 Ocitanja o = servis.findByMjesecGodinaId(ocitanja.get(i).getPotrosacByIdPotrosaca().getId().intValue(),krajnji.MONTH, pocetni.YEAR);
-				 double vrijednost = o.getPotrosnja() - ocitanja.get(i).getPotrosnja();
-				 Racuni racun = obracunajRacun(vrijednost);
-				 racun.setPotrosac(ocitanja.get(i).getPotrosacByIdPotrosaca());
-				 racun.setOcitanja(ocitanja.get(i));
-				 			 
-				 racuni.add(racun);
-				 				 
-			 }
-			
-			 return racuni;
-		}
-		
-		
-		
-		private Racuni obracunajRacun(double vrijednost) {
-			 Racuni racun = new Racuni();
-			 double cijenaKanalizacije = vrijednost*cijenaKanalizacijePoKubiku;
-			 double cijenaVode = vrijednost*cijenaVodePoKubiku;
-			 double cijenaKanalizacijeSaPDV = cijenaKanalizacije + cijenaKanalizacije*stopaPDV;
-			 double cijenaVodeSaPDV = cijenaVode + cijenaVode*stopaPDV;
-			 double ukupnaCijena = (cijenaVodePoKubiku+cijenaKanalizacijePoKubiku+PVNKoristenja+PVNZastite)*vrijednost+fiksnaCijena;
-			 double ukupnaCijenaSaPDV = ukupnaCijena+ ukupnaCijena*stopaPDV;
-			 // double cijenaZaKoristenjeVode = vrijednost*PVNKoristenja;
-			 racun.setCijenaKanalizacije(cijenaKanalizacije);
-			 racun.setCijenaKanalizacijeSaPdv(cijenaKanalizacijeSaPDV);
-			 racun.setCijenaVoda(cijenaVode);
-			 racun.setCijenaVodaSaPdv(cijenaVodeSaPDV);
-			 racun.setFisknaCijenaZaKoristenjeUsluga(fiksnaCijena);
-			 racun.setPotrosnjaZaKoristenjeKanalizacije(vrijednost);
-			 racun.setPotrosnjaZaKoristenjeVoda(vrijednost);
-			 racun.setPvnZaKoristenjeVoda(PVNKoristenja);
-			 racun.setPvnZaZastituVoda(PVNZastite);
-			 racun.setUkupnaCijena(ukupnaCijena);
-			 racun.setUkupnaCijenaSaPdv(ukupnaCijenaSaPDV);
-			 
-			 return racun;
-			 
-			 
-		}
+        public List<Racuni> pretragaRacuna(Date datumKreacije,int id,String ime,String prezime,int sifraVodomjera){
+        PotrosacService pService = new PotrosacService();
+        List<Potrosac> pList = pService.dajPotrosaceZaRacun(ime, prezime, sifraVodomjera);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();   
+        RacuniDAO dao = new RacuniDAO();
+        dao.setSession(session);
+        // Pretraga po Datumu i ID
+        List<Racuni> rList = dao.finByDateId(datumKreacije,id);
+        // Pretraga po potrosacu
+        List<Racuni> rList2 = new ArrayList();
+        if(!pList.isEmpty()){
+            for (Potrosac p : pList) {
+                List<Racuni> temp = dao.findByPotrosac(p);
+                if(!temp.isEmpty()){
+                    rList2.add(temp.get(0));
+                }
+            }
+        }
+        session.getTransaction().commit();
+        session.close();
+        
+        if(rList.isEmpty()&&rList2.isEmpty()){
+            throw new IllegalArgumentException("Racuni za unesene parametre ne postoje"); 
+        }
+        else if(rList.isEmpty()){
+            return rList2;
+        }
+        else if(rList2.isEmpty()){
+            return rList;
+        }
+        else{
+            List<Racuni> temp = new ArrayList();
+            for(Racuni r1 : rList){
+                for(Racuni r2 : rList2){
+                    if(r1.getId()==r2.getId()){
+                        temp.add(r1);
+                    }
+                }
+            }
+            if(temp.isEmpty()){
+                throw new IllegalArgumentException("Racuni za unesene parametre ne postoje"); 
+            }
+            else{
+                return temp;
+            }
+        }
+    }
 
-
-
-		public boolean snimiRacune(List<Racuni> racuni){
-			try{
-				s = HibernateUtil.getSessionFactory().openSession();
-				Transaction t = s.beginTransaction();
-				for( int i=0; i< racuni.size(); i++){
-				s.save(racuni.get(i));
-				
-			}
-				t.commit();
-				s.close();
-				return true;
-				
-				}
-				catch(Exception e){
-					return false;
-				}
-				
-			
-		}
-				
-		public boolean modificirajRacun(Racuni racun){
-			return true;
-		}
-		
-		public void izbrisiRacun(Racuni racun){
-			dao.delete(racun.getId());
-		}
-		
-		
-		
-		
-		
-		
+        public void uplatiRacun(Racuni r){
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            RacuniDAO dao = new RacuniDAO();
+            dao.setSession(session);
+            dao.save(r);
+            session.getTransaction().commit();
+            session.close();
+        }
 }
+

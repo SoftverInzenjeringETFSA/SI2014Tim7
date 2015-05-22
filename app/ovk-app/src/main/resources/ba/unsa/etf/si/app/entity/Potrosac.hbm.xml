@@ -41,12 +41,6 @@
         <property name="hidden" type="java.lang.Boolean">
             <column name="hidden" />
         </property>
-        <set name="ocitanjasForSifraVodomjera" table="ocitanja" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="sifra_vodomjera" />
-            </key>
-            <one-to-many class="ba.unsa.etf.si.app.entity.Ocitanja" />
-        </set>
         <set name="racunis" table="racuni" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_potrosaca" />

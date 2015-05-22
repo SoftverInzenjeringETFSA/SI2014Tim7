@@ -25,14 +25,13 @@ public class Potrosac  implements java.io.Serializable {
      private Boolean aktivnost;
      private Boolean hidden;
      //popraviti ovo
-     private Set ocitanjasForSifraVodomjera = new HashSet(0);
-     private Set racunis = new HashSet(0);
-     private Set ocitanjasForIdPotrosaca = new HashSet(0);
+     private transient Set racunis = new HashSet(0);
+     private transient Set ocitanjasForIdPotrosaca = new HashSet(0);
 
     public Potrosac() {
     }
 
-    public Potrosac(String ime, String prezime, String jmbg, String adresa, String telefon, String brojClanova, String kategorija, Integer sifraVodomjera, Boolean usluga, Boolean aktivnost, Boolean hidden, Set ocitanjasForSifraVodomjera, Set racunis, Set ocitanjasForIdPotrosaca) {
+    public Potrosac(String ime, String prezime, String jmbg, String adresa, String telefon, String brojClanova, String kategorija, Integer sifraVodomjera, Boolean usluga, Boolean aktivnost, Boolean hidden, Set racunis, Set ocitanjasForIdPotrosaca) {
        this.ime = ime;
        this.prezime = prezime;
        this.jmbg = jmbg;
@@ -44,7 +43,6 @@ public class Potrosac  implements java.io.Serializable {
        this.usluga = usluga;
        this.aktivnost = aktivnost;
        this.hidden = hidden;
-       this.ocitanjasForSifraVodomjera = ocitanjasForSifraVodomjera;
        this.racunis = racunis;
        this.ocitanjasForIdPotrosaca = ocitanjasForIdPotrosaca;
     }
@@ -133,13 +131,7 @@ public class Potrosac  implements java.io.Serializable {
     public void setHidden(Boolean hidden) {
         this.hidden = hidden;
     }
-    public Set getOcitanjasForSifraVodomjera() {
-        return this.ocitanjasForSifraVodomjera;
-    }
     
-    public void setOcitanjasForSifraVodomjera(Set ocitanjasForSifraVodomjera) {
-        this.ocitanjasForSifraVodomjera = ocitanjasForSifraVodomjera;
-    }
     public Set getRacunis() {
         return this.racunis;
     }

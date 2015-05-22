@@ -25,6 +25,10 @@ public class PotrosacService {
 		this.session = session;
 		
 	}
+
+    PotrosacService() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 		
 	public void kreirajPotrosaca(Potrosac p){
 		session.beginTransaction();
@@ -102,4 +106,20 @@ public class PotrosacService {
         int v = 11-((7*(j[0]+j[6])+6*(j[1]+j[7])+5*(j[2]+j[8])+4*(j[3]+j[9])+3*(j[4]+j[10])+ 2*(j[5]+j[11]))%11);
         return (v<10&&j[12]==v)||(v>9&&j[12]==0);*/
     }
+        
+        // Za koristenje Pretrage racua
+        public List<Potrosac> dajPotrosaceZaRacun(String ime,String prezime,int sifraVodomjera){
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();   
+            PotrosacDAO dao = new PotrosacDAO();
+            dao.setSession(session);
+            List <Potrosac> listaPretrage = dao.findByImePrezimeSifra(ime,prezime,sifraVodomjera);
+            session.getTransaction().commit();
+            session.close();
+            return listaPretrage;
+        }
+        
+        
+        
+        
 }

@@ -11,6 +11,8 @@ import ba.unsa.etf.si.app.dao.OcitanjaDAO;
 import ba.unsa.etf.si.app.dao.PotrosacDAO;
 import ba.unsa.etf.si.app.entity.Ocitanja;
 import ba.unsa.etf.si.app.entity.Potrosac;
+import ba.unsa.etf.si.app.services.KorisnikService;
+import ba.unsa.etf.si.app.services.OcitanjaService;
 import ba.unsa.etf.si.app.util.HibernateUtil;
 
 
@@ -28,29 +30,29 @@ public class App
         
         //otvaranje sesije i pocetak transakcije, potrebno za svaku komunikaciju sa bazom
     	Session session = HibernateUtil.getSessionFactory().openSession();
-        
+        session.beginTransaction();
         
         //instanca dao klase i proslijedjivanje sesije
-    	PotrosacDAO dao1 = new PotrosacDAO();
-    	OcitanjaDAO dao = new OcitanjaDAO();
-    	dao1.setSession(session);
+    	PotrosacDAO dao = new PotrosacDAO();
     	dao.setSession(session);
     	//vraca listu svih korisnika
     	List<Potrosac> svi = new ArrayList<Potrosac>();
-    	svi = dao1.findAll();
+    	svi = dao.findAll();
+        System.out.println(svi.get(0).getSifraVodomjera());
     	Ocitanja o = new Ocitanja();
     	o.setGodina(2012);
     	o.setAccess(true);
     	o.setMjesec(12);
-    	o.setPotrosacByIdPotrosaca(svi.get(0));
-    	o.setPotrosacBySifraVodomjera(svi.get(0));
-    	dao.save(o);
+        o.setPotrosacByIdPotrosaca(svi.get(0));
+    	o.setSifraVodomjera(svi.get(0).getSifraVodomjera());
+        System.out.println(svi.get(0).getSifraVodomjera());
+        OcitanjaService x = new OcitanjaService();
+        x.createNewOcitanja(o);
     	//commit, obavezno poslije svake komunikacije s bazom
     	session.getTransaction().commit();
         
         //zatvaranje sesije
         session.close();
-        HibernateUtil.getSessionFactory().close();
-    	
+       
     }
 }
