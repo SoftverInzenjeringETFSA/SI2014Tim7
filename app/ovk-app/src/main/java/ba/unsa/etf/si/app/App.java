@@ -2,6 +2,7 @@ package ba.unsa.etf.si.app;
 
 
 
+import ba.etf.unsa.si.app.ui.Login;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +25,15 @@ public class App
 {
 
     public static void main( String[] args )
-    {
+    {   
+        //pokretanje login forme
+        Login login = new Login();
+        login.setVisible(true);
        
         //primjer koristenja dao klase
         
         //otvaranje sesije i pocetak transakcije, potrebno za svaku komunikaciju sa bazom
-    	Session session = HibernateUtil.getSessionFactory().openSession();
+    	/*Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         
         //instanca dao klase i proslijedjivanje sesije
@@ -52,7 +56,7 @@ public class App
     	session.getTransaction().commit();
         
         //zatvaranje sesije
-        session.close();
+        session.close();*/
        
     }
 }
