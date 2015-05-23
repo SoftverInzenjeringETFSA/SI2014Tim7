@@ -30,6 +30,10 @@ public class Home extends javax.swing.JFrame {
     OcitanjaPanel1 o1;
     OcitanjaPanel2 o2;
     OcitanjaPanel3 o3;
+    KorisniciPanel1 k1;
+    KorisniciPanel2 k2;
+    KorisniciPanel3 k3;
+    KorisniciPanel4 k4;
     /**
      * Creates new form Home
      */
@@ -43,6 +47,7 @@ public class Home extends javax.swing.JFrame {
         racuniPanel.setVisible(false);
         izvjestajPanel.setVisible(false);
         ocitanjaPanel.setVisible(false);
+        korisniciPanel.setVisible(false);
         //instance svih panela u formi
         p1 = new PotrosacPanel1();
         p2 = new PotrosacPanel2();
@@ -57,11 +62,16 @@ public class Home extends javax.swing.JFrame {
         o1 = new OcitanjaPanel1();
         o2 = new OcitanjaPanel2();
         o3 = new OcitanjaPanel3();
+        k1 = new KorisniciPanel1();
+        k2 = new KorisniciPanel2();
+        k3 = new KorisniciPanel3();
+        k4 = new KorisniciPanel4();
         potrosaciDinamicki.setLayout(layout);
         parametriDinamicki.setLayout(layout);
         racuniDinamicki.setLayout(layout);
         izvjestajDinamicki.setLayout(layout);
         ocitanjaDinamicki.setLayout(layout);
+        korisniciDinamicki.setLayout(layout);
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;
@@ -102,7 +112,19 @@ public class Home extends javax.swing.JFrame {
         c.gridx = 0;
         c.gridy = 0;
         ocitanjaDinamicki.add(o3,c);
-        //prvi panel vidljiv, ostali sakriveni
+        c.gridx = 0;
+        c.gridy = 0;
+        korisniciDinamicki.add(k1,c);
+        c.gridx = 0;
+        c.gridy = 0;
+        korisniciDinamicki.add(k2,c);
+        c.gridx = 0;
+        c.gridy = 0;
+        korisniciDinamicki.add(k3,c);
+        c.gridx = 0;
+        c.gridy = 0;
+        korisniciDinamicki.add(k4,c);
+        //prvi panel Potrosaci vidljiv, ostali sakriveni
         p1.setVisible(true);
         p2.setVisible(false);
         p3.setVisible(false);
@@ -149,12 +171,20 @@ public class Home extends javax.swing.JFrame {
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         ocitanjaDinamicki = new javax.swing.JPanel();
+        korisniciPanel = new javax.swing.JPanel();
+        korisniciDinamicki = new javax.swing.JPanel();
+        korisniciOpcije = new javax.swing.JPanel();
+        jButton14 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
         potrosaciMenu = new javax.swing.JMenu();
         parametriMenu = new javax.swing.JMenu();
         racuniMenu = new javax.swing.JMenu();
         izvjestajMenu = new javax.swing.JMenu();
         ocitanjaMenu = new javax.swing.JMenu();
+        korisniciMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -563,6 +593,101 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        korisniciPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        korisniciDinamicki.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout korisniciDinamickiLayout = new javax.swing.GroupLayout(korisniciDinamicki);
+        korisniciDinamicki.setLayout(korisniciDinamickiLayout);
+        korisniciDinamickiLayout.setHorizontalGroup(
+            korisniciDinamickiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 653, Short.MAX_VALUE)
+        );
+        korisniciDinamickiLayout.setVerticalGroup(
+            korisniciDinamickiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 449, Short.MAX_VALUE)
+        );
+
+        korisniciOpcije.setBackground(new java.awt.Color(0, 102, 153));
+
+        jButton14.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jButton14.setForeground(new java.awt.Color(0, 102, 153));
+        jButton14.setText("KREIRAJ");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+
+        jButton15.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jButton15.setForeground(new java.awt.Color(0, 102, 153));
+        jButton15.setText("IZMIJENI");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+
+        jButton16.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jButton16.setForeground(new java.awt.Color(0, 102, 153));
+        jButton16.setText("IZBRIŠI");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
+
+        jButton17.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jButton17.setForeground(new java.awt.Color(0, 102, 153));
+        jButton17.setText("PRETRAŽI");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout korisniciOpcijeLayout = new javax.swing.GroupLayout(korisniciOpcije);
+        korisniciOpcije.setLayout(korisniciOpcijeLayout);
+        korisniciOpcijeLayout.setHorizontalGroup(
+            korisniciOpcijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(korisniciOpcijeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(korisniciOpcijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton15, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        korisniciOpcijeLayout.setVerticalGroup(
+            korisniciOpcijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(korisniciOpcijeLayout.createSequentialGroup()
+                .addGap(148, 148, 148)
+                .addComponent(jButton14)
+                .addGap(18, 18, 18)
+                .addComponent(jButton15)
+                .addGap(18, 18, 18)
+                .addComponent(jButton16)
+                .addGap(18, 18, 18)
+                .addComponent(jButton17)
+                .addContainerGap(147, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout korisniciPanelLayout = new javax.swing.GroupLayout(korisniciPanel);
+        korisniciPanel.setLayout(korisniciPanelLayout);
+        korisniciPanelLayout.setHorizontalGroup(
+            korisniciPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(korisniciPanelLayout.createSequentialGroup()
+                .addComponent(korisniciOpcije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(korisniciDinamicki, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        korisniciPanelLayout.setVerticalGroup(
+            korisniciPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(korisniciOpcije, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(korisniciDinamicki, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout slojeviLayout = new javax.swing.GroupLayout(slojevi);
         slojevi.setLayout(slojeviLayout);
         slojeviLayout.setHorizontalGroup(
@@ -576,6 +701,8 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(izvjestajPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(ocitanjaPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(korisniciPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         slojeviLayout.setVerticalGroup(
             slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -588,12 +715,15 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(izvjestajPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(ocitanjaPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(korisniciPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         slojevi.setLayer(potrosaciPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         slojevi.setLayer(parametriPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         slojevi.setLayer(racuniPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         slojevi.setLayer(izvjestajPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         slojevi.setLayer(ocitanjaPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        slojevi.setLayer(korisniciPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jMenuBar2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
@@ -637,6 +767,14 @@ public class Home extends javax.swing.JFrame {
         });
         jMenuBar2.add(ocitanjaMenu);
 
+        korisniciMenu.setText("Korisnici");
+        korisniciMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                korisniciMenuMouseClicked(evt);
+            }
+        });
+        jMenuBar2.add(korisniciMenu);
+
         setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -663,6 +801,7 @@ public class Home extends javax.swing.JFrame {
         racuniPanel.setVisible(false);
         izvjestajPanel.setVisible(false);
         ocitanjaPanel.setVisible(false);
+        korisniciPanel.setVisible(false);
         p1.setVisible(true);
         p2.setVisible(false);
         p3.setVisible(false);
@@ -676,6 +815,7 @@ public class Home extends javax.swing.JFrame {
         racuniPanel.setVisible(false);
         izvjestajPanel.setVisible(false);
         ocitanjaPanel.setVisible(false);
+        korisniciPanel.setVisible(false);
         m1.setVisible(true);
         m2.setVisible(false);
 // TODO add yourhandling code here:
@@ -700,6 +840,7 @@ public class Home extends javax.swing.JFrame {
         racuniPanel.setVisible(true);
         izvjestajPanel.setVisible(false);
         ocitanjaPanel.setVisible(false);
+        korisniciPanel.setVisible(false);
         r1.setVisible(true);
         r2.setVisible(false);
         // TODO add your handling code here:
@@ -737,6 +878,7 @@ public class Home extends javax.swing.JFrame {
         racuniPanel.setVisible(false);
         izvjestajPanel.setVisible(true);
         ocitanjaPanel.setVisible(false);
+        korisniciPanel.setVisible(false);
         i1.setVisible(true);
         i2.setVisible(false);
         // TODO add your handling code here:
@@ -781,6 +923,7 @@ public class Home extends javax.swing.JFrame {
         racuniPanel.setVisible(false);
         izvjestajPanel.setVisible(false);
         ocitanjaPanel.setVisible(true);
+        korisniciPanel.setVisible(false);
         o1.setVisible(true);
         o2.setVisible(false);
         o3.setVisible(false);
@@ -809,6 +952,56 @@ public class Home extends javax.swing.JFrame {
         o3.setVisible(false);
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        
+        k1.setVisible(true);
+        k2.setVisible(false);
+        k3.setVisible(false);
+        k4.setVisible(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        
+        k1.setVisible(false);
+        k2.setVisible(true);
+        k3.setVisible(false);
+        k4.setVisible(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        
+        k1.setVisible(false);
+        k2.setVisible(false);
+        k3.setVisible(true);
+        k4.setVisible(false);
+    // TODO add your handling code here:
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        
+        k1.setVisible(false);
+        k2.setVisible(false);
+        k3.setVisible(false);
+        k4.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void korisniciMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_korisniciMenuMouseClicked
+        potrosaciPanel.setVisible(false);
+        parametriPanel.setVisible(false);
+        racuniPanel.setVisible(false);
+        izvjestajPanel.setVisible(false);
+        ocitanjaPanel.setVisible(false);
+        korisniciPanel.setVisible(true);
+        k1.setVisible(true);
+        k2.setVisible(false);
+        k3.setVisible(false);
+        k4.setVisible(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_korisniciMenuMouseClicked
 
     /**
      * @param args the command line arguments
@@ -855,6 +1048,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -865,6 +1062,10 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JMenuBar jMenuBar2;
     private org.jdesktop.swingx.JXHeader jXHeader2;
+    private javax.swing.JPanel korisniciDinamicki;
+    private javax.swing.JMenu korisniciMenu;
+    private javax.swing.JPanel korisniciOpcije;
+    private javax.swing.JPanel korisniciPanel;
     private javax.swing.JPanel ocitanjaDinamicki;
     private javax.swing.JMenu ocitanjaMenu;
     private javax.swing.JPanel ocitanjaOpcije;
