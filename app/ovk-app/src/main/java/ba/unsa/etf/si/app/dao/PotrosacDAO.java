@@ -30,4 +30,19 @@ public class PotrosacDAO extends AbstractDAO<Potrosac,Integer> {
         criteria.add(Restrictions.like("sifraVodomjera",sifraVodomjera));
         return criteria.list();  
     } 
+
+    public List<Potrosac> findByFullJMBG(String jmbg) {
+            Criteria criteria = getSession().createCriteria(getPersistentClass());
+            criteria.add(Restrictions.like("jmbg",jmbg).ignoreCase());
+            return criteria.list();
+    }
+
+    public List<Potrosac> findByImePrezimeJMBGAdresa(String ime, String prezime, String jmbg, String adresa) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.add(Restrictions.like("ime","%" + ime + "%").ignoreCase());
+        criteria.add(Restrictions.like("prezime","%" + prezime + "%").ignoreCase());
+        criteria.add(Restrictions.like("jmbg","%" + jmbg + "%").ignoreCase());
+        criteria.add(Restrictions.like("adresa","%" + adresa + "%").ignoreCase());
+        return criteria.list();
+    }
 }

@@ -14,97 +14,138 @@ import ba.unsa.etf.si.app.entity.Potrosac;
 import ba.unsa.etf.si.app.util.HibernateUtil;
 
 public class PotrosacService {
-	private PotrosacDAO dao;
-	private Session session;
 
-	
-	public PotrosacService(Session session) {
-		
-		dao = new PotrosacDAO();
-		dao.setSession(session);
-		this.session = session;
-		
-	}
-
-    public PotrosacService() {}
-		
-	public void kreirajPotrosaca(Potrosac p){
-		session.beginTransaction();
-		if(validateJMBG(p.getJmbg())){
-			dao.save(p);
-			session.getTransaction().commit();
-		} else {
-			throw new IllegalArgumentException("JMBG nije validan!");
-		}
-	}
-	
-	public void modificirajPotrosaca(Potrosac p){
-		session.beginTransaction();
-		dao.save(p);
-		session.getTransaction().commit();
-	}
-	
-	public void izbrisiPotrosaca(Potrosac p){
-		session.beginTransaction();
-		dao.delete(p.getId());
-		session.getTransaction().commit();
-	}
-	
-	public Potrosac pretragaPoId(Integer id) {
-		return dao.findById(id);
-	}
-	
-	public List<Potrosac> pretragaPoIme(String ime){
-		Potrosac p = new Potrosac();
-		p.setIme(ime);
-		return dao.findByExample(p);
-		
-	}
-	
-	public Potrosac pretragaPoJMBG(String jmbg){
-		Potrosac p = new Potrosac();
-		p.setJmbg(jmbg);
-		return dao.findByExample(p).get(0);
-	}
-	
-	public List<Potrosac> pretragaPoVodomjeru(Integer sifraVodomjera){
-		Potrosac p = new Potrosac();
-		p.setSifraVodomjera(sifraVodomjera);
-		return dao.findByExample(p);
-	}
-	
-	public List<Potrosac> pretragaPoKategoriji(String kategorija){
-		Potrosac p = new Potrosac();
-		p.setKategorija(kategorija);
-		return dao.findByExample(p);
-	}
-	public List<Potrosac> searchByCriteria(String ime,String prezime,String jmbg){
+    
+    public void createNewPotrosac(Potrosac p){
+        Boolean test = false;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        PotrosacDAO dao = new PotrosacDAO();
+        dao.setSession(session);
+        // Pretraga da li vec postoji potrosac u bazi sa datim podatcima
+        List<Potrosac> svi  = dao.findByFullJMBG(p.getJmbg());
+        if(svi.isEmpty()){
+            test = true;
+        }
+        // Pocetak sesije obavezni kod za korisnika
+        if(test){
+            if(validateJMBG(p.getJmbg())){
+                // Dodavanje novog korisnika
+                dao.save(p);
+                // Zatvaranje sesije, isto obavezni dio
+                session.getTransaction().commit();
+                session.close();
+            }
+            else{
+                session.getTransaction().commit();
+                session.close();
+                throw new IllegalArgumentException("JMBG/Broj licne nije validan!");
+            }
+        }
+        else{
+            session.getTransaction().commit();
+            session.close();
+            throw new IllegalArgumentException("Korisnik vec postoji u sistemu !");
+        }
+    }
+    private Boolean validateJMBG(String JMBGX){
+        String[] jmbg = JMBGX.split("");
+        System.out.println(jmbg.length);
+        if(jmbg.length!=14) {
+        return false;
+        }
+        int[] j;
+        j = new int[jmbg.length-1];
+        for(int i = 0; i < jmbg.length-1; i++) {
+            j[i] = Integer.parseInt(jmbg[i+1]);
+        }
+        int v = 11-((7*(j[0]+j[6])+6*(j[1]+j[7])+5*(j[2]+j[8])+4*(j[3]+j[9])+3*(j[4]+j[10])+ 2*(j[5]+j[11]))%11);
+        return (v<10&&j[12]==v)||(v>9&&j[12]==0);
+        }
+    
+    // Naredne dvije klase rade zajedno, jedna vraca listu potrosaca, a druga mjenja jednog potrosaca kojeg smo preuzali iz liste
+    public List<Potrosac> searchByCriteria(String ime,String prezime,String jmbg){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();   
         PotrosacDAO dao = new PotrosacDAO();
         dao.setSession(session);
     	List <Potrosac> listaPretrage = dao.findByImePrezimeJMBG(ime,prezime,jmbg);
         session.getTransaction().commit();
+        //zatvaranje sesije
         session.close();
         return listaPretrage;
-	}
-	
-	public boolean validateJMBG(String jmbgString){
-		return true;
-		
-        /*String[] jmbg = jmbgString.split("");
-        if(jmbg.length!=14) {
-        	return false;
         }
-        int[] j;
-        j = new int[jmbg.length-1];
-        for(int i = 0; i < jmbg.length-1; i++) {
-        	j[i] = Integer.parseInt(jmbg[i+1]);
+    public void modifyPotrosac(Potrosac p){
+            if(validateJMBG(p.getJmbg())){
+                Session session = HibernateUtil.getSessionFactory().openSession();
+                session.beginTransaction();
+                PotrosacDAO dao = new PotrosacDAO();
+                dao.setSession(session);
+                dao.save(p);
+                // Zatvaranje sesije, isto obavezni dio
+                session.getTransaction().commit();
+                session.close();
+            }
+            else{
+                throw new IllegalArgumentException("Korisnik nije prosao validaciju, provjerite podatke");
+            }
+    }
+    public void deletePotrosac(Potrosac p){
+                Potrosac zaBrisanje = getPotrosacByJMBG(p.getJmbg());
+                Session session = HibernateUtil.getSessionFactory().openSession();
+                session.beginTransaction();
+                KorisnikDAO dao = new KorisnikDAO();
+                dao.setSession(session);
+                // Dodavanje novog korisnika
+                dao.delete(zaBrisanje.getId());
+                // Zatvaranje sesije, isto obavezni dio
+                session.getTransaction().commit();
+                session.close();
+    }      
+    public Potrosac getPotrosacByJMBG(String JMBG){
+        if(validateJMBG(JMBG)){
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            PotrosacDAO dao = new PotrosacDAO();
+            dao.setSession(session);
+            List<Potrosac> k = dao.findByFullJMBG(JMBG);
+            session.getTransaction().commit();
+            session.close();
+            
+            if(!k.isEmpty() && k.get(0).getJmbg().equals(JMBG)){
+                return k.get(0);
+            }
+            else{
+                throw new IllegalArgumentException("Korisnik ne postoji u sistemu");
+            }   
         }
-        int v = 11-((7*(j[0]+j[6])+6*(j[1]+j[7])+5*(j[2]+j[8])+4*(j[3]+j[9])+3*(j[4]+j[10])+ 2*(j[5]+j[11]))%11);
-        return (v<10&&j[12]==v)||(v>9&&j[12]==0);*/
+        else{
+            throw new IllegalArgumentException("JMBG nije validan!");
+        }
+    }
+    
+    public List<Potrosac> mainSearch(String ime,String prezime,String jmbg,String adresa,String sifra){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();   
+        PotrosacDAO dao = new PotrosacDAO();
+        dao.setSession(session);
+    	List <Potrosac> listaPretrage = dao.findByImePrezimeJMBGAdresa(ime,prezime,jmbg,adresa);
+        session.getTransaction().commit();
+        //zatvaranje sesije
+        session.close();
+        if("".equals(sifra)){
+            return listaPretrage;
+        }
+        List<Potrosac> listaPretragePovratna = new ArrayList<Potrosac>();
+        for (Potrosac p : listaPretrage) {
+            if(String.valueOf(p.getSifraVodomjera()).contains(sifra)){
+                listaPretragePovratna.add(p);
+            }
+        }
+        return listaPretragePovratna;
     }
         
+    
         // Za koristenje Pretrage racua
         public List<Potrosac> dajPotrosaceZaRacun(String ime,String prezime,int sifraVodomjera){
             Session session = HibernateUtil.getSessionFactory().openSession();

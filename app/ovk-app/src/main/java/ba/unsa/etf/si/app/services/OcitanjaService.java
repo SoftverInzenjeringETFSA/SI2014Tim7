@@ -41,9 +41,9 @@ public class OcitanjaService {
         OcitanjaDAO dao = new OcitanjaDAO();
         dao.setSession(session);
         
-        PotrosacService pService = new PotrosacService(session);
+        PotrosacService pService = new PotrosacService();
         Potrosac p = o.getPotrosacByIdPotrosaca();
-        Potrosac temp = pService.pretragaPoJMBG(p.getJmbg());
+        Potrosac temp = pService.getPotrosacByJMBG(p.getJmbg());
         if(temp.getJmbg() == null ? p.getJmbg() != null : !temp.getJmbg().equals(p.getJmbg())){
             session.getTransaction().commit();
             session.close();

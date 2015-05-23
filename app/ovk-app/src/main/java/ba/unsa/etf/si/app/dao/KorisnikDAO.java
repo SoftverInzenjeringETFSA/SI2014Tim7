@@ -3,6 +3,7 @@ package ba.unsa.etf.si.app.dao;
 import ba.unsa.etf.si.app.entity.Korisnik;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
 public class KorisnikDAO extends AbstractDAO<Korisnik,Integer>{
@@ -18,8 +19,9 @@ public class KorisnikDAO extends AbstractDAO<Korisnik,Integer>{
         
         public List<Korisnik> findByFullUsernameJMBG(String username,String jmbg){
             Criteria criteria = getSession().createCriteria(getPersistentClass());
-            criteria.add(Restrictions.like("jmbg",jmbg).ignoreCase());
-            criteria.add(Restrictions.like("username",username).ignoreCase());
+            Criterion x = Restrictions.like("jmbg",jmbg).ignoreCase();
+            Criterion y = Restrictions.like("username",username).ignoreCase();
+            criteria.add(Restrictions.or(x, y));
             return criteria.list();  
         }
         

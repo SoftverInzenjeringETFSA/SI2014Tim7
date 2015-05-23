@@ -28,8 +28,8 @@ public class App
     public static void main( String[] args )
     {   
         //pokretanje login forme
-        /*Login login = new Login();
-        login.setVisible(true);*/
+        Login login = new Login();
+        login.setVisible(true);
        /*KorisnikService serv = new KorisnikService();
        Korisnik k = new Korisnik();
        k.setJmbg("2309992170008");
