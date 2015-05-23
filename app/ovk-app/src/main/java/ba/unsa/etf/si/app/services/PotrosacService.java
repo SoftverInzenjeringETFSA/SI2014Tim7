@@ -48,16 +48,15 @@ public class PotrosacService {
             throw new IllegalArgumentException("Korisnik vec postoji u sistemu !");
         }
     }
-    private Boolean validateJMBG(String JMBGX){
-        String[] jmbg = JMBGX.split("");
-        System.out.println(jmbg.length);
-        if(jmbg.length!=14) {
+    public Boolean validateJMBG(String JMBGX){
+        char[] jmbg = JMBGX.toCharArray();
+        if(jmbg.length!=13) {
         return false;
         }
         int[] j;
-        j = new int[jmbg.length-1];
-        for(int i = 0; i < jmbg.length-1; i++) {
-            j[i] = Integer.parseInt(jmbg[i+1]);
+        j = new int[jmbg.length];
+        for(int i = 0; i < jmbg.length; i++) {
+            j[i] = Integer.parseInt(String.valueOf(jmbg[i]));
         }
         int v = 11-((7*(j[0]+j[6])+6*(j[1]+j[7])+5*(j[2]+j[8])+4*(j[3]+j[9])+3*(j[4]+j[10])+ 2*(j[5]+j[11]))%11);
         return (v<10&&j[12]==v)||(v>9&&j[12]==0);
