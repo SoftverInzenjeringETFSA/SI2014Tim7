@@ -22,6 +22,13 @@ public class ObracunService {
            OcitanjaService ocitanja = new OcitanjaService();
            ParametriService paramS = new ParametriService();
            List<Ocitanja> ocitanjaZaRacune = ocitanja.getOcitanjaForRacuni(odDatuma, doDatuma);
+           System.out.println(ocitanjaZaRacune.size());
+           //String ime = ocitanjaZaRacune.get(0).getPotrosacByIdPotrosaca().getIme();
+          /* if(ocitanjaZaRacune.get(1).getPotrosacByIdPotrosaca() == null){
+        	   System.out.println("BUG!");
+           }
+           else System.out.println("OK");
+           */
            Parametri param = paramS.dajParametre();
            List<Racuni> racuniList = new ArrayList<Racuni>();
             for (Ocitanja ocitanjaZaRacuneX : ocitanjaZaRacune) {

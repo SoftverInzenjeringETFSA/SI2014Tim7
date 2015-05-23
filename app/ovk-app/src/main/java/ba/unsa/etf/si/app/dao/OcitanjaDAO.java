@@ -46,9 +46,10 @@ public class OcitanjaDAO extends AbstractDAO<Ocitanja, Integer> {
             Calendar doCal = Calendar.getInstance();
             odCal.setTime(odDatuma);
             doCal.setTime(doDatuma);
+         
             Criteria criteria = getSession().createCriteria(getPersistentClass());
-            criteria.add(Restrictions.between("mjesec",odCal.MONTH+1,doCal.MONTH+1));
-            criteria.add(Restrictions.between("godina",odCal.YEAR,doCal.YEAR));
+            criteria.add(Restrictions.between("mjesec",odCal.get(odCal.MONTH)+1,doCal.get(odCal.MONTH)+1));
+            criteria.add(Restrictions.between("godina",odCal.get(odCal.YEAR),doCal.get(doCal.YEAR)));
             criteria.add(Restrictions.like("access",true));
             return criteria.list();  
         }
