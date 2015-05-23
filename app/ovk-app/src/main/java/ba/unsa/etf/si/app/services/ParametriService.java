@@ -27,8 +27,11 @@ public class ParametriService {
         List<Parametri> sviParametri = dao.findAll();
         if(!sviParametri.isEmpty()){
             params.setId(sviParametri.get(0).getId());
+            dao.merge(params);
         }
-        dao.save(params);
+        else{
+            dao.save(params);
+        }
         // Zatvaranje sesije, isto obavezni dio
         session.getTransaction().commit();
         session.close();

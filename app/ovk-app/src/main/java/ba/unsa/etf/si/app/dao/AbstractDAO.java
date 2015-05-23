@@ -75,6 +75,11 @@ getSession().saveOrUpdate(entity);
 return entity;  
 }  
 
+public T merge(T entity) {  
+getSession().merge(entity);  
+return entity;  
+}  
+
 public void delete(ID id) {  
 	
 T entity = findById(id);

@@ -5,6 +5,8 @@
  */
 package ba.etf.unsa.si.app.ui;
 
+import ba.unsa.etf.si.app.entity.Parametri;
+import ba.unsa.etf.si.app.services.ParametriService;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
@@ -36,6 +38,8 @@ public class Home extends javax.swing.JFrame {
     KorisniciPanel3 k3;
     KorisniciPanel4 k4;
     Boolean Admin;
+    ParametriService servis;
+    Parametri parametri;
     /**
      * Creates new form Home
      * @param adminTest
@@ -829,6 +833,24 @@ public class Home extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         m1.setVisible(true);
         m2.setVisible(false);
+        
+          //parametri za obracun, uzeti iz baze, postavljeni u text fields
+        servis = new ParametriService();
+        parametri = new Parametri();
+        try{
+            parametri = servis.dajParametre();
+            m1.setVodaText(parametri.getCijenaVodePoKubiku());
+            m1.setKanText(parametri.getCijenaKanalizacijePoKubiku());
+            m1.setFiksnoText(parametri.getFiksnaCijena());
+            m1.setKubiciVoda(parametri.getFiksniVodaZaPausalce());
+            m1.setKubiciKan(parametri.getFiksniKanalizacijaZaPausalce());
+            m1.setPVN1(parametri.getPvnZaKoristenjeVoda());
+            m1.setPVN2(parametri.getPvnZaZastituVoda());
+            m1.setPDV(parametri.getStopaPdv());
+        }
+        catch(Exception e){
+            //"niste postavili parametre" poruka
+        }
         
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed

@@ -4,13 +4,14 @@
  * and open the template in the editor.
  */
 package ba.etf.unsa.si.app.ui;
-
 /**
  *
  * @author Azra
  */
 public class ParametriPanel1 extends javax.swing.JPanel {
 
+    
+    
     /**
      * Creates new form ParametriPanel1
      */
@@ -34,16 +35,16 @@ public class ParametriPanel1 extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        kanText = new javax.swing.JTextField();
+        fiksnoText = new javax.swing.JTextField();
+        vodaText = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
+        kubiciKan = new javax.swing.JTextField();
+        kubiciVoda = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -51,9 +52,9 @@ public class ParametriPanel1 extends javax.swing.JPanel {
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
+        pvnText2 = new javax.swing.JTextField();
+        pdvText = new javax.swing.JTextField();
+        pvnText1 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -84,17 +85,17 @@ public class ParametriPanel1 extends javax.swing.JPanel {
         jLabel11.setForeground(new java.awt.Color(0, 102, 153));
         jLabel11.setText("KM");
 
-        jTextField4.setEditable(false);
-        jTextField4.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(0, 102, 153));
+        kanText.setEditable(false);
+        kanText.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        kanText.setForeground(new java.awt.Color(0, 102, 153));
 
-        jTextField5.setEditable(false);
-        jTextField5.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jTextField5.setForeground(new java.awt.Color(0, 102, 153));
+        fiksnoText.setEditable(false);
+        fiksnoText.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        fiksnoText.setForeground(new java.awt.Color(0, 102, 153));
 
-        jTextField6.setEditable(false);
-        jTextField6.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jTextField6.setForeground(new java.awt.Color(0, 102, 153));
+        vodaText.setEditable(false);
+        vodaText.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        vodaText.setForeground(new java.awt.Color(0, 102, 153));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,26 +104,21 @@ public class ParametriPanel1 extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
-                        .addGap(16, 16, 16))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(vodaText, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(kanText, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fiksnoText, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel11)))
                 .addContainerGap())
@@ -134,17 +130,17 @@ public class ParametriPanel1 extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(vodaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(kanText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fiksnoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -167,13 +163,13 @@ public class ParametriPanel1 extends javax.swing.JPanel {
         jLabel16.setForeground(new java.awt.Color(0, 102, 153));
         jLabel16.setText("m3");
 
-        jTextField7.setEditable(false);
-        jTextField7.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jTextField7.setForeground(new java.awt.Color(0, 102, 153));
+        kubiciKan.setEditable(false);
+        kubiciKan.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        kubiciKan.setForeground(new java.awt.Color(0, 102, 153));
 
-        jTextField9.setEditable(false);
-        jTextField9.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jTextField9.setForeground(new java.awt.Color(0, 102, 153));
+        kubiciVoda.setEditable(false);
+        kubiciVoda.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        kubiciVoda.setForeground(new java.awt.Color(0, 102, 153));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -187,11 +183,11 @@ public class ParametriPanel1 extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(kubiciVoda, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel15))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(kubiciKan, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel16)))
                 .addGap(31, 31, 31))
@@ -203,12 +199,12 @@ public class ParametriPanel1 extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jLabel15)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(kubiciVoda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel16)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(kubiciKan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -239,17 +235,17 @@ public class ParametriPanel1 extends javax.swing.JPanel {
         jLabel23.setForeground(new java.awt.Color(0, 102, 153));
         jLabel23.setText("%");
 
-        jTextField10.setEditable(false);
-        jTextField10.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jTextField10.setForeground(new java.awt.Color(0, 102, 153));
+        pvnText2.setEditable(false);
+        pvnText2.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        pvnText2.setForeground(new java.awt.Color(0, 102, 153));
 
-        jTextField11.setEditable(false);
-        jTextField11.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jTextField11.setForeground(new java.awt.Color(0, 102, 153));
+        pdvText.setEditable(false);
+        pdvText.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        pdvText.setForeground(new java.awt.Color(0, 102, 153));
 
-        jTextField12.setEditable(false);
-        jTextField12.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jTextField12.setForeground(new java.awt.Color(0, 102, 153));
+        pvnText1.setEditable(false);
+        pvnText1.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        pvnText1.setForeground(new java.awt.Color(0, 102, 153));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -265,14 +261,14 @@ public class ParametriPanel1 extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(pvnText2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pdvText, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel22)
                             .addComponent(jLabel23)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pvnText1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel21)))
                 .addContainerGap(12, Short.MAX_VALUE))
@@ -284,17 +280,17 @@ public class ParametriPanel1 extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(jLabel21)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pvnText1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
                     .addComponent(jLabel22)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pvnText2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(jLabel23)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pdvText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -329,6 +325,7 @@ public class ParametriPanel1 extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField fiksnoText;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -348,13 +345,43 @@ public class ParametriPanel1 extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField kanText;
+    private javax.swing.JTextField kubiciKan;
+    private javax.swing.JTextField kubiciVoda;
+    private javax.swing.JTextField pdvText;
+    private javax.swing.JTextField pvnText1;
+    private javax.swing.JTextField pvnText2;
+    private javax.swing.JTextField vodaText;
     // End of variables declaration//GEN-END:variables
+    public void setVodaText(Double cijena){
+       vodaText.setText(String.valueOf(cijena));
+    }
+    
+     public void setKanText(Double cijena){
+       kanText.setText(String.valueOf(cijena));
+    }
+     
+     public void setFiksnoText(Double cijena){
+       fiksnoText.setText(String.valueOf(cijena));
+    }
+     
+     public void setKubiciVoda(Double cijena){
+       kubiciVoda.setText(String.valueOf(cijena));
+    }
+    
+     public void setKubiciKan(Double cijena){
+       kubiciKan.setText(String.valueOf(cijena));
+    }
+     
+     public void setPVN1(Double cijena){
+       pvnText1.setText(String.valueOf(cijena));
+    }
+     
+    public void setPVN2(Double cijena){
+       pvnText2.setText(String.valueOf(cijena));
+    }
+    
+    public void setPDV(Double cijena){
+       pdvText.setText(String.valueOf(cijena));
+    }
 }
