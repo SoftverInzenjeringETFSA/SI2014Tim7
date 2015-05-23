@@ -5,6 +5,11 @@
  */
 package ba.etf.unsa.si.app.ui;
 
+import ba.unsa.etf.si.app.entity.Potrosac;
+import ba.unsa.etf.si.app.services.PotrosacService;
+import java.util.List;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author Azra
@@ -30,55 +35,55 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
         tipPotrosaca2 = new javax.swing.ButtonGroup();
         tipUsluge2 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
-        jTextField4 = new javax.swing.JTextField();
+        ime = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        prezime = new javax.swing.JTextField();
+        adresa = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField();
-        jFormattedTextField4 = new javax.swing.JFormattedTextField();
+        telefon = new javax.swing.JFormattedTextField();
+        jmbg = new javax.swing.JFormattedTextField();
         jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        listaPretraga = new javax.swing.JList();
         jLabel15 = new javax.swing.JLabel();
-        jFormattedTextField5 = new javax.swing.JFormattedTextField();
+        jmbgPretraga = new javax.swing.JFormattedTextField();
         jLabel16 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        imePretraga = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        porodica = new javax.swing.JSpinner();
         jLabel12 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        tipPausalni = new javax.swing.JRadioButton();
+        tipVodomjer = new javax.swing.JRadioButton();
         jLabel13 = new javax.swing.JLabel();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        tipVoda = new javax.swing.JRadioButton();
+        tipKanalizacija = new javax.swing.JRadioButton();
         jLabel14 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        aktivnost = new javax.swing.JComboBox();
         jLabel17 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        sifraVodomjera = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lični podaci", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 12), new java.awt.Color(0, 102, 153))); // NOI18N
 
-        jTextField4.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(0, 102, 153));
+        ime.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        ime.setForeground(new java.awt.Color(0, 102, 153));
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 102, 153));
         jLabel6.setText("Ime");
 
-        jTextField5.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jTextField5.setForeground(new java.awt.Color(0, 102, 153));
+        prezime.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        prezime.setForeground(new java.awt.Color(0, 102, 153));
 
-        jTextField6.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jTextField6.setForeground(new java.awt.Color(0, 102, 153));
+        adresa.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        adresa.setForeground(new java.awt.Color(0, 102, 153));
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 102, 153));
@@ -96,16 +101,17 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(0, 102, 153));
         jLabel10.setText("JMBG");
 
-        jFormattedTextField3.setForeground(new java.awt.Color(0, 102, 153));
+        telefon.setForeground(new java.awt.Color(0, 102, 153));
         try {
-            jFormattedTextField3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("0##/###-####")));
+            telefon.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("0##/###-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
-        jFormattedTextField4.setForeground(new java.awt.Color(0, 102, 153));
+        jmbg.setEditable(false);
+        jmbg.setForeground(new java.awt.Color(0, 102, 153));
         try {
-            jFormattedTextField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#############")));
+            jmbg.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#############")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -122,11 +128,11 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
                     .addComponent(jLabel8)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                    .addComponent(jTextField5)
-                    .addComponent(jTextField6)
-                    .addComponent(jFormattedTextField3)
-                    .addComponent(jFormattedTextField4))
+                    .addComponent(ime, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                    .addComponent(prezime)
+                    .addComponent(adresa)
+                    .addComponent(telefon)
+                    .addComponent(jmbg))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -135,53 +141,73 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(prezime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(adresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(telefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jmbg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 102, 153));
         jButton1.setText("SPASI");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Odabir potrošača", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 12), new java.awt.Color(0, 102, 153))); // NOI18N
 
-        jScrollPane1.setViewportView(jList1);
+        listaPretraga.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaPretragaValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(listaPretraga);
 
         jLabel15.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 102, 153));
         jLabel15.setText("po JMBG");
 
-        jFormattedTextField5.setForeground(new java.awt.Color(0, 102, 153));
+        jmbgPretraga.setForeground(new java.awt.Color(0, 102, 153));
         try {
-            jFormattedTextField5.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#############")));
+            jmbgPretraga.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#############")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField5.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
+        jmbgPretraga.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
+        jmbgPretraga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jmbgPretragaKeyReleased(evt);
+            }
+        });
 
         jLabel16.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(0, 102, 153));
         jLabel16.setText("po imenu");
 
-        jTextField7.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jTextField7.setForeground(new java.awt.Color(0, 102, 153));
+        imePretraga.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        imePretraga.setForeground(new java.awt.Color(0, 102, 153));
+        imePretraga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                imePretragaKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -191,8 +217,8 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jFormattedTextField5)
-                    .addComponent(jTextField7)
+                    .addComponent(jmbgPretraga)
+                    .addComponent(imePretraga)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15)
@@ -206,11 +232,11 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel16)
                 .addGap(5, 5, 5)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(imePretraga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jmbgPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -223,51 +249,51 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
         jLabel11.setForeground(new java.awt.Color(0, 102, 153));
         jLabel11.setText("Broj članova domaćinstva");
 
-        jSpinner1.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 20, 1));
+        porodica.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        porodica.setModel(new javax.swing.SpinnerNumberModel(1, 1, 20, 1));
 
         jLabel12.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 102, 153));
         jLabel12.setText("Tip potrošača");
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton1.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(102, 102, 102));
-        jRadioButton1.setText("paušalni");
+        tipPausalni.setBackground(new java.awt.Color(255, 255, 255));
+        tipPausalni.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        tipPausalni.setForeground(new java.awt.Color(102, 102, 102));
+        tipPausalni.setText("paušalni");
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton2.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(102, 102, 102));
-        jRadioButton2.setText("s vodomjerom");
+        tipVodomjer.setBackground(new java.awt.Color(255, 255, 255));
+        tipVodomjer.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        tipVodomjer.setForeground(new java.awt.Color(102, 102, 102));
+        tipVodomjer.setText("s vodomjerom");
 
         jLabel13.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 102, 153));
         jLabel13.setText("Usluga");
 
-        jRadioButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton3.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jRadioButton3.setForeground(new java.awt.Color(102, 102, 102));
-        jRadioButton3.setText("voda");
+        tipVoda.setBackground(new java.awt.Color(255, 255, 255));
+        tipVoda.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        tipVoda.setForeground(new java.awt.Color(102, 102, 102));
+        tipVoda.setText("voda");
 
-        jRadioButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jRadioButton4.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jRadioButton4.setForeground(new java.awt.Color(102, 102, 102));
-        jRadioButton4.setText("voda i kanalizacija");
+        tipKanalizacija.setBackground(new java.awt.Color(255, 255, 255));
+        tipKanalizacija.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        tipKanalizacija.setForeground(new java.awt.Color(102, 102, 102));
+        tipKanalizacija.setText("voda i kanalizacija");
 
         jLabel14.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 102, 153));
         jLabel14.setText("Aktivnost");
 
-        jComboBox1.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(0, 102, 153));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "aktivan", "neaktivan" }));
+        aktivnost.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        aktivnost.setForeground(new java.awt.Color(0, 102, 153));
+        aktivnost.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "aktivan", "neaktivan" }));
 
         jLabel17.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(0, 102, 153));
         jLabel17.setText("Šifra vodomjera");
 
-        jTextField8.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jTextField8.setForeground(new java.awt.Color(0, 102, 153));
+        sifraVodomjera.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        sifraVodomjera.setForeground(new java.awt.Color(0, 102, 153));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -278,19 +304,19 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
                     .addComponent(jLabel12)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(porodica, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel14)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(aktivnost, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton3)
-                            .addComponent(jRadioButton4)))
+                            .addComponent(tipVodomjer)
+                            .addComponent(tipPausalni)
+                            .addComponent(tipVoda)
+                            .addComponent(tipKanalizacija)))
                     .addComponent(jLabel17)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sifraVodomjera, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -299,27 +325,27 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(porodica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton1)
+                .addComponent(tipPausalni)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton2)
+                .addComponent(tipVodomjer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sifraVodomjera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton3)
+                .addComponent(tipVoda)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton4)
+                .addComponent(tipKanalizacija)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(aktivnost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
 
@@ -356,13 +382,98 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void imePretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_imePretragaKeyReleased
+        updateListu();
+    }//GEN-LAST:event_imePretragaKeyReleased
+
+    private void jmbgPretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jmbgPretragaKeyReleased
+        updateListu();
+    }//GEN-LAST:event_jmbgPretragaKeyReleased
+
+    private void listaPretragaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaPretragaValueChanged
+        String jmbgX = listaPretraga.getSelectedValue().toString();
+        PotrosacService servicePretraga = new PotrosacService();
+        Potrosac p = servicePretraga.getPotrosacByJMBG(jmbgX);
+            ime.setText(p.getIme());
+            prezime.setText(p.getPrezime());
+            adresa.setText(p.getAdresa());
+            telefon.setText(p.getTelefon());
+            jmbg.setText(p.getJmbg());
+            porodica.setValue(Integer.valueOf(p.getBrojClanova()));
+            if("Pausalni".equals(p.getKategorija())){
+                tipPausalni.setSelected(true);
+                tipVodomjer.setSelected(false);
+            }
+            else{
+                tipPausalni.setSelected(false);
+                tipVodomjer.setSelected(true);
+            }
+            sifraVodomjera.setText(String.valueOf(p.getSifraVodomjera()));
+            if(p.getUsluga()){
+                tipVoda.setSelected(false);
+                tipKanalizacija.setSelected(true);
+            }else{
+                tipVoda.setSelected(true);
+                tipKanalizacija.setSelected(false);
+            }
+            if(p.getAktivnost()){
+                aktivnost.setSelectedIndex(0);
+            }
+            else{
+                aktivnost.setSelectedIndex(1);
+            }
+    }//GEN-LAST:event_listaPretragaValueChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(!"".equals(jmbg.getText())){
+        PotrosacService servicePretraga = new PotrosacService();
+        Potrosac p = servicePretraga.getPotrosacByJMBG(jmbg.getText());
+            p.setAdresa(adresa.getText());
+            if(aktivnost.getSelectedIndex()==0){
+                p.setAktivnost(Boolean.TRUE);
+            }
+            else{
+                p.setAktivnost(Boolean.FALSE);
+            }
+            p.setBrojClanova(porodica.getValue().toString());
+            p.setHidden(false);
+            p.setIme(ime.getText());
+            if(tipPausalni.isSelected()){
+                p.setKategorija("Pausalac");
+            }
+            else{
+                p.setKategorija("Sa vodomjerom");
+                p.setSifraVodomjera(Integer.valueOf(sifraVodomjera.getText()));
+            }
+            p.setPrezime(prezime.getText());
+            p.setTelefon(telefon.getText());
+            if(tipVoda.isSelected()){
+                p.setUsluga(Boolean.FALSE);
+            }
+            else{
+                p.setUsluga(Boolean.TRUE);
+            }
+        servicePretraga.modifyPotrosac(p);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void updateListu(){
+        PotrosacService servis = new PotrosacService();
+        List<Potrosac> listaPotrosac = servis.searchByCriteria(imePretraga.getText(), "", jmbgPretraga.getText());
+        DefaultListModel model = new DefaultListModel();
+        model.removeAllElements();
+        for (Potrosac p : listaPotrosac) {
+            model.addElement(p.getJmbg());
+        }    
+        listaPretraga.setModel(model);    
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField adresa;
+    private javax.swing.JComboBox aktivnost;
+    private javax.swing.JTextField ime;
+    private javax.swing.JTextField imePretraga;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
-    private javax.swing.JFormattedTextField jFormattedTextField4;
-    private javax.swing.JFormattedTextField jFormattedTextField5;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -375,22 +486,22 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JFormattedTextField jmbg;
+    private javax.swing.JFormattedTextField jmbgPretraga;
+    private javax.swing.JList listaPretraga;
+    private javax.swing.JSpinner porodica;
+    private javax.swing.JTextField prezime;
+    private javax.swing.JTextField sifraVodomjera;
+    private javax.swing.JFormattedTextField telefon;
+    private javax.swing.JRadioButton tipKanalizacija;
+    private javax.swing.JRadioButton tipPausalni;
     private javax.swing.ButtonGroup tipPotrosaca2;
     private javax.swing.ButtonGroup tipUsluge2;
+    private javax.swing.JRadioButton tipVoda;
+    private javax.swing.JRadioButton tipVodomjer;
     // End of variables declaration//GEN-END:variables
 }

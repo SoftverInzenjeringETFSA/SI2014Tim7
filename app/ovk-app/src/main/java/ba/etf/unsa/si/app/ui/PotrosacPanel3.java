@@ -5,6 +5,12 @@
  */
 package ba.etf.unsa.si.app.ui;
 
+import ba.unsa.etf.si.app.entity.Potrosac;
+import ba.unsa.etf.si.app.services.PotrosacService;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Azra
@@ -29,19 +35,19 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
 
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        listaPretraga = new javax.swing.JList();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jFormattedTextField5 = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
+        imePretraga = new javax.swing.JTextField();
+        jmbgPretraga = new javax.swing.JFormattedTextField();
+        izbrisiBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Odabir potrošača", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 12), new java.awt.Color(0, 102, 153))); // NOI18N
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(listaPretraga);
 
         jLabel15.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 102, 153));
@@ -51,16 +57,26 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
         jLabel16.setForeground(new java.awt.Color(0, 102, 153));
         jLabel16.setText("po imenu");
 
-        jTextField7.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jTextField7.setForeground(new java.awt.Color(0, 102, 153));
+        imePretraga.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        imePretraga.setForeground(new java.awt.Color(0, 102, 153));
+        imePretraga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                imePretragaKeyReleased(evt);
+            }
+        });
 
-        jFormattedTextField5.setForeground(new java.awt.Color(0, 102, 153));
+        jmbgPretraga.setForeground(new java.awt.Color(0, 102, 153));
         try {
-            jFormattedTextField5.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#############")));
+            jmbgPretraga.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#############")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField5.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
+        jmbgPretraga.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
+        jmbgPretraga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jmbgPretragaKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -70,13 +86,13 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jTextField7)
+                    .addComponent(imePretraga)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15)
                             .addComponent(jLabel16))
                         .addGap(0, 108, Short.MAX_VALUE))
-                    .addComponent(jFormattedTextField5))
+                    .addComponent(jmbgPretraga))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -85,19 +101,24 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel16)
                 .addGap(5, 5, 5)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(imePretraga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jmbgPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jButton1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 102, 153));
-        jButton1.setText("IZBRIŠI");
+        izbrisiBtn.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        izbrisiBtn.setForeground(new java.awt.Color(0, 102, 153));
+        izbrisiBtn.setText("IZBRIŠI");
+        izbrisiBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                izbrisiBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -106,7 +127,7 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(izbrisiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -116,20 +137,50 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(izbrisiBtn)
                 .addContainerGap(35, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void imePretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_imePretragaKeyReleased
+        updateListu();
+    }//GEN-LAST:event_imePretragaKeyReleased
+
+    private void jmbgPretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jmbgPretragaKeyReleased
+        updateListu();
+    }//GEN-LAST:event_jmbgPretragaKeyReleased
+    private void updateListu(){
+        PotrosacService servis = new PotrosacService();
+        List<Potrosac> listaPotrosac = servis.searchByCriteria(imePretraga.getText(), "", jmbgPretraga.getText());
+        DefaultListModel model = new DefaultListModel();
+        model.removeAllElements();
+        for (Potrosac p : listaPotrosac) {
+            model.addElement(p.getJmbg());
+        }    
+        listaPretraga.setModel(model);    
+    }
+    private void izbrisiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izbrisiBtnActionPerformed
+        String jmbgX = listaPretraga.getSelectedValue().toString();
+        PotrosacService servicePretraga = new PotrosacService();
+        Potrosac p = servicePretraga.getPotrosacByJMBG(jmbgX);
+        try{
+            servicePretraga.deletePotrosac(p);
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Greska!",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_izbrisiBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JFormattedTextField jFormattedTextField5;
+    private javax.swing.JTextField imePretraga;
+    private javax.swing.JButton izbrisiBtn;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JFormattedTextField jmbgPretraga;
+    private javax.swing.JList listaPretraga;
     // End of variables declaration//GEN-END:variables
 }

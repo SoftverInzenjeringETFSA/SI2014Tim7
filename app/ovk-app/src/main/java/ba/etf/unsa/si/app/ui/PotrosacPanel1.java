@@ -341,6 +341,8 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
         }
         try{
             servis.createNewPotrosac(p);
+            
+            JOptionPane.showMessageDialog(null,"Dodavanje novog potrosaca je uspjesno");
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error",

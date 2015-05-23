@@ -39,7 +39,7 @@ public class PotrosacService {
             else{
                 session.getTransaction().commit();
                 session.close();
-                throw new IllegalArgumentException("JMBG/Broj licne nije validan!");
+                throw new IllegalArgumentException("JMBG nije validan!");
             }
         }
         else{
