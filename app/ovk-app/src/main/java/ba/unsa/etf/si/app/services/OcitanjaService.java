@@ -24,9 +24,14 @@ public class OcitanjaService {
         dao.setSession(session);
         List<Potrosac> pList = dao.findByFullSifra(sifra);
         if(pList.isEmpty()){
+        	session.getTransaction().commit();
+            session.close();
             throw new IllegalArgumentException("Potrosac sa datom sifrom ne postoji");
         }
         else{
+        	
+        session.getTransaction().commit();
+        session.close();	
         return pList.get(0);
         }
     }
@@ -69,9 +74,13 @@ public class OcitanjaService {
         dao.setSession(session);
         List<Ocitanja> tempOcitanjaList = dao.findOcitanjaBySifraVodomjeraAccess(sifra);
         if(tempOcitanjaList.isEmpty()){
+        	session.getTransaction().commit();
+            session.close();
             throw new IllegalArgumentException("Ne postoji ocitanje u bazi sa datim podatcima");
         }
         else{
+        	session.getTransaction().commit();
+            session.close();
             return tempOcitanjaList;
         }
     }
@@ -85,7 +94,8 @@ public class OcitanjaService {
         // Zatvaranje sesije, isto obavezni dio
         session.getTransaction().commit();
         session.close();
-    }
+    	}
+        
     // Sljedeca metoda radi zajedno sa getPotrosac
     public void deleteOcitanja(Ocitanja o){
         Session session = HibernateUtil.getSessionFactory().openSession();

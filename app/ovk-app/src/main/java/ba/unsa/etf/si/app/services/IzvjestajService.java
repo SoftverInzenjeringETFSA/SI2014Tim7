@@ -1,4 +1,4 @@
-package ba.etf.unsa.si.services;
+package ba.unsa.etf.si.app.services;
 
 import ba.unsa.etf.si.app.dao.IzvjestajiDAO;
 import ba.unsa.etf.si.app.dao.PotrosacDAO;

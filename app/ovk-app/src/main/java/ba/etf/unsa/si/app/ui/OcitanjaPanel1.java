@@ -51,7 +51,19 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         TxtstanjeVodomjera = new javax.swing.JFormattedTextField();
         BtnSpasiNovoOcitanje = new javax.swing.JButton();
+        DefaultListModel model = new DefaultListModel();
+        PotrosacService servicePotrosaca = new PotrosacService();
+        List<Potrosac> listPotrosaca = servicePotrosaca.dajSvePotrosace();
+        String sifra = "";
+        ListOcitanja.setModel(model);
+        
+        for (Potrosac p : listPotrosaca) {      
+        	if(String.valueOf(p.getSifraVodomjera()).contains(sifra)){
+                model.addElement(p.getSifraVodomjera());
+        	}
+        }
 
+        
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -189,18 +201,34 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
 
     private void BtnSpasiNovoOcitanjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSpasiNovoOcitanjeActionPerformed
         try{
+        	if(ListOcitanja.isSelectionEmpty()==true)
+        	{
+        		throw new IllegalArgumentException("Niste izabrali vodomjer!");
+        	}
+        	else if(TxtstanjeVodomjera.getText().trim().length()==0)
+        	{
+        		throw new IllegalArgumentException("Niste unijeli stanje vodomjera!");
+        	}
+        	
             int sifraVodomjera = Integer.valueOf(ListOcitanja.getSelectedValue().toString());
             Double novoStanje = Double.valueOf(TxtstanjeVodomjera.getText());
+
             OcitanjaService oS = new OcitanjaService();
             Ocitanja o = new Ocitanja();
             o.setAccess(true);
             o.setPotrosacByIdPotrosaca(oS.getPotrosac(sifraVodomjera));
             o.setPotrosnja(novoStanje);
             o.setSifraVodomjera(sifraVodomjera);
+
                  // potrebno ispraviti ovo ispod
             String[] x = TxtDatum.getText().split("/");
+            if(x[0].trim().length()==0 || x[1].trim().length()==2)
+            {
+            	throw new IllegalArgumentException("Niste unijeli datum ispravno!");
+            }
+
             if(Integer.valueOf(x[0])>12||Integer.valueOf(x[0])<0){
-                throw new IllegalArgumentException("Nepostojeci mjesec");
+                throw new IllegalArgumentException("Nepostojeci mjesec!");
             }
             o.setMjesec(Integer.valueOf(x[0]));
             o.setGodina(Integer.valueOf(x[1]));
@@ -210,11 +238,10 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
             TxtDatum.setText("");
             TxtSifraVodomjeraPretraga.setText("");
             TxtstanjeVodomjera.setText("");
-            JOptionPane.showMessageDialog(null, "Uspjesno dodavanje novog ocitanja !");
+            JOptionPane.showMessageDialog(null, "Uspjesno dodavanje novog ocitanja!");
         }
         catch(Exception e){
-           JOptionPane.showMessageDialog(null, e.toString(), "Error", 
-                   JOptionPane.ERROR_MESSAGE);
+           JOptionPane.showMessageDialog(null, e.getMessage(),"Greska!",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BtnSpasiNovoOcitanjeActionPerformed
 
@@ -226,6 +253,7 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
             List<Potrosac> listPotrosaca = servicePotrosaca.dajSvePotrosace();
             List<Potrosac> modelListPotrosaca = new ArrayList<Potrosac>();
             String sifra = TxtSifraVodomjeraPretraga.getText();
+            
             for (Potrosac listPotrosaca1 : listPotrosaca) {
                 if(String.valueOf(listPotrosaca1.getSifraVodomjera()).contains(sifra)){
                     modelListPotrosaca.add(listPotrosaca1);
@@ -237,8 +265,7 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
             ListOcitanja.setModel(model);
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, e.toString(), "Error", 
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Greska!",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_TxtSifraVodomjeraPretragaKeyReleased
 

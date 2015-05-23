@@ -70,10 +70,17 @@ public List<T> findByExample(T exampleInstance) {
 	return findByExample(exampleInstance, new String[] {});
 }
 
-public T save(T entity) {  
+public T save(T entity) {
+try{
 getSession().saveOrUpdate(entity);  
-return entity;  
-}  
+ 
+}
+catch(Exception e)
+	{
+	throw new IllegalStateException("Nema bolan!");
+	} 
+return entity; 
+}
 
 public T merge(T entity) {  
 getSession().merge(entity);  
@@ -84,7 +91,7 @@ public void delete(ID id) {
 	
 T entity = findById(id);
 if (entity == null)  
-    throw new IllegalStateException("Nema bolan");
+    throw new IllegalStateException("Nema bolan!");
 else
 	getSession().delete(entity);  
 
