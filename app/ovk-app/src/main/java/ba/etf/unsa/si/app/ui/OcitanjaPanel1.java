@@ -220,8 +220,6 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
 
     private void TxtSifraVodomjeraPretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtSifraVodomjeraPretragaKeyReleased
             DefaultListModel model = new DefaultListModel();
-            ListOcitanja.setModel(model);
-            ListOcitanja.removeAll();
             model.removeAllElements();
         try{
             PotrosacService servicePotrosaca = new PotrosacService();
@@ -236,6 +234,7 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
             for (Potrosac p : modelListPotrosaca) {
                 model.addElement(p.getSifraVodomjera());
             }
+            ListOcitanja.setModel(model);
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, e.toString(), "Error", 

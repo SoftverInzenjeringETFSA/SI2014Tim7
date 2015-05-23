@@ -34,4 +34,10 @@ public class KorisnikDAO extends AbstractDAO<Korisnik,Integer>{
             criteria.add(Restrictions.like("username",username).ignoreCase());
             return criteria.list();  
         }   
+
+    public List<Korisnik> findByUsername(String username) {
+            Criteria criteria = getSession().createCriteria(getPersistentClass());
+            criteria.add(Restrictions.like("username","%"+username+"%").ignoreCase());
+            return criteria.list();  
+    }
 }

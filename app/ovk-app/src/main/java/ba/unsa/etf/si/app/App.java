@@ -10,6 +10,7 @@ import org.hibernate.Session;
 
 import ba.unsa.etf.si.app.dao.OcitanjaDAO;
 import ba.unsa.etf.si.app.dao.PotrosacDAO;
+import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.entity.Ocitanja;
 import ba.unsa.etf.si.app.entity.Potrosac;
 import ba.unsa.etf.si.app.services.KorisnikService;
@@ -27,9 +28,13 @@ public class App
     public static void main( String[] args )
     {   
         //pokretanje login forme
-        Login login = new Login();
-        login.setVisible(true);
-       
+        /*Login login = new Login();
+        login.setVisible(true);*/
+       /*KorisnikService serv = new KorisnikService();
+       Korisnik k = new Korisnik();
+       k.setJmbg("2309992170008");
+       Boolean test = serv.validateJMBG(k.getJmbg());
+       System.out.println(test);*/
         //primjer koristenja dao klase
         
         //otvaranje sesije i pocetak transakcije, potrebno za svaku komunikaciju sa bazom

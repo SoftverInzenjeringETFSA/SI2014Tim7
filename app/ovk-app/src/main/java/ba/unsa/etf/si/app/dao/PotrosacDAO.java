@@ -27,7 +27,7 @@ public class PotrosacDAO extends AbstractDAO<Potrosac,Integer> {
         Criteria criteria = getSession().createCriteria(getPersistentClass());
         criteria.add(Restrictions.like("ime","%" + ime + "%").ignoreCase());
         criteria.add(Restrictions.like("prezime","%" + prezime + "%").ignoreCase());
-        criteria.add(Restrictions.like("sifraVodomjera","%" + sifraVodomjera + "%"));
+        criteria.add(Restrictions.like("sifraVodomjera",sifraVodomjera));
         return criteria.list();  
     } 
 }

@@ -41,7 +41,7 @@ public class KorisnikService {
             else{
                 session.getTransaction().commit();
                 session.close();
-                throw new IllegalArgumentException("JMBG nije validan!");
+                throw new IllegalArgumentException("JMBG/Broj licne nije validan!");
             }
         }
         else{
@@ -107,7 +107,7 @@ public class KorisnikService {
     }
     private Boolean validate(Korisnik k){
         if(!validateJMBG(k.getJmbg())){
-        return false;
+            return false;
         }
         return validateBrLicne(k);
     }
@@ -118,13 +118,14 @@ public class KorisnikService {
     }
     private Boolean validateJMBG(String JMBGX){
         String[] jmbg = JMBGX.split("");
+        System.out.println(jmbg.length);
         if(jmbg.length!=14) {
         return false;
         }
         int[] j;
         j = new int[jmbg.length-1];
         for(int i = 0; i < jmbg.length-1; i++) {
-        j[i] = Integer.parseInt(jmbg[i+1]);
+            j[i] = Integer.parseInt(jmbg[i+1]);
         }
         int v = 11-((7*(j[0]+j[6])+6*(j[1]+j[7])+5*(j[2]+j[8])+4*(j[3]+j[9])+3*(j[4]+j[10])+ 2*(j[5]+j[11]))%11);
         return (v<10&&j[12]==v)||(v>9&&j[12]==0);
@@ -147,6 +148,34 @@ public class KorisnikService {
         session.close();
     return listaPretrage;
     }
+    
+    public List<Korisnik> searchByFullUsername(String username){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();   
+        KorisnikDAO dao = new KorisnikDAO();
+        dao.setSession(session);
+    	List <Korisnik> listaPretrage = dao.findByFullUsername(username);
+        session.getTransaction().commit();
+        //zatvaranje sesije
+        session.close();
+    return listaPretrage;
+    }
+    
+        public List<Korisnik> searchByUsername(String username){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();   
+        KorisnikDAO dao = new KorisnikDAO();
+        dao.setSession(session);
+    	List <Korisnik> listaPretrage = dao.findByUsername(username);
+        session.getTransaction().commit();
+        //zatvaranje sesije
+        session.close();
+    return listaPretrage;
+    }
+    
+    
+    
+    
     // Metoda za upotrebu prilikom logiranja na sistem
     public Boolean checkLogin(String Username,String Password){
             Session session = HibernateUtil.getSessionFactory().openSession();
