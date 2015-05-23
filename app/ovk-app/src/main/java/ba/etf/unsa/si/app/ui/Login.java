@@ -59,12 +59,8 @@ public class Login extends javax.swing.JFrame {
         BtnLogin.setForeground(new java.awt.Color(0, 102, 153));
         BtnLogin.setText("LOGIN");
         BtnLogin.addActionListener(new java.awt.event.ActionListener() {
-        	Boolean b = true;
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	if(b==true){
-            	b=false;
                 BtnLoginActionPerformed(evt);
-            	}
             }
         });
 
