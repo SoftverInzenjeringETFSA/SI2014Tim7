@@ -26,9 +26,7 @@ public class PotrosacService {
 		
 	}
 
-    PotrosacService() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public PotrosacService() {}
 		
 	public void kreirajPotrosaca(Potrosac p){
 		session.beginTransaction();
@@ -119,6 +117,17 @@ public class PotrosacService {
             return listaPretrage;
         }
         
+        // Za forme Ocitanja
+        public List<Potrosac> dajSvePotrosace(){
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();   
+            PotrosacDAO dao = new PotrosacDAO();
+            dao.setSession(session);
+            List <Potrosac> listaPretrage = dao.findAll();
+            session.getTransaction().commit();
+            session.close();
+            return listaPretrage;
+        }
         
         
         

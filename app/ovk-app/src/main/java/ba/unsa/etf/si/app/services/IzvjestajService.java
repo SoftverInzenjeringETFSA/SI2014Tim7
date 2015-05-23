@@ -49,7 +49,7 @@ public class IzvjestajService {
                 //fiksna cijena * broj clanova domacinstva
                 potrosnjaVodePausalni+=racuni.get(i).getFisknaCijenaZaKoristenjeUsluga()*Double.parseDouble(p.getBrojClanova());
                 
-                //"usluga" je boolean, a u SRS-u piše: Usluga („Voda“ ili „Voda i Kanalizacija“)
+                //"usluga" je boolean, a u SRS-u piï¿½e: Usluga (ï¿½Vodaï¿½ ili ï¿½Voda i Kanalizacijaï¿½)
                 //pa sam stavio da korisnik imao kanalizaciju ako je usluga==true
                 
             }
@@ -65,7 +65,7 @@ public class IzvjestajService {
         
         //koliko ima pausalnih, a koliko nepausalnih korisnika
          for (int i=0; i<potrosaci.size(); i++){
-             if (potrosaci.get(i).getKategorija()=="Paušalni"){
+             if (potrosaci.get(i).getKategorija()=="Pausalni"){
                 brojPausalnihVoda++;
                 
                 if (potrosaci.get(i).getUsluga()==true){

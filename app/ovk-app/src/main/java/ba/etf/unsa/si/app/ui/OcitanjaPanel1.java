@@ -5,6 +5,19 @@
  */
 package ba.etf.unsa.si.app.ui;
 
+import ba.unsa.etf.si.app.entity.Ocitanja;
+import ba.unsa.etf.si.app.entity.Potrosac;
+import ba.unsa.etf.si.app.services.OcitanjaService;
+import ba.unsa.etf.si.app.services.PotrosacService;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Azra
@@ -29,29 +42,34 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
 
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        ListOcitanja = new javax.swing.JList();
         jLabel16 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        TxtSifraVodomjeraPretraga = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jFormattedTextField4 = new javax.swing.JFormattedTextField();
+        TxtDatum = new javax.swing.JFormattedTextField();
         jLabel12 = new javax.swing.JLabel();
-        jFormattedTextField5 = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
+        TxtstanjeVodomjera = new javax.swing.JFormattedTextField();
+        BtnSpasiNovoOcitanje = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Odabir vodomjera", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 12), new java.awt.Color(0, 102, 153))); // NOI18N
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(ListOcitanja);
 
         jLabel16.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(0, 102, 153));
         jLabel16.setText("po šifri ");
 
-        jTextField7.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        jTextField7.setForeground(new java.awt.Color(0, 102, 153));
+        TxtSifraVodomjeraPretraga.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        TxtSifraVodomjeraPretraga.setForeground(new java.awt.Color(0, 102, 153));
+        TxtSifraVodomjeraPretraga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtSifraVodomjeraPretragaKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -61,7 +79,7 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jTextField7)
+                    .addComponent(TxtSifraVodomjeraPretraga)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addGap(0, 114, Short.MAX_VALUE)))
@@ -73,7 +91,7 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel16)
                 .addGap(5, 5, 5)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TxtSifraVodomjeraPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
                 .addContainerGap())
@@ -86,25 +104,25 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
         jLabel9.setForeground(new java.awt.Color(0, 102, 153));
         jLabel9.setText("Period (mm/yyyy)");
 
-        jFormattedTextField4.setForeground(new java.awt.Color(0, 102, 153));
+        TxtDatum.setForeground(new java.awt.Color(0, 102, 153));
         try {
-            jFormattedTextField4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/20##")));
+            TxtDatum.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/20##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField4.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
+        TxtDatum.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
 
         jLabel12.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 102, 153));
         jLabel12.setText("Stanje vodomjera");
 
-        jFormattedTextField5.setForeground(new java.awt.Color(0, 102, 153));
+        TxtstanjeVodomjera.setForeground(new java.awt.Color(0, 102, 153));
         try {
-            jFormattedTextField5.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
+            TxtstanjeVodomjera.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField5.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
+        TxtstanjeVodomjera.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -114,9 +132,9 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
-                    .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
-                    .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtstanjeVodomjera, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -125,17 +143,22 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TxtDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(TxtstanjeVodomjera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 102, 153));
-        jButton1.setText("SPASI");
+        BtnSpasiNovoOcitanje.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        BtnSpasiNovoOcitanje.setForeground(new java.awt.Color(0, 102, 153));
+        BtnSpasiNovoOcitanje.setText("SPASI");
+        BtnSpasiNovoOcitanje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSpasiNovoOcitanjeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -144,7 +167,7 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnSpasiNovoOcitanje, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -159,23 +182,76 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(BtnSpasiNovoOcitanje)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BtnSpasiNovoOcitanjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSpasiNovoOcitanjeActionPerformed
+        try{
+            int sifraVodomjera = Integer.valueOf(ListOcitanja.getSelectedValue().toString());
+            Double novoStanje = Double.valueOf(TxtstanjeVodomjera.getText());
+            OcitanjaService oS = new OcitanjaService();
+            Ocitanja o = new Ocitanja();
+            o.setAccess(true);
+            o.setPotrosacByIdPotrosaca(oS.getPotrosac(sifraVodomjera));
+            o.setPotrosnja(novoStanje);
+            o.setSifraVodomjera(sifraVodomjera);
+                 // potrebno ispraviti ovo ispod
+            String[] x = TxtDatum.getText().split("/");
+            o.setMjesec(Integer.valueOf(x[0]));
+            o.setGodina(Integer.valueOf(x[1]));
+            oS.createNewOcitanja(o);
+            
+            ListOcitanja.removeAll();
+            TxtDatum.setText("");
+            TxtSifraVodomjeraPretraga.setText("");
+            TxtstanjeVodomjera.setText("");
+            JOptionPane.showMessageDialog(null, "Uspjesno dodavanje novog ocitanja !");
+        }
+        catch(Exception e){
+           JOptionPane.showMessageDialog(null, e.toString(), "Error", 
+                   JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_BtnSpasiNovoOcitanjeActionPerformed
+
+    private void TxtSifraVodomjeraPretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtSifraVodomjeraPretragaKeyReleased
+            DefaultListModel model = new DefaultListModel();
+            ListOcitanja.setModel(model);
+            ListOcitanja.removeAll();
+            model.removeAllElements();
+        try{
+            PotrosacService servicePotrosaca = new PotrosacService();
+            List<Potrosac> listPotrosaca = servicePotrosaca.dajSvePotrosace();
+            List<Potrosac> modelListPotrosaca = new ArrayList<Potrosac>();
+            String sifra = TxtSifraVodomjeraPretraga.getText();
+            for (Potrosac listPotrosaca1 : listPotrosaca) {
+                if(String.valueOf(listPotrosaca1.getSifraVodomjera()).contains(sifra)){
+                    modelListPotrosaca.add(listPotrosaca1);
+                }
+            }
+            for (Potrosac p : modelListPotrosaca) {
+                model.addElement(p.getSifraVodomjera());
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.toString(), "Error", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_TxtSifraVodomjeraPretragaKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JFormattedTextField jFormattedTextField4;
-    private javax.swing.JFormattedTextField jFormattedTextField5;
+    private javax.swing.JButton BtnSpasiNovoOcitanje;
+    private javax.swing.JList ListOcitanja;
+    private javax.swing.JFormattedTextField TxtDatum;
+    private javax.swing.JTextField TxtSifraVodomjeraPretraga;
+    private javax.swing.JFormattedTextField TxtstanjeVodomjera;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 }

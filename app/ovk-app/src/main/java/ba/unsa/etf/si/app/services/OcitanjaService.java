@@ -75,6 +75,7 @@ public class OcitanjaService {
             return tempOcitanjaList;
         }
     }
+    
     public void modifyOcitanja(Ocitanja o){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
