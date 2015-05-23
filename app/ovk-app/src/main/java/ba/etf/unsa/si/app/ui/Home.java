@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -34,11 +35,15 @@ public class Home extends javax.swing.JFrame {
     KorisniciPanel2 k2;
     KorisniciPanel3 k3;
     KorisniciPanel4 k4;
+    Boolean Admin;
     /**
      * Creates new form Home
+     * @param adminTest
      */
-    public Home() {
+    public Home(Boolean adminTest) {
         initComponents();
+        // Admin Test
+        Admin = adminTest;
         //bijela pozadina
         Container container = this.getContentPane();
         container.setBackground(Color.white); 
@@ -990,16 +995,21 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void korisniciMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_korisniciMenuMouseClicked
-        potrosaciPanel.setVisible(false);
-        parametriPanel.setVisible(false);
-        racuniPanel.setVisible(false);
-        izvjestajPanel.setVisible(false);
-        ocitanjaPanel.setVisible(false);
-        korisniciPanel.setVisible(true);
-        k1.setVisible(true);
-        k2.setVisible(false);
-        k3.setVisible(false);
-        k4.setVisible(false);
+        if(Admin){
+            potrosaciPanel.setVisible(false);
+            parametriPanel.setVisible(false);
+            racuniPanel.setVisible(false);
+            izvjestajPanel.setVisible(false);
+            ocitanjaPanel.setVisible(false);
+            korisniciPanel.setVisible(true);
+            k1.setVisible(true);
+            k2.setVisible(false);
+            k3.setVisible(false);
+            k4.setVisible(false);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Niste Administrator!");
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_korisniciMenuMouseClicked
 
@@ -1033,7 +1043,7 @@ public class Home extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home().setVisible(true);
+                new Home(false).setVisible(true);
             }
         });
     }

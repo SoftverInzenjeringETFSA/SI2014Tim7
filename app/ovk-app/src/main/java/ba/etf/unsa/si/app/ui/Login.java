@@ -121,8 +121,8 @@ public class Login extends javax.swing.JFrame {
         KorisnikService loginCheck = new KorisnikService();
         try{
             // Privremeno ukinut login
-          // Boolean AdminTest = loginCheck.checkLogin(TxtUserName.getText(), String.valueOf(TxtPassword.getPassword()));
-            Home home = new Home();
+            Boolean AdminTest = loginCheck.checkLogin(TxtUserName.getText(), String.valueOf(TxtPassword.getPassword()));
+            Home home = new Home(AdminTest);
             home.setVisible(true);
             this.setVisible(false);
         }

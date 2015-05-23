@@ -199,6 +199,9 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
             o.setSifraVodomjera(sifraVodomjera);
                  // potrebno ispraviti ovo ispod
             String[] x = TxtDatum.getText().split("/");
+            if(Integer.valueOf(x[0])>12||Integer.valueOf(x[0])<0){
+                throw new IllegalArgumentException("Nepostojeci mjesec");
+            }
             o.setMjesec(Integer.valueOf(x[0]));
             o.setGodina(Integer.valueOf(x[1]));
             oS.createNewOcitanja(o);
