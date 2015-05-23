@@ -122,9 +122,10 @@ public class Login extends javax.swing.JFrame {
         try{
             // Privremeno ukinut login
             Boolean AdminTest = loginCheck.checkLogin(TxtUserName.getText(), String.valueOf(TxtPassword.getPassword()));
+            this.dispose();
             Home home = new Home(AdminTest);
             home.setVisible(true);
-            this.setVisible(false);
+            
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, e.toString(), "Error",
