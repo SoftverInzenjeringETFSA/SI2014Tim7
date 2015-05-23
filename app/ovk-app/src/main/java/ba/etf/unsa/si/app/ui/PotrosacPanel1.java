@@ -58,10 +58,10 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         telefon = new javax.swing.JFormattedTextField();
         jmbg = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
+        spasiButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(600, 400));
+        setPreferredSize(new java.awt.Dimension(600, 450));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Podaci o usluzi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 12), new java.awt.Color(0, 102, 153))); // NOI18N
@@ -267,12 +267,12 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
                 .addContainerGap(69, Short.MAX_VALUE))
         );
 
-        jButton1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 102, 153));
-        jButton1.setText("SPASI");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        spasiButton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        spasiButton.setForeground(new java.awt.Color(0, 102, 153));
+        spasiButton.setText("SPASI");
+        spasiButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                spasiButtonActionPerformed(evt);
             }
         });
 
@@ -280,15 +280,15 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(92, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spasiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jpanellicnipodaci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(106, 106, 106))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jPanel1, jpanellicnipodaci});
@@ -296,20 +296,20 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jpanellicnipodaci, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpanellicnipodaci, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(spasiButton)
+                .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPanel1, jpanellicnipodaci});
 
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void spasiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spasiButtonActionPerformed
         Potrosac p = new Potrosac();
         PotrosacService servis = new PotrosacService();
         p.setIme(ime.getText());
@@ -346,14 +346,14 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error",
                                     JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+// TODO add your handling code here:
+    }//GEN-LAST:event_spasiButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField adresa;
     private javax.swing.JComboBox aktivnost;
     private javax.swing.JTextField ime;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -370,6 +370,7 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
     private javax.swing.JSpinner porodica;
     private javax.swing.JTextField prezime;
     private javax.swing.JTextField sifraVodomjera;
+    private javax.swing.JButton spasiButton;
     private javax.swing.JFormattedTextField telefon;
     private javax.swing.JRadioButton tipPausalac;
     private javax.swing.ButtonGroup tipPotrosaca;
