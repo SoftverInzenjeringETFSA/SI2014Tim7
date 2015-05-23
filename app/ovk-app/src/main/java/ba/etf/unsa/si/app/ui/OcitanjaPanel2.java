@@ -227,7 +227,7 @@ public class OcitanjaPanel2 extends javax.swing.JPanel {
             List<Ocitanja> o = oS.getId(sifraVodomjera);
             Ocitanja novi = new Ocitanja();
             String[] x = jFormattedTextField4.getText().split("/");
-            if(x[0].trim().length()==0 || x[1].trim().length()==2)
+            if(x[0].trim().length()==0 || x[0].trim().length()==1 || x[1].trim().length()==2 || x[1].trim().length()==3)
             {
             	throw new IllegalArgumentException("Niste unijeli datum ispravno!");
             }

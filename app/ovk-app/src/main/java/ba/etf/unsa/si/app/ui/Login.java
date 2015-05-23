@@ -42,6 +42,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         TxtPassword = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
+        
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -58,8 +59,12 @@ public class Login extends javax.swing.JFrame {
         BtnLogin.setForeground(new java.awt.Color(0, 102, 153));
         BtnLogin.setText("LOGIN");
         BtnLogin.addActionListener(new java.awt.event.ActionListener() {
+        	Boolean b = true;
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	if(b==true){
+            	b=false;
                 BtnLoginActionPerformed(evt);
+            	}
             }
         });
 

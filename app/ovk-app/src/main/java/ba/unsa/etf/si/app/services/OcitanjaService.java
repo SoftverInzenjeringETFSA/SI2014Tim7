@@ -14,7 +14,7 @@ import java.util.List;
 import org.hibernate.Session;
 
 
-public class OcitanjaService {
+public class OcitanjaService{
 	
     
     public Potrosac getPotrosac(int sifra){
