@@ -5,6 +5,7 @@
  */
 package ba.etf.unsa.si.app.ui;
 
+import ba.unsa.etf.si.app.entity.Potrosac;
 import java.awt.Color;
 import java.awt.Container;
 
@@ -17,10 +18,30 @@ public class PotrosacPregled extends javax.swing.JFrame {
     /**
      * Creates new form PotrosacPregled
      */
-    public PotrosacPregled() {
+    public PotrosacPregled(Potrosac p) {
         initComponents();
         Container container = this.getContentPane();
         container.setBackground(Color.white); 
+        ime.setText(p.getIme());
+        prezime.setText(p.getPrezime());
+        adresa.setText(p.getAdresa());
+        telefon.setText(p.getTelefon());
+        jmbg.setText(p.getJmbg());
+        brojClanovaDomacinstva.setText(p.getBrojClanova());
+        tip.setText(p.getKategorija());
+        sifraVodomjera.setText(String.valueOf(p.getSifraVodomjera()));
+        if(p.getUsluga()){
+            usluga.setText("Voda i Kanalizacija");
+        }
+        else{
+            usluga.setText("Voda");
+        }
+        if(p.getAktivnost()){
+            aktivnost.setText("Aktivan");
+        }
+        else{
+            aktivnost.setText("Neaktivan");
+        }
     }
 
     /**
@@ -41,8 +62,8 @@ public class PotrosacPregled extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        ime1 = new javax.swing.JTextField();
-        ime2 = new javax.swing.JTextField();
+        jmbg = new javax.swing.JTextField();
+        telefon = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -50,10 +71,10 @@ public class PotrosacPregled extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         sifraVodomjera = new javax.swing.JTextField();
-        ime3 = new javax.swing.JTextField();
-        ime4 = new javax.swing.JTextField();
-        ime5 = new javax.swing.JTextField();
-        ime6 = new javax.swing.JTextField();
+        brojClanovaDomacinstva = new javax.swing.JTextField();
+        tip = new javax.swing.JTextField();
+        aktivnost = new javax.swing.JTextField();
+        usluga = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -93,13 +114,13 @@ public class PotrosacPregled extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(0, 102, 153));
         jLabel10.setText("JMBG");
 
-        ime1.setEditable(false);
-        ime1.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        ime1.setForeground(new java.awt.Color(0, 102, 153));
+        jmbg.setEditable(false);
+        jmbg.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        jmbg.setForeground(new java.awt.Color(0, 102, 153));
 
-        ime2.setEditable(false);
-        ime2.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        ime2.setForeground(new java.awt.Color(0, 102, 153));
+        telefon.setEditable(false);
+        telefon.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        telefon.setForeground(new java.awt.Color(0, 102, 153));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -108,17 +129,16 @@ public class PotrosacPregled extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ime1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(ime2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                        .addComponent(adresa, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(prezime, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(ime, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addComponent(jmbg, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(telefon, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(adresa)
+                    .addComponent(prezime)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(ime))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -139,11 +159,11 @@ public class PotrosacPregled extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ime2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(telefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ime1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jmbg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -174,21 +194,21 @@ public class PotrosacPregled extends javax.swing.JFrame {
         sifraVodomjera.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         sifraVodomjera.setForeground(new java.awt.Color(0, 102, 153));
 
-        ime3.setEditable(false);
-        ime3.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        ime3.setForeground(new java.awt.Color(0, 102, 153));
+        brojClanovaDomacinstva.setEditable(false);
+        brojClanovaDomacinstva.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        brojClanovaDomacinstva.setForeground(new java.awt.Color(0, 102, 153));
 
-        ime4.setEditable(false);
-        ime4.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        ime4.setForeground(new java.awt.Color(0, 102, 153));
+        tip.setEditable(false);
+        tip.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        tip.setForeground(new java.awt.Color(0, 102, 153));
 
-        ime5.setEditable(false);
-        ime5.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        ime5.setForeground(new java.awt.Color(0, 102, 153));
+        aktivnost.setEditable(false);
+        aktivnost.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        aktivnost.setForeground(new java.awt.Color(0, 102, 153));
 
-        ime6.setEditable(false);
-        ime6.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        ime6.setForeground(new java.awt.Color(0, 102, 153));
+        usluga.setEditable(false);
+        usluga.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        usluga.setForeground(new java.awt.Color(0, 102, 153));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -196,15 +216,15 @@ public class PotrosacPregled extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ime3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(brojClanovaDomacinstva, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addContainerGap()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(ime5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(ime6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(aktivnost, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(usluga, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(sifraVodomjera, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(ime4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(tip, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(10, 10, 10)
                             .addComponent(jLabel17))
@@ -223,7 +243,7 @@ public class PotrosacPregled extends javax.swing.JFrame {
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {ime4, ime5, ime6, sifraVodomjera});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {aktivnost, sifraVodomjera, tip, usluga});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,11 +251,11 @@ public class PotrosacPregled extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ime3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(brojClanovaDomacinstva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ime4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -243,11 +263,11 @@ public class PotrosacPregled extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ime6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(usluga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ime5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(aktivnost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -305,20 +325,16 @@ public class PotrosacPregled extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PotrosacPregled().setVisible(true);
+                new PotrosacPregled(new Potrosac()).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField adresa;
+    private javax.swing.JTextField aktivnost;
+    private javax.swing.JTextField brojClanovaDomacinstva;
     private javax.swing.JTextField ime;
-    private javax.swing.JTextField ime1;
-    private javax.swing.JTextField ime2;
-    private javax.swing.JTextField ime3;
-    private javax.swing.JTextField ime4;
-    private javax.swing.JTextField ime5;
-    private javax.swing.JTextField ime6;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -331,7 +347,11 @@ public class PotrosacPregled extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField jmbg;
     private javax.swing.JTextField prezime;
     private javax.swing.JTextField sifraVodomjera;
+    private javax.swing.JTextField telefon;
+    private javax.swing.JTextField tip;
+    private javax.swing.JTextField usluga;
     // End of variables declaration//GEN-END:variables
 }

@@ -70,18 +70,16 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="ime1" pref="139" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="ime2" alignment="0" pref="139" max="32767" attributes="0"/>
-                          <Component id="adresa" alignment="0" max="32767" attributes="0"/>
-                          <Component id="prezime" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="ime" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jmbg" pref="139" max="32767" attributes="0"/>
+                      <Component id="telefon" alignment="0" pref="139" max="32767" attributes="0"/>
+                      <Component id="adresa" alignment="0" max="32767" attributes="0"/>
+                      <Component id="prezime" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="ime" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="30" max="32767" attributes="0"/>
               </Group>
@@ -105,11 +103,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="ime2" min="-2" max="-2" attributes="0"/>
+                  <Component id="telefon" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="ime1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jmbg" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="30" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -204,7 +202,7 @@
             <Property name="text" type="java.lang.String" value="JMBG"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="ime1">
+        <Component class="javax.swing.JTextField" name="jmbg">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -215,7 +213,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="ime2">
+        <Component class="javax.swing.JTextField" name="telefon">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -248,15 +246,15 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="ime3" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
+                      <Component id="brojClanovaDomacinstva" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="ime5" linkSize="3" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
-                                  <Component id="ime6" linkSize="3" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
+                                  <Component id="aktivnost" linkSize="3" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
+                                  <Component id="usluga" linkSize="3" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
                                   <Component id="sifraVodomjera" linkSize="3" alignment="1" min="-2" pref="117" max="-2" attributes="0"/>
-                                  <Component id="ime4" linkSize="3" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
+                                  <Component id="tip" linkSize="3" alignment="1" min="-2" pref="139" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -291,11 +289,11 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="ime3" min="-2" max="-2" attributes="0"/>
+                  <Component id="brojClanovaDomacinstva" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="ime4" min="-2" max="-2" attributes="0"/>
+                  <Component id="tip" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -303,11 +301,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="ime6" min="-2" max="-2" attributes="0"/>
+                  <Component id="usluga" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="ime5" min="-2" max="-2" attributes="0"/>
+                  <Component id="aktivnost" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="30" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -380,7 +378,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="ime3">
+        <Component class="javax.swing.JTextField" name="brojClanovaDomacinstva">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -391,7 +389,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="ime4">
+        <Component class="javax.swing.JTextField" name="tip">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -402,7 +400,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="ime5">
+        <Component class="javax.swing.JTextField" name="aktivnost">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -413,7 +411,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="ime6">
+        <Component class="javax.swing.JTextField" name="usluga">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

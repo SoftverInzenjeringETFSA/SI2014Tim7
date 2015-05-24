@@ -25,6 +25,7 @@ public class PotrosacPanel4 extends javax.swing.JPanel {
     /**
      * Creates new form PotrosacPanel4
      */
+    PotrosacPregled pregled;
     public PotrosacPanel4() {
         initComponents();
     }
@@ -65,6 +66,11 @@ public class PotrosacPanel4 extends javax.swing.JPanel {
         jButton1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 102, 153));
         jButton1.setText("PREGLEDAJ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Parametri pretrage", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 12), new java.awt.Color(0, 102, 153))); // NOI18N
@@ -256,11 +262,6 @@ public class PotrosacPanel4 extends javax.swing.JPanel {
 
         listaPretraga.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         listaPretraga.setForeground(new java.awt.Color(0, 102, 153));
-        listaPretraga.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(listaPretraga);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -388,6 +389,18 @@ public class PotrosacPanel4 extends javax.swing.JPanel {
     private void jmbgPretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jmbgPretragaKeyReleased
         update();        // TODO add your handling code here:
     }//GEN-LAST:event_jmbgPretragaKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try{
+        Potrosac p = (Potrosac) listaPretraga.getSelectedValue();
+        pregled = new PotrosacPregled(p);
+        pregled.setVisible(true);
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Niste odabrali korisnika !", "Greska",
+                                    JOptionPane.ERROR_MESSAGE);
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

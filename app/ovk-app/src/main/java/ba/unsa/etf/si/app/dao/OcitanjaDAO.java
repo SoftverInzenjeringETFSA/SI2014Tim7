@@ -53,17 +53,10 @@ public class OcitanjaDAO extends AbstractDAO<Ocitanja, Integer> {
             criteria.add(Restrictions.like("access",true));
             return criteria.list();  
         }
+   
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     public List<Ocitanja> dajOcitanja() {  
         Criteria criteria = getSession().createCriteria(getPersistentClass());
@@ -85,5 +78,7 @@ public class OcitanjaDAO extends AbstractDAO<Ocitanja, Integer> {
         criteria.add(Restrictions.like("jmbg","%" + jmbg + "%").ignoreCase());
         return criteria.list();  
     }  */
+
+
     
 }

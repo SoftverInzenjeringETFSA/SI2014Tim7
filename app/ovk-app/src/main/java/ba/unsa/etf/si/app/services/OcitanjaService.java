@@ -125,5 +125,18 @@ public class OcitanjaService{
             }
     }
     
+    public Ocitanja getOcitanjeForRacuni(int mjesec,int godina,Potrosac p){
+            session.beginTransaction();
+            OcitanjaDAO dao = new OcitanjaDAO();
+            dao.setSession(session);
+            List<Ocitanja> ocitanjaZaRacune = dao.findOcitanja(mjesec,godina,p);
+            session.getTransaction().commit();
+            if(ocitanjaZaRacune.isEmpty()){
+                throw new IllegalArgumentException("Nema ocitanja u tom periodu");
+            }
+            else{
+                return ocitanjaZaRacune.get(0); 
+            }
+    }
     
 }
