@@ -12,6 +12,7 @@ import ba.unsa.etf.si.app.services.PotrosacService;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
 
 /**
@@ -456,8 +457,15 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
             else{
                 p.setUsluga(Boolean.TRUE);
             }
-        servicePretraga.modifyPotrosac(p);
-        }        // TODO add your handling code here:
+            try{
+                servicePretraga.modifyPotrosac(p);
+                JOptionPane.showMessageDialog(null,"Uspjesno ste izmjenili potrosaca");
+            } 
+            catch(Exception e){
+                    JOptionPane.showMessageDialog(null, e.getMessage(),"Greska!",
+                    JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private void updateListu(){

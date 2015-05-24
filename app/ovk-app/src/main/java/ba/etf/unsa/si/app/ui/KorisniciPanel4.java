@@ -5,9 +5,11 @@
  */
 package ba.etf.unsa.si.app.ui;
 
+import ba.etf.unsa.si.app.comparator.KorisnikComparator;
 import ba.etf.unsa.si.app.renderer.KorisnikRenderer;
 import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.services.KorisnikService;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -243,6 +245,7 @@ public class KorisniciPanel4 extends javax.swing.JPanel {
         if(jmbgPretraga.getText().length()==0){jmbg = "";}
         if(usernamePretraga.getText().length()==0){username = "";}
         List<Korisnik> kList = servis.searchByCriteria(ime,prezime,jmbg,username);
+        Collections.sort(kList,new KorisnikComparator());
         ListCellRenderer x = new KorisnikRenderer();
         for (Korisnik k : kList) {
             model.addElement(k);

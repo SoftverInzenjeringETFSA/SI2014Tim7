@@ -5,10 +5,15 @@
  */
 package ba.etf.unsa.si.app.ui;
 
+import ba.etf.unsa.si.app.comparator.KorisnikComparator;
+import ba.etf.unsa.si.app.renderer.KorisnikRenderer;
 import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.services.KorisnikService;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.ListCellRenderer;
 
 /**
  *
@@ -118,20 +123,29 @@ public class KorisniciPanel3 extends javax.swing.JPanel {
     private void pretragaKorisnikaZaBrisanjeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pretragaKorisnikaZaBrisanjeKeyReleased
         KorisnikService servicePretraga = new KorisnikService();
         List<Korisnik> korisnikLista = servicePretraga.searchByUsername(pretragaKorisnikaZaBrisanje.getText());
-        DefaultListModel model = new DefaultListModel();
+        DefaultListModel<Korisnik> model = new DefaultListModel<Korisnik>();
         model.removeAllElements();
+        Collections.sort(korisnikLista,new KorisnikComparator());
+        
+        ListCellRenderer x = new KorisnikRenderer();
         for (Korisnik k : korisnikLista) {
-            model.addElement(k.getUsername());
+            model.addElement(k);
         }    
-        listaZaBrisanje.setModel(model);  
+        listaZaBrisanje.setCellRenderer(x);
+        listaZaBrisanje.setModel(model);
     }//GEN-LAST:event_pretragaKorisnikaZaBrisanjeKeyReleased
 
     private void obrisiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obrisiBtnActionPerformed
-        String username  = listaZaBrisanje.getSelectedValue().toString();
-        KorisnikService servicePretraga = new KorisnikService();
-        List<Korisnik> korisnikLista = servicePretraga.searchByFullUsername(username);
-        if(korisnikLista.size()==1){
-            servicePretraga.deleteKorisnik(korisnikLista.get(0));
+        try{
+            String username  = listaZaBrisanje.getSelectedValue().toString();
+            KorisnikService servicePretraga = new KorisnikService();
+            Korisnik k = (Korisnik) listaZaBrisanje.getSelectedValue();
+            servicePretraga.deleteKorisnik(k);
+            JOptionPane.showMessageDialog(null,"Uspjesno ste obrisali korisnika. ");
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Greska!",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_obrisiBtnActionPerformed
 
