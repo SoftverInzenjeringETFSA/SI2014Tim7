@@ -38,7 +38,6 @@ public class App
        System.out.println(test);*/
         //primjer koristenja dao klase
         
-        
         KorisnikService s = new KorisnikService();
         List<Korisnik> list = s.searchByCriteria("", "", "2309", "");
         System.out.println(list.size());
