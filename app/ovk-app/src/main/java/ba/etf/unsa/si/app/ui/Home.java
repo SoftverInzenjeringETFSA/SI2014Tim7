@@ -12,6 +12,8 @@ import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -38,14 +40,16 @@ public class Home extends javax.swing.JFrame {
     KorisniciPanel3 k3;
     KorisniciPanel4 k4;
     Boolean Admin;
-    ParametriService servis;
+    transient ParametriService servis;
     Parametri parametri;
+    Logger logger;
     /**
      * Creates new form Home
      * @param adminTest
      */
     public Home(Boolean adminTest) {
         initComponents();
+        logger = Logger.getAnonymousLogger();
         // Admin Test
         Admin = adminTest;
         //bijela pozadina
@@ -849,6 +853,7 @@ public class Home extends javax.swing.JFrame {
             m1.setPDV(parametri.getStopaPdv());
         }
         catch(Exception e){
+            logger.log(Level.OFF, "Nisu postavljeni parametri", e);
             //"niste postavili parametre" poruka
         }
         
