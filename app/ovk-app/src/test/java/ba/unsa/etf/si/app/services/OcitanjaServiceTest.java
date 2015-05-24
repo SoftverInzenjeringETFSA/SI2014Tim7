@@ -104,8 +104,8 @@ public class OcitanjaServiceTest {
 	@Test(expected=IllegalArgumentException.class)
 	public void testGetOcitanjaForRacuni() {
 		OcitanjaService ocitanja = new OcitanjaService();
-		Date datum1=new Date(01/04/2015);
-		Date datum2=new Date(30/04/2015);
+		Date datum1=new Date("01/04/2015");
+		Date datum2=new Date("30/04/2015");
 		List<Ocitanja>rez=ocitanja.getOcitanjaForRacuni(datum1,datum2);
 		assertNull(rez);
 		
