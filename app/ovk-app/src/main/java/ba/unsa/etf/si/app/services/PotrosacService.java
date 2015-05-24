@@ -72,7 +72,7 @@ public class PotrosacService {
         return (v<10&&j[12]==v)||(v>9&&j[12]==0);
         }
     
-    // Naredne dvije klase rade zajedno, jedna vraca listu potrosaca, a druga mjenja jednog potrosaca kojeg smo preuzali iz liste
+    // Naredne dvije metode rade zajedno, jedna vraca listu potrosaca, a druga mjenja jednog potrosaca kojeg smo preuzali iz liste
     public List<Potrosac> searchByCriteria(String ime,String prezime,String jmbg){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();   
@@ -99,9 +99,21 @@ public class PotrosacService {
                 throw new IllegalArgumentException("Potrosac nije prosao validaciju, provjerite podatke");
             }
     }
+    
+    public void hardDeletePotrosac(Potrosac p) {
+			Session session = HibernateUtil.getSessionFactory().openSession();
+		    session.beginTransaction();
+		    PotrosacDAO dao = new PotrosacDAO();
+		    dao.setSession(session);
+		    dao.delete(p.getId());
+		    // Zatvaranje sesije, isto obavezni dio
+		    session.getTransaction().commit();
+		    session.close();
+    }
+    
     public void deletePotrosac(Potrosac p){
                 Potrosac zaBrisanje = getPotrosacByJMBG(p.getJmbg());
-                if(!zaBrisanje.getHidden()){
+                if(zaBrisanje.getHidden() == null || !zaBrisanje.getHidden()){
                     zaBrisanje.setHidden(Boolean.TRUE);
                 }else{
                     zaBrisanje.setHidden(Boolean.FALSE);
@@ -152,7 +164,7 @@ public class PotrosacService {
     }
         
     
-        // Za koristenje Pretrage racua
+        // Za koristenje Pretrage racuna
         public List<Potrosac> dajPotrosaceZaRacun(String ime,String prezime,int sifraVodomjera){
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();   
