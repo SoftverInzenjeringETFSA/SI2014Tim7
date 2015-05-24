@@ -466,14 +466,17 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
         else if(jmbgTxt.getText().isEmpty()){
             status.setText("Unesite JMBG korisnika");
             pravilanJmbg = false;
+            BtnSaveKorisnik.setEnabled(false);
         }
         else if(jmbgTxt.getText().length() != 13){
             status.setText("JMBG mora imati 13 cifara");
             pravilanJmbg = false;
+            BtnSaveKorisnik.setEnabled(false);
         }
         else{
             status.setText("JMBG nije u pravilnom formatu");
             pravilanJmbg = false;
+            BtnSaveKorisnik.setEnabled(false);
         }
         
         if(formatUsername && formatLicne && formatMail && pravilanJmbg && ime && prezime && adresa && telefon)
@@ -500,7 +503,7 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
     boolean prezime = false;
     
     private void prezimeTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_prezimeTxtFocusLost
-        if(imeTxt.getText().isEmpty()){
+        if(prezimeTxt.getText().isEmpty()){
             status.setText("Unesite prezime korisnika");
             prezime  = false;
             BtnSaveKorisnik.setEnabled(false);
