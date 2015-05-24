@@ -256,7 +256,7 @@ public class Home extends javax.swing.JFrame {
         potrosaciOpcijeLayout.setVerticalGroup(
             potrosaciOpcijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(potrosaciOpcijeLayout.createSequentialGroup()
-                .addGap(148, 148, 148)
+                .addGap(163, 163, 163)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
@@ -264,7 +264,7 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(jButton3)
                 .addGap(18, 18, 18)
                 .addComponent(jButton4)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
 
         potrosaciDinamicki.setBackground(new java.awt.Color(255, 255, 255));
@@ -277,7 +277,7 @@ public class Home extends javax.swing.JFrame {
         );
         potrosaciDinamickiLayout.setVerticalGroup(
             potrosaciDinamickiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
+            .addGap(0, 483, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout potrosaciPanelLayout = new javax.swing.GroupLayout(potrosaciPanel);
@@ -332,11 +332,11 @@ public class Home extends javax.swing.JFrame {
         parametriOpcijeLayout.setVerticalGroup(
             parametriOpcijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(parametriOpcijeLayout.createSequentialGroup()
-                .addGap(190, 190, 190)
+                .addGap(207, 207, 207)
                 .addComponent(jButton5)
                 .addGap(18, 18, 18)
                 .addComponent(jButton6)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         parametriDinamicki.setBackground(new java.awt.Color(255, 255, 255));
@@ -365,7 +365,7 @@ public class Home extends javax.swing.JFrame {
         parametriPanelLayout.setVerticalGroup(
             parametriPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(parametriOpcije, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(parametriDinamicki, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(parametriDinamicki, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
         );
 
         racuniPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -404,11 +404,11 @@ public class Home extends javax.swing.JFrame {
         racuniOpcijeLayout.setVerticalGroup(
             racuniOpcijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(racuniOpcijeLayout.createSequentialGroup()
-                .addGap(190, 190, 190)
+                .addGap(207, 207, 207)
                 .addComponent(jButton8)
                 .addGap(18, 18, 18)
                 .addComponent(jButton9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         racuniDinamicki.setBackground(new java.awt.Color(255, 255, 255));
@@ -421,7 +421,7 @@ public class Home extends javax.swing.JFrame {
         );
         racuniDinamickiLayout.setVerticalGroup(
             racuniDinamickiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
+            .addGap(0, 483, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout racuniPanelLayout = new javax.swing.GroupLayout(racuniPanel);
@@ -476,11 +476,11 @@ public class Home extends javax.swing.JFrame {
         izvjestajOpcijeLayout.setVerticalGroup(
             izvjestajOpcijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(izvjestajOpcijeLayout.createSequentialGroup()
-                .addGap(190, 190, 190)
+                .addGap(207, 207, 207)
                 .addComponent(jButton10)
                 .addGap(18, 18, 18)
                 .addComponent(jButton11)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         izvjestajDinamicki.setBackground(new java.awt.Color(255, 255, 255));
@@ -493,7 +493,7 @@ public class Home extends javax.swing.JFrame {
         );
         izvjestajDinamickiLayout.setVerticalGroup(
             izvjestajDinamickiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 427, Short.MAX_VALUE)
+            .addGap(0, 461, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout izvjestajPanelLayout = new javax.swing.GroupLayout(izvjestajPanel);
@@ -561,13 +561,13 @@ public class Home extends javax.swing.JFrame {
         ocitanjaOpcijeLayout.setVerticalGroup(
             ocitanjaOpcijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ocitanjaOpcijeLayout.createSequentialGroup()
-                .addGap(169, 169, 169)
+                .addGap(185, 185, 185)
                 .addComponent(jButton7)
                 .addGap(18, 18, 18)
                 .addComponent(jButton12)
                 .addGap(18, 18, 18)
                 .addComponent(jButton13)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
 
         ocitanjaDinamicki.setBackground(new java.awt.Color(255, 255, 255));
@@ -580,7 +580,7 @@ public class Home extends javax.swing.JFrame {
         );
         ocitanjaDinamickiLayout.setVerticalGroup(
             ocitanjaDinamickiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 427, Short.MAX_VALUE)
+            .addGap(0, 461, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout ocitanjaPanelLayout = new javax.swing.GroupLayout(ocitanjaPanel);
@@ -614,7 +614,7 @@ public class Home extends javax.swing.JFrame {
         );
         korisniciDinamickiLayout.setVerticalGroup(
             korisniciDinamickiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
+            .addGap(0, 483, Short.MAX_VALUE)
         );
 
         korisniciOpcije.setBackground(new java.awt.Color(0, 102, 153));
@@ -671,7 +671,7 @@ public class Home extends javax.swing.JFrame {
         korisniciOpcijeLayout.setVerticalGroup(
             korisniciOpcijeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(korisniciOpcijeLayout.createSequentialGroup()
-                .addGap(148, 148, 148)
+                .addGap(163, 163, 163)
                 .addComponent(jButton14)
                 .addGap(18, 18, 18)
                 .addComponent(jButton15)
@@ -679,7 +679,7 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(jButton16)
                 .addGap(18, 18, 18)
                 .addComponent(jButton17)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout korisniciPanelLayout = new javax.swing.GroupLayout(korisniciPanel);
@@ -717,11 +717,11 @@ public class Home extends javax.swing.JFrame {
             slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(potrosaciPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(parametriPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(parametriPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE))
             .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(racuniPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(izvjestajPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(izvjestajPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE))
             .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(ocitanjaPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

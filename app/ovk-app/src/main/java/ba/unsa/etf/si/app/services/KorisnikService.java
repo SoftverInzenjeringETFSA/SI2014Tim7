@@ -189,7 +189,7 @@ public class KorisnikService {
                     return k.get(0).getAdmin();
                 }
                 else{
-                    throw new IllegalArgumentException("Pogresan Password");
+                    throw new IllegalArgumentException("Unijeli ste pogrešan password");
                 }   
             }
             else{
