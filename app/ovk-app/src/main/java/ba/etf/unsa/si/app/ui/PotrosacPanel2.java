@@ -5,10 +5,14 @@
  */
 package ba.etf.unsa.si.app.ui;
 
+import ba.etf.unsa.si.app.comparator.PotrosacComparator;
+import ba.etf.unsa.si.app.renderer.PotrosacRenderer;
 import ba.unsa.etf.si.app.entity.Potrosac;
 import ba.unsa.etf.si.app.services.PotrosacService;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.ListCellRenderer;
 
 /**
  *
@@ -252,11 +256,13 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
         jLabel12.setText("Tip potrošača");
 
         tipPausalni.setBackground(new java.awt.Color(255, 255, 255));
+        tipPotrosaca2.add(tipPausalni);
         tipPausalni.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         tipPausalni.setForeground(new java.awt.Color(102, 102, 102));
         tipPausalni.setText("paušalni");
 
         tipVodomjer.setBackground(new java.awt.Color(255, 255, 255));
+        tipPotrosaca2.add(tipVodomjer);
         tipVodomjer.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         tipVodomjer.setForeground(new java.awt.Color(102, 102, 102));
         tipVodomjer.setText("s vodomjerom");
@@ -266,11 +272,13 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
         jLabel13.setText("Usluga");
 
         tipVoda.setBackground(new java.awt.Color(255, 255, 255));
+        tipUsluge2.add(tipVoda);
         tipVoda.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         tipVoda.setForeground(new java.awt.Color(102, 102, 102));
         tipVoda.setText("voda");
 
         tipKanalizacija.setBackground(new java.awt.Color(255, 255, 255));
+        tipUsluge2.add(tipKanalizacija);
         tipKanalizacija.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         tipKanalizacija.setForeground(new java.awt.Color(102, 102, 102));
         tipKanalizacija.setText("voda i kanalizacija");
@@ -386,16 +394,15 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jmbgPretragaKeyReleased
 
     private void listaPretragaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaPretragaValueChanged
-        String jmbgX = listaPretraga.getSelectedValue().toString();
-        PotrosacService servicePretraga = new PotrosacService();
-        Potrosac p = servicePretraga.getPotrosacByJMBG(jmbgX);
+
+            Potrosac p = (Potrosac) listaPretraga.getSelectedValue();
             ime.setText(p.getIme());
             prezime.setText(p.getPrezime());
             adresa.setText(p.getAdresa());
             telefon.setText(p.getTelefon());
             jmbg.setText(p.getJmbg());
             porodica.setValue(Integer.valueOf(p.getBrojClanova()));
-            if("Pausalni".equals(p.getKategorija())){
+            if("Pausalac".equals(p.getKategorija())){
                 tipPausalni.setSelected(true);
                 tipVodomjer.setSelected(false);
             }
@@ -422,7 +429,7 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(!"".equals(jmbg.getText())){
         PotrosacService servicePretraga = new PotrosacService();
-        Potrosac p = servicePretraga.getPotrosacByJMBG(jmbg.getText());
+        Potrosac p = (Potrosac) listaPretraga.getSelectedValue();
             p.setAdresa(adresa.getText());
             if(aktivnost.getSelectedIndex()==0){
                 p.setAktivnost(Boolean.TRUE);
@@ -435,6 +442,7 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
             p.setIme(ime.getText());
             if(tipPausalni.isSelected()){
                 p.setKategorija("Pausalac");
+                p.setSifraVodomjera(null);
             }
             else{
                 p.setKategorija("Sa vodomjerom");
@@ -455,11 +463,15 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
     private void updateListu(){
         PotrosacService servis = new PotrosacService();
         List<Potrosac> listaPotrosac = servis.searchByCriteria(imePretraga.getText(), "", jmbgPretraga.getText());
-        DefaultListModel model = new DefaultListModel();
+        DefaultListModel<Potrosac> model = new DefaultListModel<Potrosac>();
         model.removeAllElements();
+        Collections.sort(listaPotrosac,new PotrosacComparator());
+        
+        ListCellRenderer x = new PotrosacRenderer();
         for (Potrosac p : listaPotrosac) {
-            model.addElement(p.getJmbg());
+            model.addElement(p);
         }    
+        listaPretraga.setCellRenderer(x);
         listaPretraga.setModel(model);    
     }
 

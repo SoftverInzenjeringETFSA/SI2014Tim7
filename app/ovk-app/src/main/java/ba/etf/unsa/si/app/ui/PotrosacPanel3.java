@@ -5,11 +5,15 @@
  */
 package ba.etf.unsa.si.app.ui;
 
+import ba.etf.unsa.si.app.comparator.PotrosacComparator;
+import ba.etf.unsa.si.app.renderer.PotrosacRenderer;
 import ba.unsa.etf.si.app.entity.Potrosac;
 import ba.unsa.etf.si.app.services.PotrosacService;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.ListCellRenderer;
 
 /**
  *
@@ -108,7 +112,7 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
 
         izbrisiBtn.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         izbrisiBtn.setForeground(new java.awt.Color(0, 102, 153));
-        izbrisiBtn.setText("IZBRIŠI");
+        izbrisiBtn.setText("IZBRIŠI / OBNOVI");
         izbrisiBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 izbrisiBtnActionPerformed(evt);
@@ -121,9 +125,9 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(izbrisiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(izbrisiBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -147,19 +151,31 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
     private void updateListu(){
         PotrosacService servis = new PotrosacService();
         List<Potrosac> listaPotrosac = servis.searchByCriteria(imePretraga.getText(), "", jmbgPretraga.getText());
-        DefaultListModel model = new DefaultListModel();
+        DefaultListModel<Potrosac> model = new DefaultListModel<Potrosac>();
         model.removeAllElements();
+        Collections.sort(listaPotrosac,new PotrosacComparator());
+        
+        ListCellRenderer x = new PotrosacRenderer();
         for (Potrosac p : listaPotrosac) {
-            model.addElement(p.getJmbg());
+            model.addElement(p);
         }    
-        listaPretraga.setModel(model);    
+        listaPretraga.setCellRenderer(x);
+        listaPretraga.setModel(model);   
     }
     private void izbrisiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izbrisiBtnActionPerformed
-        String jmbgX = listaPretraga.getSelectedValue().toString();
         PotrosacService servicePretraga = new PotrosacService();
-        Potrosac p = servicePretraga.getPotrosacByJMBG(jmbgX);
+        Potrosac p = (Potrosac) listaPretraga.getSelectedValue();
+        String msg = "";
+        if(p.getHidden()){
+            msg = "obnovili potrošački račun.";
+        }
+        else{
+            msg = "obrisali potrošački račun.";
+        }
         try{
             servicePretraga.deletePotrosac(p);
+            JOptionPane.showMessageDialog(null,"Uspjesno ste " + msg);
+            updateListu();
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage(),"Greska!",

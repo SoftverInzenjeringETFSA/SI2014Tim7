@@ -91,15 +91,12 @@ public class PotrosacService {
     }
     public void deletePotrosac(Potrosac p){
                 Potrosac zaBrisanje = getPotrosacByJMBG(p.getJmbg());
-                Session session = HibernateUtil.getSessionFactory().openSession();
-                session.beginTransaction();
-                KorisnikDAO dao = new KorisnikDAO();
-                dao.setSession(session);
-                // Dodavanje novog korisnika
-                dao.delete(zaBrisanje.getId());
-                // Zatvaranje sesije, isto obavezni dio
-                session.getTransaction().commit();
-                session.close();
+                if(!zaBrisanje.getHidden()){
+                    zaBrisanje.setHidden(Boolean.TRUE);
+                }else{
+                    zaBrisanje.setHidden(Boolean.FALSE);
+                }
+                modifyPotrosac(zaBrisanje);
     }      
     public Potrosac getPotrosacByJMBG(String JMBG){
         if(validateJMBG(JMBG)){
