@@ -420,7 +420,7 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
     boolean formatMail = true;
     
     private void emailTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailTxtFocusLost
-       if(emailTxt.getText().isEmpty() || emailTxt.getText().matches("\"^[^@]+@[^@.]+\\.[^@]*\\w\\w$\"")){
+       if(emailTxt.getText().isEmpty() || emailTxt.getText().matches("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")){
             status.setText("");
             formatMail = true;
        }
