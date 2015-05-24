@@ -23,7 +23,7 @@ public class KorisnikService {
         session.beginTransaction();
         KorisnikDAO dao = new KorisnikDAO();
         dao.setSession(session);
-        List<Korisnik> svi  = dao.findByFullUsernameJMBG(k.getUsername(),k.getJmbg());
+        List<Korisnik> svi  = dao.findByFullUsernameJMBG(k.getUsername(),k.getJmbg(),k.getBrojLicne());
         if(svi.isEmpty()){
             test = true;
         }

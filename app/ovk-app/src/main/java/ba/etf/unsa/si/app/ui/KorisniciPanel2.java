@@ -5,11 +5,15 @@
  */
 package ba.etf.unsa.si.app.ui;
 
+import ba.etf.unsa.si.app.comparator.KorisnikComparator;
+import ba.etf.unsa.si.app.renderer.KorisnikRenderer;
 import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.services.KorisnikService;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.ListCellRenderer;
 
 /**
  *
@@ -386,11 +390,7 @@ public class KorisniciPanel2 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void listKorisnikaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listKorisnikaValueChanged
-        String username = listKorisnika.getSelectedValue().toString();
-        KorisnikService servicePretraga = new KorisnikService();
-        List<Korisnik> korisnikLista = servicePretraga.searchByFullUsername(username);
-        if(korisnikLista.size()==1){
-            Korisnik k = korisnikLista.get(0);
+            Korisnik k = (Korisnik) listKorisnika.getSelectedValue();
             adresaTxt.setText(k.getAdresa());
             brLicneTxt.setText(k.getBrojLicne());
             dateTxt.setDate(k.getDatumZaposljenja());
@@ -402,38 +402,49 @@ public class KorisniciPanel2 extends javax.swing.JPanel {
             telTxt.setText(k.getTelefon());
             userNameTxt.setText(k.getUsername());
             adminTestIzmjena.setSelected(k.getAdmin());
-        }
     }//GEN-LAST:event_listKorisnikaValueChanged
 
     private void userNamePretragaTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userNamePretragaTxtKeyReleased
         KorisnikService servicePretraga = new KorisnikService();
         List<Korisnik> korisnikLista = servicePretraga.searchByUsername(userNamePretragaTxt.getText());
-        DefaultListModel model = new DefaultListModel();
+        DefaultListModel<Korisnik> model = new DefaultListModel<Korisnik>();
         model.removeAllElements();
+        Collections.sort(korisnikLista,new KorisnikComparator());
+        
+        ListCellRenderer x = new KorisnikRenderer();
         for (Korisnik k : korisnikLista) {
-            model.addElement(k.getUsername());
+            model.addElement(k);
         }    
+        listKorisnika.setCellRenderer(x);
         listKorisnika.setModel(model);    
         // TODO add your handling code here:
     }//GEN-LAST:event_userNamePretragaTxtKeyReleased
 
     private void btnSpasiIzmjeneKorisnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpasiIzmjeneKorisnikaActionPerformed
-        if(!"".equals(jmbgIzmjenaTxt.getText())){
-        KorisnikService servicePretraga = new KorisnikService();
-        Korisnik k = servicePretraga.getKorisnikByJMBG(jmbgIzmjenaTxt.getText());
+        try{
+            if(!"".equals(jmbgIzmjenaTxt.getText())){
+                KorisnikService servicePretraga = new KorisnikService();
+                Korisnik k = (Korisnik) listKorisnika.getSelectedValue();
         
-            k.setAdresa(adresaTxt.getText());
-            k.setBrojLicne(brLicneTxt.getText());
-            k.setDatumZaposljenja(dateTxt.getDate());
-            k.setMail(emailTxt.getText());
-            k.setIme(imeIzmjenaTxt.getText());
-            k.setPassword(passTxt.getText());
-            k.setPrezime(prezimeIzmjenaTxt.getText());
-            k.setTelefon(telTxt.getText());
-            k.setUsername(userNameTxt.getText());
-            k.setAdmin(adminTestIzmjena.isSelected());
-        servicePretraga.modifyKorisnik(k);
+                k.setAdresa(adresaTxt.getText());
+                k.setBrojLicne(brLicneTxt.getText());
+                k.setDatumZaposljenja(dateTxt.getDate());
+                k.setMail(emailTxt.getText());
+                k.setIme(imeIzmjenaTxt.getText());
+                k.setPassword(passTxt.getText());
+                k.setPrezime(prezimeIzmjenaTxt.getText());
+                k.setTelefon(telTxt.getText());
+                k.setUsername(userNameTxt.getText());
+                k.setAdmin(adminTestIzmjena.isSelected());
+                servicePretraga.modifyKorisnik(k);
+                JOptionPane.showMessageDialog(null,"Uspjesno ste izmjenili korisnika. ");
+            }
         }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Greska!",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_btnSpasiIzmjeneKorisnikaActionPerformed
 
 

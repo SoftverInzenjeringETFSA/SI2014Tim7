@@ -392,8 +392,13 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
             BtnSaveKorisnik.setEnabled(false); 
         }
         catch(Exception e){
+<<<<<<< HEAD
            //JOptionPane.showMessageDialog(null, e.toString(), "Error",
            //                        JOptionPane.ERROR_MESSAGE);
+=======
+           JOptionPane.showMessageDialog(null, e.getMessage(), "Greska",
+                                   JOptionPane.ERROR_MESSAGE);
+>>>>>>> origin/master
             status.setText(e.getMessage());
         }
         
