@@ -95,6 +95,14 @@ public class OcitanjaService{
     	}
         
     // Sljedeca metoda radi zajedno sa getPotrosac
+    public void hardDeleteOcitanja(Ocitanja o){
+        session.beginTransaction();
+        OcitanjaDAO dao = new OcitanjaDAO();
+        dao.setSession(session);
+        dao.delete(o.getId());
+        session.getTransaction().commit();
+    }
+    
     public void deleteOcitanja(Ocitanja o){
         session.beginTransaction();
         OcitanjaDAO dao = new OcitanjaDAO();
