@@ -21,6 +21,11 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
      */
     public PotrosacPanel1() {
         initComponents();
+        if(tipPausalac.isSelected())
+            sifraVodomjera.setEditable(false);
+        
+        spasiButton.setEnabled(false);
+        status.setText("Oprez: sva polja osim šifre vodomjera su obavezna!");
     }
 
     /**
@@ -48,20 +53,20 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         sifraVodomjera = new javax.swing.JTextField();
         jpanellicnipodaci = new javax.swing.JPanel();
-        ime = new javax.swing.JTextField();
+        imeTxt = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        prezime = new javax.swing.JTextField();
-        adresa = new javax.swing.JTextField();
+        prezimeTxt = new javax.swing.JTextField();
+        adresaTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        telefon = new javax.swing.JFormattedTextField();
-        jmbg = new javax.swing.JFormattedTextField();
+        telTxt = new javax.swing.JFormattedTextField();
+        jmbgTxt = new javax.swing.JFormattedTextField();
         spasiButton = new javax.swing.JButton();
+        status = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setPreferredSize(new java.awt.Dimension(500, 450));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Podaci o usluzi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 12), new java.awt.Color(0, 102, 153))); // NOI18N
@@ -83,12 +88,22 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
         tipPausalac.setForeground(new java.awt.Color(102, 102, 102));
         tipPausalac.setSelected(true);
         tipPausalac.setText("paušalni");
+        tipPausalac.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                tipPausalacItemStateChanged(evt);
+            }
+        });
 
         tipVodomjer.setBackground(new java.awt.Color(255, 255, 255));
         tipPotrosaca.add(tipVodomjer);
         tipVodomjer.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         tipVodomjer.setForeground(new java.awt.Color(102, 102, 102));
         tipVodomjer.setText("s vodomjerom");
+        tipVodomjer.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                tipVodomjerItemStateChanged(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 102, 153));
@@ -121,6 +136,11 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
 
         sifraVodomjera.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         sifraVodomjera.setForeground(new java.awt.Color(0, 102, 153));
+        sifraVodomjera.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                sifraVodomjeraFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -179,18 +199,33 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
         jpanellicnipodaci.setBackground(new java.awt.Color(255, 255, 255));
         jpanellicnipodaci.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lični podaci", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 12), new java.awt.Color(0, 102, 153))); // NOI18N
 
-        ime.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        ime.setForeground(new java.awt.Color(0, 102, 153));
+        imeTxt.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        imeTxt.setForeground(new java.awt.Color(0, 102, 153));
+        imeTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                imeTxtFocusLost(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 102, 153));
         jLabel6.setText("Ime");
 
-        prezime.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        prezime.setForeground(new java.awt.Color(0, 102, 153));
+        prezimeTxt.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        prezimeTxt.setForeground(new java.awt.Color(0, 102, 153));
+        prezimeTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                prezimeTxtFocusLost(evt);
+            }
+        });
 
-        adresa.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
-        adresa.setForeground(new java.awt.Color(0, 102, 153));
+        adresaTxt.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        adresaTxt.setForeground(new java.awt.Color(0, 102, 153));
+        adresaTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                adresaTxtFocusLost(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 102, 153));
@@ -208,21 +243,31 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(0, 102, 153));
         jLabel10.setText("JMBG");
 
-        telefon.setForeground(new java.awt.Color(0, 102, 153));
+        telTxt.setForeground(new java.awt.Color(0, 102, 153));
         try {
-            telefon.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("0##/###-####")));
+            telTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("0##/###-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        telefon.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
+        telTxt.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
+        telTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                telTxtFocusLost(evt);
+            }
+        });
 
-        jmbg.setForeground(new java.awt.Color(0, 102, 153));
+        jmbgTxt.setForeground(new java.awt.Color(0, 102, 153));
         try {
-            jmbg.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#############")));
+            jmbgTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#############")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jmbg.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
+        jmbgTxt.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
+        jmbgTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jmbgTxtFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpanellicnipodaciLayout = new javax.swing.GroupLayout(jpanellicnipodaci);
         jpanellicnipodaci.setLayout(jpanellicnipodaciLayout);
@@ -236,11 +281,11 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
                     .addComponent(jLabel8)
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
-                    .addComponent(ime)
-                    .addComponent(prezime)
-                    .addComponent(adresa)
-                    .addComponent(telefon, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                    .addComponent(jmbg))
+                    .addComponent(imeTxt)
+                    .addComponent(prezimeTxt)
+                    .addComponent(adresaTxt)
+                    .addComponent(telTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                    .addComponent(jmbgTxt))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         jpanellicnipodaciLayout.setVerticalGroup(
@@ -249,23 +294,23 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(imeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(prezime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(prezimeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(adresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(adresaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(telefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(telTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jmbg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jmbgTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(69, Short.MAX_VALUE))
         );
 
@@ -277,6 +322,15 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
                 spasiButtonActionPerformed(evt);
             }
         });
+
+        status.setEditable(false);
+        status.setBackground(new java.awt.Color(255, 255, 255));
+        status.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        status.setForeground(new java.awt.Color(255, 51, 51));
+        status.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        status.setBorder(null);
+        status.setOpaque(false);
+        status.setSelectionColor(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -290,7 +344,8 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
                         .addComponent(jpanellicnipodaci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(status, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jPanel1, jpanellicnipodaci});
@@ -298,13 +353,14 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpanellicnipodaci, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(spasiButton)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPanel1, jpanellicnipodaci});
@@ -315,8 +371,8 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
         try{
         Potrosac p = new Potrosac();
         PotrosacService servis = new PotrosacService();
-        p.setIme(ime.getText());
-        p.setAdresa(adresa.getText());
+        p.setIme(imeTxt.getText());
+        p.setAdresa(adresaTxt.getText());
         switch(aktivnost.getSelectedIndex()){
             case 0 :         
                 p.setAktivnost(true);
@@ -326,9 +382,9 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
         }
         p.setBrojClanova(porodica.getValue().toString());
         p.setHidden(false);
-        p.setJmbg(jmbg.getText());
-        p.setPrezime(prezime.getText());
-        p.setTelefon(telefon.getText());
+        p.setJmbg(jmbgTxt.getText());
+        p.setPrezime(prezimeTxt.getText());
+        p.setTelefon(telTxt.getText());
         if(tipPausalac.isSelected()){
             p.setKategorija("Pausalac");
         }
@@ -353,17 +409,156 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,"Dodavanje novog potrosaca je uspjesno");
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error",
-                                    JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, e.getMessage(), "Error",
+            //                        JOptionPane.ERROR_MESSAGE);
+            status.setText(e.getMessage());
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_spasiButtonActionPerformed
+    boolean ime = false;
+    private void imeTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_imeTxtFocusLost
+         if(imeTxt.getText().isEmpty()){
+            status.setText("Unesite ime korisnika");
+            ime  = false;
+            spasiButton.setEnabled(false);
+        }
+          else{
+            status.setText("");
+            ime  = true;
+         }
+         if(pravilanJmbg && ime && prezime && adresa && telefon && sifra)
+            spasiButton.setEnabled(true); // TODO add your handling code here:
+    }//GEN-LAST:event_imeTxtFocusLost
+    boolean prezime = false;
+    private void prezimeTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_prezimeTxtFocusLost
+        if(prezimeTxt.getText().isEmpty()){
+            status.setText("Unesite prezime korisnika");
+            prezime  = false;
+            spasiButton.setEnabled(false);
+        }
+        else {
+            status.setText("");
+            prezime  = true;
+        }
+         if(pravilanJmbg && ime && prezime && adresa && telefon && sifra)
+            spasiButton.setEnabled(true);// TODO add your handling code here:
+    }//GEN-LAST:event_prezimeTxtFocusLost
+     boolean adresa = false;
+    private void adresaTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adresaTxtFocusLost
+        if(adresaTxt.getText().isEmpty()){
+            status.setText("Unesite adresu korisnika");
+            adresa  = false;
+            spasiButton.setEnabled(false);
+        }
+        else{
+            status.setText("");
+            adresa  = true;
+        }
+         if(pravilanJmbg && ime && prezime && adresa && telefon && sifra)
+            spasiButton.setEnabled(true);// TODO add your handling code here:
+    }//GEN-LAST:event_adresaTxtFocusLost
+boolean telefon = false;
+    private void telTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_telTxtFocusLost
+         String broj = telTxt.getText().replaceAll("\\s","");
+        if(telTxt.getText().equals("0  /   -    ")){
+            status.setText("Unesite telefonski broj korisnika");
+            telefon  = false;
+            spasiButton.setEnabled(false);
+        }
+         else if(broj.length() <= 10){
+            status.setText("Broj nije tacan");
+            telefon = false;
+            spasiButton.setEnabled(false);
+        } 
+        else{
+            status.setText("");
+            telefon = true;
+        }
+         if(pravilanJmbg && ime && prezime && adresa && telefon && sifra)
+            spasiButton.setEnabled(true);// TODO add your handling code here:
+    }//GEN-LAST:event_telTxtFocusLost
+ boolean pravilanJmbg = false;
+    private void jmbgTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jmbgTxtFocusLost
+          if(jmbgTxt.getText().isEmpty()){
+            status.setText("Unesite JMBG korisnika");
+            pravilanJmbg = false;
+            spasiButton.setEnabled(false);
+        }
+        else if(jmbgTxt.getText().length() != 13){
+            status.setText("JMBG mora imati 13 cifara");
+            pravilanJmbg = false;
+            spasiButton.setEnabled(false);
+        }
+        else if(jmbgTxt.getText().matches("[0-9]+") && jmbgTxt.getText().length() == 13){
+            status.setText("");
+            pravilanJmbg = true;
+        }
+        else{
+            status.setText("JMBG nije u pravilnom formatu");
+            pravilanJmbg = false;
+            spasiButton.setEnabled(false);
+        }
+        if(pravilanJmbg && ime && prezime && adresa && telefon && sifra)
+            spasiButton.setEnabled(true);// TODO add your handling code here:
+          // TODO add your handling code here:
+    }//GEN-LAST:event_jmbgTxtFocusLost
+    boolean sifra = true;
+    private void sifraVodomjeraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sifraVodomjeraFocusLost
+        if(sifraVodomjera.isEditable()){
+        if(sifraVodomjera.getText().isEmpty()){
+            status.setText("Unesite šifru vodomjera");
+            sifra = false;
+            spasiButton.setEnabled(false);
+        }
+        else if(sifraVodomjera.getText().matches("[0-9]+")){
+            status.setText("");
+            sifra = true;
+        }
+        else{
+            status.setText("Sifra vodomjera moze sadrzavati samo cifre");
+            sifra = false;
+            spasiButton.setEnabled(false);
+        }
+        if(pravilanJmbg && ime && prezime && adresa && telefon && sifra)
+            spasiButton.setEnabled(true);
+      }// TODO add your handling code here:
+    }//GEN-LAST:event_sifraVodomjeraFocusLost
+
+    private void tipPausalacItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipPausalacItemStateChanged
+        if(tipPausalac.isSelected()){
+            sifraVodomjera.setEditable(false);
+            sifraVodomjera.setText("");
+            sifra = true;
+        }
+        else{
+            sifraVodomjera.setEditable(true);
+            if(sifraVodomjera.getText().isEmpty()){
+                sifra = false;
+                spasiButton.setEnabled(false);
+            }
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_tipPausalacItemStateChanged
+
+    private void tipVodomjerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipVodomjerItemStateChanged
+        if(tipVodomjer.isSelected()){
+            sifraVodomjera.setEditable(true);
+            if(sifraVodomjera.getText().isEmpty()){
+                sifra = false;
+                spasiButton.setEnabled(false);
+            }
+        }
+        else{
+            sifraVodomjera.setEditable(false);
+            sifraVodomjera.setText("");
+            sifra = true;
+        }// TODO ad// TODO add your handling code here:
+    }//GEN-LAST:event_tipVodomjerItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField adresa;
+    private javax.swing.JTextField adresaTxt;
     private javax.swing.JComboBox aktivnost;
-    private javax.swing.JTextField ime;
+    private javax.swing.JTextField imeTxt;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -375,13 +570,14 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JFormattedTextField jmbg;
+    private javax.swing.JFormattedTextField jmbgTxt;
     private javax.swing.JPanel jpanellicnipodaci;
     private javax.swing.JSpinner porodica;
-    private javax.swing.JTextField prezime;
+    private javax.swing.JTextField prezimeTxt;
     private javax.swing.JTextField sifraVodomjera;
     private javax.swing.JButton spasiButton;
-    private javax.swing.JFormattedTextField telefon;
+    private javax.swing.JTextField status;
+    private javax.swing.JFormattedTextField telTxt;
     private javax.swing.JRadioButton tipPausalac;
     private javax.swing.ButtonGroup tipPotrosaca;
     private javax.swing.ButtonGroup tipUsluge;

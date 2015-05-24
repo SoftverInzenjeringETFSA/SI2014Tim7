@@ -7,6 +7,7 @@ package ba.etf.unsa.si.app.ui;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JFormattedTextField;
 
@@ -95,7 +96,10 @@ public class RacuniPanel2 extends javax.swing.JPanel {
 				}
         		
         		ObracunService servis = new ObracunService();
-        		List<Racuni> raucni = servis.formirajRacune(datePocetni, dateKrajnji);
+        		List<Racuni> racuni = servis.formirajRacune(datePocetni, dateKrajnji);
+        		if(racuni!=null){
+        			JOptionPane.showMessageDialog(null,"Uspjesno ste izvrsili obracun racuna!");
+        		}
         	}
         });
         
