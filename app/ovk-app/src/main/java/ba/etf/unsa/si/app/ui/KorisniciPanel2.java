@@ -469,7 +469,7 @@ public class KorisniciPanel2 extends javax.swing.JPanel {
                 formatUsername = true;
              if(brLicneTxt.getText().matches("^[A-Z0-9]+$") && brLicneTxt.getText().length() == 9)
                 formatLicne = true;        
-             if(jmbgIzmjenaTxt.getText().matches("^[0-9]*$") && jmbgIzmjenaTxt.getText().length() == 13)
+             if(jmbgIzmjenaTxt.getText().matches("[0-9]+$") && jmbgIzmjenaTxt.getText().length() == 13)
                 pravilanJmbg = true;
              if(!imeIzmjenaTxt.getText().isEmpty())
                 ime  = true;
@@ -481,6 +481,9 @@ public class KorisniciPanel2 extends javax.swing.JPanel {
                 telefon  = true;
             if(emailTxt.getText().matches("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"))
                 formatMail = true;
+            
+            if(formatUsername && formatLicne && formatMail && pravilanJmbg && ime && prezime && adresa && telefon)
+            btnSpasiIzmjeneKorisnika.setEnabled(true);
         
     }//GEN-LAST:event_listKorisnikaValueChanged
 
@@ -571,7 +574,7 @@ public class KorisniciPanel2 extends javax.swing.JPanel {
     }//GEN-LAST:event_brLicneTxtFocusLost
 
     private void jmbgIzmjenaTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jmbgIzmjenaTxtFocusLost
-         if(jmbgIzmjenaTxt.getText().matches("^[0-9]*$") && jmbgIzmjenaTxt.getText().length() == 13){
+         if(jmbgIzmjenaTxt.getText().matches("[0-9]+") && jmbgIzmjenaTxt.getText().length() == 13){
             status.setText("");
             pravilanJmbg = true;
         }
