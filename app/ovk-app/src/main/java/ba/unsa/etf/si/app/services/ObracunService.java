@@ -22,18 +22,31 @@ public class ObracunService {
 	public List<Racuni> formirajRacune(Date odDatuma, Date doDatuma) {
 		OcitanjaService ocitanja = new OcitanjaService();
 		ParametriService paramS = new ParametriService();
+		Calendar odDat = Calendar.getInstance();
+		Calendar doDat = Calendar.getInstance();
+		odDat.setTime(odDatuma);
+		doDat.setTime(doDatuma);
+
+		formirajOcitanjaZaPausalce(odDat.get(odDat.MONTH) + 1,
+				doDat.get(doDat.MONTH) + 1, odDat.get(odDat.YEAR), ocitanja);
+		//lista koja sadrzi ocitanja za pocetni i krajnji mjesec
 		List<Ocitanja> ocitanjaZaRacune = ocitanja.getOcitanjaForRacuni(
 				odDatuma, doDatuma);
-		System.out.println(ocitanjaZaRacune.size());
-		// String ime =
-		// ocitanjaZaRacune.get(0).getPotrosacByIdPotrosaca().getIme();
-		/*
-		 * if(ocitanjaZaRacune.get(1).getPotrosacByIdPotrosaca() == null){
-		 * System.out.println("BUG!"); } else System.out.println("OK");
-		 */
-		Parametri param = paramS.dajParametre();
+		//lista koja sa drzi ocitanja za pocetni mjesec,nakon obracuna acces atribut im se postavlja na false
+		List<Ocitanja> ocitanjaZaPocetni = new ArrayList();
+		for(Ocitanja ocitanje:ocitanjaZaRacune){
+			if(ocitanje.getMjesec()== odDat.get(odDat.MONTH)+1){
+				ocitanjaZaPocetni.add(ocitanje);
+			}
+		}
+		//System.out.println(ocitanjaZaRacune.size());
+		
+		//preuzimanje parametara potrebnih za obracun
+	    Parametri param = paramS.dajParametre();
 		List<Racuni> racuniList = new ArrayList<Racuni>();
 		Calendar odCal = Calendar.getInstance();
+		
+		//obracun racuna za svako ocitanje iz liste
 		for (Ocitanja ocitanjaZaRacuneX : ocitanjaZaRacune) {
 			odCal.setTime(doDatuma);
 			Racuni racun = formirajRacun(ocitanjaZaRacuneX, param, ocitanja,
@@ -44,20 +57,29 @@ public class ObracunService {
 		}
 
 		if (racuniList.isEmpty()) {
-			throw new IllegalArgumentException("Nema ocitanja");
+			throw new IllegalArgumentException("Nije moguce kreirati racune za dati period!");
 		} else {
+			
+			snimiRacune(racuniList,ocitanjaZaPocetni, ocitanja);
 			return racuniList;
 		}
 	}
 
+	
 	private Racuni formirajRacun(Ocitanja o, Parametri param,
 			OcitanjaService servis, int krajnjiMjesec) {
 		Potrosac p = o.getPotrosacByIdPotrosaca();
 		Double potrosnja = 0.0;
-		// String kat = p.getKategorija();
+		String kat = p.getKategorija();
+		
+		//ako je potrosac pausalni, racun se obracunava na osnovu fiksne cijene
 		if ("Pausalni".equals(p.getKategorija())) {
-			potrosnja = param.getFiksniVodaZaPausalce();
-		} else {
+			if (o.getMjesec() == krajnjiMjesec) {
+				potrosnja = param.getFiksniVodaZaPausalce();
+			}
+		} 
+		//ako potrosac nije pausalni, potrosnja se racuna na osnovu ocitanog stanja za dva mjeseca
+		else {
 			List<Ocitanja> ocitanjaPoVodomjeru = servis.getId(p
 					.getSifraVodomjera());
 			for (Ocitanja ocitanje : ocitanjaPoVodomjeru) {
@@ -76,6 +98,8 @@ public class ObracunService {
 		if (potrosnja == 0.0) {
 			return null;
 		}
+		
+		//inicijaliziranje parametara i obracunavanje
 		Double fixnaCijenaZaKoristenjeUsluga = param.getFiksnaCijena();
 		Double cijenaVoda = potrosnja
 				* (param.getPvnZaKoristenjeVoda()
@@ -113,8 +137,9 @@ public class ObracunService {
 		return r;
 	}
 
-	public void snimiRacune(List<Racuni> racuni, List<Ocitanja> ocitanja) {
-		OcitanjaService o = new OcitanjaService();
+	public void snimiRacune(List<Racuni> racuni, List<Ocitanja> ocitanja, OcitanjaService o) {
+		
+		//ocitanju za koje je racun obracunat access polje postavlja se na false
 		for (Ocitanja ocitanja1 : ocitanja) {
 			ocitanja1.setAccess(Boolean.FALSE);
 			o.modifyOcitanja(ocitanja1);
@@ -155,7 +180,7 @@ public class ObracunService {
 			}
 		}
 		session.getTransaction().commit();
-		session.close();
+		
 
 		if (rList.isEmpty() && rList2.isEmpty()) {
 			throw new IllegalArgumentException(
@@ -192,19 +217,44 @@ public class ObracunService {
 		session.close();
 	}
 
-	public void formirajOcitanjaZaPausalce(int odMjesec, int doMjesec) {
-		OcitanjaService servis = new OcitanjaService();
+	//pausalci nemaju klasicna ocitavanja, ali zbog procesa obracuna neophodno je da postoje u bazi, ova funkcija ih kreira za datume za koje se vrsi obracun
+	public void formirajOcitanjaZaPausalce(int odMjesec, int doMjesec,
+			int godina, OcitanjaService servis) {
 		PotrosacService servisPotrosac = new PotrosacService();
 		List<Potrosac> potrosaci = servisPotrosac.dajSvePotrosace();
 		List<Potrosac> pausalci = new ArrayList();
 		for (Potrosac potrosac : potrosaci) {
-			if (potrosac.getKategorija() == "Pausalac") {
+			if ("Pausalni".equals(potrosac.getKategorija())) {
 
 				if (potrosac.getAktivnost()) {
 
 					pausalci.add(potrosac);
 				}
 			}
+		}
+
+		for (Potrosac potrosac : pausalci) {
+			try {
+				Ocitanja p = servis.getOcitanjeForRacuni(odMjesec, godina,
+						potrosac);
+			} catch (Exception e) {
+				Ocitanja o = new Ocitanja();
+				o.setPotrosacByIdPotrosaca(potrosac);
+				o.setMjesec(odMjesec);
+				o.setGodina(godina);
+				servis.createNewOcitanja(o);
+			}
+			try {
+				Ocitanja p = servis.getOcitanjeForRacuni(doMjesec, godina,
+						potrosac);
+			} catch (Exception e) {
+				Ocitanja o = new Ocitanja();
+				o.setPotrosacByIdPotrosaca(potrosac);
+				o.setMjesec(doMjesec);
+				o.setGodina(godina);
+				servis.createNewOcitanja(o);
+			}
+
 		}
 	}
 }
