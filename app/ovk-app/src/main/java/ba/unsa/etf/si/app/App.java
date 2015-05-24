@@ -29,8 +29,8 @@ public class App
     public static void main( String[] args )
     {   
         //pokretanje login forme
-        //Login login = new Login();
-       // login.setVisible(true);
+        Login login = new Login();
+        login.setVisible(true);
        /*PotrosacService serv = new PotrosacService();
        Potrosac k = new Potrosac();
        k.setJmbg("0611992177631");

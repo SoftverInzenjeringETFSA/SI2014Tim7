@@ -4,6 +4,29 @@
  * and open the template in the editor.
  */
 package ba.etf.unsa.si.app.ui;
+import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
+import ba.unsa.etf.si.app.entity.Izvjestaji;
+import ba.unsa.etf.si.app.entity.Potrosac;
+import ba.unsa.etf.si.app.services.IzvjestajService;
+import ba.unsa.etf.si.app.services.PotrosacService;
+
+import java.awt.Component;
+import java.util.List;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 /**
  *
@@ -15,7 +38,21 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
      * Creates new form IzvjestajPanel2
      */
     public IzvjestajPanel2() {
+    	addComponentListener(new ComponentAdapter() {
+    		@Override
+    		public void componentShown(ComponentEvent arg0) {
+    	        DefaultListModel model = new DefaultListModel();
+    	        IzvjestajService serviceIzvjestaja = new IzvjestajService();
+    	        List<Izvjestaji> listIzvjestaja = serviceIzvjestaja.vratiSveIzvjestaje();
+    	        jList1.setModel(model);
+    	        
+    	        for (Izvjestaji p : listIzvjestaja) {      
+    	                model.addElement(p.getId());
+    	        }
+    		}
+    	});
         initComponents();
+
     }
 
     /**
@@ -26,12 +63,89 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
+        jButton1.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseReleased(MouseEvent arg0) {
+        		try
+        		{
+        			if(jList1.isSelectionEmpty()==true)
+            	{
+            		throw new IllegalArgumentException("Niste izabrali izvjestaj!");
+            	}
+        			label.setText("");
+            		label_2.setText("");
+            		label_3.setText("");
+            		label_4.setText("");
+            		label_6.setText("");
+            		label_7.setText("");
+            		label_8.setText("");
+        		int id = Integer.valueOf(jList1.getSelectedValue().toString());
+        		IzvjestajService izvjestaj = new IzvjestajService();
+        		Izvjestaji neki = izvjestaj.vratiSveIzvjestajeZaId(id);
+        		
+        		label.setText(neki.getId().toString());
+        		label_2.setText(neki.getBrojPausalaca().toString());
+        		label_3.setText(neki.getPotrosnjaPausalacaVoda().toString());
+        		label_4.setText(neki.getPotrosnjaPausalacaKanalizacija().toString());
+        		label_6.setText(neki.getBrojOstalih().toString());
+        		label_7.setText(neki.getPotrosnjaOstalihVoda().toString());
+        		label_8.setText(neki.getPotrosnjaOstalihKanalizacija().toString());
+        		
+        		
+        	}
+        	catch(Exception exception)
+        	{
+        		JOptionPane.showMessageDialog(null, exception.getMessage(),"Greska!",JOptionPane.ERROR_MESSAGE);
+        	}
+        		
+    	        }
+        });
         jButton2 = new javax.swing.JButton();
+        jButton2.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseReleased(MouseEvent e) {
+        		
+        		try
+        		{
+        			if(jList1.isSelectionEmpty()==true)
+            	{
+            		throw new IllegalArgumentException("Niste izabrali izvjestaj!");
+            	}
+        		int id = Integer.valueOf(jList1.getSelectedValue().toString());
+        		IzvjestajService izvjestaj = new IzvjestajService();
+        		Izvjestaji neki = izvjestaj.vratiSveIzvjestajeZaId(id);
+        		izvjestaj.obrisiIzvjestaj(neki);
+        		jList1.removeAll();
+                DefaultListModel model = new DefaultListModel();
+                IzvjestajService serviceIzvjestaja = new IzvjestajService();
+                List<Izvjestaji> listIzvjestaja = serviceIzvjestaja.vratiSveIzvjestaje();
+                jList1.setModel(model);
+                
+                for (Izvjestaji p : listIzvjestaja) {      
+                        model.addElement(p.getId());
+                }
+                label.setText("");
+        		label_2.setText("");
+        		label_3.setText("");
+        		label_4.setText("");
+        		label_6.setText("");
+        		label_7.setText("");
+        		label_8.setText("");
+        		
+                JOptionPane.showMessageDialog(null, "Uspjesno brisanje izvještaja!");
+        	}
+        	catch(Exception exception)
+        	{
+        		JOptionPane.showMessageDialog(null, exception.getMessage(),"Greska!",JOptionPane.ERROR_MESSAGE);
+        	}
+        		
+        	}
+        });
+        
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -40,10 +154,14 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
 
         jList1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jList1.setForeground(new java.awt.Color(0, 102, 153));
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+        jList1.setModel(new AbstractListModel() {
+        	String[] values = new String[] {};
+        	public int getSize() {
+        		return values.length;
+        	}
+        	public Object getElementAt(int index) {
+        		return values[index];
+        	}
         });
         jList1.setToolTipText("");
         jScrollPane1.setViewportView(jList1);
@@ -72,32 +190,133 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         jButton2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 102, 153));
         jButton2.setText("IZBRIŠI");
+        
+        lblIdIzvjestaja = new JLabel("ID Izvještaja:");
+        
+        lblNewLabel = new JLabel("Broj Paušalaca:");
+        
+        lblPotrosnjaVode = new JLabel("Potrošnja vode:");
+        
+        lblKanalizacija = new JLabel("Kanalizacija:");
+        
+        lblPausalci = new JLabel("Paušalci");
+        
+        lblOstali = new JLabel("Ostali");
+        
+        lblBrojOstalih = new JLabel("Broj Ostalih:");
+        
+        lblPotrosnjaVode_1 = new JLabel("Potrošnja vode:");
+        
+        lblKanalizacija_1 = new JLabel("Kanalizacija:");
+        
+        label = new JLabel("");
+        
+        label_2 = new JLabel("");
+        
+        label_3 = new JLabel("");
+        
+        label_4 = new JLabel("");
+        
+        label_6 = new JLabel("");
+        
+        label_7 = new JLabel("");
+        
+        label_8 = new JLabel("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(61, Short.MAX_VALUE))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        				.addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+        					.addGap(18)
+        					.addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)))
+        			.addGap(18)
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(lblNewLabel)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(lblPotrosnjaVode, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(lblKanalizacija, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(lblOstali, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(lblBrojOstalih, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(label_6, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(lblPotrosnjaVode_1, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(label_7, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(lblKanalizacija_1, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(label_8, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(lblIdIzvjestaja)
+        						.addComponent(lblPausalci, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(label, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)))
+        			.addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(21, Short.MAX_VALUE))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addContainerGap()
+        					.addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        					.addGap(18)
+        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(jButton1)
+        						.addComponent(jButton2)))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(43)
+        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblIdIzvjestaja)
+        						.addComponent(label))
+        					.addGap(17)
+        					.addComponent(lblPausalci)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblNewLabel)
+        						.addComponent(label_2))
+        					.addGap(3)
+        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblPotrosnjaVode)
+        						.addComponent(label_3))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblKanalizacija)
+        						.addComponent(label_4))
+        					.addGap(18)
+        					.addComponent(lblOstali)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblBrojOstalih)
+        						.addComponent(label_6))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblPotrosnjaVode_1)
+        						.addComponent(label_7))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblKanalizacija_1)
+        						.addComponent(label_8))))
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblNewLabel, lblPotrosnjaVode, lblKanalizacija, lblPausalci});
+        this.setLayout(layout);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -107,5 +326,20 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
     private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    // End of variables declaration//GEN-END:variables
+    private JLabel lblIdIzvjestaja;
+    private JLabel lblNewLabel;
+    private JLabel lblPotrosnjaVode;
+    private JLabel lblKanalizacija;
+    private JLabel lblPausalci;
+    private JLabel lblOstali;
+    private JLabel lblBrojOstalih;
+    private JLabel lblPotrosnjaVode_1;
+    private JLabel lblKanalizacija_1;
+    private JLabel label;
+    private JLabel label_2;
+    private JLabel label_3;
+    private JLabel label_4;
+    private JLabel label_6;
+    private JLabel label_7;
+    private JLabel label_8;
 }

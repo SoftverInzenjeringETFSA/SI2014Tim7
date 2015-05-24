@@ -1,25 +1,118 @@
 package ba.unsa.etf.si.app.services;
 
 import ba.unsa.etf.si.app.dao.IzvjestajiDAO;
+import ba.unsa.etf.si.app.dao.OcitanjaDAO;
 import ba.unsa.etf.si.app.dao.PotrosacDAO;
 import ba.unsa.etf.si.app.dao.RacuniDAO;
 import ba.unsa.etf.si.app.entity.Izvjestaji;
+import ba.unsa.etf.si.app.entity.Ocitanja;
 import ba.unsa.etf.si.app.entity.Potrosac;
+
 import java.util.Date;
 import java.util.List;
+
 import ba.unsa.etf.si.app.entity.Racuni;
 import ba.unsa.etf.si.app.util.HibernateUtil;
+
 import java.util.ArrayList;
+
 import org.hibernate.Session;
 
 public class IzvjestajService {
     
-    private Izvjestaji izvjestaj;
+    private Session session;
     
     public IzvjestajService() {
+    	session = HibernateUtil.getSessionFactory().openSession();
     }
     
-    public void izracunajParametreZaIzvjestaj(Date donjaGranica, Date gornjaGranica){
+    public void kreirajIzvjestaj(Date donjaGranica, Date gornjaGranica)
+    {
+        if (donjaGranica.after(gornjaGranica)){
+            throw new IllegalArgumentException("Prvi datum mora biti stariji od drugog datuma.");
+       }
+        IzvjestajiDAO dao = new IzvjestajiDAO();
+        dao.setSession(session);
+        List<Racuni> racuni;
+        Izvjestaji novi = new Izvjestaji();
+        racuni=nadjiListuRacuna(donjaGranica, gornjaGranica);
+        if(racuni.size()==0)
+        {
+        	throw new IllegalArgumentException("Nema racuna u tom periodu!");
+        }
+        int brojPausalni=0;
+        Double vodaPausalni=0.0;
+        Double kanalizacijaPausalni=0.0;
+        Double vodaOstali=0.0;
+        Double kanalizacijaOstali=0.0;
+        int brojOstali=0;
+        
+        for (int i=0; i<racuni.size(); i++)
+        {
+        	String provjera = racuni.get(i).getPotrosac().getKategorija();
+        	Double kanalizacija = racuni.get(i).getPotrosnjaZaKoristenjeKanalizacije();
+        	Double voda = racuni.get(i).getPotrosnjaZaKoristenjeVoda();
+        	
+        	if(provjera.equals("Pausalni"))
+        	{
+        		vodaPausalni=vodaPausalni+voda;
+        		kanalizacijaPausalni=kanalizacijaPausalni+kanalizacija;
+        		brojPausalni++;
+        	}
+        	else
+        	{
+        		vodaOstali=vodaOstali+voda;
+        		kanalizacijaOstali=kanalizacijaOstali+kanalizacija;
+        		brojOstali++;
+        	}
+        }
+        novi.setBrojOstalih(brojOstali);
+        novi.setBrojPausalaca(brojPausalni);
+        novi.setPotrosnjaOstalihKanalizacija(kanalizacijaOstali);
+        novi.setPotrosnjaOstalihVoda(vodaOstali);
+        novi.setPotrosnjaPausalacaKanalizacija(kanalizacijaPausalni);
+        novi.setPotrosnjaPausalacaVoda(vodaPausalni);
+        session.beginTransaction();
+        dao.save(novi);
+        session.getTransaction().commit();
+        
+    }
+    
+    public List<Izvjestaji> vratiSveIzvjestaje()
+    {
+    	IzvjestajiDAO dao = new IzvjestajiDAO();
+        dao.setSession(session);
+        List<Izvjestaji> izv;
+        session.beginTransaction();
+        izv = dao.findAll();
+        session.getTransaction().commit();
+        
+        return izv;
+    }
+    
+    public Izvjestaji vratiSveIzvjestajeZaId(int id)
+    {
+    	IzvjestajiDAO dao = new IzvjestajiDAO();
+        dao.setSession(session);
+        Izvjestaji izv;
+        session.beginTransaction();
+        izv = dao.findById(id);
+        session.getTransaction().commit();
+        
+        return izv;
+    }
+    
+    public void obrisiIzvjestaj(Izvjestaji i)
+    {
+    	session.beginTransaction();
+    	IzvjestajiDAO dao = new IzvjestajiDAO();
+        dao.setSession(session);
+        dao.delete(i.getId());
+        session.getTransaction().commit();
+    }
+    
+    
+public void izracunajParametreZaIzvjestaj(Date donjaGranica, Date gornjaGranica){
         
         if (donjaGranica.after(gornjaGranica)){
              throw new IllegalArgumentException("Prvi datum mora biti stariji od drugog datuma.");
@@ -85,7 +178,7 @@ public class IzvjestajService {
     
     private List<Potrosac> nadjiPotrosace(){
         
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        //Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
             
         //instanca dao klase i proslijedjivanje sesije
@@ -100,8 +193,8 @@ public class IzvjestajService {
     	session.getTransaction().commit();
         
         //zatvaranje sesije
-        session.close();
-        HibernateUtil.getSessionFactory().close();
+        //session.close();
+        //HibernateUtil.getSessionFactory().close();
         
         return potrosaci;
     }
@@ -109,7 +202,7 @@ public class IzvjestajService {
     //lista racuna koji su izmedju dva datuma
     private List<Racuni> nadjiListuRacuna(Date donjaGranica, Date gornjaGranica){
         
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        //Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
             
         //instanca dao klase i proslijedjivanje sesije
@@ -124,8 +217,8 @@ public class IzvjestajService {
     	session.getTransaction().commit();
         
         //zatvaranje sesije
-        session.close();
-        HibernateUtil.getSessionFactory().close();
+        //session.close();
+       // HibernateUtil.getSessionFactory().close();
         
         //u ovu listu ce biti smjesti racuni koji su UNUTAR dva zadana datuma
         List<Racuni> zadovoljavajuci = new ArrayList<Racuni>();

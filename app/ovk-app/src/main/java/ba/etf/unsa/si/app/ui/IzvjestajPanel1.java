@@ -4,6 +4,13 @@
  * and open the template in the editor.
  */
 package ba.etf.unsa.si.app.ui;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Date;
+
+import javax.swing.JOptionPane;
+
+import ba.unsa.etf.si.app.services.IzvjestajService;
 
 /**
  *
@@ -28,6 +35,12 @@ public class IzvjestajPanel1 extends javax.swing.JPanel {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        jButton1.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseReleased(MouseEvent arg0) {
+        		BtnKreirajIzvjestajKeyReleased(arg0);
+        	}
+        });
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
@@ -99,7 +112,36 @@ public class IzvjestajPanel1 extends javax.swing.JPanel {
                 .addComponent(jButton1)
                 .addGap(0, 14, Short.MAX_VALUE))
         );
+        
     }// </editor-fold>//GEN-END:initComponents
+    private void BtnKreirajIzvjestajKeyReleased(java.awt.event.MouseEvent evt) 
+    {
+    	try{
+    		if(jXDatePicker1.getDate()==null)
+    		{
+    			throw new IllegalArgumentException("Niste izabrali pocetni datum!");
+    		}
+    		else if(jXDatePicker2.getDate()==null)
+    		{
+    			throw new IllegalArgumentException("Niste izabrali krajnji datum!");
+    		}
+    		
+    	IzvjestajService i = new IzvjestajService();
+    	Date donjaGranica = jXDatePicker1.getDate();
+    	Date gornjaGranica = jXDatePicker2.getDate();
+    	
+    	i.kreirajIzvjestaj(donjaGranica, gornjaGranica);
+    	
+    	jXDatePicker1.setDate(null);
+    	jXDatePicker2.setDate(null);
+    	JOptionPane.showMessageDialog(null, "Uspjesno dodavanje novog izvjestaja!");
+    	}
+    	catch(Exception e)
+    	{
+    		JOptionPane.showMessageDialog(null, e.getMessage(),"Greska!",JOptionPane.ERROR_MESSAGE);
+    	}
+    		
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
