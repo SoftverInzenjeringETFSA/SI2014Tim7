@@ -82,7 +82,6 @@ public class KorisnikService {
                 KorisnikDAO dao = new KorisnikDAO();
                 dao.setSession(session);
                 // Dodavanje novog korisnika
-                k.setPassword(createPassword());
                 dao.save(k);
                 // Zatvaranje sesije, isto obavezni dio
                 session.getTransaction().commit();

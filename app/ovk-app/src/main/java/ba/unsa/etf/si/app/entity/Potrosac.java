@@ -146,6 +146,11 @@ public class Potrosac  implements java.io.Serializable {
     public void setOcitanjasForIdPotrosaca(Set ocitanjasForIdPotrosaca) {
         this.ocitanjasForIdPotrosaca = ocitanjasForIdPotrosaca;
     }
+    
+    @Override
+    public String toString() {
+        return ime+" "+prezime+" "+jmbg+" "+String.valueOf(sifraVodomjera);
+    }
 }
 
 

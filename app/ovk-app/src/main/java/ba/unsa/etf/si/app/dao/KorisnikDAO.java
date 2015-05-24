@@ -11,7 +11,7 @@ public class KorisnikDAO extends AbstractDAO<Korisnik,Integer>{
             Criteria criteria = getSession().createCriteria(getPersistentClass());
             criteria.add(Restrictions.like("ime","%" + ime + "%").ignoreCase());
             criteria.add(Restrictions.like("prezime","%" + prezime + "%").ignoreCase());
-            criteria.add(Restrictions.like("jmbg","%" + jmbg + "%").ignoreCase());
+            criteria.add(Restrictions.like("jmbg","%" + jmbg + "%"));
             criteria.add(Restrictions.like("username","%" + username + "%").ignoreCase());
             return criteria.list();  
         } 

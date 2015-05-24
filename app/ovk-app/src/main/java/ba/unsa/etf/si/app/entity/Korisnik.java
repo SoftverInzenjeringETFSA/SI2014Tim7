@@ -126,7 +126,10 @@ public class Korisnik  implements java.io.Serializable {
         this.password = password;
     }
 
-
+    @Override
+    public String toString() {
+        return ime+" "+prezime+" "+jmbg+" "+username;
+    }
 
 
 }

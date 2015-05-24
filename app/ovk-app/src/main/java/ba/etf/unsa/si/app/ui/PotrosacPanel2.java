@@ -185,11 +185,6 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
         jLabel15.setText("po JMBG");
 
         jmbgPretraga.setForeground(new java.awt.Color(0, 102, 153));
-        try {
-            jmbgPretraga.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#############")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
         jmbgPretraga.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
         jmbgPretraga.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
