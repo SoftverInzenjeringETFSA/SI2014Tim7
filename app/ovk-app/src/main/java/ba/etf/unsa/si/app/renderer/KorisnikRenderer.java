@@ -16,7 +16,7 @@ import javax.swing.ListCellRenderer;
  * @author armin
  */
 public class KorisnikRenderer extends JLabel implements ListCellRenderer<Korisnik> {
-    @Override
+    //@Override
     public Component getListCellRendererComponent(JList<? extends Korisnik> list, Korisnik korisnik, int index,
         boolean isSelected, boolean cellHasFocus) {
         
