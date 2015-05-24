@@ -17,11 +17,12 @@ public class KorisnikDAO extends AbstractDAO<Korisnik,Integer>{
         } 
         
         
-        public List<Korisnik> findByFullUsernameJMBG(String username,String jmbg){
+        public List<Korisnik> findByFullUsernameJMBG(String username,String jmbg,String brLicne){
             Criteria criteria = getSession().createCriteria(getPersistentClass());
             Criterion x = Restrictions.like("jmbg",jmbg).ignoreCase();
             Criterion y = Restrictions.like("username",username).ignoreCase();
-            criteria.add(Restrictions.or(x, y));
+            Criterion z = Restrictions.like("brojLicne",brLicne).ignoreCase();
+            criteria.add(Restrictions.or(x, y, z));
             return criteria.list();  
         }
         

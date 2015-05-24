@@ -30,11 +30,15 @@ public class PotrosacService {
         // Pocetak sesije obavezni kod za korisnika
         if(test){
             if(validateJMBG(p.getJmbg())){
+              try{  
                 // Dodavanje novog korisnika
                 dao.save(p);
                 // Zatvaranje sesije, isto obavezni dio
                 session.getTransaction().commit();
                 session.close();
+              }catch(Exception e){
+                  throw new IllegalArgumentException("Molim provjerite unesene podatke .");
+              }
             }
             else{
                 session.getTransaction().commit();
@@ -45,7 +49,7 @@ public class PotrosacService {
         else{
             session.getTransaction().commit();
             session.close();
-            throw new IllegalArgumentException("Korisnik vec postoji u sistemu !");
+            throw new IllegalArgumentException("Potrosac vec postoji u sistemu !");
         }
     }
     public Boolean validateJMBG(String JMBGX){
@@ -86,7 +90,7 @@ public class PotrosacService {
                 session.close();
             }
             else{
-                throw new IllegalArgumentException("Korisnik nije prosao validaciju, provjerite podatke");
+                throw new IllegalArgumentException("Potrosac nije prosao validaciju, provjerite podatke");
             }
     }
     public void deletePotrosac(Potrosac p){
@@ -112,7 +116,7 @@ public class PotrosacService {
                 return k.get(0);
             }
             else{
-                throw new IllegalArgumentException("Korisnik ne postoji u sistemu");
+                throw new IllegalArgumentException("Potrosac ne postoji u sistemu");
             }   
         }
         else{

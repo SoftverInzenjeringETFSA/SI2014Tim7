@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
-import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.entity.Potrosac;
 
 public class PotrosacDAO extends AbstractDAO<Potrosac,Integer> {

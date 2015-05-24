@@ -81,6 +81,7 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
         tipPotrosaca.add(tipPausalac);
         tipPausalac.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         tipPausalac.setForeground(new java.awt.Color(102, 102, 102));
+        tipPausalac.setSelected(true);
         tipPausalac.setText("paušalni");
 
         tipVodomjer.setBackground(new java.awt.Color(255, 255, 255));
@@ -97,6 +98,7 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
         tipUsluge.add(uslugaVoda);
         uslugaVoda.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         uslugaVoda.setForeground(new java.awt.Color(102, 102, 102));
+        uslugaVoda.setSelected(true);
         uslugaVoda.setText("voda");
 
         uslugaKanalizacija.setBackground(new java.awt.Color(255, 255, 255));
@@ -310,6 +312,7 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void spasiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spasiButtonActionPerformed
+        try{
         Potrosac p = new Potrosac();
         PotrosacService servis = new PotrosacService();
         p.setIme(ime.getText());
@@ -324,22 +327,27 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
         p.setBrojClanova(porodica.getValue().toString());
         p.setHidden(false);
         p.setJmbg(jmbg.getText());
+        p.setPrezime(prezime.getText());
+        p.setTelefon(telefon.getText());
         if(tipPausalac.isSelected()){
             p.setKategorija("Pausalac");
         }
         else {
             p.setKategorija("Sa vodomjerom");
-            p.setSifraVodomjera(Integer.valueOf(sifraVodomjera.getText()));
+            try{
+                p.setSifraVodomjera(Integer.valueOf(sifraVodomjera.getText()));
+            }
+            catch(Exception e){
+                throw new IllegalArgumentException("Sifra vodomjera mora biti unesena za odabranu kategoriju");
+            }
         }
-        p.setPrezime(prezime.getText());
-        p.setTelefon(telefon.getText());
+        
         if(uslugaVoda.isSelected()){
             p.setUsluga(Boolean.FALSE);
         }
         else{
             p.setUsluga(Boolean.TRUE);
         }
-        try{
             servis.createNewPotrosac(p);
             
             JOptionPane.showMessageDialog(null,"Dodavanje novog potrosaca je uspjesno");

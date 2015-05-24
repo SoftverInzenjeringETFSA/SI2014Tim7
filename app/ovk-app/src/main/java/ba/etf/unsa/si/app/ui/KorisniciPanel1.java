@@ -369,7 +369,7 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Password za ovog korisnika je : " + pass);
         }
         catch(Exception e){
-           JOptionPane.showMessageDialog(null, e.toString(), "Error",
+           JOptionPane.showMessageDialog(null, e.getMessage(), "Greska",
                                    JOptionPane.ERROR_MESSAGE);
             status.setText(e.getMessage());
         }
