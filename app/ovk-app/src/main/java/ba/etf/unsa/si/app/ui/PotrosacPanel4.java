@@ -15,7 +15,8 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Azra
@@ -25,9 +26,12 @@ public class PotrosacPanel4 extends javax.swing.JPanel {
     /**
      * Creates new form PotrosacPanel4
      */
+    
+transient Logger logger;    
     PotrosacPregled pregled;
     public PotrosacPanel4() {
         initComponents();
+        logger = Logger.getAnonymousLogger();
     }
 
     /**
@@ -397,6 +401,7 @@ public class PotrosacPanel4 extends javax.swing.JPanel {
         pregled.setVisible(true);
         }
         catch(Exception e){
+            logger.log(Level.OFF, "Error", e);
             JOptionPane.showMessageDialog(null, "Niste odabrali korisnika !", "Greska",
                                     JOptionPane.ERROR_MESSAGE);
         }        // TODO add your handling code here:

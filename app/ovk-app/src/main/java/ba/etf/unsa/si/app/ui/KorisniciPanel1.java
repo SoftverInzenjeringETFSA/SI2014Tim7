@@ -7,7 +7,10 @@ package ba.etf.unsa.si.app.ui;
 
 import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.services.KorisnikService;
+import java.util.logging.Level;
 import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,10 +21,12 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
     /**
      * Creates new form KorisniciPanel1
      */
+    Logger logger;
     public KorisniciPanel1() {
         initComponents();
         //dugme nije enabled dok ne prodju provjere unosa
         //samo username je obavezno polje
+        logger = Logger.getAnonymousLogger();
         BtnSaveKorisnik.setEnabled(false);
         status.setText("Oprez: sva polja su obavezna!");
     }
@@ -394,6 +399,7 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
         catch(Exception e){
            //JOptionPane.showMessageDialog(null, e.toString(), "Error",
            //                        JOptionPane.ERROR_MESSAGE);
+            logger.log(Level.OFF, "Nisu postavljeni parametri", e);
             status.setText(e.getMessage());
         }
         

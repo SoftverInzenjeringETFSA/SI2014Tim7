@@ -14,15 +14,19 @@ import java.io.Serializable;
 import java.util.List;
 import java.lang.reflect.ParameterizedType;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 //genericka DAO klasa sa metodama findAll, findById, save, delete, findByExample
 
 public abstract class AbstractDAO<T, ID extends Serializable>{  
 
 private Class<T> persistentClass;
 private Session session;  
-
+    transient Logger logger;
 @SuppressWarnings("unchecked")
-public AbstractDAO() {  
+public AbstractDAO() {
+    logger = Logger.getAnonymousLogger();
 this.persistentClass = (Class<T>) ((ParameterizedType) getClass()  
                         .getGenericSuperclass()).getActualTypeArguments()[0];  
 }  
@@ -77,6 +81,7 @@ getSession().saveOrUpdate(entity);
 }
 catch(Exception e)
 	{
+            logger.log(Level.OFF, "Error", e);
 	throw new IllegalStateException("Nema bolan!");
 	} 
 return entity; 

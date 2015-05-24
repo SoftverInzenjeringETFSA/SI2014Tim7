@@ -12,10 +12,15 @@ import ba.unsa.etf.si.app.dao.PotrosacDAO;
 import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.entity.Potrosac;
 import ba.unsa.etf.si.app.util.HibernateUtil;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PotrosacService {
 
-    
+        transient Logger logger;
+        public PotrosacService(){
+          logger = Logger.getAnonymousLogger();
+        }
     public void createNewPotrosac(Potrosac p){
         Boolean test = false;
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -37,6 +42,7 @@ public class PotrosacService {
                 session.getTransaction().commit();
                 session.close();
               }catch(Exception e){
+                  logger.log(Level.OFF, "Error", e);
                   throw new IllegalArgumentException("Molim provjerite unesene podatke .");
               }
             }

@@ -14,7 +14,7 @@ import ba.unsa.etf.si.app.services.ParametriService;
  */
 public class ParametriPanel2 extends javax.swing.JPanel {
 
-    ParametriService servis;
+    transient ParametriService servis;
     Parametri parametri;
     /**
      * Creates new form ParametriPanel2
