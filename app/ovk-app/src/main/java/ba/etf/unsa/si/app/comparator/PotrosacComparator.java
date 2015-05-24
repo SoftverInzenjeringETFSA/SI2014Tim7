@@ -13,6 +13,7 @@ import java.util.Comparator;
  * @author armin
  */
 public class PotrosacComparator implements Comparator<Potrosac> {
+    @Override
     public int compare(Potrosac o1,Potrosac o2) {
         return o1.getIme().compareTo(o2.getIme());
     }

@@ -13,6 +13,7 @@ import java.util.Comparator;
  * @author armin
  */
 public class KorisnikComparator implements Comparator<Korisnik> {
+    @Override
     public int compare(Korisnik o1,Korisnik o2) {
         return o1.getIme().compareTo(o2.getIme());
     }

@@ -16,7 +16,7 @@ import javax.swing.ListCellRenderer;
  * @author armin
  */
 public class PotrosacRenderer extends JLabel implements ListCellRenderer<Potrosac> {
-    //@Override
+    @Override
     public Component getListCellRendererComponent(JList<? extends Potrosac> list, Potrosac potrosac, int index,
         boolean isSelected, boolean cellHasFocus) {
         
