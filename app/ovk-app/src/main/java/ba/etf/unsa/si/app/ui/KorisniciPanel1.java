@@ -22,7 +22,8 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
         initComponents();
         //dugme nije enabled dok ne prodju provjere unosa
         //samo username je obavezno polje
-        BtnSaveKorisnik.setEnabled(false);             
+        BtnSaveKorisnik.setEnabled(false);
+        status.setText("Oprez: sva polja su obavezna!");
     }
 
     /**
@@ -40,9 +41,9 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
         prezimeTxt = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jmbgTxt = new javax.swing.JFormattedTextField();
         jLabel13 = new javax.swing.JLabel();
         brlicneTxt = new javax.swing.JTextField();
+        jmbgTxt = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         usernameTxt1 = new javax.swing.JTextField();
@@ -67,6 +68,11 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
 
         imeTxt.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         imeTxt.setForeground(new java.awt.Color(0, 102, 153));
+        imeTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                imeTxtFocusLost(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 102, 153));
@@ -74,6 +80,11 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
 
         prezimeTxt.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         prezimeTxt.setForeground(new java.awt.Color(0, 102, 153));
+        prezimeTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                prezimeTxtFocusLost(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 102, 153));
@@ -82,14 +93,6 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
         jLabel15.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 102, 153));
         jLabel15.setText("JMBG");
-
-        jmbgTxt.setForeground(new java.awt.Color(0, 102, 153));
-        try {
-            jmbgTxt.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#############")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jmbgTxt.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
 
         jLabel13.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 102, 153));
@@ -103,21 +106,30 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
             }
         });
 
+        jmbgTxt.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        jmbgTxt.setForeground(new java.awt.Color(0, 102, 153));
+        jmbgTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jmbgTxtFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel15)
-                    .addComponent(imeTxt)
-                    .addComponent(prezimeTxt)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jmbgTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                    .addComponent(jLabel13)
-                    .addComponent(brlicneTxt))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel11)
+                        .addComponent(jLabel12)
+                        .addComponent(jLabel15)
+                        .addComponent(imeTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                        .addComponent(prezimeTxt)
+                        .addComponent(jLabel13)
+                        .addComponent(brlicneTxt)))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -135,7 +147,7 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jmbgTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(5, 5, 5)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(brlicneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -217,9 +229,9 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
 
         emailTxt.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         emailTxt.setForeground(new java.awt.Color(0, 102, 153));
-        emailTxt.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                emailTxtFocusLost(evt);
+        emailTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                emailTxtKeyTyped(evt);
             }
         });
 
@@ -229,6 +241,11 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
 
         adresaTxt.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         adresaTxt.setForeground(new java.awt.Color(0, 102, 153));
+        adresaTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                adresaTxtFocusLost(evt);
+            }
+        });
 
         jLabel18.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(0, 102, 153));
@@ -245,6 +262,11 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
             ex.printStackTrace();
         }
         telTxt.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
+        telTxt.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                telTxtFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -366,11 +388,12 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
             prezimeTxt.setText("");
             telTxt.setText("");
             usernameTxt1.setText("");
-            JOptionPane.showMessageDialog(null, "Password za ovog korisnika je : " + pass);
+            JOptionPane.showMessageDialog(null, "Korisnik uspješno kreiran! Password za ovog korisnika je : " + pass);
+            BtnSaveKorisnik.setEnabled(false); 
         }
         catch(Exception e){
-           JOptionPane.showMessageDialog(null, e.toString(), "Error",
-                                   JOptionPane.ERROR_MESSAGE);
+           //JOptionPane.showMessageDialog(null, e.toString(), "Error",
+           //                        JOptionPane.ERROR_MESSAGE);
             status.setText(e.getMessage());
         }
         
@@ -393,36 +416,143 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
             formatUsername = true;
         }// TODO add your handling code here:
         
-        if(formatUsername && formatLicne && formatMail)
+        if(formatUsername && formatLicne && formatMail && pravilanJmbg && ime && prezime && adresa && telefon)
             BtnSaveKorisnik.setEnabled(true);
     }//GEN-LAST:event_usernameTxt1FocusLost
 
     // validacija formata licne - samo brojevi i velika slova
     
-    boolean formatLicne = true;
+    boolean formatLicne = false;
     
     private void brlicneTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_brlicneTxtFocusLost
-        if(brlicneTxt.getText().isEmpty() || brlicneTxt.getText().matches("^[A-Z0-9]+$")){
+        if(brlicneTxt.getText().matches("^[A-Z0-9]+$") && brlicneTxt.getText().length() == 9){
             status.setText("");
             formatLicne = true;
-        }// TODO add your handling code here:
-        else{
+        }
+        else if(brlicneTxt.getText().isEmpty()){
+            status.setText("Unesite broj lične karte");
+            formatLicne = false;
+            BtnSaveKorisnik.setEnabled(false);
+        }
+        else if(brlicneTxt.getText().length() != 9){
+            status.setText("Broj lične karte mora sadržavati 9 karaktera");
+            formatLicne = false;
+            BtnSaveKorisnik.setEnabled(false);
+        } 
+        else {
             status.setText("Broj lične karte nije u pravilnom formatu");
             formatLicne = false;
             BtnSaveKorisnik.setEnabled(false);
         }
-        
-        if(formatUsername && formatLicne && formatMail)
+        if(formatUsername && formatLicne && formatMail && pravilanJmbg && ime && prezime && adresa && telefon)
             BtnSaveKorisnik.setEnabled(true);
     }//GEN-LAST:event_brlicneTxtFocusLost
 
-    //regex za e-mail
-    boolean formatMail = true;
+  
     
-    private void emailTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailTxtFocusLost
-       if(emailTxt.getText().isEmpty() || emailTxt.getText().matches("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")){
+    boolean pravilanJmbg = false;
+    
+    private void jmbgTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jmbgTxtFocusLost
+         if(jmbgTxt.getText().matches("^[0-9]*$") && jmbgTxt.getText().length() == 13){
+            status.setText("");
+            pravilanJmbg = true;
+        }
+        else if(jmbgTxt.getText().isEmpty()){
+            status.setText("Unesite JMBG korisnika");
+            pravilanJmbg = false;
+        }
+        else if(jmbgTxt.getText().length() != 13){
+            status.setText("JMBG mora imati 13 cifara");
+            pravilanJmbg = false;
+        }
+        else{
+            status.setText("JMBG nije u pravilnom formatu");
+            pravilanJmbg = false;
+        }
+        
+        if(formatUsername && formatLicne && formatMail && pravilanJmbg && ime && prezime && adresa && telefon)
+            BtnSaveKorisnik.setEnabled(true);// TODO add your handling code here:
+    }//GEN-LAST:event_jmbgTxtFocusLost
+
+    boolean ime = false;
+    
+    private void imeTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_imeTxtFocusLost
+          if(imeTxt.getText().isEmpty()){
+            status.setText("Unesite ime korisnika");
+            ime  = false;
+            BtnSaveKorisnik.setEnabled(false);
+        }
+        else{
+            status.setText("");
+            ime = true;
+        }// TODO add your handling code here:
+        
+        if(formatUsername && formatLicne && formatMail && pravilanJmbg && ime && prezime && adresa && telefon)
+            BtnSaveKorisnik.setEnabled(true);// TODO add your handling code here:
+    }//GEN-LAST:event_imeTxtFocusLost
+
+    boolean prezime = false;
+    
+    private void prezimeTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_prezimeTxtFocusLost
+        if(imeTxt.getText().isEmpty()){
+            status.setText("Unesite prezime korisnika");
+            prezime  = false;
+            BtnSaveKorisnik.setEnabled(false);
+        }
+        else{
+            status.setText("");
+            prezime = true;
+        }// TODO add your handling code here:
+        
+        if(formatUsername && formatLicne && formatMail && pravilanJmbg && ime && prezime && adresa && telefon)
+            BtnSaveKorisnik.setEnabled(true);// TODO add your handling code here:// TODO add your handling code here:
+    }//GEN-LAST:event_prezimeTxtFocusLost
+
+    boolean adresa = false;
+    
+    private void adresaTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adresaTxtFocusLost
+         if(adresaTxt.getText().isEmpty()){
+            status.setText("Unesite adresu korisnika");
+            adresa  = false;
+            BtnSaveKorisnik.setEnabled(false);
+        }
+        else{
+            status.setText("");
+            adresa = true;
+        }// TODO add your handling code here:
+        
+        if(formatUsername && formatLicne && formatMail && pravilanJmbg && ime && prezime && adresa && telefon)
+            BtnSaveKorisnik.setEnabled(true);// TODO add your handling code here:
+    }//GEN-LAST:event_adresaTxtFocusLost
+
+    boolean telefon = false;
+    
+    private void telTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_telTxtFocusLost
+         if(telTxt.getText().equals("0  /   -    ")){
+            status.setText("Unesite telefonski broj korisnika");
+            telefon  = false;
+            BtnSaveKorisnik.setEnabled(false);
+        }// TODO add your handling code here:
+        else{
+            status.setText("");
+            telefon = true;
+        }// TODO add your handling code here:
+        
+        if(formatUsername && formatLicne && formatMail && pravilanJmbg && ime && prezime && adresa && telefon)
+            BtnSaveKorisnik.setEnabled(true);
+    }//GEN-LAST:event_telTxtFocusLost
+
+      //regex za e-mail
+    boolean formatMail = false;
+    private void emailTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailTxtKeyTyped
+         if(emailTxt.getText().matches("^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")){
             status.setText("");
             formatMail = true;
+       }
+       else if(emailTxt.getText().isEmpty()){
+            status.setText("Unesite e-mail korisnika");
+            formatMail = false;
+            BtnSaveKorisnik.setEnabled(false);
        }
        else{
             status.setText("E-mail nije u pravilnom formatu");
@@ -430,10 +560,12 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
             BtnSaveKorisnik.setEnabled(false);
        }
        
-       if(formatUsername && formatLicne && formatMail)
-            BtnSaveKorisnik.setEnabled(true);
-    }//GEN-LAST:event_emailTxtFocusLost
+       if(formatUsername && formatLicne && formatMail && pravilanJmbg && ime && prezime && adresa && telefon)
+            BtnSaveKorisnik.setEnabled(true);// TODO add your handling code here:
+    }//GEN-LAST:event_emailTxtKeyTyped
 
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnSaveKorisnik;
@@ -456,7 +588,7 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JFormattedTextField jmbgTxt;
+    private javax.swing.JTextField jmbgTxt;
     private javax.swing.JTextField prezimeTxt;
     private javax.swing.JTextField status;
     private javax.swing.JFormattedTextField telTxt;

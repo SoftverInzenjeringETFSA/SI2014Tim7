@@ -43,15 +43,18 @@ public class Login extends javax.swing.JFrame {
         TxtPassword = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         status = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
         TxtUserName.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         TxtUserName.setForeground(new java.awt.Color(0, 102, 153));
+        TxtUserName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("USERNAME");
 
         BtnLogin.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.light"));
@@ -66,11 +69,14 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("PASSWORD");
 
         TxtPassword.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         TxtPassword.setForeground(new java.awt.Color(0, 102, 153));
+        TxtPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rsz_bg_use.png"))); // NOI18N
 
         status.setEditable(false);
@@ -80,6 +86,13 @@ public class Login extends javax.swing.JFrame {
         status.setToolTipText("");
         status.setBorder(null);
         status.setOpaque(false);
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 20)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("JKP VODOVOD I KANALIZACIJA");
+        jLabel2.setOpaque(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,6 +110,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(89, 89, 89))
             .addComponent(BtnLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(status)
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {TxtPassword, TxtUserName});
@@ -106,6 +120,8 @@ public class Login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jXHeader1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
@@ -188,6 +204,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField TxtPassword;
     private javax.swing.JTextField TxtUserName;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private org.jdesktop.swingx.JXHeader jXHeader1;
