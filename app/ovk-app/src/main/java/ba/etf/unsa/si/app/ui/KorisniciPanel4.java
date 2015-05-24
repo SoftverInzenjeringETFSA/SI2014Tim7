@@ -22,6 +22,7 @@ public class KorisniciPanel4 extends javax.swing.JPanel {
     /**
      * Creates new form KorisniciPanel4
      */
+    KorisniciPregled pregled;
     public KorisniciPanel4() {
         initComponents();
     }
@@ -218,9 +219,15 @@ public class KorisniciPanel4 extends javax.swing.JPanel {
     }//GEN-LAST:event_usernamePretragaKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try{
         Korisnik k = (Korisnik) listaPretraga.getSelectedValue();
-        JOptionPane.showMessageDialog(null, k.getUsername());
-
+        pregled = new KorisniciPregled(k);
+        pregled.setVisible(true);
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Niste odabrali korisnika !", "Greska",
+                                    JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void update(){
