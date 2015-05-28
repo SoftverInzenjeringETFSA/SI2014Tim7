@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -49,7 +50,7 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         TxtDatum = new javax.swing.JFormattedTextField();
         jLabel12 = new javax.swing.JLabel();
-        TxtstanjeVodomjera = new javax.swing.JFormattedTextField();
+        TxtstanjeVodomjera = new JTextField();
         BtnSpasiNovoOcitanje = new javax.swing.JButton();
         DefaultListModel model = new DefaultListModel();
         PotrosacService servicePotrosaca = new PotrosacService();
@@ -59,7 +60,10 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
         
         for (Potrosac p : listPotrosaca) {      
         	if(String.valueOf(p.getSifraVodomjera()).contains(sifra)){
+        		if(p.getAktivnost()==true || p.getHidden()==false)
+        		{
                 model.addElement(p.getSifraVodomjera());
+        		}
         	}
         }
 
@@ -130,11 +134,9 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
 
         TxtstanjeVodomjera.setForeground(new java.awt.Color(0, 102, 153));
         try {
-            TxtstanjeVodomjera.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
-        } catch (java.text.ParseException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-        TxtstanjeVodomjera.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -209,6 +211,13 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
         	{
         		throw new IllegalArgumentException("Niste unijeli stanje vodomjera!");
         	}
+        	try{
+        		Double.valueOf(TxtstanjeVodomjera.getText());
+        	}
+        	catch(Exception e)
+        	{
+        		throw new IllegalArgumentException("Pogresno stanje vodomjera, niste unijeli brojeve!");
+        	}
         	
             int sifraVodomjera = Integer.valueOf(ListOcitanja.getSelectedValue().toString());
             Double novoStanje = Double.valueOf(TxtstanjeVodomjera.getText());
@@ -222,6 +231,7 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
 
                  // potrebno ispraviti ovo ispod
             String[] x = TxtDatum.getText().split("/");
+            x[1]= x[1].replaceAll("\\s","");
             if(x[0].trim().length()==0 || x[0].trim().length()==1 || x[1].trim().length()==2 || x[1].trim().length()==3)
             {
             	throw new IllegalArgumentException("Niste unijeli datum ispravno!");
@@ -256,7 +266,10 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
             
             for (Potrosac listPotrosaca1 : listPotrosaca) {
                 if(String.valueOf(listPotrosaca1.getSifraVodomjera()).contains(sifra)){
-                    modelListPotrosaca.add(listPotrosaca1);
+            		if(listPotrosaca1.getAktivnost()==true || listPotrosaca1.getHidden()==false)
+            		{
+                    model.addElement(listPotrosaca1.getSifraVodomjera());
+            		}
                 }
             }
             for (Potrosac p : modelListPotrosaca) {
@@ -275,7 +288,7 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
     private javax.swing.JList ListOcitanja;
     private javax.swing.JFormattedTextField TxtDatum;
     private javax.swing.JTextField TxtSifraVodomjeraPretraga;
-    private javax.swing.JFormattedTextField TxtstanjeVodomjera;
+    private JTextField TxtstanjeVodomjera;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel9;

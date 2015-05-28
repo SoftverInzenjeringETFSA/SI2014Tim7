@@ -49,13 +49,26 @@ public class OcitanjaPanel3 extends javax.swing.JPanel {
         jTextField7 = new javax.swing.JTextField();
         DefaultListModel model = new DefaultListModel();
         PotrosacService servicePotrosaca = new PotrosacService();
+        OcitanjaService oS = new OcitanjaService();
         List<Potrosac> listPotrosaca = servicePotrosaca.dajSvePotrosace();
         String sifra = "";
         jList1.setModel(model);
         
         for (Potrosac p : listPotrosaca) {      
         	if(String.valueOf(p.getSifraVodomjera()).contains(sifra)){
-                model.addElement(p.getSifraVodomjera());
+        		if(p.getAktivnost()==true || p.getHidden()==false)
+        		{
+                	try{
+                    	if(oS.getId(p.getSifraVodomjera()).size()!=0){
+                    		  model.addElement(p.getSifraVodomjera());
+                    	}
+                    	}
+                    	catch(Exception e)
+                    	{
+                    		continue;
+                    	}
+              
+        		}
         	}
         }
         
@@ -199,6 +212,7 @@ public class OcitanjaPanel3 extends javax.swing.JPanel {
             List<Ocitanja> o = oS.getId(sifraVodomjera);
             
             String[] x = jFormattedTextField4.getText().split("/");
+            x[1]= x[1].replaceAll("\\s","");
             if(x[0].trim().length()==0 || x[0].trim().length()==1 || x[1].trim().length()==2 || x[1].trim().length()==3)
             {
             	throw new IllegalArgumentException("Niste unijeli datum ispravno!");
@@ -245,16 +259,28 @@ public class OcitanjaPanel3 extends javax.swing.JPanel {
         model.removeAllElements();
     try{
         PotrosacService servicePotrosaca = new PotrosacService();
+        OcitanjaService oS = new OcitanjaService();
         List<Potrosac> listPotrosaca = servicePotrosaca.dajSvePotrosace();
         List<Potrosac> modelListPotrosaca = new ArrayList<Potrosac>();
         String sifra = jTextField7.getText();
         for (Potrosac listPotrosaca1 : listPotrosaca) {
             if(String.valueOf(listPotrosaca1.getSifraVodomjera()).contains(sifra)){
+            	try{
+            	if(oS.getId(listPotrosaca1.getSifraVodomjera()).size()!=0){
                 modelListPotrosaca.add(listPotrosaca1);
+            	}
+            	}
+            	catch(Exception e)
+            	{
+            		continue;
+            	}
             }
         }
         for (Potrosac p : modelListPotrosaca) {
+    		if(p.getAktivnost()==true || p.getHidden()==false)
+    		{
             model.addElement(p.getSifraVodomjera());
+    		}
         }
         
     }
