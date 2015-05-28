@@ -62,6 +62,13 @@ public class OcitanjaPanel2 extends javax.swing.JPanel {
         	public void mousePressed(MouseEvent e) {
         		try{
         		jFormattedTextField5.setText("");
+        		try{
+        			Integer.valueOf(jList1.getSelectedValue().toString());
+        		}catch(Exception eks)
+        		{
+        			jFormattedTextField5.setText("Nema ocitanja!");
+        			return;
+        		}
             	int i = Integer.valueOf(jList1.getSelectedValue().toString());
             	OcitanjaService oS = new OcitanjaService();
                 String[] x = jFormattedTextField4.getText().split("/");
@@ -110,16 +117,21 @@ public class OcitanjaPanel2 extends javax.swing.JPanel {
         List<Potrosac> listPotrosaca = servicePotrosaca.dajSvePotrosace();
         String sifra = "";
         jList1.setModel(model);
-        
-        
         for (Potrosac p : listPotrosaca) {      
         	if(String.valueOf(p.getSifraVodomjera()).contains(sifra)){
         		if(p.getAktivnost()==true || p.getHidden()==false)
-        		{            	
+        		{        
+        			if(p.getKategorija().equals("Pausalni"))
+        			{
+        				continue;
+        			}
         			try{
                 	if(oS.getId(p.getSifraVodomjera()).size()!=0)
                 	{
+                		if(p.getAktivnost()==true || p.getHidden()==false)
+                		{
                 		model.addElement(p.getSifraVodomjera());
+                		}
                 	}
                     	}
                     	catch(Exception e)
@@ -138,6 +150,13 @@ public class OcitanjaPanel2 extends javax.swing.JPanel {
         	public void keyReleased(KeyEvent arg0) {
         		try{
             		jFormattedTextField5.setText("");
+            		try{
+            			Integer.valueOf(jList1.getSelectedValue().toString());
+            		}catch(Exception eks)
+            		{
+            			jFormattedTextField5.setText("Nema ocitanja!");
+            			return;
+            		}
                 	int i = Integer.valueOf(jList1.getSelectedValue().toString());
                 	OcitanjaService oS = new OcitanjaService();
                     String[] x = jFormattedTextField4.getText().split("/");
@@ -384,21 +403,26 @@ public class OcitanjaPanel2 extends javax.swing.JPanel {
     
     private void TxtSifraVodomjeraPretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtSifraVodomjeraPretragaKeyReleased
     	DefaultListModel model = new DefaultListModel();
-        jList1.setModel(model);
         jList1.removeAll();
         model.removeAllElements();
     try{
         PotrosacService servicePotrosaca = new PotrosacService();
         OcitanjaService oS = new OcitanjaService();
         List<Potrosac> listPotrosaca = servicePotrosaca.dajSvePotrosace();
-        List<Potrosac> modelListPotrosaca = new ArrayList<Potrosac>();
         String sifra = jTextField7.getText();
         for (Potrosac listPotrosaca1 : listPotrosaca) {
             if(String.valueOf(listPotrosaca1.getSifraVodomjera()).contains(sifra)){
             	try{
             	if(oS.getId(listPotrosaca1.getSifraVodomjera()).size()!=0)
             	{
-                modelListPotrosaca.add(listPotrosaca1);
+            		if(listPotrosaca1.getKategorija().equals("Pausalni"))
+            		{
+            			continue;
+            		}
+            		if(listPotrosaca1.getAktivnost()==true || listPotrosaca1.getHidden()==false)
+            		{
+                    model.addElement(listPotrosaca1.getSifraVodomjera());
+            		}
             	}
             	}
             	catch(Exception e)
@@ -407,12 +431,7 @@ public class OcitanjaPanel2 extends javax.swing.JPanel {
             	}
             }
         }
-        for (Potrosac p : modelListPotrosaca) {
-    		if(p.getAktivnost()==true || p.getHidden()==false)
-    		{
-    				model.addElement(p.getSifraVodomjera());
-    		}
-        }
+        jList1.setModel(model);
         
     }
     catch(Exception e){

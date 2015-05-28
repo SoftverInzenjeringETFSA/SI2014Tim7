@@ -58,9 +58,16 @@ public class OcitanjaPanel3 extends javax.swing.JPanel {
         	if(String.valueOf(p.getSifraVodomjera()).contains(sifra)){
         		if(p.getAktivnost()==true || p.getHidden()==false)
         		{
+        			if(p.getKategorija().equals("Pausalni"))
+        			{
+        				continue;
+        			}
                 	try{
                     	if(oS.getId(p.getSifraVodomjera()).size()!=0){
+                    		if(p.getAktivnost()==true || p.getHidden()==false)
+                    		{
                     		  model.addElement(p.getSifraVodomjera());
+                    		}
                     	}
                     	}
                     	catch(Exception e)
@@ -261,13 +268,16 @@ public class OcitanjaPanel3 extends javax.swing.JPanel {
         PotrosacService servicePotrosaca = new PotrosacService();
         OcitanjaService oS = new OcitanjaService();
         List<Potrosac> listPotrosaca = servicePotrosaca.dajSvePotrosace();
-        List<Potrosac> modelListPotrosaca = new ArrayList<Potrosac>();
         String sifra = jTextField7.getText();
         for (Potrosac listPotrosaca1 : listPotrosaca) {
             if(String.valueOf(listPotrosaca1.getSifraVodomjera()).contains(sifra)){
             	try{
+            		if(listPotrosaca1.getKategorija().equals("Pausalni"))
             	if(oS.getId(listPotrosaca1.getSifraVodomjera()).size()!=0){
-                modelListPotrosaca.add(listPotrosaca1);
+            		if(listPotrosaca1.getAktivnost()==true || listPotrosaca1.getHidden()==false)
+            		{
+            			model.addElement(listPotrosaca1.getSifraVodomjera());
+            	}
             	}
             	}
             	catch(Exception e)
@@ -275,12 +285,6 @@ public class OcitanjaPanel3 extends javax.swing.JPanel {
             		continue;
             	}
             }
-        }
-        for (Potrosac p : modelListPotrosaca) {
-    		if(p.getAktivnost()==true || p.getHidden()==false)
-    		{
-            model.addElement(p.getSifraVodomjera());
-    		}
         }
         
     }
