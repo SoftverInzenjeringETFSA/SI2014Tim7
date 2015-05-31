@@ -60,7 +60,7 @@ public class RacuniPanel2 extends javax.swing.JPanel {
 
         jLabel9.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 102, 153));
-        jLabel9.setText("pocetni datum (mm/yyyy)");
+        jLabel9.setText("početni datum (mm/yyyy)");
 
         jFormattedTextField4.setForeground(new java.awt.Color(0, 102, 153));
         try {
@@ -100,11 +100,11 @@ public class RacuniPanel2 extends javax.swing.JPanel {
         		try{ 
         			List<Racuni> racuni = servis.formirajRacune(datePocetni, dateKrajnji); 
         		if(racuni!=null){ 
-        			JOptionPane.showMessageDialog(null,"Uspjesno ste izvrsili obracun racuna!"); 
+        			JOptionPane.showMessageDialog(null,"Uspješno ste izvršili obračun računa!"); 
         		} 
         		
         		if(racuni == null){
-        			JOptionPane.showMessageDialog(null,"Nema racuna za unesene datume!");
+        			JOptionPane.showMessageDialog(null,"Nema računa za unesene datume!");
         		}
         		}
         		catch(Exception e)
