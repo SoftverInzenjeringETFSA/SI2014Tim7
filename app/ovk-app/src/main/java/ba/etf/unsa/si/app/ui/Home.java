@@ -67,7 +67,8 @@ public class Home extends javax.swing.JFrame {
         p3 = new PotrosacPanel3();
         p4 = new PotrosacPanel4();
         m1 = new ParametriPanel1();
-        m2 = new ParametriPanel2();
+        this.pokupiParametre();
+        m2 = new ParametriPanel2(m1,this);
         r1 = new RacuniPanel1();
         r2 = new RacuniPanel2();
         i1 = new IzvjestajPanel1();
@@ -165,7 +166,9 @@ public class Home extends javax.swing.JFrame {
         potrosaciDinamicki = new javax.swing.JPanel();
         parametriPanel = new javax.swing.JPanel();
         parametriOpcije = new javax.swing.JPanel();
+        
         jButton5 = new javax.swing.JButton();
+        jButton5.setVisible(false);
         jButton6 = new javax.swing.JButton();
         parametriDinamicki = new javax.swing.JPanel();
         racuniPanel = new javax.swing.JPanel();
@@ -831,31 +834,36 @@ public class Home extends javax.swing.JFrame {
         korisniciPanel.setVisible(false);
         m1.setVisible(true);
         m2.setVisible(false);
+        this.pokupiParametre();
+       
 // TODO add yourhandling code here:
     }//GEN-LAST:event_parametriMenuMouseClicked
 
+    	public void pokupiParametre(){
+    		 servis = new ParametriService();
+    	        parametri = new Parametri();
+    	        try{
+    	            parametri = servis.dajParametre();
+    	            m1.setVodaText(parametri.getCijenaVodePoKubiku());
+    	            m1.setKanText(parametri.getCijenaKanalizacijePoKubiku());
+    	            m1.setFiksnoText(parametri.getFiksnaCijena());
+    	            m1.setKubiciVoda(parametri.getFiksniVodaZaPausalce());
+    	            m1.setKubiciKan(parametri.getFiksniKanalizacijaZaPausalce());
+    	            m1.setPVN1(parametri.getPvnZaKoristenjeVoda());
+    	            m1.setPVN2(parametri.getPvnZaZastituVoda());
+    	            m1.setPDV(parametri.getStopaPdv());
+    	        }
+    	        catch(Exception e){
+    	            logger.log(Level.OFF, "Nisu postavljeni parametri", e);
+    	            //"niste postavili parametre" poruka
+    	        }
+    	}
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         m1.setVisible(true);
         m2.setVisible(false);
         
           //parametri za obracun, uzeti iz baze, postavljeni u text fields
-        servis = new ParametriService();
-        parametri = new Parametri();
-        try{
-            parametri = servis.dajParametre();
-            m1.setVodaText(parametri.getCijenaVodePoKubiku());
-            m1.setKanText(parametri.getCijenaKanalizacijePoKubiku());
-            m1.setFiksnoText(parametri.getFiksnaCijena());
-            m1.setKubiciVoda(parametri.getFiksniVodaZaPausalce());
-            m1.setKubiciKan(parametri.getFiksniKanalizacijaZaPausalce());
-            m1.setPVN1(parametri.getPvnZaKoristenjeVoda());
-            m1.setPVN2(parametri.getPvnZaZastituVoda());
-            m1.setPDV(parametri.getStopaPdv());
-        }
-        catch(Exception e){
-            logger.log(Level.OFF, "Nisu postavljeni parametri", e);
-            //"niste postavili parametre" poruka
-        }
+        this.pokupiParametre();
         
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -865,7 +873,7 @@ public class Home extends javax.swing.JFrame {
         m1.setVisible(false);
         m2.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
-
+    
     private void racuniMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_racuniMenuMouseClicked
         potrosaciPanel.setVisible(false);
         parametriPanel.setVisible(false);

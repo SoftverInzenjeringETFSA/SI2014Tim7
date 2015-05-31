@@ -353,35 +353,70 @@ public class ParametriPanel1 extends javax.swing.JPanel {
     private javax.swing.JTextField pvnText2;
     private javax.swing.JTextField vodaText;
     // End of variables declaration//GEN-END:variables
+    
+    public String getVodaText(){
+    	return vodaText.getText();
+    }
+    
     public void setVodaText(Double cijena){
        vodaText.setText(String.valueOf(cijena));
+    }
+    
+    public String getKanText(){
+    	return kanText.getText();
     }
     
      public void setKanText(Double cijena){
        kanText.setText(String.valueOf(cijena));
     }
      
+     public String getFiksnoText(){
+     	return fiksnoText.getText();
+     }
+     
      public void setFiksnoText(Double cijena){
        fiksnoText.setText(String.valueOf(cijena));
     }
+     
+     public String GetKubiciVoda(){
+    	 return kubiciVoda.getText();
+     }
      
      public void setKubiciVoda(Double cijena){
        kubiciVoda.setText(String.valueOf(cijena));
     }
     
+     public String getKubiciKan(){
+    	 return kubiciKan.getText();
+     }
+     
      public void setKubiciKan(Double cijena){
        kubiciKan.setText(String.valueOf(cijena));
     }
+     
+     public String getPVN1(){
+    	 return pvnText1.getText();
+    	 }
      
      public void setPVN1(Double cijena){
        pvnText1.setText(String.valueOf(cijena));
     }
      
+     public String getPVN2(){
+    	 return pvnText2.getText();
+     }
+     
     public void setPVN2(Double cijena){
        pvnText2.setText(String.valueOf(cijena));
+    }
+    
+    public String getPDV(){
+    	return pdvText.getText();
     }
     
     public void setPDV(Double cijena){
        pdvText.setText(String.valueOf(cijena));
     }
 }
+
+
