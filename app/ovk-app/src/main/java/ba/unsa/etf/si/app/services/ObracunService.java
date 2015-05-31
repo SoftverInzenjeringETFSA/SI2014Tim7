@@ -156,52 +156,51 @@ public class ObracunService {
 	}
 
 	public List<Racuni> pretragaRacuna(Date datumKreacije, int id, String ime,
-			String prezime, int sifraVodomjera) {
-		PotrosacService pService = new PotrosacService();
-		List<Potrosac> pList = pService.dajPotrosaceZaRacun(ime, prezime,
-				sifraVodomjera);
+			String prezime, String sifraVodomjera) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		RacuniDAO dao = new RacuniDAO();
 		dao.setSession(session);
+                PotrosacService servP = new PotrosacService();
+                List<Potrosac> pList = servP.mainSearch(ime, prezime, "", "", String.valueOf(sifraVodomjera));
+                List<Racuni> returnList = new ArrayList();
 		// Pretraga po Datumu i ID
-		List<Racuni> rList = dao.finByDateId(datumKreacije, id);
-		// Pretraga po potrosacu
-		List<Racuni> rList2 = new ArrayList();
-		if (!pList.isEmpty()) {
-			for (Potrosac p : pList) {
-				List<Racuni> temp = dao.findByPotrosac(p);
-				if (!temp.isEmpty()) {
-					rList2.add(temp.get(0));
-				}
-			}
-		}
-		session.getTransaction().commit();
-		
+		List<Racuni> rListID = dao.finById(id);
+                List<Racuni> rListDate = dao.finByDate(datumKreacije);
+                List<Racuni> rList = new ArrayList();
+                if(rListID.isEmpty()&&rListDate.isEmpty()){
+                    rList = dao.findAll();
+                    if(pList.isEmpty()){
+                        throw new IllegalArgumentException("Nema računa za date podatke!");
+                    }
+                }
+                else if(rListID.isEmpty()){rList=rListDate;}
+                else {rList=rListID;}
+                // Pretraga po Potrosacu
 
-		if (rList.isEmpty() && rList2.isEmpty()) {
-			throw new IllegalArgumentException(
-					"Racuni za unesene parametre ne postoje");
-		} else if (rList.isEmpty()) {
-			return rList2;
-		} else if (rList2.isEmpty()) {
-			return rList;
-		} else {
-			List<Racuni> temp = new ArrayList();
-			for (Racuni r1 : rList) {
-				for (Racuni r2 : rList2) {
-					if (r1.getId() == r2.getId()) {
-						temp.add(r1);
-					}
-				}
-			}
-			if (temp.isEmpty()) {
-				throw new IllegalArgumentException(
-						"Racuni za unesene parametre ne postoje");
-			} else {
-				return temp;
-			}
-		}
+                if(!rList.isEmpty()){
+                    if(pList.isEmpty()){
+                        return rList;
+                    }
+                    for (Racuni r : rList) {
+                        for (Potrosac p : pList) {
+                            int racunID = r.getPotrosac().getId();
+                            int potrosacID = p.getId();
+                            if(racunID==potrosacID){
+                                returnList.add(r);
+                            }
+                        }
+                    }
+                    if(!returnList.isEmpty()){
+                        return returnList;
+                    }
+                    else{
+                        throw new IllegalArgumentException("Nema računa za date podatke!");
+                    }
+                }
+                else{
+                    throw new IllegalArgumentException("Nema računa za date podatke!");
+                }
 	}
 
 	public void uplatiRacun(Racuni r) {
@@ -209,7 +208,7 @@ public class ObracunService {
 		session.beginTransaction();
 		RacuniDAO dao = new RacuniDAO();
 		dao.setSession(session);
-		dao.save(r);
+			dao.save(r);
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -258,5 +257,24 @@ public class ObracunService {
         bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
+    
+    
+    public Racuni pretragaRacunaPoID(int id) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		RacuniDAO dao = new RacuniDAO();
+		dao.setSession(session);
+		// Pretraga po Datumu i ID
+		List<Racuni> rListID = dao.finById(id);
+                                session.getTransaction().commit();
+		session.close();
+                if(rListID.isEmpty()){
+                    throw new IllegalArgumentException("Ne postroji racun!");
+                }
+                else{
+                    return rListID.get(0);
+                }
+    }
+  
         
 }

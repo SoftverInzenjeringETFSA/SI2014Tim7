@@ -16,6 +16,8 @@ import javax.swing.table.TableModel;
 
 import ba.unsa.etf.si.app.entity.Racuni;
 import ba.unsa.etf.si.app.services.ObracunService;
+import static com.sun.org.apache.xerces.internal.util.XMLChar.trim;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,55 +29,27 @@ public class RacuniPregled extends javax.swing.JFrame {
     /**
      * Creates new form RacuniPregled
      */
+    transient private List<Racuni> racuni;
     public RacuniPregled() {
     	  initComponents();
           //boja pozadine
           Container container = this.getContentPane();
           container.setBackground(Color.white); 
     }
-
-    public RacuniPregled(Date datumKreiranja,int sifraRacuna,
-    		String ime,String prezime,int sifraVodomjera) {
+Date datumKreiranja;
+int sifraRacuna;
+String ime;
+String prezime;
+String sifraVodomjera;
+    public RacuniPregled(Date datumKreiranja1,int sifraRacuna1,
+    		String ime1,String prezime1,String sifraVodomjera1) {
     	  initComponents();
-          //boja pozadine
-          Container container = this.getContentPane();
-          container.setBackground(Color.white); 
-    	ObracunService servis = new ObracunService();
-    	List<Racuni> racuni = new ArrayList();
-    	try{
-    		racuni = servis.pretragaRacuna(datumKreiranja, sifraRacuna, ime, prezime, sifraVodomjera);
-    	}
-    	catch(Exception e){
-    		e.printStackTrace();
-    	}
-    	
-    	
-    	DefaultTableModel model1 = new DefaultTableModel(new Object[]{ "Ime", "Prezime", "Å ifra raÄ�una", "Å ifra vodomjera", "Period",
-    			                            "UtroÅ¡ak m3", "Iznos", "Iznos sa PDV", "Iznos PVN", "Ukupan iznos", "Datum uplate"
-                 },0);
-    	for(Racuni racun:racuni){
-    		Object[] red = new Object[11];
-    		red[0] = racun.getPotrosac().getIme();
-    		red[1] = racun.getPotrosac().getPrezime();
-    		red[2] = racun.getId();
-    		red[3] = racun.getOcitanja().getSifraVodomjera();
-    		red[4] = racun.getOcitanja().getMjesec();
-    		red[5] = racun.getPotrosnjaZaKoristenjeVoda();
-    		red[6] = racun.getUkupnaCijena();
-    		red[7] = racun.getUkupnaCijenaSaPdv();
-    		red[8] = racun.getPvnZaKoristenjeVoda();
-    		red[9] = racun.getUkupnaCijena();
-    		red[10] = racun.getDatumUplate();
-    		
-    		model1.addRow(red);
-    	}
-    	try{
-    	jTable1.setModel(model1);
-	}
-    
-    catch(Exception e){
-    	System.out.println("nesto nije u redu");
-    }
+          datumKreiranja = datumKreiranja1;
+          sifraRacuna = sifraRacuna1;
+          ime=ime1;
+          prezime=prezime1;
+          sifraVodomjera=sifraVodomjera1;
+          update();
     }
 	/**
      * This method is called from within the constructor to initialize the form.
@@ -172,12 +146,67 @@ public class RacuniPregled extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    	
-        datum = new DatumUplate();
+    	if(racuni.isEmpty()){return;}
+        String idString = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 2));
+        if("".equals(trim(idString))||idString==null){
+            JOptionPane.showMessageDialog(null,"Niste izabrani ni jedan red");
+            return;
+        }
+        int id = Integer.valueOf(idString);
+        ObracunService s = new ObracunService();
+        Racuni r = new Racuni();
+        try{
+            r = s.pretragaRacunaPoID(id);
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+            return;
+        }
+        datum = new DatumUplate(r,this);
         datum.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+public void update(){
+//boja pozadine
+          Container container = this.getContentPane();
+          container.setBackground(Color.white); 
+    	ObracunService servis = new ObracunService();
+    	try{
+    		racuni = servis.pretragaRacuna(datumKreiranja, sifraRacuna, ime, prezime, sifraVodomjera);
+    	}
+    	catch(Exception e){
+    		e.printStackTrace();
+    	}
+    	
+    	
+    	DefaultTableModel model1 = new DefaultTableModel(new Object[]{ "Ime", "Prezime", "Šifra računa", "Šifra vodomjera", "Period",
+    			                            "Utrošak m3", "Iznos", "Iznos sa PDV", "Iznos PVN", "Ukupan iznos", "Datum uplate"
+                 },0);
+    	for(Racuni racun:racuni){
+    		Object[] red = new Object[11];
+    		red[0] = racun.getPotrosac().getIme();
+    		red[1] = racun.getPotrosac().getPrezime();
+    		red[2] = racun.getId();
+    		red[3] = racun.getOcitanja().getSifraVodomjera();
+    		red[4] = racun.getOcitanja().getMjesec();
+    		red[5] = racun.getPotrosnjaZaKoristenjeVoda();
+    		red[6] = racun.getUkupnaCijena();
+    		red[7] = racun.getUkupnaCijenaSaPdv();
+    		red[8] = racun.getPvnZaKoristenjeVoda();
+    		red[9] = racun.getUkupnaCijena();
+    		red[10] = racun.getDatumUplate();
+    		
+    		model1.addRow(red);
+    	}
+    	try{
+            jTable1.setModel(model1);
+	}
+    
+    catch(Exception e){
+    	System.out.println("nesto nije u redu");
+    }
 
+}
     /**
      * @param args the command line arguments
      */
@@ -211,8 +240,6 @@ public class RacuniPregled extends javax.swing.JFrame {
                 new RacuniPregled().setVisible(true);
             }
         });
-        
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

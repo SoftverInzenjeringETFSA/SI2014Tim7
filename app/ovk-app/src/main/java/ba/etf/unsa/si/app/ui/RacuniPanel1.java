@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 
 import ba.unsa.etf.si.app.entity.Racuni;
 import ba.unsa.etf.si.app.services.ObracunService;
+import static com.sun.org.apache.xerces.internal.util.XMLChar.trim;
 
 /**
  *
@@ -170,11 +171,14 @@ public class RacuniPanel1 extends javax.swing.JPanel {
 
 		
 		int sifraRacuna = 0;
-		int sifraVodomjera = 0;
+		String sifraVodomjera = "";
 		DateFormat format = new SimpleDateFormat("MM/yyyy");
 		try {
 			sifraRacuna = Integer.parseInt(jTextField5.getText());
-			sifraVodomjera = Integer.parseInt(jTextField6.getText());
+			sifraVodomjera = jTextField6.getText();
+                        if("".equals(trim(sifraVodomjera))){
+                            sifraVodomjera = "";
+                        }
 		} catch (Exception e) {
 
 		}
@@ -182,8 +186,18 @@ public class RacuniPanel1 extends javax.swing.JPanel {
 		String imeIprezime = jTextField4.getText();
 		
 			String[] podijeli = imeIprezime.split(" ");
-			String ime = podijeli[0];
-			String prezime = podijeli[1];
+                        String ime = "";
+                        String prezime = "";
+                        if(podijeli.length==0);
+                        else if(podijeli.length==1){
+                            ime = podijeli[0];
+                        }
+                        else{			
+                            ime = podijeli[0];
+                            prezime = podijeli[1];
+                        }
+                        System.out.println(ime+" "+prezime);
+
 			Date datumKreiranja = new Date();
 		
 		try {
