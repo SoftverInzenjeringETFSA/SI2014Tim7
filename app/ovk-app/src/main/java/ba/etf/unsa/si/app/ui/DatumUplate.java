@@ -5,8 +5,14 @@
  */
 package ba.etf.unsa.si.app.ui;
 
+import ba.unsa.etf.si.app.entity.Racuni;
+import ba.unsa.etf.si.app.services.ObracunService;
 import java.awt.Color;
 import java.awt.Container;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,9 +22,14 @@ public class DatumUplate extends javax.swing.JFrame {
 
     /**
      * Creates new form DatumUplate
+     * @param racun1
      */
-    public DatumUplate() {
+    Racuni racun;
+    RacuniPregled pregled;
+    public DatumUplate(Racuni racun1,RacuniPregled p) {
         initComponents();
+        racun = racun1;
+        pregled = p;
         Container container = this.getContentPane();
         container.setBackground(Color.white); 
     }
@@ -33,7 +44,7 @@ public class DatumUplate extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
-        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
+        datum = new org.jdesktop.swingx.JXDatePicker();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
@@ -53,7 +64,7 @@ public class DatumUplate extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                    .addComponent(datum, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -65,13 +76,18 @@ public class DatumUplate extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(datum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jButton1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 102, 153));
         jButton1.setText("SPASI");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,6 +112,28 @@ public class DatumUplate extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try{
+            ObracunService serv = new ObracunService();
+            Date x = datum.getDate();
+            Date y = new Date();
+            Calendar s = Calendar.getInstance();
+            y = s.getTime();
+               if(x.compareTo(y)>0){
+                   throw new IllegalArgumentException("Ne mozete izabrati datum veci od sadasnjeg!");
+               }     
+            racun.setDatumUplate(x);
+            String datum = new SimpleDateFormat("yyyy-MM-dd").format(x);
+            x = new SimpleDateFormat("yyyy-MM-dd").parse(datum);
+            serv.uplatiRacun(racun);
+            pregled.update();
+            JOptionPane.showMessageDialog(null,"Uspjena uplata racuna");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+    // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,15 +165,15 @@ public class DatumUplate extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DatumUplate().setVisible(true);
+                new DatumUplate(new Racuni(),new RacuniPregled()).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.jdesktop.swingx.JXDatePicker datum;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel3;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     // End of variables declaration//GEN-END:variables
 }

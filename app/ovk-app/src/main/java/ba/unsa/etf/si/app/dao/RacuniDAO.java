@@ -50,4 +50,14 @@ public class RacuniDAO extends AbstractDAO<Racuni,Integer> {
         return criteria.list();
     }
 	
+    public List<Racuni> finByDate(Date datumKreacije) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.add(Restrictions.like("datumKreacije",datumKreacije));
+        return criteria.list();  
+    }
+    public List<Racuni> finById(int id) {
+        Criteria criteria = getSession().createCriteria(getPersistentClass());
+        criteria.add(Restrictions.like("id",id));
+        return criteria.list();  
+    }
 }
