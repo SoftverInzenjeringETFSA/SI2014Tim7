@@ -9,6 +9,7 @@ import ba.etf.unsa.si.app.comparator.KorisnikComparator;
 import ba.etf.unsa.si.app.renderer.KorisnikRenderer;
 import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.services.KorisnikService;
+import static com.sun.org.apache.xerces.internal.util.XMLChar.trim;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -520,7 +521,8 @@ public class KorisniciPanel2 extends javax.swing.JPanel {
                     k.setIme(imeIzmjenaTxt.getText());
                     k.setPassword(passTxt.getText());
                     k.setPrezime(prezimeIzmjenaTxt.getText());
-                    k.setTelefon(telTxt.getText());
+                    String tel = trim(telTxt.getText());
+                    k.setTelefon(tel);
                     k.setUsername(userNameTxt.getText());
                     k.setAdmin(adminTestIzmjena.isSelected());
                     servicePretraga.modifyKorisnik(k);
