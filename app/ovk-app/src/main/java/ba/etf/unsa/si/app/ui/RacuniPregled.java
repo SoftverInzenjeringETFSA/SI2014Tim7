@@ -175,7 +175,7 @@ public void update(){
     		racuni = servis.pretragaRacuna(datumKreiranja, sifraRacuna, ime, prezime, sifraVodomjera);
     	}
     	catch(Exception e){
-    		e.printStackTrace();
+    		JOptionPane.showMessageDialog(null, e.getMessage());
     	}
     	
     	
@@ -203,7 +203,7 @@ public void update(){
 	}
     
     catch(Exception e){
-    	System.out.println("nesto nije u redu");
+    	JOptionPane.showMessageDialog(null, e.getMessage());
     }
 
 }
