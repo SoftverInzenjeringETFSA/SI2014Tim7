@@ -53,6 +53,8 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Odabir potrošača", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 12), new java.awt.Color(0, 102, 153))); // NOI18N
 
+        listaPretraga.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        listaPretraga.setForeground(new java.awt.Color(0, 102, 153));
         jScrollPane1.setViewportView(listaPretraga);
 
         jLabel15.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
