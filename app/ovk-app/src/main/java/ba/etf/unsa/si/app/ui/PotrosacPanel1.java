@@ -397,6 +397,7 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
                 
                 if(tipPausalac.isSelected()){
                     p.setKategorija("Pausalac");
+                    p.setSifraVodomjera(null);
                 }
                 else {
                     p.setKategorija("Sa vodomjerom");

@@ -459,7 +459,13 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
                 tipPausalac.setSelected(false);
                 tipVodomjer.setSelected(true);
             }
-            sifraVodomjera.setText(String.valueOf(p.getSifraVodomjera()));
+            if(p.getSifraVodomjera() == null){
+                 sifraVodomjera.setText("");
+            }
+            else{
+                 sifraVodomjera.setText(String.valueOf(p.getSifraVodomjera()));
+            }
+           
             if(p.getUsluga()){
                 tipVoda.setSelected(false);
                 tipKanalizacija.setSelected(true);
@@ -528,11 +534,25 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
             }
             else{
                 p.setKategorija("Sa vodomjerom");
-                p.setSifraVodomjera(Integer.valueOf(sifraVodomjera.getText()));
+                try{
+                        List<Potrosac> potrosaci = servicePretraga.dajSvePotrosace();
+                        for(Potrosac potrosac : potrosaci){
+                            if(potrosac.getSifraVodomjera() != null && potrosac.getSifraVodomjera().equals(Integer.valueOf(sifraVodomjera.getText())))
+                                throw new IllegalArgumentException("Šifra vodomjera pripada drugom potrošaču! Izaberite drugu šifru");
+           
+                        }
+                     
+                        p.setSifraVodomjera(Integer.valueOf(sifraVodomjera.getText()));
+                    }
+                    catch(Exception e){
+                       throw new IllegalArgumentException(e.getMessage());
+                    }
             }
+            
             p.setPrezime(prezimeTxt.getText());
             String tel = trim(telTxt.getText());
             p.setTelefon(tel);
+            
             if(tipVoda.isSelected()){
                 p.setUsluga(Boolean.FALSE);
             }
@@ -540,23 +560,22 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
                 p.setUsluga(Boolean.TRUE);
             }
             try{
+                status.setText("");
                 servicePretraga.modifyPotrosac(p);
-                JOptionPane.showMessageDialog(null,"Uspjesno ste izmjenili potrosaca");
+                JOptionPane.showMessageDialog(null,"Uspješno ste izmjenili potrošača");
             } 
             catch(Exception e){
-                    JOptionPane.showMessageDialog(null, e.getMessage(),"Greska!",
-                    JOptionPane.ERROR_MESSAGE);
+                   // JOptionPane.showMessageDialog(null, e.getMessage(),"Greska!",
+                   // JOptionPane.ERROR_MESSAGE);
+                    status.setText(e.getMessage());
             }
         }
             }
     }//GEN-LAST:event_spasiButtonActionPerformed
-boolean ime = false;    boolean prezime = false;
-    boolean adresa = false;    boolean telefon = false;    
-    boolean sifra = true;
+
     private void tipPausalacItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipPausalacItemStateChanged
         if(tipPausalac.isSelected()){
             sifraVodomjera.setEditable(false);
-            sifraVodomjera.setText("");
         }
         else{
             sifraVodomjera.setEditable(true);
@@ -570,7 +589,6 @@ boolean ime = false;    boolean prezime = false;
         }
         else{
             sifraVodomjera.setEditable(false);
-            sifraVodomjera.setText("");
         } // TODO add your handling code here:
     }//GEN-LAST:event_tipVodomjerItemStateChanged
 
