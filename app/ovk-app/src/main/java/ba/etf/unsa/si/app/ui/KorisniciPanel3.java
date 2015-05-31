@@ -6,11 +6,14 @@
 package ba.etf.unsa.si.app.ui;
 
 import ba.etf.unsa.si.app.comparator.KorisnikComparator;
+import ba.etf.unsa.si.app.globals.CurrentlyLoggedIn;
 import ba.etf.unsa.si.app.renderer.KorisnikRenderer;
 import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.services.KorisnikService;
+
 import java.util.Collections;
 import java.util.List;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
@@ -161,6 +164,18 @@ public class KorisniciPanel3 extends javax.swing.JPanel {
             String username  = listaZaBrisanje.getSelectedValue().toString();
             KorisnikService servicePretraga = new KorisnikService();
             Korisnik k = (Korisnik) listaZaBrisanje.getSelectedValue();
+            if(CurrentlyLoggedIn.korisnik.getAdmin() != null && !CurrentlyLoggedIn.korisnik.getAdmin()){
+            	JOptionPane.showMessageDialog(null,"Samo administrator moze izbrisati korisnika.");
+            	return;
+            }
+            if(k.getUsername().equals(CurrentlyLoggedIn.korisnik.getUsername())){
+            	JOptionPane.showMessageDialog(null,"Ne mozete vrsiti tu opciju nad svojim korisnickim nalogom.");
+            	return;
+            }
+            if(k.getAdmin()!=null && k.getAdmin()){
+            	JOptionPane.showMessageDialog(null,"Ne mozete izbrisati tog usera.");
+            	return;
+            }
             servicePretraga.deleteKorisnik(k);
             JOptionPane.showMessageDialog(null,"Uspjesno ste obrisali korisnika " + username);
             }

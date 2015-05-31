@@ -6,13 +6,16 @@
 package ba.etf.unsa.si.app.ui;
 
 import ba.etf.unsa.si.app.comparator.KorisnikComparator;
+import ba.etf.unsa.si.app.globals.CurrentlyLoggedIn;
 import ba.etf.unsa.si.app.renderer.KorisnikRenderer;
 import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.services.KorisnikService;
 import static com.sun.org.apache.xerces.internal.util.XMLChar.trim;
+
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
@@ -440,9 +443,17 @@ public class KorisniciPanel2 extends javax.swing.JPanel {
     }//GEN-LAST:event_userNamePretragaTxtKeyReleased
 
     private void btnSpasiIzmjeneKorisnikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpasiIzmjeneKorisnikaActionPerformed
-        if(listKorisnika.getSelectedValue() == null){
+    	Korisnik k1 = (Korisnik) listKorisnika.getSelectedValue();
+    	if(listKorisnika.getSelectedValue() == null){
             status.setText("Izaberite iz liste korisnika kojeg želite izmijeniti");
-        } 
+        }
+       
+    	else if(k1.getUsername().equals(CurrentlyLoggedIn.korisnik.getUsername())){
+    		JOptionPane.showMessageDialog(null,"Ne mozete vrsiti tu opciju nad svojim korisnickim nalogom.");
+        }
+    	else if(k1.getAdmin()!=null && k1.getAdmin()){
+    		JOptionPane.showMessageDialog(null,"Ne mozete mijenjati tog usera.");
+        }
         else if(imeIzmjenaTxt.getText().isEmpty() || imeIzmjenaTxt.getText().replaceAll("\\s","").length() == 0 ){
           status.setText("Unesite ime korisnika");
         }
