@@ -421,7 +421,7 @@ public class OcitanjaPanel2 extends javax.swing.JPanel {
             		{
             			continue;
             		}
-            		if(listPotrosaca1.getAktivnost()==true || listPotrosaca1.getHidden()==false)
+            		if(listPotrosaca1.getAktivnost()==true && listPotrosaca1.getHidden()==false)
             		{
                     model.addElement(listPotrosaca1.getSifraVodomjera());
             		}

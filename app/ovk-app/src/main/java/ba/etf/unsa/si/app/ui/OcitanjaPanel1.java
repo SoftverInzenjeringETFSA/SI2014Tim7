@@ -62,7 +62,7 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
         		{
         			continue;
         		}
-        		if(p.getAktivnost()==true || p.getHidden()==false)
+        		if(p.getAktivnost()==true && p.getHidden()==false)
         		{
                 model.addElement(p.getSifraVodomjera());
         		}
@@ -294,7 +294,7 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
             		{
             			continue;
             		}
-            		if(listPotrosaca1.getAktivnost()==true || listPotrosaca1.getHidden()==false)
+            		if(listPotrosaca1.getAktivnost()==true && listPotrosaca1.getHidden()==false)
             		{
                     model.addElement(listPotrosaca1.getSifraVodomjera());
             		}
