@@ -9,6 +9,7 @@ import ba.etf.unsa.si.app.comparator.PotrosacComparator;
 import ba.etf.unsa.si.app.renderer.PotrosacRenderer;
 import ba.unsa.etf.si.app.entity.Potrosac;
 import ba.unsa.etf.si.app.services.PotrosacService;
+import static com.sun.org.apache.xerces.internal.util.XMLChar.trim;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -28,8 +29,6 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
         initComponents();
         if(tipPausalac.isSelected())
             sifraVodomjera.setEditable(false);
-        
-        spasiButton.setEnabled(false);
     }
 
     /**
@@ -86,11 +85,6 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
 
         imeTxt.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         imeTxt.setForeground(new java.awt.Color(0, 102, 153));
-        imeTxt.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                imeTxtFocusLost(evt);
-            }
-        });
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 102, 153));
@@ -98,19 +92,9 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
 
         prezimeTxt.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         prezimeTxt.setForeground(new java.awt.Color(0, 102, 153));
-        prezimeTxt.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                prezimeTxtFocusLost(evt);
-            }
-        });
 
         adresaTxt.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         adresaTxt.setForeground(new java.awt.Color(0, 102, 153));
-        adresaTxt.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                adresaTxtFocusLost(evt);
-            }
-        });
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 102, 153));
@@ -134,11 +118,8 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        telTxt.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                telTxtFocusLost(evt);
-            }
-        });
+        telTxt.setFocusCycleRoot(true);
+        telTxt.setFocusLostBehavior(javax.swing.JFormattedTextField.PERSIST);
 
         jmbg.setEditable(false);
         jmbg.setForeground(new java.awt.Color(0, 102, 153));
@@ -307,6 +288,7 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
         tipPotrosaca2.add(tipPausalac);
         tipPausalac.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         tipPausalac.setForeground(new java.awt.Color(102, 102, 102));
+        tipPausalac.setSelected(true);
         tipPausalac.setText("paušalni");
         tipPausalac.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -333,6 +315,7 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
         tipUsluge2.add(tipVoda);
         tipVoda.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         tipVoda.setForeground(new java.awt.Color(102, 102, 102));
+        tipVoda.setSelected(true);
         tipVoda.setText("voda");
 
         tipKanalizacija.setBackground(new java.awt.Color(255, 255, 255));
@@ -355,11 +338,6 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
 
         sifraVodomjera.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         sifraVodomjera.setForeground(new java.awt.Color(0, 102, 153));
-        sifraVodomjera.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                sifraVodomjeraFocusLost(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -412,7 +390,7 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(aktivnost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         status.setEditable(false);
@@ -446,16 +424,12 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(87, 87, 87))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(spasiButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addComponent(spasiButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -499,28 +473,43 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
             else{
                 aktivnost.setSelectedIndex(1);
             }
-            
-            String broj = telTxt.getText().replaceAll("\\s","");
-                
-             if(!imeTxt.getText().isEmpty())
-                ime  = true;
-             if(!prezimeTxt.getText().isEmpty())
-                prezime  = true;
-             if(!adresaTxt.getText().isEmpty())
-                 adresa  = true;
-            if(!telTxt.getText().equals("0  /   -    ") && broj.length() > 10)
-                telefon  = true;
-            if(sifraVodomjera.isEditable()){
-                if(!sifraVodomjera.getText().isEmpty() && sifraVodomjera.getText().matches("[0-9]+"))
-                     sifra = true;     
-            }
-            
-            if( ime && prezime && adresa && telefon && sifra)
-            spasiButton.setEnabled(true);
+
     }//GEN-LAST:event_listaPretragaValueChanged
 
     private void spasiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spasiButtonActionPerformed
-        if(!"".equals(jmbg.getText())){
+        
+        if(imeTxt.getText().isEmpty() || imeTxt.getText().replaceAll("\\s","").length() == 0 ){
+          status.setText("Unesite ime korisnika");
+        }
+        else if(!imeTxt.getText().matches("^[A-ZŠĐŽČĆ][-a-zA-ZšđžčćŠĐŽČĆ]+$")){
+           status.setText("Ime korisnika nije pravilno unijeto"); 
+        }
+        else if(prezimeTxt.getText().isEmpty() || prezimeTxt.getText().replaceAll("\\s","").length() == 0 ){
+          status.setText("Unesite prezime korisnika");
+        }
+        else if(!prezimeTxt.getText().matches("^[A-ZŠĐŽČĆ][-a-zA-ZšđžčćŠĐŽČĆ]+$")){
+           status.setText("Prezime korisnika nije pravilno unijeto"); 
+        }
+        else if(adresaTxt.getText().isEmpty() || adresaTxt.getText().replaceAll("\\s","").length() == 0 ){
+          status.setText("Unesite adresu korisnika");
+        }
+        else if(!adresaTxt.getText().matches("^[A-Za-z0-9šđžčćŠĐŽČĆ -]*$")){
+           status.setText("Adresa sadrži neispravne karaktere");  
+        }
+        else if(telTxt.getText().equals("0  /   -    ") || telTxt.getText().replaceAll("\\s","").length() <= 10 ){
+            status.setText("Unesite telefonski broj korisnika");
+        }
+        else if(telTxt.getText().substring(0,11).contains(" ")){
+            status.setText("Broj telefona nije u pravilnom formatu");
+        }
+        else if(tipVodomjer.isSelected() && (sifraVodomjera.getText().isEmpty() || sifraVodomjera.getText().replaceAll("\\s","").length() == 0)){
+            status.setText("Unesite šifru vodomjera");
+        }   
+        else if(tipVodomjer.isSelected() && !sifraVodomjera.getText().matches("^[0-9]*$")){
+                 status.setText("Šifra vodomjera moze sadrzavati samo cifre");
+        }
+        else{
+                if(!"".equals(jmbg.getText())){
         PotrosacService servicePretraga = new PotrosacService();
         Potrosac p = (Potrosac) listaPretraga.getSelectedValue();
             p.setAdresa(adresaTxt.getText());
@@ -542,7 +531,8 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
                 p.setSifraVodomjera(Integer.valueOf(sifraVodomjera.getText()));
             }
             p.setPrezime(prezimeTxt.getText());
-            p.setTelefon(telTxt.getText());
+            String tel = trim(telTxt.getText());
+            p.setTelefon(tel);
             if(tipVoda.isSelected()){
                 p.setUsluga(Boolean.FALSE);
             }
@@ -558,121 +548,29 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
                     JOptionPane.ERROR_MESSAGE);
             }
         }
+            }
     }//GEN-LAST:event_spasiButtonActionPerformed
-boolean ime = false;
-    private void imeTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_imeTxtFocusLost
-         if(imeTxt.getText().isEmpty()){
-            status.setText("Unesite ime korisnika");
-            ime  = false;
-            spasiButton.setEnabled(false);
-        }
-          else{
-            status.setText("");
-            ime  = true;
-         }
-         if( ime && prezime && adresa && telefon && sifra)
-            spasiButton.setEnabled(true);// TODO add your handling code here:
-    }//GEN-LAST:event_imeTxtFocusLost
-    boolean prezime = false;
-    private void prezimeTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_prezimeTxtFocusLost
-         if(prezimeTxt.getText().isEmpty()){
-            status.setText("Unesite prezime korisnika");
-            prezime  = false;
-            spasiButton.setEnabled(false);
-        }
-        else {
-            status.setText("");
-            prezime  = true;
-        }
-         if( ime && prezime && adresa && telefon && sifra)
-            spasiButton.setEnabled(true);// TODO add your handling code here:
-    }//GEN-LAST:event_prezimeTxtFocusLost
-
-    boolean adresa = false;
-    private void adresaTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adresaTxtFocusLost
-         if(adresaTxt.getText().isEmpty()){
-            status.setText("Unesite adresu korisnika");
-            adresa  = false;
-            spasiButton.setEnabled(false);
-        }
-        else{
-            status.setText("");
-            adresa  = true;
-        }
-         if( ime && prezime && adresa && telefon && sifra)
-            spasiButton.setEnabled(true);// TODO add your handling code here:
-       // TODO add your handling code here:
-    }//GEN-LAST:event_adresaTxtFocusLost
-    boolean telefon = false;
-    private void telTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_telTxtFocusLost
-      String broj = telTxt.getText().replaceAll("\\s","");
-        if(telTxt.getText().equals("0  /   -    ")){
-            status.setText("Unesite telefonski broj korisnika");
-            telefon  = false;
-            spasiButton.setEnabled(false);
-        }
-         else if(broj.length() <= 10){
-            status.setText("Broj nije tacan");
-            telefon = false;
-            spasiButton.setEnabled(false);
-        } 
-        else{
-            status.setText("");
-            telefon = true;
-        }
-         if( ime && prezime && adresa && telefon && sifra)
-            spasiButton.setEnabled(true);   // TODO add your handling code here:
-    }//GEN-LAST:event_telTxtFocusLost
-    
+boolean ime = false;    boolean prezime = false;
+    boolean adresa = false;    boolean telefon = false;    
     boolean sifra = true;
-    private void sifraVodomjeraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_sifraVodomjeraFocusLost
-       if(sifraVodomjera.isEditable()){
-        if(sifraVodomjera.getText().isEmpty()){
-            status.setText("Unesite šifru vodomjera");
-            sifra = false;
-            spasiButton.setEnabled(false);
-        }
-        else if(sifraVodomjera.getText().matches("[0-9]+")){
-            status.setText("");
-            sifra = true;
-        }
-        else{
-            status.setText("Sifra vodomjera moze sadrzavati samo cifre");
-            sifra = false;
-            spasiButton.setEnabled(false);
-        }
-        if( ime && prezime && adresa && telefon && sifra)
-            spasiButton.setEnabled(true);
-      } // TODO add your handling code here:
-    }//GEN-LAST:event_sifraVodomjeraFocusLost
-
     private void tipPausalacItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipPausalacItemStateChanged
         if(tipPausalac.isSelected()){
             sifraVodomjera.setEditable(false);
             sifraVodomjera.setText("");
-            sifra = true;
         }
         else{
             sifraVodomjera.setEditable(true);
-            if(sifraVodomjera.getText().isEmpty()){
-                sifra = false;
-                spasiButton.setEnabled(false);
-            }
+           
         }// TODO// TODO add your handling code here:
     }//GEN-LAST:event_tipPausalacItemStateChanged
 
     private void tipVodomjerItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_tipVodomjerItemStateChanged
         if(tipVodomjer.isSelected()){
             sifraVodomjera.setEditable(true);
-            if(sifraVodomjera.getText().isEmpty()){
-                sifra = false;
-                spasiButton.setEnabled(false);
-            }
         }
         else{
             sifraVodomjera.setEditable(false);
             sifraVodomjera.setText("");
-            sifra = true;
         } // TODO add your handling code here:
     }//GEN-LAST:event_tipVodomjerItemStateChanged
 

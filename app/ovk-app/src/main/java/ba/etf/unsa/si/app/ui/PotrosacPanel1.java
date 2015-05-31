@@ -8,6 +8,7 @@ package ba.etf.unsa.si.app.ui;
 import ba.unsa.etf.si.app.dao.PotrosacDAO;
 import ba.unsa.etf.si.app.entity.Potrosac;
 import ba.unsa.etf.si.app.services.PotrosacService;
+import static com.sun.org.apache.xerces.internal.util.XMLChar.trim;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -242,16 +243,15 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jpanellicnipodaciLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jmbgTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                    .addGroup(jpanellicnipodaciLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel7)
-                        .addComponent(jLabel8)
-                        .addComponent(jLabel9)
-                        .addComponent(jLabel10)
-                        .addComponent(imeTxt)
-                        .addComponent(prezimeTxt)
-                        .addComponent(adresaTxt)
-                        .addComponent(telTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(imeTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(prezimeTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(adresaTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(telTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         jpanellicnipodaciLayout.setVerticalGroup(
@@ -338,13 +338,13 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
         if(imeTxt.getText().isEmpty() || imeTxt.getText().replaceAll("\\s","").length() == 0 ){
           status.setText("Unesite ime korisnika");
         }
-        else if(!imeTxt.getText().matches("^[A-Z][-a-zA-ZšđžčćŠĐŽČĆ]+$")){
+        else if(!imeTxt.getText().matches("^[A-ZŠĐŽČĆ][-a-zA-ZšđžčćŠĐŽČĆ]+$")){
            status.setText("Ime korisnika nije pravilno unijeto"); 
         }
         else if(prezimeTxt.getText().isEmpty() || prezimeTxt.getText().replaceAll("\\s","").length() == 0 ){
           status.setText("Unesite prezime korisnika");
         }
-        else if(!prezimeTxt.getText().matches("^[A-Z][-a-zA-ZšđžčćŠĐŽČĆ]+$")){
+        else if(!prezimeTxt.getText().matches("^[A-ZŠĐŽČĆ][-a-zA-ZšđžčćŠĐŽČĆ]+$")){
            status.setText("Prezime korisnika nije pravilno unijeto"); 
         }
         else if(adresaTxt.getText().isEmpty() || adresaTxt.getText().replaceAll("\\s","").length() == 0 ){
@@ -392,7 +392,8 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
                 p.setHidden(false);
                 p.setJmbg(jmbgTxt.getText());
                 p.setPrezime(prezimeTxt.getText());
-                p.setTelefon(telTxt.getText());
+                String tel = trim(telTxt.getText());
+                p.setTelefon(tel);
                 
                 if(tipPausalac.isSelected()){
                     p.setKategorija("Pausalac");

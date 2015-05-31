@@ -326,17 +326,15 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Component id="jmbgTxt" pref="120" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="imeTxt" max="32767" attributes="0"/>
-                          <Component id="prezimeTxt" alignment="0" max="32767" attributes="0"/>
-                          <Component id="adresaTxt" alignment="0" max="32767" attributes="0"/>
-                          <Component id="telTxt" alignment="0" pref="120" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="imeTxt" alignment="0" max="32767" attributes="0"/>
+                      <Component id="prezimeTxt" alignment="0" max="32767" attributes="0"/>
+                      <Component id="adresaTxt" alignment="0" max="32767" attributes="0"/>
+                      <Component id="telTxt" alignment="0" pref="120" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="50" max="32767" attributes="0"/>
               </Group>
