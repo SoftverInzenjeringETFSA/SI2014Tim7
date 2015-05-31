@@ -6,6 +6,7 @@
 package ba.etf.unsa.si.app.ui;
 
 import ba.etf.unsa.si.app.comparator.KorisnikComparator;
+import ba.etf.unsa.si.app.globals.CurrentlyLoggedIn;
 import ba.etf.unsa.si.app.renderer.KorisnikRenderer;
 import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.services.KorisnikService;
@@ -243,7 +244,7 @@ public class KorisniciPanel4 extends javax.swing.JPanel {
             status.setText("");
             try{
             Korisnik k = (Korisnik) listaPretraga.getSelectedValue();
-            pregled = new KorisniciPregled(k);
+            pregled = new KorisniciPregled(k,this);
             pregled.setVisible(true);
             }
             catch(Exception e){
@@ -252,10 +253,9 @@ public class KorisniciPanel4 extends javax.swing.JPanel {
                 status.setText(e.getMessage());
             }
         }
-       
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void update(){
+    public void update(){
         DefaultListModel<Korisnik> model = new DefaultListModel<Korisnik>();
         model.removeAllElements();
         KorisnikService servis = new KorisnikService();

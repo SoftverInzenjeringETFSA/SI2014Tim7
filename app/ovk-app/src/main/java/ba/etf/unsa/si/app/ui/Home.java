@@ -5,6 +5,8 @@
  */
 package ba.etf.unsa.si.app.ui;
 
+import ba.etf.unsa.si.app.globals.CurrentlyLoggedIn;
+import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.entity.Parametri;
 import ba.unsa.etf.si.app.services.ParametriService;
 import java.awt.Color;
@@ -47,9 +49,10 @@ public class Home extends javax.swing.JFrame {
      * Creates new form Home
      * @param adminTest
      */
-    public Home(Boolean adminTest) {
+    public Home(Boolean adminTest,Korisnik k) {
         initComponents();
         logger = Logger.getAnonymousLogger();
+        CurrentlyLoggedIn.setKorisnik(k);
         // Admin Test
         Admin = adminTest;
         //bijela pozadina
@@ -1078,7 +1081,7 @@ public class Home extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home(false).setVisible(true);
+                new Home(false,new Korisnik()).setVisible(true);
             }
         });
     }

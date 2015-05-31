@@ -5,9 +5,11 @@
  */
 package ba.etf.unsa.si.app.ui;
 
+import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.services.KorisnikService;
 import java.awt.Color;
 import java.awt.Container;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -150,8 +152,9 @@ public class Login extends javax.swing.JFrame {
         try{
             // Privremeno ukinut login
             Boolean AdminTest = loginCheck.checkLogin(TxtUserName.getText(), String.valueOf(TxtPassword.getPassword()));
+            List<Korisnik> kList = loginCheck.searchByFullUsername(TxtUserName.getText());
             this.dispose();
-            Home home = new Home(AdminTest);
+            Home home = new Home(AdminTest,kList.get(0));
             home.setVisible(true);
             
         }

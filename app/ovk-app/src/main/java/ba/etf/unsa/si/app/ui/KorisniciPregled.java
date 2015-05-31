@@ -6,8 +6,10 @@
 package ba.etf.unsa.si.app.ui;
 
 import ba.unsa.etf.si.app.entity.Korisnik;
+import ba.unsa.etf.si.app.services.KorisnikService;
 import java.awt.Color;
 import java.awt.Container;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,8 +20,12 @@ public class KorisniciPregled extends javax.swing.JFrame {
     /**
      * Creates new form KorisniciPregled
      */
-    public KorisniciPregled(Korisnik k) {
+    Korisnik zaBrisanje;
+    KorisniciPanel4 panelUpdate;
+    public KorisniciPregled(Korisnik k,KorisniciPanel4 panel) {
         initComponents();
+        zaBrisanje = k;
+        panelUpdate= panel;
         Container container = this.getContentPane();
         container.setBackground(Color.white); 
         ime.setText(k.getIme());
@@ -70,7 +76,6 @@ public class KorisniciPregled extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         tel = new javax.swing.JTextField();
         button1 = new javax.swing.JButton();
-        button2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -296,10 +301,11 @@ public class KorisniciPregled extends javax.swing.JFrame {
         button1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         button1.setForeground(new java.awt.Color(0, 102, 153));
         button1.setText("IZBRIŠI");
-
-        button2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        button2.setForeground(new java.awt.Color(0, 102, 153));
-        button2.setText("IZMIJENI");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -309,8 +315,6 @@ public class KorisniciPregled extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
@@ -340,14 +344,25 @@ public class KorisniciPregled extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(button1)
-                    .addComponent(button2))
+                .addComponent(button1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        try{
+        KorisnikService s = new KorisnikService();
+        s.deleteKorisnik(zaBrisanje);
+            JOptionPane.showMessageDialog(null,"Uspjesno ste obrisali korisnika. ");
+            panelUpdate.update();
+            this.dispose();
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Brisanje korisnika nije uspjelo !");
+        }
+    }//GEN-LAST:event_button1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -379,7 +394,7 @@ public class KorisniciPregled extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KorisniciPregled(new Korisnik()).setVisible(true);
+                new KorisniciPregled(new Korisnik(),new KorisniciPanel4()).setVisible(true);
             }
         });
     }
@@ -389,7 +404,6 @@ public class KorisniciPregled extends javax.swing.JFrame {
     private javax.swing.JTextField adresa;
     private javax.swing.JTextField brlicne;
     private javax.swing.JButton button1;
-    private javax.swing.JButton button2;
     private javax.swing.JTextField datum;
     private javax.swing.JTextField ime;
     private javax.swing.JLabel jLabel11;
