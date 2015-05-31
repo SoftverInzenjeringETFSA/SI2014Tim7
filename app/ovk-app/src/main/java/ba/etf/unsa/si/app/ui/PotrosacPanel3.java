@@ -6,11 +6,14 @@
 package ba.etf.unsa.si.app.ui;
 
 import ba.etf.unsa.si.app.comparator.PotrosacComparator;
+import ba.etf.unsa.si.app.globals.CurrentlyLoggedIn;
 import ba.etf.unsa.si.app.renderer.PotrosacRenderer;
 import ba.unsa.etf.si.app.entity.Potrosac;
 import ba.unsa.etf.si.app.services.PotrosacService;
+
 import java.util.Collections;
 import java.util.List;
+
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
@@ -187,6 +190,11 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
     private void izbrisiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_izbrisiBtnActionPerformed
         PotrosacService servicePretraga = new PotrosacService();
         Potrosac p = (Potrosac) listaPretraga.getSelectedValue();
+        if(CurrentlyLoggedIn.korisnik.getAdmin() != null && !CurrentlyLoggedIn.korisnik.getAdmin()){
+        	JOptionPane.showMessageDialog(null,"Samo administrator moze izbrisati potrosaca.");
+        	return;
+        }
+        
         String msg = "";
         if(p.getHidden()){
             msg = "obnovili potrošački račun.";
