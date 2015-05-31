@@ -7,6 +7,7 @@ package ba.etf.unsa.si.app.ui;
 
 import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.services.KorisnikService;
+import static com.sun.org.apache.xerces.internal.util.XMLChar.trim;
 import java.util.Date;
 import java.util.logging.Level;
 import javax.swing.JOptionPane;
@@ -404,7 +405,8 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
             k.setJmbg(jmbgTxt.getText());
             k.setMail(emailTxt.getText());
             k.setPrezime(prezimeTxt.getText());
-            k.setTelefon(telTxt.getText());
+            String tel = trim(telTxt.getText());
+            k.setTelefon(tel);
             k.setUsername(usernameTxt1.getText());
             try{
                 String pass = dodaj.createNewKorisnik(k);
