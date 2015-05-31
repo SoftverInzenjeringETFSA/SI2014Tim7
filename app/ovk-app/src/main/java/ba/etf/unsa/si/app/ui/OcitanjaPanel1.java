@@ -55,11 +55,9 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
         DefaultListModel model = new DefaultListModel();
         PotrosacService servicePotrosaca = new PotrosacService();
         List<Potrosac> listPotrosaca = servicePotrosaca.dajSvePotrosace();
-        String sifra = "";
         ListOcitanja.setModel(model);
         
         for (Potrosac p : listPotrosaca) {      
-        	if(String.valueOf(p.getSifraVodomjera()).contains(sifra)){
         		if(p.getKategorija().equals("Pausalni"))
         		{
         			continue;
@@ -68,7 +66,6 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
         		{
                 model.addElement(p.getSifraVodomjera());
         		}
-        	}
         }
 
         
@@ -222,8 +219,14 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
         	{
         		throw new IllegalArgumentException("Pogresno stanje vodomjera, niste unijeli brojeve!");
         	}
-        	
-            int sifraVodomjera = Integer.valueOf(ListOcitanja.getSelectedValue().toString());
+        	try{
+        		Integer.valueOf(ListOcitanja.getSelectedValue().toString());
+        	}
+        	catch(Exception baci)
+        	{
+        		throw new IllegalArgumentException("Niste selektovali ispravan vodomjer!");
+        	}
+        	int sifraVodomjera = Integer.valueOf(ListOcitanja.getSelectedValue().toString());
             Double novoStanje = Double.valueOf(TxtstanjeVodomjera.getText());
 
             OcitanjaService oS = new OcitanjaService();
@@ -244,6 +247,21 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
             if(Integer.valueOf(x[0])>12||Integer.valueOf(x[0])<0){
                 throw new IllegalArgumentException("Nepostojeci mjesec!");
             }
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM");
+      	   //get current date time with Date()
+      	   	Date date = new Date();
+      	   	String sad = dateFormat.format(date);
+      	   	String[] pomocna =  sad.split("/");
+      	   	int godina = Integer.valueOf(pomocna[0].toString());
+      	   	int mjesec = Integer.valueOf(pomocna[1].toString());
+      	   	int unesenagodina = Integer.valueOf(x[1].toString());
+      	   	int unesenimjesec = Integer.valueOf(x[0].toString());
+      	   	
+      	   	if((godina<unesenagodina && mjesec<unesenimjesec) || (godina==unesenagodina && mjesec<unesenimjesec) || (godina<unesenagodina && mjesec==unesenimjesec))
+      	   	{
+      	   	throw new IllegalArgumentException("Unijeli ste datum iz buducnosti!");
+      	   	}
+      	   	
             o.setMjesec(Integer.valueOf(x[0]));
             o.setGodina(Integer.valueOf(x[1]));
             oS.createNewOcitanja(o);
@@ -252,7 +270,8 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
             TxtDatum.setText("");
             TxtSifraVodomjeraPretraga.setText("");
             TxtstanjeVodomjera.setText("");
-            JOptionPane.showMessageDialog(null, "Uspjesno dodavanje novog ocitanja!");
+            ListOcitanja.clearSelection();
+            JOptionPane.showMessageDialog(null, "Uspjesno dodavanje ocitanja za uneseni datum!");
         }
         catch(Exception e){
            JOptionPane.showMessageDialog(null, e.getMessage(),"Greska!",JOptionPane.ERROR_MESSAGE);
@@ -263,6 +282,7 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
             DefaultListModel model = new DefaultListModel();
             ListOcitanja.removeAll();
             model.removeAllElements();
+            ListOcitanja.setModel(model);
         try{
             PotrosacService servicePotrosaca = new PotrosacService();
             List<Potrosac> listPotrosaca = servicePotrosaca.dajSvePotrosace();
@@ -280,7 +300,6 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
             		}
                 }
             }
-            ListOcitanja.setModel(model);
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, e.getMessage(),"Greska!",JOptionPane.ERROR_MESSAGE);

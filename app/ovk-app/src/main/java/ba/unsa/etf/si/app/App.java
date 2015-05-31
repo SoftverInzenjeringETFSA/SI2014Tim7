@@ -5,6 +5,7 @@ package ba.unsa.etf.si.app;
 import ba.etf.unsa.si.app.ui.Login;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -32,6 +33,7 @@ public class App
         //pokretanje login forme
         Login login = new Login();
         login.setVisible(true);
+        
        /*PotrosacService serv = new PotrosacService();
        Potrosac k = new Potrosac();
        k.setJmbg("0611992177631");
@@ -39,9 +41,9 @@ public class App
        System.out.println(test);*/
         //primjer koristenja dao klase
         
-        KorisnikService s = new KorisnikService();
+        /*KorisnikService s = new KorisnikService();
         List<Korisnik> list = s.searchByCriteria("", "", "2309", "");
-        System.out.println(list.size());
+        System.out.println(list.size());*/
         //otvaranje sesije i pocetak transakcije, potrebno za svaku komunikaciju sa bazom
     	/*Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();

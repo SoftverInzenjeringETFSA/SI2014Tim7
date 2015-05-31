@@ -29,6 +29,7 @@ import java.beans.PropertyChangeEvent;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -115,12 +116,8 @@ public class OcitanjaPanel2 extends javax.swing.JPanel {
         PotrosacService servicePotrosaca = new PotrosacService();
         OcitanjaService oS = new OcitanjaService();
         List<Potrosac> listPotrosaca = servicePotrosaca.dajSvePotrosace();
-        String sifra = "";
         jList1.setModel(model);
-        for (Potrosac p : listPotrosaca) {      
-        	if(String.valueOf(p.getSifraVodomjera()).contains(sifra)){
-        		if(p.getAktivnost()==true || p.getHidden()==false)
-        		{        
+        for (Potrosac p : listPotrosaca) {         
         			if(p.getKategorija().equals("Pausalni"))
         			{
         				continue;
@@ -128,7 +125,7 @@ public class OcitanjaPanel2 extends javax.swing.JPanel {
         			try{
                 	if(oS.getId(p.getSifraVodomjera()).size()!=0)
                 	{
-                		if(p.getAktivnost()==true || p.getHidden()==false)
+                		if(p.getAktivnost()==true && p.getHidden()==false)
                 		{
                 		model.addElement(p.getSifraVodomjera());
                 		}
@@ -140,8 +137,6 @@ public class OcitanjaPanel2 extends javax.swing.JPanel {
                     	}	
                 
         		}
-        	}
-        }
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jFormattedTextField4 = new javax.swing.JFormattedTextField();
@@ -356,7 +351,13 @@ public class OcitanjaPanel2 extends javax.swing.JPanel {
         	{
         		throw new IllegalArgumentException("Pogresno stanje vodomjera, niste unijeli brojeve!");
         	}
-        	
+        	try{
+        		Integer.valueOf(jList1.getSelectedValue().toString());
+        	}
+        	catch(Exception novi)
+        	{
+        		throw new IllegalArgumentException("Niste selektovali ispravan vodomjer!");
+        	}
             int sifraVodomjera = Integer.valueOf(jList1.getSelectedValue().toString());
             Double novoStanje = Double.valueOf(jFormattedTextField5.getText());
             OcitanjaService oS = new OcitanjaService();
@@ -393,7 +394,8 @@ public class OcitanjaPanel2 extends javax.swing.JPanel {
             jFormattedTextField4.setText("");
             jTextField7.setText("");
             jFormattedTextField5.setText("");
-            JOptionPane.showMessageDialog(null, "Uspjesno modifikovanje izabranog ocitanja!");
+            jList1.clearSelection();
+            JOptionPane.showMessageDialog(null, "Uspjesno modifikovanje ocitanja za uneseni datum!");
 
         	}
         catch(Exception e){

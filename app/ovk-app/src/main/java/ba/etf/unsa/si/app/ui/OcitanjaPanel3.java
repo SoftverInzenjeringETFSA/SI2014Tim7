@@ -51,20 +51,16 @@ public class OcitanjaPanel3 extends javax.swing.JPanel {
         PotrosacService servicePotrosaca = new PotrosacService();
         OcitanjaService oS = new OcitanjaService();
         List<Potrosac> listPotrosaca = servicePotrosaca.dajSvePotrosace();
-        String sifra = "";
         jList1.setModel(model);
         
         for (Potrosac p : listPotrosaca) {      
-        	if(String.valueOf(p.getSifraVodomjera()).contains(sifra)){
-        		if(p.getAktivnost()==true || p.getHidden()==false)
-        		{
         			if(p.getKategorija().equals("Pausalni"))
         			{
         				continue;
         			}
                 	try{
                     	if(oS.getId(p.getSifraVodomjera()).size()!=0){
-                    		if(p.getAktivnost()==true || p.getHidden()==false)
+                    		if(p.getAktivnost()==true && p.getHidden()==false)
                     		{
                     		  model.addElement(p.getSifraVodomjera());
                     		}
@@ -76,8 +72,6 @@ public class OcitanjaPanel3 extends javax.swing.JPanel {
                     	}
               
         		}
-        	}
-        }
         
         jTextField7.addKeyListener(new KeyAdapter() {
         	@Override
@@ -241,7 +235,7 @@ public class OcitanjaPanel3 extends javax.swing.JPanel {
             	{
             		pomocna=false;
             		oS.deleteOcitanja(tmp);
-            		JOptionPane.showMessageDialog(null, "Uspjesno brisanje izabranog ocitanja !");
+            		JOptionPane.showMessageDialog(null, "Uspjesno brisanje ocitanja za uneseni datum!");
             	}
             }
             if(pomocna==true)
@@ -251,6 +245,7 @@ public class OcitanjaPanel3 extends javax.swing.JPanel {
             jList1.removeAll();
             jFormattedTextField4.setText("");
             jTextField7.setText("");
+            jList1.clearSelection();
             
         }
         catch(Exception e){
@@ -261,9 +256,9 @@ public class OcitanjaPanel3 extends javax.swing.JPanel {
     
     private void TxtSifraVodomjeraBrisanjeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtSifraVodomjeraPretragaKeyReleased
         DefaultListModel model = new DefaultListModel();
-        jList1.setModel(model);
         jList1.removeAll();
         model.removeAllElements();
+        jList1.setModel(model);
     try{
         PotrosacService servicePotrosaca = new PotrosacService();
         OcitanjaService oS = new OcitanjaService();
@@ -273,8 +268,11 @@ public class OcitanjaPanel3 extends javax.swing.JPanel {
             if(String.valueOf(listPotrosaca1.getSifraVodomjera()).contains(sifra)){
             	try{
             		if(listPotrosaca1.getKategorija().equals("Pausalni"))
+            		{
+            			continue;
+            		}
             	if(oS.getId(listPotrosaca1.getSifraVodomjera()).size()!=0){
-            		if(listPotrosaca1.getAktivnost()==true || listPotrosaca1.getHidden()==false)
+            		if(listPotrosaca1.getAktivnost()==true && listPotrosaca1.getHidden()==false)
             		{
             			model.addElement(listPotrosaca1.getSifraVodomjera());
             	}
