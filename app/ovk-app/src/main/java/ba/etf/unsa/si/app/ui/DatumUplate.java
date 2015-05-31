@@ -129,6 +129,7 @@ public class DatumUplate extends javax.swing.JFrame {
             serv.uplatiRacun(racun);
             pregled.update();
             JOptionPane.showMessageDialog(null,"Uspjena uplata racuna");
+            this.dispose();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e.getMessage());
         }
