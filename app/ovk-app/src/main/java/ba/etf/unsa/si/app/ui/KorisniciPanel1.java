@@ -7,6 +7,7 @@ package ba.etf.unsa.si.app.ui;
 
 import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.services.KorisnikService;
+import static com.sun.org.apache.xerces.internal.util.XMLChar.trim;
 import java.util.Date;
 import java.util.logging.Level;
 import javax.swing.JOptionPane;
@@ -376,11 +377,14 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
         else if(adresaTxt.getText().isEmpty() || adresaTxt.getText().replaceAll("\\s","").length() == 0 ){
           status.setText("Unesite adresu korisnika");
         }
-        else if(!adresaTxt.getText().matches("^[A-Za-z0-9 -]*$")){
+        else if(!adresaTxt.getText().matches("^[A-Za-z0-9šđžčćŠĐŽČĆ -]*$")){
            status.setText("Adresa sadrži neispravne karaktere");  
         }
         else if(telTxt.getText().equals("0  /   -    ") || telTxt.getText().replaceAll("\\s","").length() <= 10 ){
             status.setText("Unesite telefonski broj korisnika");
+        }
+        else if(telTxt.getText().substring(0,11).contains(" ")){
+            status.setText("Broj telefona nije u pravilnom formatu");
         }
         else if(emailTxt.getText().isEmpty() || emailTxt.getText().replaceAll("\\s","").length() == 0){
             status.setText("Unesite e-mail korisnika");
@@ -401,7 +405,8 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
             k.setJmbg(jmbgTxt.getText());
             k.setMail(emailTxt.getText());
             k.setPrezime(prezimeTxt.getText());
-            k.setTelefon(telTxt.getText());
+            String tel = trim(telTxt.getText());
+            k.setTelefon(tel);
             k.setUsername(usernameTxt1.getText());
             try{
                 String pass = dodaj.createNewKorisnik(k);

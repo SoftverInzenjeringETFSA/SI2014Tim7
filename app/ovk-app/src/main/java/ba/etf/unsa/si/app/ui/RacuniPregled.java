@@ -64,6 +64,7 @@ String sifraVodomjera;
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        status = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -83,7 +84,7 @@ String sifraVodomjera;
 
         jTable1.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         jTable1.setForeground(new java.awt.Color(0, 102, 153));
-       /* jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null},
@@ -91,9 +92,9 @@ String sifraVodomjera;
                 {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Ime", "Prezime", "Å ifra raÄ�una", "Å ifra vodomjera", "Period", "UtroÅ¡ak m3", "Iznos", "Iznos sa PDV", "Iznos PVN", "Ukupan iznos", "Datum uplate"
+                "Ime", "Prezime", "Šifra računa", "Šifra vodomjera", "Period", "Utrošak m3", "Iznos", "Iznos sa PDV", "Iznos PVN", "Ukupan iznos", "Datum uplate"
             }
-        ));*/
+        ));
         jTable1.setInheritsPopupMenu(true);
         jTable1.setSelectionBackground(new java.awt.Color(0, 102, 153));
         jScrollPane1.setViewportView(jTable1);
@@ -111,9 +112,15 @@ String sifraVodomjera;
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        status.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        status.setForeground(new java.awt.Color(255, 51, 51));
+        status.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        status.setBorder(null);
+        status.setOpaque(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,6 +130,7 @@ String sifraVodomjera;
                 .addContainerGap(734, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addComponent(status, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -132,38 +140,46 @@ String sifraVodomjera;
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(415, Short.MAX_VALUE)
+                .addContainerGap(402, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(23, 23, 23))
+                .addGap(18, 18, 18)
+                .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(70, Short.MAX_VALUE)))
+                    .addContainerGap(79, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    	if(racuni.isEmpty()){return;}
-        String idString = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 2));
-        if("".equals(trim(idString))||idString==null){
-            JOptionPane.showMessageDialog(null,"Niste izabrani ni jedan red");
-            return;
+    	if(jTable1.getSelectedRow() == -1){
+            status.setText("Izaberite račun");
         }
-        int id = Integer.valueOf(idString);
-        ObracunService s = new ObracunService();
-        Racuni r = new Racuni();
-        try{
-            r = s.pretragaRacunaPoID(id);
+        else{
+            status.setText("");
+            if(racuni.isEmpty()){return;}
+            String idString = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 2));
+            if("".equals(trim(idString))||idString==null){
+                JOptionPane.showMessageDialog(null,"Niste izabrani ni jedan red");
+                return;
+            }
+            int id = Integer.valueOf(idString);
+            ObracunService s = new ObracunService();
+            Racuni r = new Racuni();
+            try{
+                r = s.pretragaRacunaPoID(id);
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null,e.getMessage());
+                return;
+            }
+            datum = new DatumUplate(r,this);
+            datum.setVisible(true);
         }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null,e.getMessage());
-            return;
-        }
-        datum = new DatumUplate(r,this);
-        datum.setVisible(true);
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 public void update(){
@@ -175,7 +191,7 @@ public void update(){
     		racuni = servis.pretragaRacuna(datumKreiranja, sifraRacuna, ime, prezime, sifraVodomjera);
     	}
     	catch(Exception e){
-    		e.printStackTrace();
+    		JOptionPane.showMessageDialog(null, e.getMessage());
     	}
     	
     	
@@ -203,7 +219,7 @@ public void update(){
 	}
     
     catch(Exception e){
-    	System.out.println("nesto nije u redu");
+    	JOptionPane.showMessageDialog(null, e.getMessage());
     }
 
 }
@@ -247,6 +263,6 @@ public void update(){
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    
+    private javax.swing.JTextField status;
     // End of variables declaration//GEN-END:variables
 }

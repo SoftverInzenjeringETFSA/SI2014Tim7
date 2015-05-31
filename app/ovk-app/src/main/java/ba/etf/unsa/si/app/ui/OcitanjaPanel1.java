@@ -290,7 +290,7 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
             
             for (Potrosac listPotrosaca1 : listPotrosaca) {
                 if(String.valueOf(listPotrosaca1.getSifraVodomjera()).contains(sifra)){
-            		if(listPotrosaca1.getKategorija().equals("Pausalni"))
+            		if(listPotrosaca1.getKategorija().equals("Pausalac"))
             		{
             			continue;
             		}

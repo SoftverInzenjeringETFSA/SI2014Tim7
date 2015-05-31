@@ -49,7 +49,7 @@ public class KorisnikService {
             else{
                 session.getTransaction().commit();
                 session.close();
-                throw new IllegalArgumentException("JMBG/Broj licne nije validan!");
+                throw new IllegalArgumentException("JMBG nije validan!");
             }
         }
         else{
@@ -114,7 +114,6 @@ public class KorisnikService {
     }
     private Boolean validate(Korisnik k){
         if(!validateJMBG(k.getJmbg())){
-        	JOptionPane.showMessageDialog(null,"JMBG nije validan!");
             return false;
         }
         if( !validateBrLicne(k)){
@@ -228,7 +227,7 @@ public class KorisnikService {
                     return k.get(0).getAdmin();
                 }
                 else{
-                    throw new IllegalArgumentException("Unijeli ste pogreÅ¡an password");
+                    throw new IllegalArgumentException("Unijeli ste pogrešan password");
                 }   
             }
             else{

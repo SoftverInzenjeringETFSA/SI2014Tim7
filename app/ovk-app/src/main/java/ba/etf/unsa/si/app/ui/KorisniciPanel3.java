@@ -124,7 +124,7 @@ public class KorisniciPanel3 extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(status)
         );
         layout.setVerticalGroup(
@@ -140,6 +140,7 @@ public class KorisniciPanel3 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pretragaKorisnikaZaBrisanjeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pretragaKorisnikaZaBrisanjeKeyReleased
+        
         KorisnikService servicePretraga = new KorisnikService();
         List<Korisnik> korisnikLista = servicePretraga.searchByUsername(pretragaKorisnikaZaBrisanje.getText());
         DefaultListModel<Korisnik> model = new DefaultListModel<Korisnik>();
@@ -152,6 +153,11 @@ public class KorisniciPanel3 extends javax.swing.JPanel {
         }    
         listaZaBrisanje.setCellRenderer(x);
         listaZaBrisanje.setModel(model);
+        
+        if(pretragaKorisnikaZaBrisanje.getText().isEmpty() || pretragaKorisnikaZaBrisanje.getText().replaceAll("\\s","").length() == 0 ){
+            DefaultListModel listModel = (DefaultListModel) listaZaBrisanje.getModel();
+            listModel.removeAllElements();
+        }
     }//GEN-LAST:event_pretragaKorisnikaZaBrisanjeKeyReleased
 
     private void obrisiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obrisiBtnActionPerformed
@@ -177,7 +183,11 @@ public class KorisniciPanel3 extends javax.swing.JPanel {
             	return;
             }
             servicePretraga.deleteKorisnik(k);
-            JOptionPane.showMessageDialog(null,"Uspjesno ste obrisali korisnika " + username);
+            pretragaKorisnikaZaBrisanje.setText("");
+            
+            DefaultListModel listModel = (DefaultListModel) listaZaBrisanje.getModel();
+            listModel.removeAllElements();
+            JOptionPane.showMessageDialog(null,"Uspjesno ste obrisali korisnika ");
             }
             catch(Exception e){
                 //JOptionPane.showMessageDialog(null, e.getMessage(),"Greska!",
