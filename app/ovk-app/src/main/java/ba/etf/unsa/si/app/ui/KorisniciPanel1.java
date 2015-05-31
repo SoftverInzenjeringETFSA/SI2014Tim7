@@ -377,7 +377,7 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
         else if(adresaTxt.getText().isEmpty() || adresaTxt.getText().replaceAll("\\s","").length() == 0 ){
           status.setText("Unesite adresu korisnika");
         }
-        else if(!adresaTxt.getText().matches("^[A-Za-z0-9 -]*$")){
+        else if(!adresaTxt.getText().matches("^[A-Za-z0-9šđžčćŠĐŽČĆ -]*$")){
            status.setText("Adresa sadrži neispravne karaktere");  
         }
         else if(telTxt.getText().equals("0  /   -    ") || telTxt.getText().replaceAll("\\s","").length() <= 10 ){

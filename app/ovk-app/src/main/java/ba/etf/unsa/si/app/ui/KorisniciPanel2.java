@@ -435,7 +435,12 @@ public class KorisniciPanel2 extends javax.swing.JPanel {
             model.addElement(k);
         }    
         listKorisnika.setCellRenderer(x);
-        listKorisnika.setModel(model);    
+        listKorisnika.setModel(model);
+        
+         if(userNamePretragaTxt.getText().isEmpty() || userNamePretragaTxt.getText().replaceAll("\\s","").length() == 0 ){
+            DefaultListModel listModel = (DefaultListModel) listKorisnika.getModel();
+            listModel.removeAllElements();
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_userNamePretragaTxtKeyReleased
 
@@ -494,7 +499,7 @@ public class KorisniciPanel2 extends javax.swing.JPanel {
         else if(adresaTxt.getText().isEmpty() || adresaTxt.getText().replaceAll("\\s","").length() == 0 ){
           status.setText("Unesite adresu korisnika");
         }
-        else if(!adresaTxt.getText().matches("^[A-Za-z0-9 -]*$")){
+        else if(!adresaTxt.getText().matches("^[A-Za-z0-9šđžčćŠĐŽČĆ -]*$")){
            status.setText("Adresa sadrži neispravne karaktere");  
         }
         else if(telTxt.getText().equals("0  /   -    ") || telTxt.getText().replaceAll("\\s","").length() <= 10 ){
@@ -526,7 +531,22 @@ public class KorisniciPanel2 extends javax.swing.JPanel {
                     k.setUsername(userNameTxt.getText());
                     k.setAdmin(adminTestIzmjena.isSelected());
                     servicePretraga.modifyKorisnik(k);
+                    
                     JOptionPane.showMessageDialog(null,"Uspjesno ste izmjenili korisnika. ");
+                    
+                    adresaTxt.setText("");
+                    brLicneTxt.setText("");
+                    dateTxt.setDate(danas);
+                    emailTxt.setText("");
+                    imeIzmjenaTxt.setText("");
+                    passTxt.setText("");
+                    prezimeIzmjenaTxt.setText("");
+                    userNameTxt.setText("");
+                    adminTestIzmjena.setSelected(false);
+                    telTxt.setText("");
+                    jmbgIzmjenaTxt.setText("");
+                    userNamePretragaTxt.setText("");
+
                 }
             }
             catch(Exception e){
