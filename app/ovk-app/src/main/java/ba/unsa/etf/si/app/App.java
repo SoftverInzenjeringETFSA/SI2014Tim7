@@ -16,9 +16,13 @@ import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.entity.Ocitanja;
 import ba.unsa.etf.si.app.entity.Potrosac;
 import ba.unsa.etf.si.app.services.KorisnikService;
+import ba.unsa.etf.si.app.services.ObracunService;
 import ba.unsa.etf.si.app.services.OcitanjaService;
 import ba.unsa.etf.si.app.services.PotrosacService;
 import ba.unsa.etf.si.app.util.HibernateUtil;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 
 /**
@@ -33,6 +37,22 @@ public class App
         //pokretanje login forme
         Login login = new Login();
         login.setVisible(true);
+        /*
+        ObracunService s = new ObracunService();
+        Date x = new Date();
+        Date y = new Date();
+        DateFormat format = new SimpleDateFormat("MM/yyyy");
+        try{
+        x = format.parse("10/2010");
+        y = format.parse("12/2010");
+        
+        } catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        s.formirajRacune(x, y);
+        */
+        
         
        /*PotrosacService serv = new PotrosacService();
        Potrosac k = new Potrosac();
