@@ -75,6 +75,8 @@ public class PotrosacPregled extends javax.swing.JFrame {
         tip = new javax.swing.JTextField();
         aktivnost = new javax.swing.JTextField();
         usluga = new javax.swing.JTextField();
+        button1 = new javax.swing.JButton();
+        button2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -271,15 +273,29 @@ public class PotrosacPregled extends javax.swing.JFrame {
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
+        button1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        button1.setForeground(new java.awt.Color(0, 102, 153));
+        button1.setText("IZBRIŠI");
+
+        button2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        button2.setForeground(new java.awt.Color(0, 102, 153));
+        button2.setText("IZMIJENI");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -289,7 +305,11 @@ public class PotrosacPregled extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(button1)
+                    .addComponent(button2))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -334,6 +354,8 @@ public class PotrosacPregled extends javax.swing.JFrame {
     private javax.swing.JTextField adresa;
     private javax.swing.JTextField aktivnost;
     private javax.swing.JTextField brojClanovaDomacinstva;
+    private javax.swing.JButton button1;
+    private javax.swing.JButton button2;
     private javax.swing.JTextField ime;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

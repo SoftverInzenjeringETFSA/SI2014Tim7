@@ -44,6 +44,8 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         imePretraga = new javax.swing.JTextField();
         jmbgPretraga = new javax.swing.JFormattedTextField();
+        prezimePretraga = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
         izbrisiBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -77,6 +79,18 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
             }
         });
 
+        prezimePretraga.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        prezimePretraga.setForeground(new java.awt.Color(0, 102, 153));
+        prezimePretraga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                prezimePretragaKeyReleased(evt);
+            }
+        });
+
+        jLabel18.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(0, 102, 153));
+        jLabel18.setText("po prezimenu");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -86,12 +100,14 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(imePretraga)
+                    .addComponent(jmbgPretraga)
+                    .addComponent(prezimePretraga)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
                             .addComponent(jLabel15)
-                            .addComponent(jLabel16))
-                        .addGap(0, 108, Short.MAX_VALUE))
-                    .addComponent(jmbgPretraga))
+                            .addComponent(jLabel18))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -102,10 +118,14 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
                 .addGap(5, 5, 5)
                 .addComponent(imePretraga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel18)
+                .addGap(5, 5, 5)
+                .addComponent(prezimePretraga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jmbgPretraga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -127,7 +147,7 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(izbrisiBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(izbrisiBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -135,9 +155,9 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(izbrisiBtn)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -183,15 +203,21 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_izbrisiBtnActionPerformed
 
+    private void prezimePretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_prezimePretragaKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_prezimePretragaKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField imePretraga;
     private javax.swing.JButton izbrisiBtn;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JFormattedTextField jmbgPretraga;
     private javax.swing.JList listaPretraga;
+    private javax.swing.JTextField prezimePretraga;
     // End of variables declaration//GEN-END:variables
 }
