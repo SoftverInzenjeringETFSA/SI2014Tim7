@@ -6,6 +6,7 @@
 package ba.etf.unsa.si.app.renderer;
 
 import ba.unsa.etf.si.app.entity.Korisnik;
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -24,7 +25,7 @@ public class KorisnikRenderer extends JLabel implements ListCellRenderer<Korisni
             setBackground(list.getSelectionBackground());
             setForeground(list.getSelectionForeground());
         } else {
-            setBackground(list.getBackground());
+            setBackground(Color.white);
             setForeground(list.getForeground());
         }
         

@@ -10,6 +10,8 @@ import ba.etf.unsa.si.app.renderer.PotrosacRenderer;
 import ba.unsa.etf.si.app.entity.Potrosac;
 import ba.unsa.etf.si.app.services.PotrosacService;
 import static com.sun.org.apache.xerces.internal.util.XMLChar.trim;
+import java.awt.Color;
+import java.awt.Component;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -29,6 +31,7 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
         initComponents();
         if(tipPausalac.isSelected())
             sifraVodomjera.setEditable(false);
+        
     }
 
     /**
@@ -435,7 +438,7 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void imePretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_imePretragaKeyReleased
-        updateListu();
+        updateListu();    
     }//GEN-LAST:event_imePretragaKeyReleased
 
     private void jmbgPretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jmbgPretragaKeyReleased
@@ -608,7 +611,8 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
             model.addElement(p);
         }    
         listaPretraga.setCellRenderer(x);
-        listaPretraga.setModel(model);    
+        listaPretraga.setModel(model);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
