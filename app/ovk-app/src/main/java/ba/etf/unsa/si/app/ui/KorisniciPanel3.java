@@ -162,6 +162,7 @@ public class KorisniciPanel3 extends javax.swing.JPanel {
             KorisnikService servicePretraga = new KorisnikService();
             Korisnik k = (Korisnik) listaZaBrisanje.getSelectedValue();
             servicePretraga.deleteKorisnik(k);
+            pretragaKorisnikaZaBrisanje.setText("");
             JOptionPane.showMessageDialog(null,"Uspjesno ste obrisali korisnika " + username);
             }
             catch(Exception e){

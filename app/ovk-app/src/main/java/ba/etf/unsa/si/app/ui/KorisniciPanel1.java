@@ -382,6 +382,9 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
         else if(telTxt.getText().equals("0  /   -    ") || telTxt.getText().replaceAll("\\s","").length() <= 10 ){
             status.setText("Unesite telefonski broj korisnika");
         }
+        else if(telTxt.getText().substring(0,11).contains(" ")){
+            status.setText("Broj telefona nije u pravilnom formatu");
+        }
         else if(emailTxt.getText().isEmpty() || emailTxt.getText().replaceAll("\\s","").length() == 0){
             status.setText("Unesite e-mail korisnika");
         }
