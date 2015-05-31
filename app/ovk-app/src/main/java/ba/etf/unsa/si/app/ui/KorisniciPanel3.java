@@ -43,12 +43,15 @@ public class KorisniciPanel3 extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         pretragaKorisnikaZaBrisanje = new javax.swing.JTextField();
         obrisiBtn = new javax.swing.JButton();
+        status = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Odabir korisnika", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 1, 12), new java.awt.Color(0, 102, 153))); // NOI18N
 
+        listaZaBrisanje.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        listaZaBrisanje.setForeground(new java.awt.Color(0, 102, 153));
         jScrollPane1.setViewportView(listaZaBrisanje);
 
         jLabel16.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
@@ -98,15 +101,28 @@ public class KorisniciPanel3 extends javax.swing.JPanel {
             }
         });
 
+        status.setEditable(false);
+        status.setBackground(new java.awt.Color(255, 255, 255));
+        status.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        status.setForeground(new java.awt.Color(255, 51, 51));
+        status.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        status.setBorder(null);
+        status.setOpaque(false);
+        status.setSelectionColor(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(obrisiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addGap(190, 190, 190)
+                .addComponent(obrisiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
+            .addComponent(status)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,7 +131,8 @@ public class KorisniciPanel3 extends javax.swing.JPanel {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(obrisiBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -135,17 +152,25 @@ public class KorisniciPanel3 extends javax.swing.JPanel {
     }//GEN-LAST:event_pretragaKorisnikaZaBrisanjeKeyReleased
 
     private void obrisiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_obrisiBtnActionPerformed
-        try{
+        if(listaZaBrisanje.getSelectedValue() == null){
+            status.setText("Niste odabrali korisnika");
+        }
+        else{
+            status.setText("");
+            try{
             String username  = listaZaBrisanje.getSelectedValue().toString();
             KorisnikService servicePretraga = new KorisnikService();
             Korisnik k = (Korisnik) listaZaBrisanje.getSelectedValue();
             servicePretraga.deleteKorisnik(k);
-            JOptionPane.showMessageDialog(null,"Uspjesno ste obrisali korisnika. ");
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage(),"Greska!",
-                    JOptionPane.ERROR_MESSAGE);
-        }
+            JOptionPane.showMessageDialog(null,"Uspjesno ste obrisali korisnika " + username);
+            }
+            catch(Exception e){
+                //JOptionPane.showMessageDialog(null, e.getMessage(),"Greska!",
+                //        JOptionPane.ERROR_MESSAGE);
+                status.setText(e.getMessage());
+            }
+        }    
+       
     }//GEN-LAST:event_obrisiBtnActionPerformed
 
 
@@ -156,5 +181,6 @@ public class KorisniciPanel3 extends javax.swing.JPanel {
     private javax.swing.JList listaZaBrisanje;
     private javax.swing.JButton obrisiBtn;
     private javax.swing.JTextField pretragaKorisnikaZaBrisanje;
+    private javax.swing.JTextField status;
     // End of variables declaration//GEN-END:variables
 }

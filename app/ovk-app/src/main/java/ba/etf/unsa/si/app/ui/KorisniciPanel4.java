@@ -51,6 +51,7 @@ public class KorisniciPanel4 extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaPretraga = new javax.swing.JList();
+        status = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -177,6 +178,15 @@ public class KorisniciPanel4 extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        status.setEditable(false);
+        status.setBackground(new java.awt.Color(255, 255, 255));
+        status.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        status.setForeground(new java.awt.Color(255, 51, 51));
+        status.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        status.setBorder(null);
+        status.setOpaque(false);
+        status.setSelectionColor(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -193,6 +203,7 @@ public class KorisniciPanel4 extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addComponent(status)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,7 +214,8 @@ public class KorisniciPanel4 extends javax.swing.JPanel {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -224,15 +236,23 @@ public class KorisniciPanel4 extends javax.swing.JPanel {
     }//GEN-LAST:event_usernamePretragaKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try{
-        Korisnik k = (Korisnik) listaPretraga.getSelectedValue();
-        pregled = new KorisniciPregled(k);
-        pregled.setVisible(true);
+        if(listaPretraga.getSelectedValue() == null){
+             status.setText("Niste odabrali korisnika");
         }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Niste odabrali korisnika !", "Greska",
-                                    JOptionPane.ERROR_MESSAGE);
+        else{
+            status.setText("");
+            try{
+            Korisnik k = (Korisnik) listaPretraga.getSelectedValue();
+            pregled = new KorisniciPregled(k);
+            pregled.setVisible(true);
+            }
+            catch(Exception e){
+                //JOptionPane.showMessageDialog(null, "Niste odabrali korisnika !", "Greska",
+                //                        JOptionPane.ERROR_MESSAGE);
+                status.setText(e.getMessage());
+            }
         }
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void update(){
@@ -271,6 +291,7 @@ public class KorisniciPanel4 extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField jmbgPretraga;
     private javax.swing.JList listaPretraga;
     private javax.swing.JTextField prezimePretraga;
+    private javax.swing.JTextField status;
     private javax.swing.JTextField usernamePretraga;
     // End of variables declaration//GEN-END:variables
 }

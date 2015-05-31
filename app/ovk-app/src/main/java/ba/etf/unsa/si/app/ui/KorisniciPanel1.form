@@ -135,9 +135,6 @@
               <Color blue="99" green="66" red="0" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="imeTxtFocusLost"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
@@ -159,9 +156,6 @@
               <Color blue="99" green="66" red="0" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="prezimeTxtFocusLost"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel12">
           <Properties>
@@ -205,9 +199,6 @@
               <Color blue="99" green="66" red="0" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="brlicneTxtFocusLost"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jmbgTxt">
           <Properties>
@@ -218,9 +209,6 @@
               <Color blue="99" green="66" red="0" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jmbgTxtFocusLost"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -291,9 +279,6 @@
               <Color blue="99" green="66" red="0" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="usernameTxt1FocusLost"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel24">
           <Properties>
@@ -423,9 +408,6 @@
               <Color blue="99" green="66" red="0" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="emailTxtKeyTyped"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel16">
           <Properties>
@@ -447,9 +429,6 @@
               <Color blue="99" green="66" red="0" type="rgb"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="adresaTxtFocusLost"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel18">
           <Properties>
@@ -483,9 +462,6 @@
             </Property>
             <Property name="focusLostBehavior" type="int" value="3"/>
           </Properties>
-          <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="telTxtFocusLost"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

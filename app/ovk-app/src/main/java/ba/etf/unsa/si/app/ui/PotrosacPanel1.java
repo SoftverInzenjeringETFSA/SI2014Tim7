@@ -24,7 +24,6 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
         if(tipPausalac.isSelected())
             sifraVodomjera.setEditable(false);
         
-        spasiButton.setEnabled(false);
         status.setText("Oprez: sva polja osim šifre vodomjera su obavezna!");
     }
 
