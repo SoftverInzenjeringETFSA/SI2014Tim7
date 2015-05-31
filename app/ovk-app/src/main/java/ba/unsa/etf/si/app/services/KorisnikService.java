@@ -8,7 +8,15 @@ package ba.unsa.etf.si.app.services;
 import ba.unsa.etf.si.app.dao.KorisnikDAO;
 import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.util.HibernateUtil;
+
+
+//import java.sql.Date;
+import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import org.hibernate.Session;
 
 /**
@@ -106,9 +114,23 @@ public class KorisnikService {
     }
     private Boolean validate(Korisnik k){
         if(!validateJMBG(k.getJmbg())){
+        	JOptionPane.showMessageDialog(null,"JMBG nije validan!");
             return false;
         }
-        return validateBrLicne(k);
+        if( !validateBrLicne(k)){
+        	JOptionPane.showMessageDialog(null,"Broj lične karte ne smije imati manje od 9 cifara!");
+        	return false;
+        }
+        if( !validateDatum(k)){
+        	JOptionPane.showMessageDialog(null,"Datum zaposlenja ne moze biti poslije trenutnog datuma!");
+        	return false;
+        }
+                 
+        if( !validateEmail(k)){
+        	JOptionPane.showMessageDialog(null,"Email adresa nije validna!");
+        	return false;
+        }
+        return true;
     }
     private String createPassword(){
         String newPass;
@@ -131,6 +153,24 @@ public class KorisnikService {
     private Boolean validateBrLicne(Korisnik k){
         return k.getBrojLicne().length()==9;
     }
+    
+    private Boolean validateDatum(Korisnik k){
+    	Date sadasnjiDatum = new Date();
+    	if(k.getDatumZaposljenja().after(sadasnjiDatum)){
+    		return false;
+    	}
+    	return true;
+    }
+    private Boolean validateEmail(Korisnik k){
+    	String mailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+		+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    	if(!k.getMail().matches(mailPattern)){
+    		return false;
+    	}
+    	return true;
+    }
+   
+    
     public void closeSession(){
         HibernateUtil.getSessionFactory().close();
     }
@@ -188,7 +228,7 @@ public class KorisnikService {
                     return k.get(0).getAdmin();
                 }
                 else{
-                    throw new IllegalArgumentException("Unijeli ste pogrešan password");
+                    throw new IllegalArgumentException("Unijeli ste pogreÅ¡an password");
                 }   
             }
             else{
