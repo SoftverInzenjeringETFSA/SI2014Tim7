@@ -29,10 +29,10 @@ public class ObracunServiceTest {
 		assertEquals(rez.size(), 0);
 	}
 
-	@Test
+	@Test(expected=IllegalStateException.class)
 	public void testUplatiRacun() {
 		ObracunService obracuni = new ObracunService();
-		Racuni r=obracuni.pretragaRacunaPoID(1);
+		Racuni r=obracuni.pretragaRacunaPoID(2);
 		obracuni.uplatiRacun(r);
 		assertNotNull(r);
 	}
