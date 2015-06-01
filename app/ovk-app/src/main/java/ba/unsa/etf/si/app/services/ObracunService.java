@@ -117,7 +117,7 @@ public class ObracunService {
 		Double cijenaKsaPDV = round(cijenaKanalizacije + cijenaKanalizacije
 				* param.getStopaPdv()/100,2);
 		Double cijenaVsaPDV = round(cijenaVoda + cijenaVoda * param.getStopaPdv()/100,2);
-		Double ukupnoSaPDV = round(cijenaVsaPDV + cijenaKsaPDV + + param.getFiksnaCijena() +param.getFiksnaCijena()*param.getStopaPdv()/100,2);
+		Double ukupnoSaPDV = round(cijenaVsaPDV + cijenaKsaPDV + param.getFiksnaCijena() + param.getFiksnaCijena()*param.getStopaPdv()/100,2);
 		Racuni r = new Racuni();
 		r.setCijenaKanalizacije(cijenaKanalizacije);
 		r.setCijenaKanalizacijeSaPdv(cijenaKsaPDV);
@@ -133,8 +133,8 @@ public class ObracunService {
 			r.setPotrosnjaZaKoristenjeKanalizacije(0.0);
 		}
                 r.setPotrosnjaZaKoristenjeVoda(potrosnja);
-		r.setPvnZaKoristenjeVoda(param.getPvnZaKoristenjeVoda());
-		r.setPvnZaZastituVoda(param.getPvnZaZastituVoda());
+		r.setPvnZaKoristenjeVoda(potrosnja*param.getPvnZaKoristenjeVoda());
+		r.setPvnZaZastituVoda(potrosnja*param.getPvnZaZastituVoda());
 		r.setUkupnaCijena(ukupno);
 		r.setUkupnaCijenaSaPdv(ukupnoSaPDV);
                 oPocetak.setAccess(false);

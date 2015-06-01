@@ -194,7 +194,7 @@ public class ParametriPanel2 extends javax.swing.JPanel {
         jLabel23.setForeground(new java.awt.Color(0, 102, 153));
         jLabel23.setText("%");
 
-        PVN2.setModel(new javax.swing.SpinnerNumberModel(0.004d, 0.0d, 1.0d, 0.001d));
+        PVN2.setModel(new javax.swing.SpinnerNumberModel(0.04d, 0.0d, 1.0d, 0.01d));
 
         PVN1.setModel(new javax.swing.SpinnerNumberModel(0.01d, 0.0d, 1.0d, 0.01d));
 
