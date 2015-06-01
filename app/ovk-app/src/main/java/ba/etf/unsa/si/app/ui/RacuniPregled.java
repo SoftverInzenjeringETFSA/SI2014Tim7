@@ -198,7 +198,7 @@ public void update(){
     	
     	
     	DefaultTableModel model1 = new DefaultTableModel(new Object[]{ "Ime", "Prezime", "Šifra računa", "Šifra vodomjera", "Period",
-    			                            "Utrošak m3", "Iznos", "Iznos sa PDV", "PVN", "Ukupan iznos", "Datum uplate"
+    			                            "Utrošak m3", "Iznos", "Iznos sa PDV", "PVN za koristenje voda", "PVN za zastitu voda", "Datum uplate"
                  },0);
     	for(Racuni racun:racuni){
     		Object[] red = new Object[11];
@@ -220,7 +220,7 @@ public void update(){
     		red[6] = racun.getUkupnaCijena();
     		red[7] = racun.getUkupnaCijenaSaPdv();
     		red[8] = racun.getPvnZaKoristenjeVoda();
-    		red[9] = racun.getUkupnaCijena();
+    		red[9] = racun.getPvnZaZastituVoda();
     		red[10] = racun.getDatumUplate();
     		
     		model1.addRow(red);
