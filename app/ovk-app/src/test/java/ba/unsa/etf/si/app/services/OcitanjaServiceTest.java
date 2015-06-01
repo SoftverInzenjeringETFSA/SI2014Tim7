@@ -14,67 +14,43 @@ public class OcitanjaServiceTest {
 	private static Ocitanja o;
 
 
-	
+	@Test
 	public void testGetPotrosac() {
 		OcitanjaService ocitanja = new OcitanjaService();
-		Potrosac p=ocitanja.getPotrosac(123);
-		assertNull(p);
+		Potrosac p=ocitanja.getPotrosac(3);
+		assertNotNull(p);
 	}
-	
-
 	@Test
 	public void testCreateNewOcitanja() {
 		PotrosacService potrosaci = new PotrosacService();
-		Potrosac potrosac = new Potrosac();
-		potrosac.setIme("Emina");
-		potrosac.setPrezime("Muharemovic");
-		potrosac.setJmbg("2709992176217");
-		potrosac.setSifraVodomjera(3);
-		potrosac.setKategorija("pausalni");
-		potrosaci.createNewPotrosac(potrosac);
+		List<Potrosac> p=potrosaci.searchByCriteria("Emina", "Muharemovic", "2709992176217");
 		OcitanjaService ocitanja = new OcitanjaService();
 		o=new Ocitanja();
 		o.setGodina(2015);
 		o.setMjesec(5);
-		o.setPotrosacByIdPotrosaca(potrosac);
+		o.setPotrosacByIdPotrosaca(p.get(0));
 		o.setPotrosnja(123.0);
-		o.setSifraVodomjera(5);
+		o.setSifraVodomjera(3);
+		o.setAccess(true);
 		ocitanja.createNewOcitanja(o);
 		assertNotNull(o);
 		ocitanja.hardDeleteOcitanja(o);
-		potrosaci.hardDeletePotrosac(potrosac);
 	}
-
-	@Test(expected=IllegalArgumentException.class)
+	
+	@Test
 	public void testGetId() {
 		OcitanjaService ocitanja = new OcitanjaService();
-		List<Ocitanja>rez=ocitanja.getId(5);
-		assertNull(rez.size());
+		List<Ocitanja>rez=ocitanja.getId(2);
+		assertNotNull(rez.size());
 	}
 
 	@Test
 	public void testModifyOcitanja() {
-		PotrosacService potrosaci = new PotrosacService();
-		Potrosac potrosac = new Potrosac();
-		potrosac.setIme("Emina");
-		potrosac.setPrezime("Muharemovic");
-		potrosac.setJmbg("2709992176217");
-		potrosac.setSifraVodomjera(3);
-		potrosac.setKategorija("pausalni");
-		potrosaci.createNewPotrosac(potrosac);
 		OcitanjaService ocitanja = new OcitanjaService();
-		o=new Ocitanja();
-		o.setGodina(2015);
-		o.setMjesec(5);
-		o.setPotrosacByIdPotrosaca(potrosac);
-		o.setPotrosnja(123.0);
-		o.setSifraVodomjera(5);
-		ocitanja.createNewOcitanja(o);
-		o.setMjesec(4);
-		ocitanja.modifyOcitanja(o);
-		assertTrue(o.getMjesec()==4);
-		ocitanja.hardDeleteOcitanja(o);
-		potrosaci.hardDeletePotrosac(potrosac);
+		List<Ocitanja>rez=ocitanja.getId(2);
+		rez.get(0).setMjesec(5);
+		ocitanja.modifyOcitanja(rez.get(0));
+		assertTrue(rez.get(0).getMjesec()==5);
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
@@ -87,52 +63,32 @@ public class OcitanjaServiceTest {
 		o.setSifraVodomjera(5);
 		ocitanja.hardDeleteOcitanja(o);
 	}
-
+	
 	@Test(expected=IllegalArgumentException.class)
 	public void testDeleteOcitanja() {
 		OcitanjaService ocitanja = new OcitanjaService();
-		o=new Ocitanja();
-		o.setGodina(2015);
-		o.setMjesec(5);
-		o.setPotrosnja(123.0);
-		o.setSifraVodomjera(5);
-		ocitanja.deleteOcitanja(o);
-	
-	
+		List<Ocitanja>rez=ocitanja.getId(123);
+		ocitanja.deleteOcitanja(rez.get(0));
 	}
 
-	@Test(expected=IllegalArgumentException.class)
-	public void testGetOcitanjaForRacuni() {
-		OcitanjaService ocitanja = new OcitanjaService();
-		Date datum1=new Date("01/04/2015");
-		Date datum2=new Date("30/04/2015");
-		List<Ocitanja>rez=ocitanja.getOcitanjaForRacuni(datum1,datum2);
-		assertNull(rez);
-		
-	}
 
 	@Test
 	public void testGetOcitanjeForRacuni() {
-		PotrosacService potrosaci = new PotrosacService();
-		Potrosac potrosac = new Potrosac();
-		potrosac.setIme("Pero");
-		potrosac.setPrezime("Peric");
-		potrosac.setJmbg("2309992170008");
-		potrosac.setSifraVodomjera(4);
-		potrosac.setKategorija("pausalni");
-		potrosaci.createNewPotrosac(potrosac);
 		OcitanjaService ocitanja = new OcitanjaService();
-		o=new Ocitanja();
-		o.setGodina(2014);
-		o.setMjesec(4);
-		o.setPotrosacByIdPotrosaca(potrosac);
-		o.setPotrosnja(123.0);
-		o.setSifraVodomjera(5);
-		ocitanja.createNewOcitanja(o);
-		Ocitanja rez=ocitanja.getOcitanjeForRacuni(4, 2014, potrosac);
+		Date datum1=new Date("01/04/2015");
+		Date datum2=new Date("30/04/2015");
+		List<Ocitanja>rez=ocitanja.getOcitanjaForRacuni(datum1, datum2);
 		assertNotNull(rez);
-		ocitanja.hardDeleteOcitanja(o);
-		potrosaci.hardDeletePotrosac(potrosac);
+		
+	}
+	@Test
+	public void testGetOcitanjeForRacuni2() {
+		OcitanjaService ocitanja = new OcitanjaService();
+		PotrosacService potrosaci = new PotrosacService();
+		List<Potrosac> p=potrosaci.searchByCriteria("Kenan", "Mahmutovic", "1512997172641");
+		Ocitanja o=ocitanja.getOcitanjeForRacuni(4, 2015, p.get(0));
+		assertNotNull(o);
+			
 	}
 
 }

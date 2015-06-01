@@ -9,11 +9,12 @@ import org.junit.Test;
 
 import ba.unsa.etf.si.app.entity.Izvjestaji;
 import ba.unsa.etf.si.app.entity.Potrosac;
+import ba.unsa.etf.si.app.entity.Racuni;
 
 public class IzvjestajServiceTest {
 	private static Izvjestaji izvjestaj;
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void testKreirajIzvjestaj() {
 		IzvjestajService izvjestaji = new IzvjestajService();
 		Date datum1=new Date("01/04/2015");
@@ -48,9 +49,7 @@ public class IzvjestajServiceTest {
 		izvjestaj.setPotrosnjaPausalacaVoda(2001.12);
 		izvjestaj.setId(2);
 		izvjestaji.obrisiIzvjestaj(izvjestaj);
-		assertNull(izvjestaj);
-		
-		
+		assertNull(izvjestaj);	
 	}
 
 	@Test(expected=IllegalArgumentException.class)
@@ -59,6 +58,14 @@ public class IzvjestajServiceTest {
 		Date datum1=new Date("01/04/2015");
 		Date datum2=new Date("30/04/2015");
 		izvjestaji.izracunajParametreZaIzvjestaj(datum2, datum1);	
+	}
+	@Test
+	public void testNadjiPotrosace() {
+		IzvjestajService izvjestaji = new IzvjestajService();
+		Date datum1=new Date("01/04/2015");
+		Date datum2=new Date("30/04/2015");
+		List<Racuni>r=izvjestaji.nadjiListuRacuna(datum1, datum2);
+		assertNotNull(r);
 	}
 
 }

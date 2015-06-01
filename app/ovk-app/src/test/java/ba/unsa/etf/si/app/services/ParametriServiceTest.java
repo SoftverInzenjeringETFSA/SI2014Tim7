@@ -13,17 +13,10 @@ public class ParametriServiceTest {
 	@Test
 	public void testCreateOrModifyParams() {
 		ParametriService parametri = new ParametriService();
-		parametar=new Parametri();
-		parametar.setCijenaKanalizacijePoKubiku(20.0);
-		parametar.setCijenaVodePoKubiku(25.0);
-		parametar.setFiksnaCijena(30.0);
-		parametar.setFiksniKanalizacijaZaPausalce(12.5);
-		parametar.setId(2);
-		parametar.setPvnZaKoristenjeVoda(32.0);
-		parametar.setPvnZaZastituVoda(12.0);
-		parametar.setStopaPdv(17.0);
-		parametri.createOrModifyParams(parametar);
-		assertTrue(parametar.getId()==2);
+		Parametri p=parametri.dajParametre();
+		p.setFiksnaCijena(10.0);
+		parametri.createOrModifyParams(p);
+		assertTrue(p.getFiksnaCijena()==10);
 		
 		
 	}
@@ -31,19 +24,8 @@ public class ParametriServiceTest {
 	@Test
 	public void testDajParametre() {
 		ParametriService parametri = new ParametriService();
-		parametar=new Parametri();
-		parametar.setCijenaKanalizacijePoKubiku(20.0);
-		parametar.setCijenaVodePoKubiku(25.0);
-		parametar.setFiksnaCijena(30.0);
-		parametar.setFiksniKanalizacijaZaPausalce(12.5);
-		parametar.setId(2);
-		parametar.setPvnZaKoristenjeVoda(32.0);
-		parametar.setPvnZaZastituVoda(12.0);
-		parametar.setStopaPdv(17.0);
-		parametri.createOrModifyParams(parametar);
-		assertTrue(parametar.getId()==2);
-		Parametri rezultat=parametri.dajParametre();
-		assertEquals(parametar.getId(),rezultat.getId());
+		Parametri p=parametri.dajParametre();
+		assertNotNull(p);
 	}
 
 }

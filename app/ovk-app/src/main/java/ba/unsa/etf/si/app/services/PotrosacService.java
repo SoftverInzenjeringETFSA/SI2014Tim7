@@ -99,18 +99,7 @@ public class PotrosacService {
                 throw new IllegalArgumentException("Potrosac nije prosao validaciju, provjerite podatke");
             }
     }
-    
-    public void hardDeletePotrosac(Potrosac p) {
-			Session session = HibernateUtil.getSessionFactory().openSession();
-		    session.beginTransaction();
-		    PotrosacDAO dao = new PotrosacDAO();
-		    dao.setSession(session);
-		    dao.delete(p.getId());
-		    // Zatvaranje sesije, isto obavezni dio
-		    session.getTransaction().commit();
-		    session.close();
-    }
-    
+   
     public void deletePotrosac(Potrosac p){
                 Potrosac zaBrisanje = getPotrosacByJMBG(p.getJmbg());
                 if(zaBrisanje.getHidden() == null || !zaBrisanje.getHidden()){
