@@ -31,7 +31,7 @@ public class ObracunService {
 		Calendar doDat = Calendar.getInstance();
 		odDat.setTime(odDatuma);
 		doDat.setTime(doDatuma);
-                if(odDatuma.compareTo(doDatuma)==0){
+                if(odDatuma.compareTo(doDatuma)==0||odDat.get(odDat.YEAR)<2000||doDat.get(odDat.YEAR)<2000){
                     throw new IllegalArgumentException("Nije moguce kreirati racune za dati period!");
                 }
 		formirajOcitanjaZaPausalce(odDat.get(odDat.MONTH) + 1,

@@ -436,20 +436,20 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
 
     private void imePretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_imePretragaKeyReleased
         updateListu();    
-        if(imePretraga.getText().isEmpty() || imePretraga.getText().replaceAll("\\s","").length() == 0 ){
+       /* if(imePretraga.getText().isEmpty() || imePretraga.getText().replaceAll("\\s","").length() == 0 ){
             listaPretraga.clearSelection();
             DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
             listModel.removeAllElements();
-        }
+        }*/
     }//GEN-LAST:event_imePretragaKeyReleased
 
     private void jmbgPretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jmbgPretragaKeyReleased
         updateListu();
-        if(jmbgPretraga.getText().isEmpty() || jmbgPretraga.getText().replaceAll("\\s","").length() == 0 ){
+       /* if(jmbgPretraga.getText().isEmpty() || jmbgPretraga.getText().replaceAll("\\s","").length() == 0 ){
             listaPretraga.clearSelection();
             DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
             listModel.removeAllElements();
-        }
+        }*/
     }//GEN-LAST:event_jmbgPretragaKeyReleased
 
     private void listaPretragaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaPretragaValueChanged
@@ -628,12 +628,12 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
     }//GEN-LAST:event_tipVodomjerItemStateChanged
 
     private void prezimePretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_prezimePretragaKeyReleased
-        // TODO add your handling code here:
+        updateListu();
     }//GEN-LAST:event_prezimePretragaKeyReleased
     
     private void updateListu(){
         PotrosacService servis = new PotrosacService();
-        List<Potrosac> listaPotrosac = servis.searchByCriteria(imePretraga.getText(), "", jmbgPretraga.getText());
+        List<Potrosac> listaPotrosac = servis.searchByCriteria(imePretraga.getText(), prezimePretraga.getText(), jmbgPretraga.getText());
         DefaultListModel<Potrosac> model = new DefaultListModel<Potrosac>();
         model.removeAllElements();
         Collections.sort(listaPotrosac,new PotrosacComparator());

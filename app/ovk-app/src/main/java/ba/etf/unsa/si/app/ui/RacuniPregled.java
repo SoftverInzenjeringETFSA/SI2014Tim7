@@ -196,7 +196,7 @@ public void update(){
     	
     	
     	DefaultTableModel model1 = new DefaultTableModel(new Object[]{ "Ime", "Prezime", "Šifra računa", "Šifra vodomjera", "Period",
-    			                            "Utrošak m3", "Iznos", "Iznos sa PDV", "Iznos PVN", "Ukupan iznos", "Datum uplate"
+    			                            "Utrošak m3", "Iznos", "Iznos sa PDV", "PVN za koristenje voda", "Ukupan iznos", "Datum uplate"
                  },0);
     	for(Racuni racun:racuni){
     		Object[] red = new Object[11];

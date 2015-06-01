@@ -221,38 +221,38 @@ public class KorisniciPanel4 extends javax.swing.JPanel {
 
     private void imePretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_imePretragaKeyReleased
         update();
-        if(imePretraga.getText().isEmpty() || imePretraga.getText().replaceAll("\\s","").length() == 0 ){
+       /* if(imePretraga.getText().isEmpty() || imePretraga.getText().replaceAll("\\s","").length() == 0 ){
             listaPretraga.clearSelection();
             DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
             listModel.removeAllElements();
-        }
+        }*/
     }//GEN-LAST:event_imePretragaKeyReleased
 
     private void prezimePretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_prezimePretragaKeyReleased
         update();
-         if(prezimePretraga.getText().isEmpty() || prezimePretraga.getText().replaceAll("\\s","").length() == 0 ){
+         /*if(prezimePretraga.getText().isEmpty() || prezimePretraga.getText().replaceAll("\\s","").length() == 0 ){
             listaPretraga.clearSelection();
             DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
             listModel.removeAllElements();
-        }
+        }*/
     }//GEN-LAST:event_prezimePretragaKeyReleased
 
     private void jmbgPretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jmbgPretragaKeyReleased
         update();
-         if(jmbgPretraga.getText().isEmpty() || jmbgPretraga.getText().replaceAll("\\s","").length() == 0 ){
+        /* if(jmbgPretraga.getText().isEmpty() || jmbgPretraga.getText().replaceAll("\\s","").length() == 0 ){
             listaPretraga.clearSelection();
             DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
             listModel.removeAllElements();
-        }
+        }*/
     }//GEN-LAST:event_jmbgPretragaKeyReleased
 
     private void usernamePretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernamePretragaKeyReleased
         update();
-        if(usernamePretraga.getText().isEmpty() || usernamePretraga.getText().replaceAll("\\s","").length() == 0 ){
+      /*  if(usernamePretraga.getText().isEmpty() || usernamePretraga.getText().replaceAll("\\s","").length() == 0 ){
             listaPretraga.clearSelection();
             DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
             listModel.removeAllElements();
-        }
+        }*/
     }//GEN-LAST:event_usernamePretragaKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

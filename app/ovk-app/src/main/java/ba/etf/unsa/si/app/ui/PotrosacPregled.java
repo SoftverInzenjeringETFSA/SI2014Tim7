@@ -5,9 +5,13 @@
  */
 package ba.etf.unsa.si.app.ui;
 
+import ba.etf.unsa.si.app.globals.CurrentlyLoggedIn;
 import ba.unsa.etf.si.app.entity.Potrosac;
+import ba.unsa.etf.si.app.services.PotrosacService;
 import java.awt.Color;
 import java.awt.Container;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,9 +22,13 @@ public class PotrosacPregled extends javax.swing.JFrame {
     /**
      * Creates new form PotrosacPregled
      */
-    public PotrosacPregled(Potrosac p) {
+    Potrosac zaBrisanje;
+    PotrosacPanel4 panelUpdate;
+    public PotrosacPregled(Potrosac p,PotrosacPanel4 panelX) {
         initComponents();
         Container container = this.getContentPane();
+        zaBrisanje = p;
+        panelUpdate = panelX;
         container.setBackground(Color.white); 
         ime.setText(p.getIme());
         prezime.setText(p.getPrezime());
@@ -76,7 +84,6 @@ public class PotrosacPregled extends javax.swing.JFrame {
         aktivnost = new javax.swing.JTextField();
         usluga = new javax.swing.JTextField();
         button1 = new javax.swing.JButton();
-        button2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -276,10 +283,11 @@ public class PotrosacPregled extends javax.swing.JFrame {
         button1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         button1.setForeground(new java.awt.Color(0, 102, 153));
         button1.setText("IZBRIŠI");
-
-        button2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        button2.setForeground(new java.awt.Color(0, 102, 153));
-        button2.setText("IZMIJENI");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -288,10 +296,7 @@ public class PotrosacPregled extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(button2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -306,14 +311,39 @@ public class PotrosacPregled extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(button1)
-                    .addComponent(button2))
+                .addComponent(button1)
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+       PotrosacService servicePretraga = new PotrosacService();
+        Potrosac p = zaBrisanje;
+        if(CurrentlyLoggedIn.korisnik.getAdmin() != null && !CurrentlyLoggedIn.korisnik.getAdmin()){
+        	JOptionPane.showMessageDialog(null,"Samo administrator može izbrisati potrošača.");
+        	return;
+        }
+        
+        String msg = "";
+        if(p.getHidden()){
+            msg = "obnovili potrošački račun.";
+        }
+        else{
+            msg = "obrisali potrošački račun.";
+        }
+        try{
+            servicePretraga.deletePotrosac(p);
+            zaBrisanje.setHidden(!zaBrisanje.getHidden());
+            panelUpdate.update();
+            JOptionPane.showMessageDialog(null,"Uspješno ste " + msg); 
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Greška!",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_button1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -345,7 +375,7 @@ public class PotrosacPregled extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PotrosacPregled(new Potrosac()).setVisible(true);
+                new PotrosacPregled(new Potrosac(),new PotrosacPanel4()).setVisible(true);
             }
         });
     }
@@ -355,7 +385,6 @@ public class PotrosacPregled extends javax.swing.JFrame {
     private javax.swing.JTextField aktivnost;
     private javax.swing.JTextField brojClanovaDomacinstva;
     private javax.swing.JButton button1;
-    private javax.swing.JButton button2;
     private javax.swing.JTextField ime;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

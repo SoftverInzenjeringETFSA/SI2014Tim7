@@ -204,7 +204,7 @@ public void izracunajParametreZaIzvjestaj(Date donjaGranica, Date gornjaGranica)
         for (int i=0; i<racuni.size(); i++){
             p=racuni.get(i).getPotrosac();
             
-            if (p.getKategorija()=="Pausalni"){        
+            if (p.getKategorija()=="Pausalac"){        
                 //fiksna cijena * broj clanova domacinstva
                 potrosnjaVodePausalni+=racuni.get(i).getFisknaCijenaZaKoristenjeUsluga()*Double.parseDouble(p.getBrojClanova());
                 
@@ -224,7 +224,7 @@ public void izracunajParametreZaIzvjestaj(Date donjaGranica, Date gornjaGranica)
         
         //koliko ima pausalnih, a koliko nepausalnih korisnika
          for (int i=0; i<potrosaci.size(); i++){
-             if (potrosaci.get(i).getKategorija()=="Pausalni"){
+             if (potrosaci.get(i).getKategorija()=="Pausalac"){
                 brojPausalnihVoda++;
                 
                 if (potrosaci.get(i).getUsluga()==true){
