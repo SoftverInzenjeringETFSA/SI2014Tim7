@@ -36,6 +36,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  *
@@ -383,6 +388,36 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         lblPeriod = new JLabel("Period:");
         
         lblAhaaaaaaaaaa = new JLabel("");
+        
+        JButton btnPrintaj = new JButton("PRINTAJ");
+        btnPrintaj.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        	}
+        });
+        btnPrintaj.setForeground(new java.awt.Color(0, 102, 153));
+        btnPrintaj.setFont(new Font("SansSerif", Font.BOLD, 12));
+        btnPrintaj.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseClicked(MouseEvent arg0) {
+        		
+        		try
+        		{
+        			if(jList1.isSelectionEmpty()==true)
+            	{
+            		throw new IllegalArgumentException("Niste izabrali izvjestaj!");
+            	}
+        			
+        		int id = Integer.valueOf(jList1.getSelectedValue().toString());
+        		IzvjestajService izvjestaj = new IzvjestajService();
+        		Izvjestaji neki = izvjestaj.vratiSveIzvjestajeZaId(id);
+        		izvjestaj.print(neki);
+        		
+        	}
+        		catch(Exception e){
+        			JOptionPane.showMessageDialog(null, e.getMessage());
+        		}
+        	}
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
@@ -396,41 +431,46 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         					.addGap(18)
         					.addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)))
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        					.addGroup(layout.createSequentialGroup()
+        						.addGap(14)
+        						.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        							.addComponent(lblNewLabel)
+        							.addComponent(lblPotrSaKanalizacijom, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(lblIdIzvjestaja)
+        							.addComponent(lblPausalci, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(lblKanalizacija, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(lblPotrosnjaVode, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(lblSaKanalizacijom, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(lblPotrosnjaVode_1, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(lblPotrKanalizacije, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(lblZaradaVoda, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(lblUkupnaZarada, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(lblPeriod, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE))
+        						.addPreferredGap(ComponentPlacement.RELATED)
+        						.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        							.addComponent(label, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(label_2, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+        							.addComponent(label_3, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+        							.addComponent(label_4, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+        							.addComponent(label_5, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+        							.addComponent(label_6, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+        							.addComponent(label_7, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+        							.addComponent(label_8, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+        							.addComponent(label_9, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+        							.addComponent(label_10, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+        							.addComponent(label_11, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+        							.addComponent(lblSasaa, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
+        						.addGap(11))
+        					.addGroup(layout.createSequentialGroup()
+        						.addGap(66)
+        						.addComponent(lblAhaaaaaaaaaa, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+        						.addGap(59)))
         				.addGroup(layout.createSequentialGroup()
-        					.addGap(14)
-        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(lblNewLabel)
-        						.addComponent(lblPotrSaKanalizacijom, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblIdIzvjestaja)
-        						.addComponent(lblPausalci, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblKanalizacija, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblPotrosnjaVode, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblSaKanalizacijom, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblPotrosnjaVode_1, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblPotrKanalizacije, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblZaradaVoda, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblUkupnaZarada, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblPeriod, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
-        						.addComponent(label, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(label_2, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-        						.addComponent(label_3, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-        						.addComponent(label_4, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-        						.addComponent(label_5, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-        						.addComponent(label_6, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-        						.addComponent(label_7, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-        						.addComponent(label_8, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-        						.addComponent(label_9, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-        						.addComponent(label_10, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-        						.addComponent(label_11, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-        						.addComponent(lblSasaa, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))
-        					.addGap(11))
-        				.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-        					.addGap(66)
-        					.addComponent(lblAhaaaaaaaaaa, GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-        					.addGap(59))))
+        					.addGap(18)
+        					.addComponent(btnPrintaj, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        					.addContainerGap())))
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
@@ -442,7 +482,8 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         					.addGap(18)
         					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
         						.addComponent(jButton1)
-        						.addComponent(jButton2)))
+        						.addComponent(jButton2)
+        						.addComponent(btnPrintaj, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
         				.addGroup(layout.createSequentialGroup()
         					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
         						.addGroup(layout.createSequentialGroup()
