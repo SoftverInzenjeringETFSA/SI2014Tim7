@@ -121,7 +121,6 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         		IzvjestajService svipotrosaci = new IzvjestajService();
         		List<Racuni> svi = svipotrosaci.nadjiListuRacuna(neki.getDatumOd(), neki.getDatumDo());
         		int pausalniukupno=0;
-        		int ostaliukupno=0;
         		int pausalniSaKanalizacijom=0;
         		int obicniSaKanalizacijom = 0;
         		Double zaradaPausalciVoda=0.0;
@@ -177,16 +176,16 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
                 		listasvih.add(svi.get(i).getPotrosac());
                 	}
                 	
-                	
+            		int ostalipotrosaci=0;
                 	for(int k=0;k<svi.size();k++)
                 	{
-                		if(svi.get(k).getPotrosac().getUsluga().equals("Pausalac"))
+                		if(svi.get(k).getPotrosac().getKategorija().equals("Pausalac"))
                 		{
                 			pausalniukupno++;
                 		}
                 		else
                 		{
-                			ostaliukupno++;
+                			ostalipotrosaci++;
                 		}
                 	}
                 	
@@ -197,7 +196,7 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         		zaradaPausalciVoda= pomocna * (1+para.getStopaPdv()/100.0);
         		
         		
-        		double zarada = neki.getPotrosnjaOstalihVoda()*(para.getPvnZaKoristenjeVoda() + para.getPvnZaZastituVoda() + para.getCijenaVodePoKubiku()) + neki.getPotrosnjaOstalihKanalizacija()*para.getCijenaKanalizacijePoKubiku() + ostaliukupno*para.getFiksnaCijena();        	
+        		double zarada = neki.getPotrosnjaOstalihVoda()*(para.getPvnZaKoristenjeVoda() + para.getPvnZaZastituVoda() + para.getCijenaVodePoKubiku()) + neki.getPotrosnjaOstalihKanalizacija()*para.getCijenaKanalizacijePoKubiku() + ostalipotrosaci*para.getFiksnaCijena();        	
         		zaradaOstaliVoda = 	zarada * (1+para.getStopaPdv()/100.0);
         		        		
         		
