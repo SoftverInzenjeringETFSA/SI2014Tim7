@@ -58,7 +58,7 @@ public class OcitanjaPanel1 extends javax.swing.JPanel {
         ListOcitanja.setModel(model);
         
         for (Potrosac p : listPotrosaca) {      
-        		if(p.getKategorija().equals("Pausalni"))
+        		if(p.getKategorija().equals("Pausalac"))
         		{
         			continue;
         		}

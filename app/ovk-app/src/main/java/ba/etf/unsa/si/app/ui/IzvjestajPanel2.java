@@ -156,9 +156,9 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         		
         		zaradaPausalciKanalizacija= zarada + neki.getPotrosnjaPausalacaKanalizacija()*para.getStopaPdv() + neki.getPotrosnjaPausalacaKanalizacija() * para.getPvnZaKoristenjeVoda() + neki.getPotrosnjaPausalacaKanalizacija() * para.getPvnZaZastituVoda();
         
-        		zaradaOstaliVoda = neki.getPotrosnjaOstalihVoda()*para.getCijenaVodePoKubiku()+ neki.getPotrosnjaOstalihVoda()*para.getStopaPdv()+neki.getPotrosnjaOstalihVoda()*para.getPvnZaKoristenjeVoda() + neki.getPotrosnjaOstalihVoda()*para.getPvnZaZastituVoda();
+        		zaradaOstaliVoda = neki.getPotrosnjaOstalihVoda()*para.getCijenaVodePoKubiku()+ neki.getPotrosnjaOstalihVoda()*para.getStopaPdv()/100+neki.getPotrosnjaOstalihVoda()*para.getPvnZaKoristenjeVoda() + neki.getPotrosnjaOstalihVoda()*para.getPvnZaZastituVoda();
         		
-        		zaradaOstaliKanalizacija = neki.getPotrosnjaOstalihKanalizacija() * (para.getCijenaKanalizacijePoKubiku() +para.getStopaPdv()+para.getPvnZaKoristenjeVoda()+para.getPvnZaZastituVoda());
+        		zaradaOstaliKanalizacija = neki.getPotrosnjaOstalihKanalizacija() * (para.getCijenaKanalizacijePoKubiku() +para.getStopaPdv()/100+para.getPvnZaKoristenjeVoda()+para.getPvnZaZastituVoda());
         		
         		double zaradaPausalciUkupno= zaradaPausalciVoda + zaradaPausalciKanalizacija;
         		
