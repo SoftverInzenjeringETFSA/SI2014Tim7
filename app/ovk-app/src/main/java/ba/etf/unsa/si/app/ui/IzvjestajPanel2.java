@@ -176,14 +176,28 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
                 		}
                 		listasvih.add(svi.get(i).getPotrosac());
                 	}
+                	
+                	
+                	for(int k=0;k<listasvih.size();k++)
+                	{
+                		if(listasvih.get(k).getUsluga().equals("Pausalac"))
+                		{
+                			pausalniukupno++;
+                		}
+                		else
+                		{
+                			ostaliukupno++;
+                		}
+                	}
+                	
         		ParametriService parametri = new ParametriService();
         		Parametri para = parametri.dajParametre();
         		
-        		Double pomocna = neki.getPotrosnjaPausalacaVoda()*(para.getPvnZaKoristenjeVoda()+para.getPvnZaZastituVoda() + para.getCijenaVodePoKubiku());
+        		Double pomocna = neki.getPotrosnjaPausalacaVoda()*(para.getPvnZaKoristenjeVoda()+para.getPvnZaZastituVoda() + para.getCijenaVodePoKubiku()) + neki.getPotrosnjaPausalacaKanalizacija()*para.getCijenaKanalizacijePoKubiku() + pausalniukupno*para.getFiksnaCijena();
         		zaradaPausalciVoda= pomocna * (1+para.getStopaPdv()/100.0);
         		
         		
-        		double zarada = neki.getPotrosnjaOstalihVoda()*(para.getPvnZaKoristenjeVoda() + para.getPvnZaZastituVoda() + para.getCijenaVodePoKubiku());        	
+        		double zarada = neki.getPotrosnjaOstalihVoda()*(para.getPvnZaKoristenjeVoda() + para.getPvnZaZastituVoda() + para.getCijenaVodePoKubiku()) + neki.getPotrosnjaOstalihKanalizacija()*para.getCijenaKanalizacijePoKubiku() + ostaliukupno*para.getFiksnaCijena();        	
         		zaradaOstaliVoda = 	zarada * (1+para.getStopaPdv()/100.0);
         		        		
         		
