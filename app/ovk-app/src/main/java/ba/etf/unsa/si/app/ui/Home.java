@@ -202,6 +202,7 @@ public class Home extends javax.swing.JFrame {
         izvjestajMenu = new javax.swing.JMenu();
         ocitanjaMenu = new javax.swing.JMenu();
         korisniciMenu = new javax.swing.JMenu();
+        odjava = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -792,6 +793,9 @@ public class Home extends javax.swing.JFrame {
         });
         jMenuBar2.add(korisniciMenu);
 
+        odjava.setText("Odjava");
+        jMenuBar2.add(odjava);
+
         setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1116,6 +1120,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenu ocitanjaMenu;
     private javax.swing.JPanel ocitanjaOpcije;
     private javax.swing.JPanel ocitanjaPanel;
+    private javax.swing.JMenu odjava;
     private javax.swing.JPanel parametriDinamicki;
     private javax.swing.JMenu parametriMenu;
     private javax.swing.JPanel parametriOpcije;

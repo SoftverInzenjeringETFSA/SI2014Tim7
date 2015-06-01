@@ -170,20 +170,10 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
 
     private void imePretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_imePretragaKeyReleased
         updateListu();
-        /*if(imePretraga.getText().isEmpty() || imePretraga.getText().replaceAll("\\s","").length() == 0 ){
-            listaPretraga.clearSelection();
-            DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
-            listModel.removeAllElements();
-        }*/
     }//GEN-LAST:event_imePretragaKeyReleased
 
     private void jmbgPretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jmbgPretragaKeyReleased
         updateListu();
-       /* if(jmbgPretraga.getText().isEmpty() || jmbgPretraga.getText().replaceAll("\\s","").length() == 0 ){
-            listaPretraga.clearSelection();
-            DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
-            listModel.removeAllElements();
-        }*/
     }//GEN-LAST:event_jmbgPretragaKeyReleased
     
     private void updateListu(){

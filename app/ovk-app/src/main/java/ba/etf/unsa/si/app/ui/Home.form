@@ -59,6 +59,11 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="korisniciMenuMouseClicked"/>
           </Events>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="odjava">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Odjava"/>
+          </Properties>
+        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>
