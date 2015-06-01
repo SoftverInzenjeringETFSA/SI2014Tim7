@@ -113,11 +113,11 @@ public class ObracunService {
 			cijenaKanalizacije = round(potrosnja
 					* param.getCijenaKanalizacijePoKubiku(),2);
 		}
-		Double ukupno = round(cijenaKanalizacije + cijenaVoda,2);
+		Double ukupno = round(cijenaKanalizacije + cijenaVoda + param.getFiksnaCijena(),2);
 		Double cijenaKsaPDV = round(cijenaKanalizacije + cijenaKanalizacije
-				* param.getStopaPdv(),2);
-		Double cijenaVsaPDV = round(cijenaVoda + cijenaVoda * param.getStopaPdv(),2);
-		Double ukupnoSaPDV = round(cijenaVsaPDV + cijenaKsaPDV,2);
+				* param.getStopaPdv()/100,2);
+		Double cijenaVsaPDV = round(cijenaVoda + cijenaVoda * param.getStopaPdv()/100,2);
+		Double ukupnoSaPDV = round(cijenaVsaPDV + cijenaKsaPDV + param.getFiksnaCijena()*param.getStopaPdv()/100,2);
 		Racuni r = new Racuni();
 		r.setCijenaKanalizacije(cijenaKanalizacije);
 		r.setCijenaKanalizacijeSaPdv(cijenaKsaPDV);
