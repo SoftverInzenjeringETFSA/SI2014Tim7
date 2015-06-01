@@ -557,7 +557,8 @@ public class KorisniciPanel2 extends javax.swing.JPanel {
                     telTxt.setText("");
                     jmbgIzmjenaTxt.setText("");
                     userNamePretragaTxt.setText("");
-
+                    DefaultListModel listaModel = (DefaultListModel) listKorisnika.getModel();
+                    listaModel.removeAllElements();
                 }
             }
             catch(Exception e){

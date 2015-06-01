@@ -319,8 +319,19 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         this.setLayout(layout);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnPrikaziIzvjestajActionPerformed(java.awt.event.ActionEvent evt) {   
+     //dynamic report
+               /* JasperReportBuilder report = DynamicReports.report();
+                //add title
+                TextFieldBuilder<String> title1 = DynamicReports.cmp.text("  International Technical University\n");
+                report.title(title1);
+                TextFieldBuilder<String> title2 = DynamicReports.cmp.text("  Zmaja od Bosne bb, Kampus Univerziteta u Sarajevu, 71 000 Sarajevo\n");
+                report.title(title2);
+                TextFieldBuilder<String> title3 = DynamicReports.cmp.text("  Tel: ++387 33 250 700\n\n\n\n");
+                report.title(title3);*/
+    }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JList jList1;
