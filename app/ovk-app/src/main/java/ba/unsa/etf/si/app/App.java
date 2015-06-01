@@ -23,6 +23,9 @@ import ba.unsa.etf.si.app.util.HibernateUtil;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.builder.DynamicReports;
+import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
 
 
 /**
