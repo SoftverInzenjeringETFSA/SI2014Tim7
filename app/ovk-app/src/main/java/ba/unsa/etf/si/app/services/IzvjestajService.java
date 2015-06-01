@@ -13,8 +13,13 @@ import java.util.List;
 
 import ba.unsa.etf.si.app.entity.Racuni;
 import ba.unsa.etf.si.app.util.HibernateUtil;
+import java.io.FileNotFoundException;
 
 import java.util.ArrayList;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.builder.DynamicReports;
+import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
+import net.sf.dynamicreports.report.exception.DRException;
 
 import org.hibernate.Session;
 
@@ -300,6 +305,45 @@ public void izracunajParametreZaIzvjestaj(Date donjaGranica, Date gornjaGranica)
         } 
 
         return zadovoljavajuci;
+    }
+    
+    
+    
+    
+    // Printanje izvjestaja :
+    
+    public void print(Izvjestaji i) throws FileNotFoundException, DRException{
+    //dynamic report
+                JasperReportBuilder report = DynamicReports.report();
+                //add title
+                TextFieldBuilder<String> title1 = DynamicReports.cmp.text("  Vodovod i Kanalizacija d.o.o.\n");
+                report.title(title1);
+                TextFieldBuilder<String> title2 = DynamicReports.cmp.text("  Jaroslava Černija 8, 71 000 Sarajevo\n");
+                report.title(title2);
+                TextFieldBuilder<String> title3 = DynamicReports.cmp.text("  Tel: +387 33 237-655\n\n\n\n");
+                report.title(title3);
+
+                // Za ova sva polja ispod mora biti ispis :
+                i.getBrojPausalaca();
+                i.getBrojOstalih();
+                i.getPotrosnjaOstalihKanalizacija();
+                i.getPotrosnjaOstalihVoda();
+                i.getPotrosnjaPausalacaKanalizacija();
+                i.getPotrosnjaPausalacaVoda();
+                
+                // Dodatna polja :
+                    // 1. Ukupni prihod za Pausalce = (PotrosnjaVodaPausalac*(PVN1+PVN2) + PotrosnjaKanalizacijaPausalac)*(stopaPDV/100)
+                    // 2. Ukupni prihod za Ostale = (PotrosnjaVodaOstalih*(PVN1+PVN2) + PotrosnjaKanalizacijaOstalih)*(stopaPDV/100)
+                    // 3. Ukupni prihod za Sviju = 1. + 2. 
+                
+                
+                TextFieldBuilder<String> title5 =DynamicReports.cmp.text("Potpis ovlaštenog lica: ___________________ \n");
+                report.title(title5);
+                String s = i.getDatumOd()+"-"+i.getDatumDo();
+                TextFieldBuilder<String> title7 = DynamicReports.cmp.text("Datum: " + s);
+                report.title(title7);          
+                report.show(true);
+    
     }
     
 }

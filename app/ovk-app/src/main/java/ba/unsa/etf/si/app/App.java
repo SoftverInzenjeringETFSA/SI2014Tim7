@@ -12,9 +12,11 @@ import org.hibernate.Session;
 
 import ba.unsa.etf.si.app.dao.OcitanjaDAO;
 import ba.unsa.etf.si.app.dao.PotrosacDAO;
+import ba.unsa.etf.si.app.entity.Izvjestaji;
 import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.entity.Ocitanja;
 import ba.unsa.etf.si.app.entity.Potrosac;
+import ba.unsa.etf.si.app.services.IzvjestajService;
 import ba.unsa.etf.si.app.services.KorisnikService;
 import ba.unsa.etf.si.app.services.ObracunService;
 import ba.unsa.etf.si.app.services.OcitanjaService;
@@ -40,6 +42,7 @@ public class App
         //pokretanje login forme
         Login login = new Login();
         login.setVisible(true);
+       
         /*
         ObracunService s = new ObracunService();
         Date x = new Date();
