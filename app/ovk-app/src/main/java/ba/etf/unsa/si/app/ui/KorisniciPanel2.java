@@ -411,18 +411,34 @@ public class KorisniciPanel2 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
   
     private void listKorisnikaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listKorisnikaValueChanged
-            Korisnik k = (Korisnik) listKorisnika.getSelectedValue();
-            adresaTxt.setText(k.getAdresa());
-            brLicneTxt.setText(k.getBrojLicne());
-            dateTxt.setDate(k.getDatumZaposljenja());
-            emailTxt.setText(k.getMail());
-            imeIzmjenaTxt.setText(k.getIme());
-            jmbgIzmjenaTxt.setText(k.getJmbg());
-            passTxt.setText(k.getPassword());
-            prezimeIzmjenaTxt.setText(k.getPrezime());
-            telTxt.setText(k.getTelefon());
-            userNameTxt.setText(k.getUsername());
-            adminTestIzmjena.setSelected(k.getAdmin());
+            if(listKorisnika.getSelectedIndex() == -1){
+                adresaTxt.setText("");
+                brLicneTxt.setText("");
+                dateTxt.setDate(null);
+                emailTxt.setText("");
+                imeIzmjenaTxt.setText("");
+                jmbgIzmjenaTxt.setText("");
+                passTxt.setText("");
+                prezimeIzmjenaTxt.setText("");
+                telTxt.setText("");
+                userNameTxt.setText("");
+                adminTestIzmjena.setSelected(false);
+            }
+            else{
+                Korisnik k = (Korisnik) listKorisnika.getSelectedValue();
+                adresaTxt.setText(k.getAdresa());
+                brLicneTxt.setText(k.getBrojLicne());
+                dateTxt.setDate(k.getDatumZaposljenja());
+                emailTxt.setText(k.getMail());
+                imeIzmjenaTxt.setText(k.getIme());
+                jmbgIzmjenaTxt.setText(k.getJmbg());
+                passTxt.setText(k.getPassword());
+                prezimeIzmjenaTxt.setText(k.getPrezime());
+                telTxt.setText(k.getTelefon());
+                userNameTxt.setText(k.getUsername());
+                adminTestIzmjena.setSelected(k.getAdmin());
+            }
+            
 
     }//GEN-LAST:event_listKorisnikaValueChanged
 
@@ -441,6 +457,7 @@ public class KorisniciPanel2 extends javax.swing.JPanel {
         listKorisnika.setModel(model);
         
          if(userNamePretragaTxt.getText().isEmpty() || userNamePretragaTxt.getText().replaceAll("\\s","").length() == 0 ){
+            listKorisnika.clearSelection();
             DefaultListModel listModel = (DefaultListModel) listKorisnika.getModel();
             listModel.removeAllElements();
         }

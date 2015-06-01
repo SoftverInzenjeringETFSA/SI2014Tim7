@@ -14,7 +14,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -22,7 +22,7 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.4.3</version>
                 <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
         </plugins>
@@ -76,6 +76,11 @@
 	<groupId>org.swinglabs</groupId>
 	<artifactId>swingx</artifactId>
 	<version>1.6.1</version>
+    </dependency>
+    <dependency>
+	<groupId>jasperreports</groupId>
+	<artifactId>jasperreports</artifactId>
+	<version>3.5.3</version>
     </dependency>
 
   </dependencies>
