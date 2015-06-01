@@ -158,7 +158,7 @@ public class ObracunService {
 	}
 
 	public List<Racuni> pretragaRacuna(Date datumKreacije, int id, String ime,
-			String prezime, String sifraVodomjera) {
+			String prezime, String sifraVodomjera,Boolean nemaDatuma) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		RacuniDAO dao = new RacuniDAO();
@@ -167,12 +167,13 @@ public class ObracunService {
                 List<Potrosac> pList = servP.mainSearch(ime, prezime, "", "", String.valueOf(sifraVodomjera));
                 List<Racuni> returnList = new ArrayList();
 		// Pretraga po Datumu i ID
+                Date s = new Date();
 		List<Racuni> rListID = dao.finById(id);
                 List<Racuni> rListDate = dao.finByDate(datumKreacije);
                 List<Racuni> rList = new ArrayList();
                 if(rListID.isEmpty()&&rListDate.isEmpty()){
                     rList = dao.findAll();
-                    if(pList.isEmpty()){
+                    if(pList.isEmpty()||id!=0||nemaDatuma == false){
                         throw new IllegalArgumentException("Nema računa za date podatke!");
                     }
                 }

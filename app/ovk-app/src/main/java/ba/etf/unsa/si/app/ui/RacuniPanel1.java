@@ -171,17 +171,18 @@ public class RacuniPanel1 extends javax.swing.JPanel {
 
 		
 		int sifraRacuna = 0;
-		String sifraVodomjera = "";
+		String sifraVodomjera = trim(jTextField6.getText());
+                String ONLY_NUMBERS_REGEX = "[0-9]+";
+                String ONLY_LETTERS_REGEX = "[a-zA-Z]+";
+                String sRacuna = trim(jTextField5.getText());
 		DateFormat format = new SimpleDateFormat("MM/yyyy");
-		try {
-			sifraRacuna = Integer.parseInt(jTextField5.getText());
-			sifraVodomjera = jTextField6.getText();
-                        if("".equals(trim(sifraVodomjera))){
-                            sifraVodomjera = "";
-                        }
-		} catch (Exception e) {
-
-		}
+                if(!sRacuna.equals("")&&sRacuna.matches(ONLY_NUMBERS_REGEX)){
+                    try {
+                            sifraRacuna = Integer.parseInt(sRacuna);
+                        } catch (Exception e) {
+                        //prazno
+                    }
+                }
 		String datum = jFormattedTextField4.getText();
 		String imeIprezime = jTextField4.getText();
 		
@@ -196,19 +197,22 @@ public class RacuniPanel1 extends javax.swing.JPanel {
                             ime = podijeli[0];
                             prezime = podijeli[1];
                         }
-                        System.out.println(ime+" "+prezime);
-
-			Date datumKreiranja = new Date();
-		
+                String[] datumPodijeli = trim(datum).split("/20");
+                Date datumKreiranja = new Date();
+		Boolean nemaDatuma = false;
+                if(datumPodijeli.length==2&&trim(datumPodijeli[0]).matches(ONLY_NUMBERS_REGEX)&&trim(datumPodijeli[1]).matches(ONLY_NUMBERS_REGEX)){
 		try {
-
-		datumKreiranja = format.parse(datum);
-		} catch (ParseException e1) {
+                    datumKreiranja = format.parse(datum);
+		}catch (ParseException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+			//e1.printStackTrace();
+                    }
+                }
+                else{
+                    nemaDatuma = true;
+                }
 			
-		racuniPregled = new RacuniPregled(datumKreiranja,sifraRacuna,ime,prezime,sifraVodomjera);
+		racuniPregled = new RacuniPregled(datumKreiranja,sifraRacuna,ime,prezime,sifraVodomjera,nemaDatuma);
 		racuniPregled.setVisible(true);
 		// TODO add your handling code here:
 	}// GEN-LAST:event_jButton1ActionPerformed

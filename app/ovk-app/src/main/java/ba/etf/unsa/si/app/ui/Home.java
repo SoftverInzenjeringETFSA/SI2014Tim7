@@ -794,6 +794,11 @@ public class Home extends javax.swing.JFrame {
         jMenuBar2.add(korisniciMenu);
 
         odjava.setText("Odjava");
+        odjava.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                odjavaMouseClicked(evt);
+            }
+        });
         jMenuBar2.add(odjava);
 
         setJMenuBar(jMenuBar2);
@@ -1052,6 +1057,12 @@ public class Home extends javax.swing.JFrame {
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_korisniciMenuMouseClicked
+
+    private void odjavaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_odjavaMouseClicked
+        Login login = new Login();
+        login.setVisible(true);
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_odjavaMouseClicked
 
     /**
      * @param args the command line arguments
