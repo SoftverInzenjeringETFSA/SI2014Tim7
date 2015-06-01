@@ -98,47 +98,8 @@ public class IzvjestajService {
         		listasvih.add(racuni.get(i).getPotrosac());
         	}
         }
-        PotrosacService svipotrosaci = new PotrosacService();
-		List<Potrosac> svi = svipotrosaci.dajSvePotrosace();
-		int pausalniukupno=0;
-		int ostaliukupno=0;
-		int pausalniSaKanalizacijom=0;
-		int obicniSaKanalizacijom = 0;
-		Double zaradaPausalciVoda=0.0;
-		Double zaradaPausalciKanalizacija=0.0;
-		Double zaradaOstaliVoda=0.0;
-		Double zaradaOstaliKanalizacija=0.0;
-		int pausalniBrojClanova = 0;
-		int brojClanova=0;
-		
-		
-		
-		for(int i=0;i<svi.size();i++)
-		{
-			if(svi.get(i).getKategorija().equals("Pausalac"))
-			{
-				pausalniukupno++;
-				if(svi.get(i).getUsluga()==true)
-				{
-					pausalniSaKanalizacijom++;
-					pausalniBrojClanova=pausalniBrojClanova + Integer.valueOf(svi.get(i).getBrojClanova());
-				}
-				else
-				{
-					brojClanova= brojClanova + Integer.valueOf(svi.get(i).getBrojClanova());
-				}
-			}
-			else
-			{
-				ostaliukupno++;
-				if(svi.get(i).getUsluga()==true)
-				{
-					obicniSaKanalizacijom++;
-				}
-			}
-		}
-        novi.setBrojOstalih(ostaliukupno);
-        novi.setBrojPausalaca(pausalniukupno);
+        novi.setBrojOstalih(brojOstali);
+        novi.setBrojPausalaca(brojPausalni);
         novi.setPotrosnjaOstalihKanalizacija(kanalizacijaOstali);
         novi.setPotrosnjaOstalihVoda(vodaOstali);
         novi.setPotrosnjaPausalacaKanalizacija(kanalizacijaPausalni);
@@ -273,7 +234,7 @@ public void izracunajParametreZaIzvjestaj(Date donjaGranica, Date gornjaGranica)
     }
     
     //lista racuna koji su izmedju dva datuma
-    private List<Racuni> nadjiListuRacuna(Date donjaGranica, Date gornjaGranica){
+    public List<Racuni> nadjiListuRacuna(Date donjaGranica, Date gornjaGranica){
         
         //Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
