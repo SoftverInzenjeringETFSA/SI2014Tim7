@@ -26,5 +26,11 @@
         <property name="potrosnjaOstalihKanalizacija" type="java.lang.Double">
             <column name="potrosnja_ostalih_kanalizacija" precision="22" scale="0" />
         </property>
+        <property name="datumOd" type="date">
+            <column name="datumod" length="10" />
+        </property>
+        <property name="datumDo" type="date">
+            <column name="datumdo" length="10" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -1,6 +1,9 @@
 package ba.unsa.etf.si.app.entity;
 // Generated May 10, 2015 4:50:37 PM by Hibernate Tools 4.3.1
 
+import java.util.Date;
+
+
 
 
 /**
@@ -17,17 +20,21 @@ public class Izvjestaji  implements java.io.Serializable {
      private Integer brojOstalih;
      private Double potrosnjaOstalihVoda;
      private Double potrosnjaOstalihKanalizacija;
+     private Date datumOd;
+     private Date datumDo;
 
     public Izvjestaji() {
     }
 
-    public Izvjestaji(Integer brojPausalaca, Double potrosnjaPausalacaVoda, Double potrosnjaPausalacaKanalizacija, Integer brojOstalih, Double potrosnjaOstalihVoda, Double potrosnjaOstalihKanalizacija) {
+    public Izvjestaji(Integer brojPausalaca, Double potrosnjaPausalacaVoda, Double potrosnjaPausalacaKanalizacija, Integer brojOstalih, Double potrosnjaOstalihVoda, Double potrosnjaOstalihKanalizacija, Date datumOd, Date datumDo) {
        this.brojPausalaca = brojPausalaca;
        this.potrosnjaPausalacaVoda = potrosnjaPausalacaVoda;
        this.potrosnjaPausalacaKanalizacija = potrosnjaPausalacaKanalizacija;
        this.brojOstalih = brojOstalih;
        this.potrosnjaOstalihVoda = potrosnjaOstalihVoda;
        this.potrosnjaOstalihKanalizacija = potrosnjaOstalihKanalizacija;
+       this.datumOd = datumOd;
+       this.datumDo = datumDo;
     }
    
     public Integer getId() {
@@ -79,7 +86,21 @@ public class Izvjestaji  implements java.io.Serializable {
     public void setPotrosnjaOstalihKanalizacija(Double potrosnjaOstalihKanalizacija) {
         this.potrosnjaOstalihKanalizacija = potrosnjaOstalihKanalizacija;
     }
-
+    public Date getDatumOd() {
+        return this.datumOd;
+    }
+    
+    public void setDatumOd(Date datumOd) {
+        this.datumOd = datumOd;
+    }
+    
+    public Date getDatumDo() {
+        return this.datumDo;
+    }
+    
+    public void setDatumDo(Date datumDo) {
+        this.datumDo = datumDo;
+    }
 
 
 

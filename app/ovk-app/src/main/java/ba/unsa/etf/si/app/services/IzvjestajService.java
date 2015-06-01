@@ -138,6 +138,8 @@ public class IzvjestajService {
         novi.setPotrosnjaOstalihVoda(vodaOstali);
         novi.setPotrosnjaPausalacaKanalizacija(kanalizacijaPausalni);
         novi.setPotrosnjaPausalacaVoda(vodaPausalni);
+        novi.setDatumOd(donjaGranica);
+        novi.setDatumDo(gornjaGranica);
         session.beginTransaction();
         dao.save(novi);
         session.getTransaction().commit();
