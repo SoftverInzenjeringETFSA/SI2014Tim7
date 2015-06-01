@@ -201,7 +201,40 @@ Boolean nemaDatuma;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        if(jTable1.getSelectedRow() == -1){
+            status.setText("Izaberite račun");
+        }
+        else{
+            status.setText("");
+            if(racuni.isEmpty()){return;}
+            String idString = String.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 2));
+            if("".equals(trim(idString))||idString==null){
+                JOptionPane.showMessageDialog(null,"Niste izabrani ni jedan red");
+                return;
+            }
+            int id = Integer.valueOf(idString);
+            ObracunService s = new ObracunService();
+            Racuni r = new Racuni();
+            try{
+                r = s.pretragaRacunaPoID(id);
+                String output = "";
+                
+                if(r.getOcitanja().getMjesec()==1){
+                    output = "12/"+(r.getOcitanja().getGodina()-1);
+                }
+                else{
+                    output = (r.getOcitanja().getMjesec()-1) + "/" + r.getOcitanja().getGodina();
+                }
+                
+                ObracunService sPrint = new ObracunService();
+                sPrint.print(r,r.getPotrosac().getIme()+" "+r.getPotrosac().getPrezime(),output);
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null,e.getMessage());
+                return;
+            }
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 public void update(){
 //boja pozadine

@@ -359,7 +359,7 @@ public void izracunajParametreZaIzvjestaj(Date donjaGranica, Date gornjaGranica)
                 String s = i.getDatumOd()+"-"+i.getDatumDo();
                 TextFieldBuilder<String> title21 = DynamicReports.cmp.text("Datum: " + s);
                 report.title(title21);          
-                report.show(true);
+                report.show(false);
     
     }
     

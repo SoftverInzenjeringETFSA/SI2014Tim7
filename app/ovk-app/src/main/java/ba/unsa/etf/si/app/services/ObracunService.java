@@ -295,8 +295,8 @@ public class ObracunService {
 		dao.setSession(session);
 		// Pretraga po Datumu i ID
 		List<Racuni> rListID = dao.finById(id);
-                                session.getTransaction().commit();
-		session.close();
+                session.getTransaction().commit();
+	
                 if(rListID.isEmpty()){
                     throw new IllegalArgumentException("Ne postroji racun!");
                 }
@@ -305,7 +305,7 @@ public class ObracunService {
                 }
     }
     
-    public void print(Racuni r) throws FileNotFoundException, DRException{
+    public void print(Racuni r,String naziv,String datumKreacije) throws FileNotFoundException, DRException{
     //dynamic report
                 JasperReportBuilder report = DynamicReports.report();
                 //add title
@@ -317,15 +317,15 @@ public class ObracunService {
                 report.title(title3);
 
 
-                
+
                 
                 TextFieldBuilder<String> title4 = DynamicReports.cmp.text("  ID:" + r.getId() + "\n");
                 report.title(title4);
-                
-                 TextFieldBuilder<String> title5 = DynamicReports.cmp.text("  Očitanja" + r.getOcitanja() + "\n");
+       
+                 TextFieldBuilder<String> title5 = DynamicReports.cmp.text("  Očitanja" + datumKreacije + "\n");
                 report.title(title5);
                 
-                 TextFieldBuilder<String> title6 = DynamicReports.cmp.text("  Potrošač):" + r.getPotrosac().getIme() + " " + r.getPotrosac().getPrezime()+ "\n");
+                 TextFieldBuilder<String> title6 = DynamicReports.cmp.text("  Potrošač):" + naziv + "\n");
                 report.title(title6);
                 
                  TextFieldBuilder<String> title7 = DynamicReports.cmp.text("  Datum uplate:" + r.getDatumUplate() + "\n");
@@ -334,7 +334,7 @@ public class ObracunService {
                 TextFieldBuilder<String> title8 = DynamicReports.cmp.text("  Datum kreacije:" + r.getDatumKreacije() + "\n");
                 report.title(title8);
   
-   
+
                 TextFieldBuilder<String> title9 = DynamicReports.cmp.text("  Fiksna cijena za korištenje usluga:" +  r.getFisknaCijenaZaKoristenjeUsluga() + "\n");
                 report.title(title9);
                 
@@ -364,13 +364,10 @@ public class ObracunService {
                 
                 TextFieldBuilder<String> title18 = DynamicReports.cmp.text("  PVN za zaštitu voda:" + r.getPvnZaZastituVoda() + "\n");
                 report.title(title18);
-                
 
-                TextFieldBuilder<String> title20 =DynamicReports.cmp.text("Potpis ovlaštenog lica: ___________________ \n");
+                TextFieldBuilder<String> title20 = DynamicReports.cmp.text("Potpis ovlaštenog lica: ___________________ \n");
                 report.title(title20);
-                 
-                report.show(true);
-    
+                report.show(false);
     }
   
         
