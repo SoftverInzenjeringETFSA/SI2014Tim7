@@ -471,10 +471,10 @@ public class KorisniciPanel2 extends javax.swing.JPanel {
         }
        
     	else if(k1.getUsername().equals(CurrentlyLoggedIn.korisnik.getUsername())){
-    		JOptionPane.showMessageDialog(null,"Ne mozete vrsiti tu opciju nad svojim korisnickim nalogom.");
+                status.setText("Ne možete vršiti tu opciju nad svojim korisničkim nalogom");
         }
     	else if(k1.getAdmin()!=null && k1.getAdmin()){
-    		JOptionPane.showMessageDialog(null,"Ne mozete mijenjati tog usera.");
+                status.setText("Ne možete mijenjati korisnika s privilegijama administratora");
         }
         else if(imeIzmjenaTxt.getText().isEmpty() || imeIzmjenaTxt.getText().replaceAll("\\s","").length() == 0 ){
           status.setText("Unesite ime korisnika");
@@ -560,7 +560,7 @@ public class KorisniciPanel2 extends javax.swing.JPanel {
                     k.setAdmin(adminTestIzmjena.isSelected());
                     servicePretraga.modifyKorisnik(k);
                     
-                    JOptionPane.showMessageDialog(null,"Uspjesno ste izmjenili korisnika. ");
+                    JOptionPane.showMessageDialog(null,"Uspješno ste izmijenili korisnika. ");
                     
                     adresaTxt.setText("");
                     brLicneTxt.setText("");

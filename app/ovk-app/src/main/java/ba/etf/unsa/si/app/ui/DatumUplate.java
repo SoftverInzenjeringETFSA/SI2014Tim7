@@ -121,14 +121,14 @@ public class DatumUplate extends javax.swing.JFrame {
             Calendar s = Calendar.getInstance();
             y = s.getTime();
                if(x.compareTo(y)>0){
-                   throw new IllegalArgumentException("Ne mozete izabrati datum veci od sadasnjeg!");
+                   throw new IllegalArgumentException("Ne možete izabrati datum veći od sadašnjeg!");
                }     
             racun.setDatumUplate(x);
             String datum = new SimpleDateFormat("yyyy-MM-dd").format(x);
             x = new SimpleDateFormat("yyyy-MM-dd").parse(datum);
             serv.uplatiRacun(racun);
             pregled.update();
-            JOptionPane.showMessageDialog(null,"Uspjena uplata racuna");
+            JOptionPane.showMessageDialog(null,"Uspješna uplata računa");
             this.dispose();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e.getMessage());

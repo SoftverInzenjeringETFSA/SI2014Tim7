@@ -418,6 +418,7 @@ public class KorisniciPanel1 extends javax.swing.JPanel {
                 prezimeTxt.setText("");
                 telTxt.setText("");
                 usernameTxt1.setText("");
+                dateTxt1.setDate(null);
                 JOptionPane.showMessageDialog(null, "Korisnik uspješno kreiran! Password za ovog korisnika je : " + pass);
             }
             catch(Exception e){

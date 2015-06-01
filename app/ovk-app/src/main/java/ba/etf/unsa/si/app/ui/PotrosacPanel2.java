@@ -436,14 +436,33 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
 
     private void imePretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_imePretragaKeyReleased
         updateListu();    
+        if(imePretraga.getText().isEmpty() || imePretraga.getText().replaceAll("\\s","").length() == 0 ){
+            listaPretraga.clearSelection();
+            DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
+            listModel.removeAllElements();
+        }
     }//GEN-LAST:event_imePretragaKeyReleased
 
     private void jmbgPretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jmbgPretragaKeyReleased
         updateListu();
+        if(jmbgPretraga.getText().isEmpty() || jmbgPretraga.getText().replaceAll("\\s","").length() == 0 ){
+            listaPretraga.clearSelection();
+            DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
+            listModel.removeAllElements();
+        }
     }//GEN-LAST:event_jmbgPretragaKeyReleased
 
     private void listaPretragaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaPretragaValueChanged
-
+        if(listaPretraga.getSelectedIndex() == -1){
+                adresaTxt.setText("");
+                sifraVodomjera.setText("");
+                imeTxt.setText("");
+                jmbg.setText("");
+                prezimeTxt.setText("");
+                telTxt.setText("");
+            }
+        else{
+            
             Potrosac p = (Potrosac) listaPretraga.getSelectedValue();
             imeTxt.setText(p.getIme());
             prezimeTxt.setText(p.getPrezime());
@@ -479,6 +498,9 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
             else{
                 aktivnost.setSelectedIndex(1);
             }
+        }
+        
+            
 
     }//GEN-LAST:event_listaPretragaValueChanged
 
@@ -563,6 +585,19 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
                 status.setText("");
                 servicePretraga.modifyPotrosac(p);
                 JOptionPane.showMessageDialog(null,"Uspješno ste izmjenili potrošača");
+                adresaTxt.setText("");
+                sifraVodomjera.setText("");
+                imeTxt.setText("");
+                jmbg.setText("");
+                prezimeTxt.setText("");
+                telTxt.setText("");
+                imePretraga.setText("");
+                prezimePretraga.setText("");
+                jmbgPretraga.setText("");
+                listaPretraga.clearSelection();
+                DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
+                listModel.removeAllElements();
+                
             } 
             catch(Exception e){
                    // JOptionPane.showMessageDialog(null, e.getMessage(),"Greska!",

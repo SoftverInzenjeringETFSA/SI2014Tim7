@@ -274,7 +274,7 @@ transient Logger logger;
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -289,8 +289,8 @@ transient Logger logger;
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -299,7 +299,7 @@ transient Logger logger;
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,39 +359,68 @@ transient Logger logger;
         listaPretraga.setModel(model); 
     }
     private void kategorijaPausalacStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_kategorijaPausalacStateChanged
-        update();        // TODO add your handling code here:
+        update();
+        // TODO add your handling code here:
     }//GEN-LAST:event_kategorijaPausalacStateChanged
 
     private void kategorijaVodomjerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_kategorijaVodomjerStateChanged
-        update();         // TODO add your handling code here:
+        update();
+        // TODO add your handling code here:
     }//GEN-LAST:event_kategorijaVodomjerStateChanged
 
     private void kategorijaSakriveniStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_kategorijaSakriveniStateChanged
-        update();         // TODO add your handling code here:
+        update();  
+       // TODO add your handling code here:
     }//GEN-LAST:event_kategorijaSakriveniStateChanged
 
     private void kategorijaSviStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_kategorijaSviStateChanged
-        update();         // TODO add your handling code here:
+        update();
+        // TODO add your handling code here:
     }//GEN-LAST:event_kategorijaSviStateChanged
 
     private void imePretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_imePretragaKeyReleased
-        update(); // TODO add your handling code here:
+        update();
+        if(imePretraga.getText().isEmpty() || imePretraga.getText().replaceAll("\\s","").length() == 0 ){
+            listaPretraga.clearSelection();
+            DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
+            listModel.removeAllElements();
+        }// TODO add your handling code here:
     }//GEN-LAST:event_imePretragaKeyReleased
 
     private void prezimePretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_prezimePretragaKeyReleased
-        update(); // TODO add your handling code here:
+        update();
+        if(prezimePretraga.getText().isEmpty() || prezimePretraga.getText().replaceAll("\\s","").length() == 0 ){
+            listaPretraga.clearSelection();
+            DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
+            listModel.removeAllElements();
+        }// TODO add your handling code here:
     }//GEN-LAST:event_prezimePretragaKeyReleased
 
     private void adresaPretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_adresaPretragaKeyReleased
-        update();        // TODO add your handling code here:
+        update();
+        if(adresaPretraga.getText().isEmpty() || adresaPretraga.getText().replaceAll("\\s","").length() == 0 ){
+            listaPretraga.clearSelection();
+            DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
+            listModel.removeAllElements();
+        }
     }//GEN-LAST:event_adresaPretragaKeyReleased
 
     private void sifraPretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sifraPretragaKeyReleased
-        update();        // TODO add your handling code here:
+        update();
+        if(sifraPretraga.getText().isEmpty() || adresaPretraga.getText().replaceAll("\\s","").length() == 0 ){
+            listaPretraga.clearSelection();
+            DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
+            listModel.removeAllElements();
+        }// TODO add your handling code here:
     }//GEN-LAST:event_sifraPretragaKeyReleased
 
     private void jmbgPretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jmbgPretragaKeyReleased
-        update();        // TODO add your handling code here:
+        update();
+        if(jmbgPretraga.getText().isEmpty() || jmbgPretraga.getText().replaceAll("\\s","").length() == 0 ){
+            listaPretraga.clearSelection();
+            DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
+            listModel.removeAllElements();
+        }
     }//GEN-LAST:event_jmbgPretragaKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

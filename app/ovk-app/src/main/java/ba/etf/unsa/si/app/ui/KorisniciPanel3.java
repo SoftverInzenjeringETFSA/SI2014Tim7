@@ -55,6 +55,11 @@ public class KorisniciPanel3 extends javax.swing.JPanel {
 
         listaZaBrisanje.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         listaZaBrisanje.setForeground(new java.awt.Color(0, 102, 153));
+        listaZaBrisanje.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaZaBrisanjeValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(listaZaBrisanje);
 
         jLabel16.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
@@ -139,6 +144,7 @@ public class KorisniciPanel3 extends javax.swing.JPanel {
 
     private void pretragaKorisnikaZaBrisanjeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pretragaKorisnikaZaBrisanjeKeyReleased
         
+        status.setText("");
         KorisnikService servicePretraga = new KorisnikService();
         List<Korisnik> korisnikLista = servicePretraga.searchByUsername(pretragaKorisnikaZaBrisanje.getText());
         DefaultListModel<Korisnik> model = new DefaultListModel<Korisnik>();
@@ -163,29 +169,29 @@ public class KorisniciPanel3 extends javax.swing.JPanel {
             status.setText("Niste odabrali korisnika");
         }
         else{
-            status.setText("");
+            
             try{
             String username  = listaZaBrisanje.getSelectedValue().toString();
             KorisnikService servicePretraga = new KorisnikService();
             Korisnik k = (Korisnik) listaZaBrisanje.getSelectedValue();
             if(CurrentlyLoggedIn.korisnik.getAdmin() != null && !CurrentlyLoggedIn.korisnik.getAdmin()){
-            	JOptionPane.showMessageDialog(null,"Samo administrator moze izbrisati korisnika.");
+                status.setText("Samo administrator može izbrisati korisnički nalog");
             	return;
             }
             if(k.getUsername().equals(CurrentlyLoggedIn.korisnik.getUsername())){
-            	JOptionPane.showMessageDialog(null,"Ne mozete vrsiti tu opciju nad svojim korisnickim nalogom.");
+                status.setText("Ne možete vršiti tu opciju nad svojim korisničkim nalogom");
             	return;
             }
             if(k.getAdmin()!=null && k.getAdmin()){
-            	JOptionPane.showMessageDialog(null,"Ne mozete izbrisati tog usera.");
+                status.setText("Ne možete izbrisati tog korisnika");
             	return;
             }
             servicePretraga.deleteKorisnik(k);
             pretragaKorisnikaZaBrisanje.setText("");
-            
+            status.setText("");
             DefaultListModel listModel = (DefaultListModel) listaZaBrisanje.getModel();
             listModel.removeAllElements();
-            JOptionPane.showMessageDialog(null,"Uspjesno ste obrisali korisnika ");
+            JOptionPane.showMessageDialog(null,"Uspješno ste obrisali korisnika ");
             }
             catch(Exception e){
                 //JOptionPane.showMessageDialog(null, e.getMessage(),"Greska!",
@@ -195,6 +201,10 @@ public class KorisniciPanel3 extends javax.swing.JPanel {
         }    
        
     }//GEN-LAST:event_obrisiBtnActionPerformed
+
+    private void listaZaBrisanjeValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaZaBrisanjeValueChanged
+        status.setText("");// TODO add your handling code here:
+    }//GEN-LAST:event_listaZaBrisanjeValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

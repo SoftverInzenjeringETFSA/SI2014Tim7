@@ -422,6 +422,13 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
                     status.setText("");
                     servis.createNewPotrosac(p);
                     JOptionPane.showMessageDialog(null,"Dodavanje novog potrošača je uspješno");
+                    adresaTxt.setText("");
+                    sifraVodomjera.setText("");
+                    imeTxt.setText("");
+                    jmbgTxt.setText("");
+                    prezimeTxt.setText("");
+                    telTxt.setText("");
+                    porodica.setValue(1);
                 }
                 catch(Exception e){
                     //JOptionPane.showMessageDialog(null, e.getMessage(), "Error",

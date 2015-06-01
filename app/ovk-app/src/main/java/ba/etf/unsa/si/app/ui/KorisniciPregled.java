@@ -5,6 +5,7 @@
  */
 package ba.etf.unsa.si.app.ui;
 
+import ba.etf.unsa.si.app.globals.CurrentlyLoggedIn;
 import ba.unsa.etf.si.app.entity.Korisnik;
 import ba.unsa.etf.si.app.services.KorisnikService;
 import java.awt.Color;
@@ -76,6 +77,7 @@ public class KorisniciPregled extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         tel = new javax.swing.JTextField();
         button1 = new javax.swing.JButton();
+        status = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -307,6 +309,15 @@ public class KorisniciPregled extends javax.swing.JFrame {
             }
         });
 
+        status.setEditable(false);
+        status.setBackground(new java.awt.Color(255, 255, 255));
+        status.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        status.setForeground(new java.awt.Color(255, 51, 51));
+        status.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        status.setBorder(null);
+        status.setOpaque(false);
+        status.setSelectionColor(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -326,6 +337,7 @@ public class KorisniciPregled extends javax.swing.JFrame {
                             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(30, 30, 30))
+            .addComponent(status)
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jPanel4, jPanel5});
@@ -345,7 +357,8 @@ public class KorisniciPregled extends javax.swing.JFrame {
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(button1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -353,14 +366,26 @@ public class KorisniciPregled extends javax.swing.JFrame {
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         try{
+            if(CurrentlyLoggedIn.korisnik.getAdmin() != null && !CurrentlyLoggedIn.korisnik.getAdmin()){
+                status.setText("Samo administrator može izbrisati korisnički nalog");
+            	return;
+            }
+            if(username.getText().equals(CurrentlyLoggedIn.korisnik.getUsername())){
+                status.setText("Ne možete vršiti tu opciju nad svojim korisničkim nalogom");
+            	return;
+            }
+            if(admin.isSelected()){
+                status.setText("Ne možete izbrisati korisnika s privilegijama administratora");
+            	return;
+            }
         KorisnikService s = new KorisnikService();
         s.deleteKorisnik(zaBrisanje);
-            JOptionPane.showMessageDialog(null,"Uspjesno ste obrisali korisnika. ");
+            JOptionPane.showMessageDialog(null,"Uspješno ste obrisali korisnika. ");
             panelUpdate.update();
             this.dispose();
             
         }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Brisanje korisnika nije uspjelo !");
+            JOptionPane.showMessageDialog(null,"Brisanje korisnika nije uspjelo!");
         }
     }//GEN-LAST:event_button1ActionPerformed
 
@@ -424,6 +449,7 @@ public class KorisniciPregled extends javax.swing.JFrame {
     private javax.swing.JTextField mail;
     private javax.swing.JTextField pass;
     private javax.swing.JTextField prezime;
+    private javax.swing.JTextField status;
     private javax.swing.JTextField tel;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables

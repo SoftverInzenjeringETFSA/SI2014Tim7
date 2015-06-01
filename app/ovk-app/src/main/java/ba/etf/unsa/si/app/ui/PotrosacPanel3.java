@@ -170,11 +170,22 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
 
     private void imePretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_imePretragaKeyReleased
         updateListu();
+        if(imePretraga.getText().isEmpty() || imePretraga.getText().replaceAll("\\s","").length() == 0 ){
+            listaPretraga.clearSelection();
+            DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
+            listModel.removeAllElements();
+        }
     }//GEN-LAST:event_imePretragaKeyReleased
 
     private void jmbgPretragaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jmbgPretragaKeyReleased
         updateListu();
+        if(jmbgPretraga.getText().isEmpty() || jmbgPretraga.getText().replaceAll("\\s","").length() == 0 ){
+            listaPretraga.clearSelection();
+            DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
+            listModel.removeAllElements();
+        }
     }//GEN-LAST:event_jmbgPretragaKeyReleased
+    
     private void updateListu(){
         PotrosacService servis = new PotrosacService();
         List<Potrosac> listaPotrosac = servis.searchByCriteria(imePretraga.getText(), "", jmbgPretraga.getText());
@@ -193,7 +204,7 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
         PotrosacService servicePretraga = new PotrosacService();
         Potrosac p = (Potrosac) listaPretraga.getSelectedValue();
         if(CurrentlyLoggedIn.korisnik.getAdmin() != null && !CurrentlyLoggedIn.korisnik.getAdmin()){
-        	JOptionPane.showMessageDialog(null,"Samo administrator moze izbrisati potrosaca.");
+        	JOptionPane.showMessageDialog(null,"Samo administrator može izbrisati potrošača.");
         	return;
         }
         
@@ -206,11 +217,16 @@ public class PotrosacPanel3 extends javax.swing.JPanel {
         }
         try{
             servicePretraga.deletePotrosac(p);
-            JOptionPane.showMessageDialog(null,"Uspjesno ste " + msg);
-            updateListu();
+            JOptionPane.showMessageDialog(null,"Uspješno ste " + msg);
+            imePretraga.setText("");
+            prezimePretraga.setText("");
+            jmbgPretraga.setText("");
+            listaPretraga.clearSelection();
+            DefaultListModel listModel = (DefaultListModel) listaPretraga.getModel();
+            listModel.removeAllElements();         
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage(),"Greska!",
+            JOptionPane.showMessageDialog(null, e.getMessage(),"Greška!",
                     JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_izbrisiBtnActionPerformed
