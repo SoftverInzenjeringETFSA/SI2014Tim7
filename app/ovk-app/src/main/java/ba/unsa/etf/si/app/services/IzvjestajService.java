@@ -294,19 +294,19 @@ public void izracunajParametreZaIzvjestaj(Date donjaGranica, Date gornjaGranica)
                 i.getPotrosnjaPausalacaVoda();
                 
                 
-                TextFieldBuilder<String> title4 = DynamicReports.cmp.text("  Broj paušalnih:" + i.getBrojPausalaca());
+                TextFieldBuilder<String> title4 = DynamicReports.cmp.text("  Broj paušalnih:" + i.getBrojPausalaca() + "\n");
                 report.title(title4);
                 
-                 TextFieldBuilder<String> title5 = DynamicReports.cmp.text("  Broj ostalih:" + i.getBrojOstalih());
+                 TextFieldBuilder<String> title5 = DynamicReports.cmp.text("  Broj ostalih:" + i.getBrojOstalih() + "\n");
                 report.title(title5);
                 
-                 TextFieldBuilder<String> title6 = DynamicReports.cmp.text("  Potrošnja ostalih (kanalizacija):" + i.getPotrosnjaOstalihKanalizacija());
+                 TextFieldBuilder<String> title6 = DynamicReports.cmp.text("  Potrošnja ostalih (kanalizacija):" + i.getPotrosnjaOstalihKanalizacija() + "\n");
                 report.title(title6);
                 
-                 TextFieldBuilder<String> title7 = DynamicReports.cmp.text("  Broj ostalih (voda):" + i.getPotrosnjaOstalihVoda());
+                 TextFieldBuilder<String> title7 = DynamicReports.cmp.text("  Broj ostalih (voda):" + i.getPotrosnjaOstalihVoda() + "\n");
                 report.title(title7);
                 
-                TextFieldBuilder<String> title8 = DynamicReports.cmp.text("  Potrošnja paušalaca (kanalizacija):" + i.getPotrosnjaPausalacaKanalizacija());
+                TextFieldBuilder<String> title8 = DynamicReports.cmp.text("  Potrošnja paušalaca (kanalizacija):" + i.getPotrosnjaPausalacaKanalizacija() + "\n");
                 report.title(title8);
   
    
@@ -329,19 +329,19 @@ public void izracunajParametreZaIzvjestaj(Date donjaGranica, Date gornjaGranica)
                  prihodOstali=potrosnjaOstali*(1+p.getStopaPdv()/100);
                  
                  
-                TextFieldBuilder<String> title9 = DynamicReports.cmp.text("  Potrošnja paušalci:" +  potrosnjaPausalci);
+                TextFieldBuilder<String> title9 = DynamicReports.cmp.text("  Potrošnja paušalci:" +  potrosnjaPausalci + "\n");
                 report.title(title9);
                 
-                 TextFieldBuilder<String> title10 = DynamicReports.cmp.text("  Potrošnja ostalih:" + potrosnjaOstali);
+                 TextFieldBuilder<String> title10 = DynamicReports.cmp.text("  Potrošnja ostalih:" + potrosnjaOstali + "\n");
                 report.title(title10);
                 
-                TextFieldBuilder<String> title11 = DynamicReports.cmp.text("  Prihod pausalci:" + prihodPausalci);
+                TextFieldBuilder<String> title11 = DynamicReports.cmp.text("  Prihod pausalci:" + prihodPausalci + "\n");
                 report.title(title11);
                 
-                 TextFieldBuilder<String> title12 = DynamicReports.cmp.text("  Prihod ostali:" + prihodOstali);
+                 TextFieldBuilder<String> title12 = DynamicReports.cmp.text("  Prihod ostali:" + prihodOstali + "\n");
                 report.title(title12);
                 
-                 TextFieldBuilder<String> title13 = DynamicReports.cmp.text("  Ukupni prihod:" + prihodPausalci+prihodOstali);
+                 TextFieldBuilder<String> title13 = DynamicReports.cmp.text("  Ukupni prihod:" + prihodPausalci+prihodOstali + "\n");
                 report.title(title13);
                 
                 
