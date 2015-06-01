@@ -41,14 +41,16 @@ int sifraRacuna;
 String ime;
 String prezime;
 String sifraVodomjera;
+Boolean nemaDatuma;
     public RacuniPregled(Date datumKreiranja1,int sifraRacuna1,
-    		String ime1,String prezime1,String sifraVodomjera1) {
+    		String ime1,String prezime1,String sifraVodomjera1,Boolean nemaDatuma1) {
     	  initComponents();
           datumKreiranja = datumKreiranja1;
           sifraRacuna = sifraRacuna1;
           ime=ime1;
           prezime=prezime1;
           sifraVodomjera=sifraVodomjera1;
+          nemaDatuma=nemaDatuma1;
           update();
     }
 	/**
@@ -188,7 +190,7 @@ public void update(){
           container.setBackground(Color.white); 
     	ObracunService servis = new ObracunService();
     	try{
-    		racuni = servis.pretragaRacuna(datumKreiranja, sifraRacuna, ime, prezime, sifraVodomjera);
+    		racuni = servis.pretragaRacuna(datumKreiranja, sifraRacuna, ime, prezime, sifraVodomjera,nemaDatuma);
     	}
     	catch(Exception e){
     		JOptionPane.showMessageDialog(null, e.getMessage());
