@@ -192,15 +192,16 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         		ParametriService parametri = new ParametriService();
         		Parametri para = parametri.dajParametre();
         		
-        		Double pomocna = neki.getPotrosnjaPausalacaVoda()*(para.getPvnZaKoristenjeVoda()+para.getPvnZaZastituVoda() + para.getCijenaVodePoKubiku()) + neki.getPotrosnjaPausalacaKanalizacija()*para.getCijenaKanalizacijePoKubiku() + pausalniukupno*para.getFiksnaCijena();
+        		double pomocna = neki.getPotrosnjaPausalacaVoda()*(para.getPvnZaKoristenjeVoda()+para.getPvnZaZastituVoda() + para.getCijenaVodePoKubiku()) + neki.getPotrosnjaPausalacaKanalizacija()*para.getCijenaKanalizacijePoKubiku() + pausalniukupno*para.getFiksnaCijena();
         		zaradaPausalciVoda= pomocna * (1+para.getStopaPdv()/100.0);
-        		
+        		zaradaPausalciVoda=(double)Math.round(zaradaPausalciVoda * 100000) / 100000;
         		
         		double zarada = neki.getPotrosnjaOstalihVoda()*(para.getPvnZaKoristenjeVoda() + para.getPvnZaZastituVoda() + para.getCijenaVodePoKubiku()) + neki.getPotrosnjaOstalihKanalizacija()*para.getCijenaKanalizacijePoKubiku() + ostalipotrosaci*para.getFiksnaCijena();        	
         		zaradaOstaliVoda = 	zarada * (1+para.getStopaPdv()/100.0);
-        		        		
+        		zaradaOstaliVoda = (double)Math.round(zaradaOstaliVoda * 100000) / 100000;  		
         		
         		double aha = zaradaPausalciVoda + zaradaOstaliVoda;
+        		aha=(double)Math.round(aha * 100000) / 100000;
         		
         		if(neki.getBrojPausalaca()==0)
         		{
@@ -211,7 +212,7 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         		else
         		{
             		label_3.setText(String.valueOf(pausalniSaKanalizacijom));
-            		label_6.setText(String.valueOf((double)Math.round(zaradaPausalciVoda * 100000) / 100000));
+            		label_6.setText(String.valueOf(String.valueOf(zaradaPausalciVoda)));
         		}
         		if(neki.getBrojOstalih()==0)
         		{
@@ -222,10 +223,10 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         		else
         		{
             		label_8.setText(String.valueOf(obicniSaKanalizacijom));
-            		label_11.setText(String.valueOf((double)Math.round(zaradaOstaliVoda * 100000) / 100000));
+            		label_11.setText(String.valueOf(String.valueOf(zaradaOstaliVoda)));
         		}
 
-        		lblSasaa.setText(String.valueOf((double)Math.round(aha * 100000) / 100000));
+        		lblSasaa.setText(String.valueOf(String.valueOf(aha)));
         		label_2.setText(neki.getBrojPausalaca().toString());
         		label_7.setText(neki.getBrojOstalih().toString());
         		
