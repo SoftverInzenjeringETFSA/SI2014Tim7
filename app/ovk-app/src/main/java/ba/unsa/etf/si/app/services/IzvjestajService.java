@@ -331,9 +331,13 @@ public void izracunajParametreZaIzvjestaj(Date donjaGranica, Date gornjaGranica)
                 i.getPotrosnjaPausalacaKanalizacija();
                 i.getPotrosnjaPausalacaVoda();
                 
+                
+                // Za Dodatna polja :
+                // potrosnjaPausalci = PotrosnjaVodaPausalac*(PVN1+PVN2+cijenaVoda) + PotrosnjaKanalizacijaPausalac*cijenaKanalizacija
+                // potrosnjaOstali = PotrosnjaVodaOstalih*(PVN1+PVN2+cijenaVoda) + PotrosnjaKanalizacijaOstalih*cijenaKanalizacija
                 // Dodatna polja :
-                    // 1. Ukupni prihod za Pausalce = (PotrosnjaVodaPausalac*(PVN1+PVN2) + PotrosnjaKanalizacijaPausalac)*(stopaPDV/100)
-                    // 2. Ukupni prihod za Ostale = (PotrosnjaVodaOstalih*(PVN1+PVN2) + PotrosnjaKanalizacijaOstalih)*(stopaPDV/100)
+                    // 1. Ukupni prihod za Pausalce = potrosnjaPausalci*(1+stopaPDV/100)
+                    // 2. Ukupni prihod za Ostale = potrosnjaOstali*(1+stopaPDV/100)
                     // 3. Ukupni prihod za Sviju = 1. + 2. 
                 
                 
