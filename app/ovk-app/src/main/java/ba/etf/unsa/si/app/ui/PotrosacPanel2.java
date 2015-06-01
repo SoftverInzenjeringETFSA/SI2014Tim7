@@ -29,9 +29,6 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
      */
     public PotrosacPanel2() {
         initComponents();
-        if(tipPausalac.isSelected())
-            sifraVodomjera.setEditable(false);
-        
     }
 
     /**
@@ -291,7 +288,6 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
         tipPotrosaca2.add(tipPausalac);
         tipPausalac.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         tipPausalac.setForeground(new java.awt.Color(102, 102, 102));
-        tipPausalac.setSelected(true);
         tipPausalac.setText("paušalni");
         tipPausalac.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -303,6 +299,7 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
         tipPotrosaca2.add(tipVodomjer);
         tipVodomjer.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         tipVodomjer.setForeground(new java.awt.Color(102, 102, 102));
+        tipVodomjer.setSelected(true);
         tipVodomjer.setText("s vodomjerom");
         tipVodomjer.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -515,7 +512,7 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
             status.setText("Unesite šifru vodomjera");
         }   
         else if(tipVodomjer.isSelected() && !sifraVodomjera.getText().matches("^[0-9]*$")){
-                 status.setText("Šifra vodomjera moze sadrzavati samo cifre");
+                 status.setText("Šifra vodomjera može sadržavati samo cifre");
         }
         else{
                 if(!"".equals(jmbg.getText())){
@@ -540,7 +537,7 @@ public class PotrosacPanel2 extends javax.swing.JPanel {
                 try{
                         List<Potrosac> potrosaci = servicePretraga.dajSvePotrosace();
                         for(Potrosac potrosac : potrosaci){
-                            if(potrosac.getSifraVodomjera() != null && potrosac.getSifraVodomjera().equals(Integer.valueOf(sifraVodomjera.getText())))
+                            if(potrosac.getSifraVodomjera() != null && !potrosac.getSifraVodomjera().equals(p.getSifraVodomjera()) && potrosac.getSifraVodomjera().equals(Integer.valueOf(sifraVodomjera.getText())))
                                 throw new IllegalArgumentException("Šifra vodomjera pripada drugom potrošaču! Izaberite drugu šifru");
            
                         }

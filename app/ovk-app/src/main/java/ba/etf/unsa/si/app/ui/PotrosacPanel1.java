@@ -23,9 +23,6 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
      */
     public PotrosacPanel1() {
         initComponents();
-        if(tipPausalac.isSelected())
-            sifraVodomjera.setEditable(false);
-        
         status.setText("Oprez: sva polja osim šifre vodomjera su obavezna!");
     }
 
@@ -87,7 +84,6 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
         tipPotrosaca.add(tipPausalac);
         tipPausalac.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         tipPausalac.setForeground(new java.awt.Color(102, 102, 102));
-        tipPausalac.setSelected(true);
         tipPausalac.setText("paušalni");
         tipPausalac.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -99,6 +95,7 @@ public class PotrosacPanel1 extends javax.swing.JPanel {
         tipPotrosaca.add(tipVodomjer);
         tipVodomjer.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
         tipVodomjer.setForeground(new java.awt.Color(102, 102, 102));
+        tipVodomjer.setSelected(true);
         tipVodomjer.setText("s vodomjerom");
         tipVodomjer.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {

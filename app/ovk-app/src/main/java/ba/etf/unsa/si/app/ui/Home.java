@@ -169,9 +169,7 @@ public class Home extends javax.swing.JFrame {
         potrosaciDinamicki = new javax.swing.JPanel();
         parametriPanel = new javax.swing.JPanel();
         parametriOpcije = new javax.swing.JPanel();
-        
         jButton5 = new javax.swing.JButton();
-        jButton5.setVisible(false);
         jButton6 = new javax.swing.JButton();
         parametriDinamicki = new javax.swing.JPanel();
         racuniPanel = new javax.swing.JPanel();
@@ -274,7 +272,7 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(jButton3)
                 .addGap(18, 18, 18)
                 .addComponent(jButton4)
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
 
         potrosaciDinamicki.setBackground(new java.awt.Color(255, 255, 255));
@@ -283,11 +281,11 @@ public class Home extends javax.swing.JFrame {
         potrosaciDinamicki.setLayout(potrosaciDinamickiLayout);
         potrosaciDinamickiLayout.setHorizontalGroup(
             potrosaciDinamickiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 653, Short.MAX_VALUE)
+            .addGap(0, 668, Short.MAX_VALUE)
         );
         potrosaciDinamickiLayout.setVerticalGroup(
             potrosaciDinamickiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 483, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout potrosaciPanelLayout = new javax.swing.GroupLayout(potrosaciPanel);
@@ -370,12 +368,12 @@ public class Home extends javax.swing.JFrame {
             .addGroup(parametriPanelLayout.createSequentialGroup()
                 .addComponent(parametriOpcije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(parametriDinamicki, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE))
+                .addComponent(parametriDinamicki, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE))
         );
         parametriPanelLayout.setVerticalGroup(
             parametriPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(parametriOpcije, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(parametriDinamicki, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+            .addComponent(parametriDinamicki, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
         );
 
         racuniPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -713,11 +711,11 @@ public class Home extends javax.swing.JFrame {
             slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(potrosaciPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(parametriPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(parametriPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
             .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(racuniPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(izvjestajPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(izvjestajPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
             .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(ocitanjaPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -727,11 +725,11 @@ public class Home extends javax.swing.JFrame {
             slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(potrosaciPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(parametriPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE))
+                .addComponent(parametriPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE))
             .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(racuniPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(izvjestajPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE))
+                .addComponent(izvjestajPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE))
             .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(ocitanjaPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(slojeviLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

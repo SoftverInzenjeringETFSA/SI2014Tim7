@@ -117,13 +117,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="potrosaciPanel" alignment="0" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Component id="parametriPanel" alignment="1" max="32767" attributes="0"/>
+                  <Component id="parametriPanel" alignment="1" pref="800" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
                   <Component id="racuniPanel" alignment="1" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
-                  <Component id="izvjestajPanel" alignment="1" max="32767" attributes="0"/>
+                  <Component id="izvjestajPanel" alignment="1" pref="800" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="4" groupAlignment="0" attributes="0">
                   <Component id="ocitanjaPanel" alignment="1" max="32767" attributes="0"/>
@@ -137,13 +137,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="potrosaciPanel" alignment="0" max="32767" attributes="0"/>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                  <Component id="parametriPanel" alignment="1" pref="483" max="32767" attributes="0"/>
+                  <Component id="parametriPanel" alignment="1" pref="494" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="2" groupAlignment="0" attributes="0">
                   <Component id="racuniPanel" alignment="1" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="3" groupAlignment="0" attributes="0">
-                  <Component id="izvjestajPanel" alignment="1" pref="483" max="32767" attributes="0"/>
+                  <Component id="izvjestajPanel" alignment="1" pref="494" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="4" groupAlignment="0" attributes="0">
                   <Component id="ocitanjaPanel" alignment="1" max="32767" attributes="0"/>
@@ -213,7 +213,7 @@
                           <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jButton4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="166" max="32767" attributes="0"/>
+                          <EmptySpace pref="177" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -287,12 +287,12 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="653" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="668" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="483" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -315,14 +315,14 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="parametriOpcije" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="parametriDinamicki" pref="653" max="32767" attributes="0"/>
+                      <Component id="parametriDinamicki" pref="668" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="parametriOpcije" alignment="0" max="32767" attributes="0"/>
-                  <Component id="parametriDinamicki" alignment="0" pref="483" max="32767" attributes="0"/>
+                  <Component id="parametriDinamicki" alignment="0" pref="494" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
