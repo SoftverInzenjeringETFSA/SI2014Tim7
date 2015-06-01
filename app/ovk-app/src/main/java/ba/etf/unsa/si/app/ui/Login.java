@@ -42,6 +42,7 @@ public class Login extends javax.swing.JFrame {
         TxtUserName = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         BtnLogin = new javax.swing.JButton();
+        jXHeader1 = new org.jdesktop.swingx.JXHeader();
         jLabel3 = new javax.swing.JLabel();
         TxtPassword = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
@@ -101,6 +102,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jXHeader1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(89, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -120,7 +122,8 @@ public class Login extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addComponent(jXHeader1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
@@ -209,6 +212,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private org.jdesktop.swingx.JXHeader jXHeader1;
     private javax.swing.JTextField status;
     // End of variables declaration//GEN-END:variables
 }
