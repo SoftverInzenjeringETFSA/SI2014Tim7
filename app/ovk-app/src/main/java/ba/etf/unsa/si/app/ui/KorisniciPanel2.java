@@ -473,8 +473,8 @@ public class KorisniciPanel2 extends javax.swing.JPanel {
     	else if(k1.getUsername().equals(CurrentlyLoggedIn.korisnik.getUsername())){
                 status.setText("Ne možete vršiti tu opciju nad svojim korisničkim nalogom");
         }
-    	else if(k1.getAdmin()!=null && k1.getAdmin()){
-                status.setText("Ne možete mijenjati korisnika s privilegijama administratora");
+    	else if("admin".equals(k1.getUsername())){
+                status.setText("Ne možete mijenjati tog korisnika!");
         }
         else if(imeIzmjenaTxt.getText().isEmpty() || imeIzmjenaTxt.getText().replaceAll("\\s","").length() == 0 ){
           status.setText("Unesite ime korisnika");

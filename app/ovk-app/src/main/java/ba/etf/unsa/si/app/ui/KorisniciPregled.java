@@ -374,8 +374,8 @@ public class KorisniciPregled extends javax.swing.JFrame {
                 status.setText("Ne možete vršiti tu opciju nad svojim korisničkim nalogom");
             	return;
             }
-            if(admin.isSelected()){
-                status.setText("Ne možete izbrisati korisnika s privilegijama administratora");
+            if("admin".equals(username.getText())){
+                status.setText("Ne možete mijenjati tog korisnika!");
             	return;
             }
         KorisnikService s = new KorisnikService();

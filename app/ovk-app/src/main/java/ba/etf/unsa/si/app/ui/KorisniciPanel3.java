@@ -182,8 +182,8 @@ public class KorisniciPanel3 extends javax.swing.JPanel {
                 status.setText("Ne možete vršiti tu opciju nad svojim korisničkim nalogom");
             	return;
             }
-            if(k.getAdmin()!=null && k.getAdmin()){
-                status.setText("Ne možete izbrisati tog korisnika");
+            if("admin".equals(k.getUsername())){
+                status.setText("Ne možete mijenjati tog korisnika!");
             	return;
             }
             servicePretraga.deleteKorisnik(k);
