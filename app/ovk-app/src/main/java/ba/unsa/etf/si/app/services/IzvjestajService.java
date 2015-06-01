@@ -6,6 +6,7 @@ import ba.unsa.etf.si.app.dao.PotrosacDAO;
 import ba.unsa.etf.si.app.dao.RacuniDAO;
 import ba.unsa.etf.si.app.entity.Izvjestaji;
 import ba.unsa.etf.si.app.entity.Ocitanja;
+import ba.unsa.etf.si.app.entity.Parametri;
 import ba.unsa.etf.si.app.entity.Potrosac;
 
 import java.util.Date;
@@ -293,6 +294,57 @@ public void izracunajParametreZaIzvjestaj(Date donjaGranica, Date gornjaGranica)
                 i.getPotrosnjaPausalacaVoda();
                 
                 
+                TextFieldBuilder<String> title4 = DynamicReports.cmp.text("  Broj paušalnih:" + i.getBrojPausalaca());
+                report.title(title4);
+                
+                 TextFieldBuilder<String> title5 = DynamicReports.cmp.text("  Broj ostalih:" + i.getBrojOstalih());
+                report.title(title5);
+                
+                 TextFieldBuilder<String> title6 = DynamicReports.cmp.text("  Potrošnja ostalih (kanalizacija):" + i.getPotrosnjaOstalihKanalizacija());
+                report.title(title6);
+                
+                 TextFieldBuilder<String> title7 = DynamicReports.cmp.text("  Broj ostalih (voda):" + i.getPotrosnjaOstalihVoda());
+                report.title(title7);
+                
+                TextFieldBuilder<String> title8 = DynamicReports.cmp.text("  Potrošnja paušalaca (kanalizacija):" + i.getPotrosnjaPausalacaKanalizacija());
+                report.title(title8);
+  
+   
+       
+                ParametriService ps= new ParametriService();
+                Parametri p=ps.dajParametre();
+                
+                double potrosnjaPausalci;
+                 potrosnjaPausalci=i.getPotrosnjaPausalacaVoda()*(p.getPvnZaKoristenjeVoda()+p.getPvnZaZastituVoda()+p.getCijenaVodePoKubiku())
+                                    + p.getFiksniKanalizacijaZaPausalce()*i.getPotrosnjaPausalacaKanalizacija();;
+                 
+                 double potrosnjaOstali;
+                 potrosnjaOstali=i.getPotrosnjaOstalihVoda()*(p.getPvnZaKoristenjeVoda()+p.getPvnZaZastituVoda()+p.getCijenaVodePoKubiku())
+                         + p.getCijenaKanalizacijePoKubiku()*i.getPotrosnjaOstalihKanalizacija();
+                 
+                 double prihodPausalci;
+                 prihodPausalci=potrosnjaPausalci*(1+p.getStopaPdv()/100);
+                 
+                 double prihodOstali;
+                 prihodOstali=potrosnjaOstali*(1+p.getStopaPdv()/100);
+                 
+                 
+                TextFieldBuilder<String> title9 = DynamicReports.cmp.text("  Potrošnja paušalci:" +  potrosnjaPausalci);
+                report.title(title9);
+                
+                 TextFieldBuilder<String> title10 = DynamicReports.cmp.text("  Potrošnja ostalih:" + potrosnjaOstali);
+                report.title(title10);
+                
+                TextFieldBuilder<String> title11 = DynamicReports.cmp.text("  Prihod pausalci:" + prihodPausalci);
+                report.title(title11);
+                
+                 TextFieldBuilder<String> title12 = DynamicReports.cmp.text("  Prihod ostali:" + prihodOstali);
+                report.title(title12);
+                
+                 TextFieldBuilder<String> title13 = DynamicReports.cmp.text("  Ukupni prihod:" + prihodPausalci+prihodOstali);
+                report.title(title13);
+                
+                
                 // Za Dodatna polja :
                 // potrosnjaPausalci = PotrosnjaVodaPausalac*(PVN1+PVN2+cijenaVoda) + PotrosnjaKanalizacijaPausalac*cijenaKanalizacija
                 // potrosnjaOstali = PotrosnjaVodaOstalih*(PVN1+PVN2+cijenaVoda) + PotrosnjaKanalizacijaOstalih*cijenaKanalizacija
@@ -302,11 +354,11 @@ public void izracunajParametreZaIzvjestaj(Date donjaGranica, Date gornjaGranica)
                     // 3. Ukupni prihod za Sviju = 1. + 2. 
                 
                 
-                TextFieldBuilder<String> title5 =DynamicReports.cmp.text("Potpis ovlaštenog lica: ___________________ \n");
-                report.title(title5);
+                TextFieldBuilder<String> title20 =DynamicReports.cmp.text("Potpis ovlaštenog lica: ___________________ \n");
+                report.title(title20);
                 String s = i.getDatumOd()+"-"+i.getDatumDo();
-                TextFieldBuilder<String> title7 = DynamicReports.cmp.text("Datum: " + s);
-                report.title(title7);          
+                TextFieldBuilder<String> title21 = DynamicReports.cmp.text("Datum: " + s);
+                report.title(title21);          
                 report.show(true);
     
     }
