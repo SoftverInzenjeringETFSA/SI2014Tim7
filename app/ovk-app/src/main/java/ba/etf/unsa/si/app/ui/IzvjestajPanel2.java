@@ -177,9 +177,9 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
                 	}
                 	
             		int ostalipotrosaci=0;
-                	for(int k=0;k<svi.size();k++)
+                	for(int k=0;k<listasvih.size();k++)
                 	{
-                		if(svi.get(k).getPotrosac().getKategorija().equals("Pausalac"))
+                		if(listasvih.get(k).getKategorija().equals("Pausalac"))
                 		{
                 			pausalniukupno++;
                 		}
