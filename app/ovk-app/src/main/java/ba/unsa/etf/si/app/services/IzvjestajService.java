@@ -14,9 +14,10 @@ import java.util.List;
 
 import ba.unsa.etf.si.app.entity.Racuni;
 import ba.unsa.etf.si.app.util.HibernateUtil;
-import java.io.FileNotFoundException;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
@@ -309,25 +310,100 @@ public void izracunajParametreZaIzvjestaj(Date donjaGranica, Date gornjaGranica)
                 TextFieldBuilder<String> title8 = DynamicReports.cmp.text("  Potrošnja paušalaca (kanalizacija):" + i.getPotrosnjaPausalacaKanalizacija());
                 report.title(title8);
   
-   
+                TextFieldBuilder<String> title14 = DynamicReports.cmp.text("  Potrošnja paušalaca (voda):" + i.getPotrosnjaPausalacaVoda());
+                report.title(title14);
+                
+                IzvjestajService svipotrosaci = new IzvjestajService();
+        		List<Racuni> svi = svipotrosaci.nadjiListuRacuna(i.getDatumOd(), i.getDatumDo());
+        		int pausalniukupno=0;
+        		int pausalniSaKanalizacijom=0;
+        		int obicniSaKanalizacijom = 0;
+        		double zaradaPausalciVoda=0.0;
+        		double zaradaPausalciKanalizacija=0.0;
+        		double zaradaOstaliVoda=0.0;
+        		double zaradaOstaliKanalizacija=0.0;
+        		int pausalniBrojClanova = 0;
+        		int brojClanova=0;
+        		List<Potrosac> listasvih = new ArrayList();
+        		Boolean b = false;
+        		
+        		for (int m=0; m<svi.size(); m++)
+                {
+                	String provjera = svi.get(m).getPotrosac().getKategorija();
+                	double kanalizacija = svi.get(m).getPotrosnjaZaKoristenjeKanalizacije();
+                	double voda = svi.get(m).getPotrosnjaZaKoristenjeVoda();
+                	
+                	for(int j=0;j<listasvih.size();j++)
+                	{
+                		if(listasvih.get(j).equals(svi.get(m).getPotrosac()))
+                		{
+                			if(provjera.equals("Pausalac"))
+                			{
+                        		pausalniBrojClanova=pausalniBrojClanova+ Integer.valueOf(svi.get(m).getPotrosac().getBrojClanova());
+                			}
+                			else
+                			{
+                        		brojClanova=brojClanova+Integer.valueOf(svi.get(m).getPotrosac().getBrojClanova());
+                			}
+                			b=true;
+                			break;
+                		}
+                	}
+                	if(b==true)
+                	{
+                		b=false;
+                		continue;
+                	}
+                	if(provjera.equals("Pausalac"))
+                	{
+                		if(svi.get(m).getPotrosac().getUsluga()==true)
+                		{
+                			pausalniSaKanalizacijom++;
+                		}
+                		listasvih.add(svi.get(m).getPotrosac());
+                	}
+                	else
+                	{
+                		if(svi.get(m).getPotrosac().getUsluga()==true)
+                		{
+                			obicniSaKanalizacijom++;
+                		}
+                		listasvih.add(svi.get(m).getPotrosac());
+                	}
+                }
+                	
+            		int ostalipotrosaci=0;
+                	for(int k=0;k<listasvih.size();k++)
+                	{
+                		if(listasvih.get(k).getKategorija().equals("Pausalac"))
+                		{
+                			pausalniukupno++;
+                		}
+                		else
+                		{
+                			ostalipotrosaci++;
+                		}
+                	}
        
                 ParametriService ps= new ParametriService();
                 Parametri p=ps.dajParametre();
                 
                 double potrosnjaPausalci;
-                 potrosnjaPausalci=i.getPotrosnjaPausalacaVoda()*(p.getPvnZaKoristenjeVoda()+p.getPvnZaZastituVoda()+p.getCijenaVodePoKubiku())
-                                    + p.getFiksniKanalizacijaZaPausalce()*i.getPotrosnjaPausalacaKanalizacija();;
+                 potrosnjaPausalci=i.getPotrosnjaPausalacaVoda()*(p.getPvnZaKoristenjeVoda()+p.getPvnZaZastituVoda()+p.getCijenaVodePoKubiku()) + p.getFiksniKanalizacijaZaPausalce()*i.getPotrosnjaPausalacaKanalizacija() + pausalniukupno*p.getFiksnaCijena();
                  
                  double potrosnjaOstali;
-                 potrosnjaOstali=i.getPotrosnjaOstalihVoda()*(p.getPvnZaKoristenjeVoda()+p.getPvnZaZastituVoda()+p.getCijenaVodePoKubiku())
-                         + p.getCijenaKanalizacijePoKubiku()*i.getPotrosnjaOstalihKanalizacija();
+                 potrosnjaOstali=i.getPotrosnjaOstalihVoda()*(p.getPvnZaKoristenjeVoda()+p.getPvnZaZastituVoda()+p.getCijenaVodePoKubiku()) + p.getCijenaKanalizacijePoKubiku()*i.getPotrosnjaOstalihKanalizacija() + ostalipotrosaci*p.getFiksnaCijena();
                  
                  double prihodPausalci;
-                 prihodPausalci=potrosnjaPausalci*(1+p.getStopaPdv()/100);
+                 prihodPausalci=potrosnjaPausalci*(1+p.getStopaPdv()/100.0);
+                 prihodPausalci = (double)Math.round(prihodPausalci * 100000) / 100000;
                  
                  double prihodOstali;
-                 prihodOstali=potrosnjaOstali*(1+p.getStopaPdv()/100);
+                 prihodOstali=potrosnjaOstali*(1+p.getStopaPdv()/100.0);
+                 prihodOstali = (double)Math.round(prihodOstali * 100000) / 100000;
                  
+                 double aha = prihodPausalci+prihodOstali;
+                 aha = (double)Math.round(aha * 100000) / 100000;
                  
                 TextFieldBuilder<String> title9 = DynamicReports.cmp.text("  Potrošnja paušalci:" +  potrosnjaPausalci);
                 report.title(title9);
@@ -341,7 +417,7 @@ public void izracunajParametreZaIzvjestaj(Date donjaGranica, Date gornjaGranica)
                  TextFieldBuilder<String> title12 = DynamicReports.cmp.text("  Prihod ostali:" + prihodOstali);
                 report.title(title12);
                 
-                 TextFieldBuilder<String> title13 = DynamicReports.cmp.text("  Ukupni prihod:" + prihodPausalci+prihodOstali);
+                 TextFieldBuilder<String> title13 = DynamicReports.cmp.text("  Ukupni prihod:" + aha);
                 report.title(title13);
                 
                 
@@ -358,9 +434,9 @@ public void izracunajParametreZaIzvjestaj(Date donjaGranica, Date gornjaGranica)
                 report.title(title20);
                 String s = i.getDatumOd()+"-"+i.getDatumDo();
                 TextFieldBuilder<String> title21 = DynamicReports.cmp.text("Datum: " + s);
-                report.title(title21);          
+                report.title(title21);       
                 report.show(true);
-    
+
     }
-    
 }
+    

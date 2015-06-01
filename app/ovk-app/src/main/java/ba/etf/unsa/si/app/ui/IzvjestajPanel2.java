@@ -128,10 +128,10 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         		int pausalniukupno=0;
         		int pausalniSaKanalizacijom=0;
         		int obicniSaKanalizacijom = 0;
-        		Double zaradaPausalciVoda=0.0;
-        		Double zaradaPausalciKanalizacija=0.0;
-        		Double zaradaOstaliVoda=0.0;
-        		Double zaradaOstaliKanalizacija=0.0;
+        		double zaradaPausalciVoda=0.0;
+        		double zaradaPausalciKanalizacija=0.0;
+        		double zaradaOstaliVoda=0.0;
+        		double zaradaOstaliKanalizacija=0.0;
         		int pausalniBrojClanova = 0;
         		int brojClanova=0;
         		List<Potrosac> listasvih = new ArrayList();
@@ -140,8 +140,8 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         		for (int i=0; i<svi.size(); i++)
                 {
                 	String provjera = svi.get(i).getPotrosac().getKategorija();
-                	Double kanalizacija = svi.get(i).getPotrosnjaZaKoristenjeKanalizacije();
-                	Double voda = svi.get(i).getPotrosnjaZaKoristenjeVoda();
+                	double kanalizacija = svi.get(i).getPotrosnjaZaKoristenjeKanalizacije();
+                	double voda = svi.get(i).getPotrosnjaZaKoristenjeVoda();
                 	
                 	for(int j=0;j<listasvih.size();j++)
                 	{
@@ -197,7 +197,7 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         		ParametriService parametri = new ParametriService();
         		Parametri para = parametri.dajParametre();
         		
-        		double pomocna = neki.getPotrosnjaPausalacaVoda()*(para.getPvnZaKoristenjeVoda()+para.getPvnZaZastituVoda() + para.getCijenaVodePoKubiku()) + neki.getPotrosnjaPausalacaKanalizacija()*para.getCijenaKanalizacijePoKubiku() + pausalniukupno*para.getFiksnaCijena();
+        		double pomocna = neki.getPotrosnjaPausalacaVoda()*(para.getPvnZaKoristenjeVoda()+para.getPvnZaZastituVoda() + para.getCijenaVodePoKubiku()) + neki.getPotrosnjaPausalacaKanalizacija()*para.getFiksniKanalizacijaZaPausalce() + pausalniukupno*para.getFiksnaCijena();
         		zaradaPausalciVoda= pomocna * (1+para.getStopaPdv()/100.0);
         		zaradaPausalciVoda=(double)Math.round(zaradaPausalciVoda * 100000) / 100000;
         		
@@ -217,7 +217,7 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         		else
         		{
             		label_3.setText(String.valueOf(pausalniSaKanalizacijom));
-            		label_6.setText(String.valueOf(String.valueOf(zaradaPausalciVoda)));
+            		label_6.setText(String.valueOf(zaradaPausalciVoda));
         		}
         		if(neki.getBrojOstalih()==0)
         		{
@@ -228,10 +228,10 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         		else
         		{
             		label_8.setText(String.valueOf(obicniSaKanalizacijom));
-            		label_11.setText(String.valueOf(String.valueOf(zaradaOstaliVoda)));
+            		label_11.setText(String.valueOf(zaradaOstaliVoda));
         		}
 
-        		lblSasaa.setText(String.valueOf(String.valueOf(aha)));
+        		lblSasaa.setText(String.valueOf(aha));
         		label_2.setText(neki.getBrojPausalaca().toString());
         		label_7.setText(neki.getBrojOstalih().toString());
         		
@@ -390,16 +390,9 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         lblAhaaaaaaaaaa = new JLabel("");
         
         JButton btnPrintaj = new JButton("PRINTAJ");
-        btnPrintaj.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        	}
-        });
-        btnPrintaj.setForeground(new java.awt.Color(0, 102, 153));
-        btnPrintaj.setFont(new Font("SansSerif", Font.BOLD, 12));
         btnPrintaj.addMouseListener(new MouseAdapter() {
         	@Override
-        	public void mouseClicked(MouseEvent arg0) {
-        		
+        	public void mouseReleased(MouseEvent arg0) {
         		try
         		{
         			if(jList1.isSelectionEmpty()==true)
@@ -418,6 +411,8 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         		}
         	}
         });
+        btnPrintaj.setForeground(new java.awt.Color(0, 102, 153));
+        btnPrintaj.setFont(new Font("SansSerif", Font.BOLD, 12));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
