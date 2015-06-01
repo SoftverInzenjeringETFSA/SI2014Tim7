@@ -16,11 +16,16 @@ import ba.unsa.etf.si.app.entity.Parametri;
 import ba.unsa.etf.si.app.entity.Potrosac;
 import ba.unsa.etf.si.app.entity.Racuni;
 import ba.unsa.etf.si.app.util.HibernateUtil;
+import java.io.FileNotFoundException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.builder.DynamicReports;
+import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
+import net.sf.dynamicreports.report.exception.DRException;
 
 public class ObracunService {
 
@@ -117,7 +122,7 @@ public class ObracunService {
 		Double cijenaKsaPDV = round(cijenaKanalizacije + cijenaKanalizacije
 				* param.getStopaPdv()/100,2);
 		Double cijenaVsaPDV = round(cijenaVoda + cijenaVoda * param.getStopaPdv()/100,2);
-		Double ukupnoSaPDV = round(cijenaVsaPDV + cijenaKsaPDV + + param.getFiksnaCijena() +param.getFiksnaCijena()*param.getStopaPdv()/100,2);
+		Double ukupnoSaPDV = round(cijenaVsaPDV + cijenaKsaPDV + param.getFiksnaCijena() + param.getFiksnaCijena()*param.getStopaPdv()/100,2);
 		Racuni r = new Racuni();
 		r.setCijenaKanalizacije(cijenaKanalizacije);
 		r.setCijenaKanalizacijeSaPdv(cijenaKsaPDV);
@@ -133,8 +138,8 @@ public class ObracunService {
 			r.setPotrosnjaZaKoristenjeKanalizacije(0.0);
 		}
                 r.setPotrosnjaZaKoristenjeVoda(potrosnja);
-		r.setPvnZaKoristenjeVoda(param.getPvnZaKoristenjeVoda());
-		r.setPvnZaZastituVoda(param.getPvnZaZastituVoda());
+		r.setPvnZaKoristenjeVoda(potrosnja*param.getPvnZaKoristenjeVoda());
+		r.setPvnZaZastituVoda(potrosnja*param.getPvnZaZastituVoda());
 		r.setUkupnaCijena(ukupno);
 		r.setUkupnaCijenaSaPdv(ukupnoSaPDV);
                 oPocetak.setAccess(false);
@@ -290,14 +295,79 @@ public class ObracunService {
 		dao.setSession(session);
 		// Pretraga po Datumu i ID
 		List<Racuni> rListID = dao.finById(id);
-                                session.getTransaction().commit();
-		session.close();
+                session.getTransaction().commit();
+	
                 if(rListID.isEmpty()){
                     throw new IllegalArgumentException("Ne postroji racun!");
                 }
                 else{
                     return rListID.get(0);
                 }
+    }
+    
+    public void print(Racuni r,String naziv,String datumKreacije) throws FileNotFoundException, DRException{
+    //dynamic report
+                JasperReportBuilder report = DynamicReports.report();
+                //add title
+                TextFieldBuilder<String> title1 = DynamicReports.cmp.text("  Vodovod i Kanalizacija d.o.o.\n");
+                report.title(title1);
+                TextFieldBuilder<String> title2 = DynamicReports.cmp.text("  Jaroslava Černija 8, 71 000 Sarajevo\n");
+                report.title(title2);
+                TextFieldBuilder<String> title3 = DynamicReports.cmp.text("  Tel: +387 33 237-655\n\n\n\n");
+                report.title(title3);
+
+
+
+                
+                TextFieldBuilder<String> title4 = DynamicReports.cmp.text("  ID:" + r.getId() + "\n");
+                report.title(title4);
+       
+                 TextFieldBuilder<String> title5 = DynamicReports.cmp.text("  Očitanja" + datumKreacije + "\n");
+                report.title(title5);
+                
+                 TextFieldBuilder<String> title6 = DynamicReports.cmp.text("  Potrošač):" + naziv + "\n");
+                report.title(title6);
+                
+                 TextFieldBuilder<String> title7 = DynamicReports.cmp.text("  Datum uplate:" + r.getDatumUplate() + "\n");
+                report.title(title7);
+                
+                TextFieldBuilder<String> title8 = DynamicReports.cmp.text("  Datum kreacije:" + r.getDatumKreacije() + "\n");
+                report.title(title8);
+  
+
+                TextFieldBuilder<String> title9 = DynamicReports.cmp.text("  Fiksna cijena za korištenje usluga:" +  r.getFisknaCijenaZaKoristenjeUsluga() + "\n");
+                report.title(title9);
+                
+                 TextFieldBuilder<String> title10 = DynamicReports.cmp.text("  Potrošnja (voda):" + r.getPotrosnjaZaKoristenjeVoda() + "\n");
+                report.title(title10);
+                
+                TextFieldBuilder<String> title11 = DynamicReports.cmp.text("  Potrošnja (kanalizacija):" + r.getPotrosnjaZaKoristenjeKanalizacije() + "\n");
+                report.title(title11);
+                
+                 TextFieldBuilder<String> title12 = DynamicReports.cmp.text("  Cijena vode:" + r.getCijenaVoda() + "\n");
+                report.title(title12);
+                
+                 TextFieldBuilder<String> title13 = DynamicReports.cmp.text("  Cijena kanalizacije:" + r.getCijenaKanalizacije() + "\n");
+                report.title(title13);
+                
+                TextFieldBuilder<String> title14 = DynamicReports.cmp.text("  Ukupna cijena:" + r.getUkupnaCijena() + "\n");
+                report.title(title14);
+                
+                TextFieldBuilder<String> title15 = DynamicReports.cmp.text("  Cijena vode s PDV-om:" + r.getCijenaVodaSaPdv() + "\n");
+                report.title(title15);
+                
+                TextFieldBuilder<String> title16 = DynamicReports.cmp.text("  Cijena kanalizacije s PDV-om:" + r.getCijenaKanalizacijeSaPdv() + "\n");
+                report.title(title16);
+                
+                TextFieldBuilder<String> title17 = DynamicReports.cmp.text("  PVN za korištenje voda:" + r.getPvnZaKoristenjeVoda() + "\n");
+                report.title(title17);
+                
+                TextFieldBuilder<String> title18 = DynamicReports.cmp.text("  PVN za zaštitu voda:" + r.getPvnZaZastituVoda() + "\n");
+                report.title(title18);
+
+                TextFieldBuilder<String> title20 = DynamicReports.cmp.text("Potpis ovlaštenog lica: ___________________ \n");
+                report.title(title20);
+                report.show(false);
     }
   
         

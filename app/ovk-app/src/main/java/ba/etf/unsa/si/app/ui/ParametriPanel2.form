@@ -344,7 +344,7 @@
         <Component class="javax.swing.JSpinner" name="PVN2">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="0.004" maximum="1.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.001" type="number"/>
+              <SpinnerModel initial="0.04" maximum="1.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.01" type="number"/>
             </Property>
           </Properties>
         </Component>
