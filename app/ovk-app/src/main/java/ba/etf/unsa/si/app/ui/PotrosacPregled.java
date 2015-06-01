@@ -26,6 +26,7 @@ public class PotrosacPregled extends javax.swing.JFrame {
     PotrosacPanel4 panelUpdate;
     public PotrosacPregled(Potrosac p,PotrosacPanel4 panelX) {
         initComponents();
+        setResizable(false);
         Container container = this.getContentPane();
         zaBrisanje = p;
         panelUpdate = panelX;

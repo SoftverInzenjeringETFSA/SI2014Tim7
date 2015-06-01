@@ -24,8 +24,10 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         //bijela pozadina forme
+        setResizable(false);
         Container container = this.getContentPane();
         container.setBackground(Color.white); 
+        
     }
 
     /**

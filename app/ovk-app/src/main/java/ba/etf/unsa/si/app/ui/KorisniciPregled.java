@@ -25,6 +25,7 @@ public class KorisniciPregled extends javax.swing.JFrame {
     KorisniciPanel4 panelUpdate;
     public KorisniciPregled(Korisnik k,KorisniciPanel4 panel) {
         initComponents();
+        setResizable(false);
         zaBrisanje = k;
         panelUpdate= panel;
         Container container = this.getContentPane();
