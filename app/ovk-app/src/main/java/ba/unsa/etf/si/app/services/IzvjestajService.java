@@ -46,6 +46,8 @@ public class IzvjestajService {
         Double vodaOstali=0.0;
         Double kanalizacijaOstali=0.0;
         int brojOstali=0;
+        List<Potrosac> listasvih = new ArrayList();
+        Boolean pomocna = false;
         
         for (int i=0; i<racuni.size(); i++)
         {
@@ -53,21 +55,85 @@ public class IzvjestajService {
         	Double kanalizacija = racuni.get(i).getPotrosnjaZaKoristenjeKanalizacije();
         	Double voda = racuni.get(i).getPotrosnjaZaKoristenjeVoda();
         	
-        	if(provjera.equals("Pausalni"))
+        	for(int j=0;j<listasvih.size();j++)
+        	{
+        		if(listasvih.get(j).equals(racuni.get(i).getPotrosac()))
+        		{
+        			if(provjera.equals("Pausalac"))
+        			{
+                		vodaPausalni=vodaPausalni+voda;
+                		kanalizacijaPausalni=kanalizacijaPausalni+kanalizacija;
+        			}
+        			else
+        			{
+                		vodaOstali=vodaOstali+voda;
+                		kanalizacijaOstali=kanalizacijaOstali+kanalizacija;
+        			}
+        			pomocna=true;
+        			break;
+        		}
+        	}
+        	if(pomocna==true)
+        	{
+        		pomocna=false;
+        		continue;
+        	}
+        	if(provjera.equals("Pausalac"))
         	{
         		vodaPausalni=vodaPausalni+voda;
         		kanalizacijaPausalni=kanalizacijaPausalni+kanalizacija;
         		brojPausalni++;
+        		listasvih.add(racuni.get(i).getPotrosac());
         	}
         	else
         	{
         		vodaOstali=vodaOstali+voda;
         		kanalizacijaOstali=kanalizacijaOstali+kanalizacija;
         		brojOstali++;
+        		listasvih.add(racuni.get(i).getPotrosac());
         	}
         }
-        novi.setBrojOstalih(brojOstali);
-        novi.setBrojPausalaca(brojPausalni);
+        PotrosacService svipotrosaci = new PotrosacService();
+		List<Potrosac> svi = svipotrosaci.dajSvePotrosace();
+		int pausalniukupno=0;
+		int ostaliukupno=0;
+		int pausalniSaKanalizacijom=0;
+		int obicniSaKanalizacijom = 0;
+		Double zaradaPausalciVoda=0.0;
+		Double zaradaPausalciKanalizacija=0.0;
+		Double zaradaOstaliVoda=0.0;
+		Double zaradaOstaliKanalizacija=0.0;
+		int pausalniBrojClanova = 0;
+		int brojClanova=0;
+		
+		
+		
+		for(int i=0;i<svi.size();i++)
+		{
+			if(svi.get(i).getKategorija().equals("Pausalac"))
+			{
+				pausalniukupno++;
+				if(svi.get(i).getUsluga()==true)
+				{
+					pausalniSaKanalizacijom++;
+					pausalniBrojClanova=pausalniBrojClanova + Integer.valueOf(svi.get(i).getBrojClanova());
+				}
+				else
+				{
+					brojClanova= brojClanova + Integer.valueOf(svi.get(i).getBrojClanova());
+				}
+			}
+			else
+			{
+				ostaliukupno++;
+				if(svi.get(i).getUsluga()==true)
+				{
+					obicniSaKanalizacijom++;
+				}
+			}
+		}
+        novi.setBrojOstalih(ostaliukupno);
+        novi.setBrojPausalaca(pausalniukupno);
         novi.setPotrosnjaOstalihKanalizacija(kanalizacijaOstali);
         novi.setPotrosnjaOstalihVoda(vodaOstali);
         novi.setPotrosnjaPausalacaKanalizacija(kanalizacijaPausalni);

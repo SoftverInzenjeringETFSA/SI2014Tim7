@@ -82,7 +82,7 @@ getSession().saveOrUpdate(entity);
 catch(Exception e)
 	{
             logger.log(Level.OFF, "Error", e);
-	throw new IllegalStateException("Nema bolan!");
+	throw new IllegalStateException("Ne postoji trazeni entitet u bazi podataka!");
 	} 
 return entity; 
 }
@@ -96,7 +96,7 @@ public void delete(ID id) {
 	
 T entity = findById(id);
 if (entity == null)  
-    throw new IllegalStateException("Nema bolan!");
+    throw new IllegalStateException("Ne postoji trazeni entitet u bazi podataka!");
 else
 	getSession().delete(entity);  
 

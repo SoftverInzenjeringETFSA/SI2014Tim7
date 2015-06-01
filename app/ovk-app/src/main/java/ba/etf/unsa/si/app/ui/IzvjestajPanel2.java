@@ -14,12 +14,18 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import ba.unsa.etf.si.app.dao.IzvjestajiDAO;
+import ba.unsa.etf.si.app.dao.PotrosacDAO;
 import ba.unsa.etf.si.app.entity.Izvjestaji;
+import ba.unsa.etf.si.app.entity.Parametri;
 import ba.unsa.etf.si.app.entity.Potrosac;
+import ba.unsa.etf.si.app.entity.Racuni;
 import ba.unsa.etf.si.app.services.IzvjestajService;
+import ba.unsa.etf.si.app.services.ParametriService;
 import ba.unsa.etf.si.app.services.PotrosacService;
 
 import java.awt.Component;
+import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -76,24 +82,98 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
             	{
             		throw new IllegalArgumentException("Niste izabrali izvjestaj!");
             	}
-        			label.setText("");
+        			
+            		label.setText("");
             		label_2.setText("");
-            		label_3.setText("");
             		label_4.setText("");
-            		label_6.setText("");
+            		label_5.setText("");
             		label_7.setText("");
+            		label_9.setText("");
+            		label_10.setText("");
+            		label_3.setText("");
+            		label_6.setText("");
             		label_8.setText("");
+            		label_11.setText("");
+            		label_12.setText("");
         		int id = Integer.valueOf(jList1.getSelectedValue().toString());
         		IzvjestajService izvjestaj = new IzvjestajService();
         		Izvjestaji neki = izvjestaj.vratiSveIzvjestajeZaId(id);
         		
         		label.setText(neki.getId().toString());
-        		label_2.setText(neki.getBrojPausalaca().toString());
-        		label_3.setText(neki.getPotrosnjaPausalacaVoda().toString());
-        		label_4.setText(neki.getPotrosnjaPausalacaKanalizacija().toString());
-        		label_6.setText(neki.getBrojOstalih().toString());
-        		label_7.setText(neki.getPotrosnjaOstalihVoda().toString());
-        		label_8.setText(neki.getPotrosnjaOstalihKanalizacija().toString());
+        	
+        		label_4.setText(neki.getPotrosnjaPausalacaVoda().toString());
+        		label_5.setText(neki.getPotrosnjaPausalacaKanalizacija().toString());
+        		label_9.setText(neki.getPotrosnjaOstalihVoda().toString());
+        		label_10.setText(neki.getPotrosnjaOstalihKanalizacija().toString());
+
+        		PotrosacService svipotrosaci = new PotrosacService();
+        		List<Potrosac> svi = svipotrosaci.dajSvePotrosace();
+        		int pausalniukupno=0;
+        		int ostaliukupno=0;
+        		int pausalniSaKanalizacijom=0;
+        		int obicniSaKanalizacijom = 0;
+        		Double zaradaPausalciVoda=0.0;
+        		Double zaradaPausalciKanalizacija=0.0;
+        		Double zaradaOstaliVoda=0.0;
+        		Double zaradaOstaliKanalizacija=0.0;
+        		int pausalniBrojClanova = 0;
+        		int brojClanova=0;
+        		
+        		
+        		
+        		for(int i=0;i<svi.size();i++)
+        		{
+        			if(svi.get(i).getKategorija().equals("Pausalac"))
+        			{
+        				pausalniukupno++;
+        				if(svi.get(i).getUsluga()==true)
+        				{
+        					pausalniSaKanalizacijom++;
+        					pausalniBrojClanova=pausalniBrojClanova + Integer.valueOf(svi.get(i).getBrojClanova());
+        				}
+        				else
+        				{
+        					brojClanova= brojClanova + Integer.valueOf(svi.get(i).getBrojClanova());
+        				}
+        			}
+        			else
+        			{
+        				ostaliukupno++;
+        				if(svi.get(i).getUsluga()==true)
+        				{
+        					obicniSaKanalizacijom++;
+        				}
+        			}
+        		}
+        		ParametriService parametri = new ParametriService();
+        		Parametri para = parametri.dajParametre();
+        		
+        		Double pomocna = para.getFiksniVodaZaPausalce() * brojClanova * para.getFiksnaCijena();
+        		zaradaPausalciVoda=pomocna + neki.getPotrosnjaPausalacaVoda()*para.getStopaPdv() + neki.getPotrosnjaPausalacaVoda() * para.getPvnZaKoristenjeVoda() + neki.getPotrosnjaPausalacaVoda() * para.getPvnZaZastituVoda();
+        		
+        		
+        		Double zarada = para.getFiksniKanalizacijaZaPausalce() *  pausalniBrojClanova * para.getFiksnaCijena();
+        		
+        		zaradaPausalciKanalizacija= zarada + neki.getPotrosnjaPausalacaKanalizacija()*para.getStopaPdv() + neki.getPotrosnjaPausalacaKanalizacija() * para.getPvnZaKoristenjeVoda() + neki.getPotrosnjaPausalacaKanalizacija() * para.getPvnZaZastituVoda();
+        
+        		zaradaOstaliVoda = neki.getPotrosnjaOstalihVoda()*para.getCijenaVodePoKubiku()+ neki.getPotrosnjaOstalihVoda()*para.getStopaPdv()+neki.getPotrosnjaOstalihVoda()*para.getPvnZaKoristenjeVoda() + neki.getPotrosnjaOstalihVoda()*para.getPvnZaZastituVoda();
+        		
+        		zaradaOstaliKanalizacija = neki.getPotrosnjaOstalihKanalizacija() * (para.getCijenaKanalizacijePoKubiku() +para.getStopaPdv()+para.getPvnZaKoristenjeVoda()+para.getPvnZaZastituVoda());
+        		
+        		double zaradaPausalciUkupno= zaradaPausalciVoda + zaradaPausalciKanalizacija;
+        		
+        		double zaradaOstaliUkupno = zaradaOstaliVoda + zaradaOstaliKanalizacija;
+        		
+        		double aha = zaradaPausalciUkupno + zaradaOstaliUkupno;
+        		
+        		
+        		label_3.setText(String.valueOf(pausalniSaKanalizacijom));
+        		label_6.setText(String.valueOf(zaradaPausalciUkupno));
+        		label_8.setText(String.valueOf(obicniSaKanalizacijom));
+        		label_11.setText(String.valueOf(zaradaOstaliUkupno));
+        		label_12.setText(String.valueOf(aha));
+        		label_2.setText(String.valueOf(pausalniukupno));
+        		label_7.setText(String.valueOf(ostaliukupno));
         		
         		
         	}
@@ -130,11 +210,17 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
                 }
                 label.setText("");
         		label_2.setText("");
-        		label_3.setText("");
         		label_4.setText("");
-        		label_6.setText("");
+        		label_5.setText("");
         		label_7.setText("");
+        		label_9.setText("");
+        		label_10.setText("");
+        		label_3.setText("");
+        		label_6.setText("");
         		label_8.setText("");
+        		label_11.setText("");
+        		label_12.setText("");
+        		jList1.clearSelection();
         		
                 JOptionPane.showMessageDialog(null, "Uspjesno brisanje izvještaja!");
         	}
@@ -193,21 +279,27 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         
         lblIdIzvjestaja = new JLabel("ID Izvještaja:");
         
-        lblNewLabel = new JLabel("Broj Paušalaca:");
+        lblNewLabel = new JLabel("Sa kanalizacijom:");
         
-        lblPotrosnjaVode = new JLabel("Potrošnja vode:");
+        lblPotrosnjaVode = new JLabel("Ukupno:");
         
-        lblKanalizacija = new JLabel("Kanalizacija:");
+        lblKanalizacija = new JLabel("Potr. kanalizacije:");
         
-        lblPausalci = new JLabel("Paušalci");
+        lblPausalci = new JLabel("Broj Pausalaca:");
         
-        lblOstali = new JLabel("Ostali");
+        JLabel lblPotrSaKanalizacijom = new JLabel("Potrosnja vode:");
         
-        lblBrojOstalih = new JLabel("Broj Ostalih:");
+        label_1 = new JLabel("Broj Ostali:");
         
-        lblPotrosnjaVode_1 = new JLabel("Potrošnja vode:");
+        lblSaKanalizacijom = new JLabel("Sa kanalizacijom:");
         
-        lblKanalizacija_1 = new JLabel("Kanalizacija:");
+        lblPotrosnjaVode_1 = new JLabel("Potrosnja vode:");
+        
+        lblPotrKanalizacije = new JLabel("Potr. kanalizacije:");
+        
+        lblZaradaVoda = new JLabel("Ukupno:");
+        
+        lblUkupnaZarada = new JLabel("Ukupna zarada:");
         
         label = new JLabel("");
         
@@ -217,11 +309,21 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         
         label_4 = new JLabel("");
         
+        label_5 = new JLabel("");
+        
         label_6 = new JLabel("");
         
         label_7 = new JLabel("");
         
         label_8 = new JLabel("");
+        
+        label_9 = new JLabel("");
+        
+        label_10 = new JLabel("");
+        
+        label_11 = new JLabel("");
+        
+        label_12 = new JLabel("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
@@ -234,85 +336,96 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
         					.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
         					.addGap(18)
         					.addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)))
-        			.addGap(18)
+        			.addGap(14)
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(layout.createSequentialGroup()
-        					.addComponent(lblNewLabel)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(layout.createSequentialGroup()
-        					.addComponent(lblPotrosnjaVode, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(layout.createSequentialGroup()
-        					.addComponent(lblKanalizacija, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-        				.addComponent(lblOstali, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
-        				.addGroup(layout.createSequentialGroup()
-        					.addComponent(lblBrojOstalih, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(label_6, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(layout.createSequentialGroup()
-        					.addComponent(lblPotrosnjaVode_1, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(label_7, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(layout.createSequentialGroup()
-        					.addComponent(lblKanalizacija_1, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(label_8, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(layout.createSequentialGroup()
-        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(lblIdIzvjestaja)
-        						.addComponent(lblPausalci, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(label, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)))
-        			.addContainerGap(12, Short.MAX_VALUE))
+        				.addComponent(lblNewLabel)
+        				.addComponent(lblPotrSaKanalizacijom, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblIdIzvjestaja)
+        				.addComponent(lblPausalci, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblKanalizacija, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblPotrosnjaVode, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblSaKanalizacijom, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblPotrosnjaVode_1, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblPotrKanalizacije, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblZaradaVoda, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblUkupnaZarada, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(label, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(label_5, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(label_6, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(label_7, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(label_8, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(label_9, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(label_10, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(label_11, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(label_12, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE))
+        			.addContainerGap(11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap()
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
         				.addGroup(layout.createSequentialGroup()
-        					.addContainerGap()
         					.addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         					.addGap(18)
         					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
         						.addComponent(jButton1)
         						.addComponent(jButton2)))
-        				.addGroup(layout.createSequentialGroup()
-        					.addGap(43)
-        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        				.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        					.addGroup(layout.createSequentialGroup()
+        						.addComponent(label)
+        						.addGap(17)
+        						.addComponent(label_2)
+        						.addGap(6)
+        						.addComponent(label_3)
+        						.addGap(3)
+        						.addComponent(label_4)
+        						.addGap(6)
+        						.addComponent(label_5)
+        						.addGap(6)
+        						.addComponent(label_6)
+        						.addGap(11)
+        						.addComponent(label_7)
+        						.addGap(6)
+        						.addComponent(label_8)
+        						.addGap(6)
+        						.addComponent(label_9)
+        						.addGap(6)
+        						.addComponent(label_10)
+        						.addGap(6)
+        						.addComponent(label_11)
+        						.addGap(18)
+        						.addComponent(label_12))
+        					.addGroup(layout.createSequentialGroup()
         						.addComponent(lblIdIzvjestaja)
-        						.addComponent(label))
-        					.addGap(17)
-        					.addComponent(lblPausalci)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addGap(17)
+        						.addComponent(lblPausalci)
+        						.addPreferredGap(ComponentPlacement.RELATED)
         						.addComponent(lblNewLabel)
-        						.addComponent(label_2))
-        					.addGap(3)
-        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblPotrosnjaVode)
-        						.addComponent(label_3))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addGap(3)
+        						.addComponent(lblPotrSaKanalizacijom)
+        						.addPreferredGap(ComponentPlacement.RELATED)
         						.addComponent(lblKanalizacija)
-        						.addComponent(label_4))
-        					.addGap(18)
-        					.addComponent(lblOstali)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblBrojOstalih)
-        						.addComponent(label_6))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addPreferredGap(ComponentPlacement.RELATED)
+        						.addComponent(lblPotrosnjaVode)
+        						.addPreferredGap(ComponentPlacement.UNRELATED)
+        						.addComponent(label_1)
+        						.addPreferredGap(ComponentPlacement.RELATED)
+        						.addComponent(lblSaKanalizacijom)
+        						.addPreferredGap(ComponentPlacement.RELATED)
         						.addComponent(lblPotrosnjaVode_1)
-        						.addComponent(label_7))
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lblKanalizacija_1)
-        						.addComponent(label_8))))
+        						.addPreferredGap(ComponentPlacement.RELATED)
+        						.addComponent(lblPotrKanalizacije)
+        						.addPreferredGap(ComponentPlacement.RELATED)
+        						.addComponent(lblZaradaVoda)
+        						.addGap(18)
+        						.addComponent(lblUkupnaZarada))))
         			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.linkSize(SwingConstants.HORIZONTAL, new Component[] {lblNewLabel, lblPotrosnjaVode, lblKanalizacija, lblPausalci});
@@ -342,15 +455,22 @@ public class IzvjestajPanel2 extends javax.swing.JPanel {
     private JLabel lblPotrosnjaVode;
     private JLabel lblKanalizacija;
     private JLabel lblPausalci;
-    private JLabel lblOstali;
-    private JLabel lblBrojOstalih;
+    private JLabel label_1;
+    private JLabel lblSaKanalizacijom;
     private JLabel lblPotrosnjaVode_1;
-    private JLabel lblKanalizacija_1;
+    private JLabel lblPotrKanalizacije;
+    private JLabel lblZaradaVoda;
+    private JLabel lblUkupnaZarada;
     private JLabel label;
     private JLabel label_2;
     private JLabel label_3;
     private JLabel label_4;
+    private JLabel label_5;
     private JLabel label_6;
     private JLabel label_7;
     private JLabel label_8;
+    private JLabel label_9;
+    private JLabel label_10;
+    private JLabel label_11;
+    private JLabel label_12;
 }
