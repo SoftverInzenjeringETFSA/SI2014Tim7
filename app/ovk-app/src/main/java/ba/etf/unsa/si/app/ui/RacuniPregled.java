@@ -206,7 +206,16 @@ public void update(){
     		red[1] = racun.getPotrosac().getPrezime();
     		red[2] = racun.getId();
     		red[3] = racun.getOcitanja().getSifraVodomjera();
-    		red[4] = racun.getOcitanja().getMjesec() + "/" + racun.getOcitanja().getGodina();
+                
+                String output = "";
+                
+                if(racun.getOcitanja().getMjesec()==1){
+                    output = "12/"+(racun.getOcitanja().getGodina()-1);
+                }
+                else{
+                    output = (racun.getOcitanja().getMjesec()-1) + "/" + racun.getOcitanja().getGodina();
+                }
+    		red[4] = output;
     		red[5] = racun.getPotrosnjaZaKoristenjeVoda();
     		red[6] = racun.getUkupnaCijena();
     		red[7] = racun.getUkupnaCijenaSaPdv();

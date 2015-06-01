@@ -177,8 +177,29 @@ public class ObracunService {
                         throw new IllegalArgumentException("Nema računa za date podatke!");
                     }
                 }
-                else if(rListID.isEmpty()){rList=rListDate;}
-                else {rList=rListID;}
+                else if(rListID.isEmpty()){
+                    rList=rListDate;
+                    if(id!=0){
+                        throw new IllegalArgumentException("Nema računa za date podatke!");
+                    }
+                }
+                else if(rListDate.isEmpty()){
+                    rList=rListID;
+                    if(nemaDatuma == false){
+                        throw new IllegalArgumentException("Nema računa za date podatke!");
+                    }
+                }
+                else{
+                    for(Racuni poDatumu : rListDate){
+                        for(Racuni poID : rListID){
+                            int datumProvjera = poID.getId();
+                            int idProvjera = poDatumu.getId();
+                            if(idProvjera == datumProvjera){
+                                rList.add(poDatumu);
+                            }
+                        }
+                    }
+                }
                 // Pretraga po Potrosacu
 
                 if(!rList.isEmpty()){
