@@ -187,7 +187,7 @@ Boolean nemaDatuma;
             ObracunService s = new ObracunService();
             Racuni r = new Racuni();
             try{
-                r = s.pretragaRacunaPoID(id);
+                r = s.pretragaRacunaPoID(id,true);
             }
             catch(Exception e){
                 JOptionPane.showMessageDialog(null,e.getMessage());
@@ -216,7 +216,7 @@ Boolean nemaDatuma;
             ObracunService s = new ObracunService();
             Racuni r = new Racuni();
             try{
-                r = s.pretragaRacunaPoID(id);
+                r = s.pretragaRacunaPoID(id,false);
                 String output = "";
                 
                 if(r.getOcitanja().getMjesec()==1){

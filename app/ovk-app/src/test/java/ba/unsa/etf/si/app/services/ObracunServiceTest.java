@@ -32,7 +32,7 @@ public class ObracunServiceTest {
 	@Test(expected=IllegalStateException.class)
 	public void testUplatiRacun() {
 		ObracunService obracuni = new ObracunService();
-		Racuni r=obracuni.pretragaRacunaPoID(2);
+		Racuni r=obracuni.pretragaRacunaPoID(2,false);
 		obracuni.uplatiRacun(r);
 		assertNotNull(r);
 	}
@@ -53,7 +53,7 @@ public class ObracunServiceTest {
 	@Test
 	public void testPretragaRacunaPoID() {
 		ObracunService obracuni = new ObracunService();
-		Racuni r=obracuni.pretragaRacunaPoID(2);
+		Racuni r=obracuni.pretragaRacunaPoID(2,false);
 		assertNotNull(r);
 	}
 

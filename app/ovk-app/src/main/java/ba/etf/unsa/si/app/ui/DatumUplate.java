@@ -123,9 +123,9 @@ public class DatumUplate extends javax.swing.JFrame {
                if(x.compareTo(y)>0){
                    throw new IllegalArgumentException("Ne možete izabrati datum veći od sadašnjeg!");
                }     
-            racun.setDatumUplate(x);
             String datum = new SimpleDateFormat("yyyy-MM-dd").format(x);
             x = new SimpleDateFormat("yyyy-MM-dd").parse(datum);
+            racun.setDatumUplate(x);
             serv.uplatiRacun(racun);
             pregled.update();
             JOptionPane.showMessageDialog(null,"Uspješna uplata računa");

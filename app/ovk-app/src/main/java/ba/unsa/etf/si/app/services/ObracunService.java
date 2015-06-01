@@ -288,7 +288,7 @@ public class ObracunService {
     }
     
     
-    public Racuni pretragaRacunaPoID(int id) {
+    public Racuni pretragaRacunaPoID(int id,Boolean closeSession) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		RacuniDAO dao = new RacuniDAO();
@@ -296,7 +296,9 @@ public class ObracunService {
 		// Pretraga po Datumu i ID
 		List<Racuni> rListID = dao.finById(id);
                 session.getTransaction().commit();
-	
+                if(closeSession){
+                    session.close();
+                }
                 if(rListID.isEmpty()){
                     throw new IllegalArgumentException("Ne postroji racun!");
                 }
@@ -315,9 +317,6 @@ public class ObracunService {
                 report.title(title2);
                 TextFieldBuilder<String> title3 = DynamicReports.cmp.text("  Tel: +387 33 237-655\n\n\n\n");
                 report.title(title3);
-
-
-
                 
                 TextFieldBuilder<String> title4 = DynamicReports.cmp.text("  ID:" + r.getId() + "\n");
                 report.title(title4);
